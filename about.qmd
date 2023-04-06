@@ -1,5 +1,65 @@
 ---
-title: "About"
+title: "About me"
 ---
 
-About this site
+## Academic Degrees
+* **Associate Professor** in Bioinformatics, Uppsala University, Uppsala, Sweden, 2019.
+
+* **Doctor of Philosophy** in Bioinformatics, Uppsala University, Uppsala, Sweden, 2010. Linnaeus Centre for Bioinformatics, advisor prof. Jan Komorowski. Thesis: *From Physicochemical Features to Interdependency Networks: A Monte Carlo Approach to Modeling HIV-1 Resistome and Post-translational Modifications*. 
+
+* **MSc**, Uppsala University, Uppsala, Sweden, 2005. Major: molecular biology, minor: chemistry.
+
+* **BSc**, Warsaw University, Warsaw, Poland, 2003.  Area: molecular biology.
+
+## Experience
+* Bioinformatics Data Scientist, Science for Life Laboratory, National Bioinformatics Structure, Sweden. Uppsala, Sweden, 2017 – now.  
+
+* Researcher, Kerstin Lindblad-Toh’s Lab, Department of Medical Biochemistry and Microbiology, Uppsala University, & Science for Life Laboratory, Uppsala, Sweden, 2014 – 2017.  
+
+* Assistant researcher, Örjan Carlborg’s Lab, Computational Genetics Group, Department of Clinical Sciences, Swedish University of Agricultural Sciences, Sweden, 2010 – 2014.  
+
+* Postdoctoral researcher, Örjan Carlborg’s Lab, Computational Genetics Group, Department of Animal Breeding and Genetics, Swedish University of Agricultural Sciences, Sweden, 2010 – 2014.  
+
+* PhD student, The Linnaeus Centre for Bioinformatics, Uppsala University, Sweden, 2006 – 2009.  
+
+* Web consultant and database engineer, Global Diversity Foundation, 2006 – 2010.
+
+## Programming Languages
+| | Language | Skill | Comment |
+|-|--|-|-----|
+| | bash | 95% |daily routine advanced use |
+| {{< fa brands r-project >}} | R | 98% | daily advanced usage, teaching advanced R {{< fa face-grin-hearts >}} |
+| {{< fa brands python >}} | Python | 80% | frequent advanced use, esp. for deep learning |
+| &micro;{{< fa brands python >}} | uPython | 90% | frequent advanced usage for microcontroller programming |
+| {{< fa brands c >}} | C | 75% | frequent use for microcontroller programming |
+| {{< fa brands java >}} | Java | 75% | frequent advanced use in the past |
+| | LISP | 50% | used for fun and for teaching purposes |
+| | PERL | 40% | used some time ago |
+| | Fortran | 30% | used some time ago |
+| | Julia | 5% | want to learn |
+| {{< fa brands js >}} | JS | 45% | using quite frequently |
+| {{< fa brands html5 >}} | HTML5 | 80% | using frequently |
+| {{< fa brands markdown >}} | markdown | 87% | daily usage of RMarkdown & Quarto |
+| | SQL | 60% | frequent usage from time to time |
+
+## Tools
+* {{< fa brands docker >}} Docker, 
+* Singularity, 
+* Snakemake, 
+* Nextflow,
+* OpenSCAD,
+* Keras,
+* Jupyter, RStudio, Wordpress etc.
+
+## Other skills
+* system administration,
+* 3D printing & parametric design,
+* soldering,
+* &micro;C programming (Arduino, RPi Pico family),
+* electronic circuit analysis & design,
+* boating/navigation (Coastal Yahtsmaster Diploma, Marine VHF license),
+* radio digital modes,
+* home automation,
+* woodworking,
+* wet biological lab (Radiation Safety License)
+

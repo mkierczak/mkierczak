@@ -3,16 +3,40 @@ project:
   output-dir: docs
 
 website:
-  title: "Marcin Kierczak's Personal Website"
+  title: "Marcin Kierczak"
+  favicon: assets/images/logos/Marcin Kierczak-logos.jpeg
   navbar:
+    title: false
+    logo: assets/images/logos/Marcin Kierczak-logos.jpeg
+    logo-alt: "Marcin Kierczak personal logo"
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-
+        icon: house-door
+      - href: about.qmd
+        text: CV
+        icon: file-earmark-person
+      - href: publications.qmd
+        text: Publications
+        icon: newspaper
+      - href: teaching.qmd
+        text: Teaching
+        icon: mortarboard
+  page-footer: 
+    background: light
+    left:
+      - "Copyright &copy; 2023, Marcin Kierczak"
+    right: 
+      - icon: github
+        href: https://github.com/mkierczal
+      - icon: twitter
+        href: https://twitter.com/quiestrho
+  twitter-card: true
 format:
   html:
-    theme: cosmo
+    theme: 
+      - assets/scss/marcin.scss
+    mainfont: Lato
     css: styles.css
     toc: true
 
