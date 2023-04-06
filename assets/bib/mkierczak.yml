@@ -1,0 +1,580 @@
+- ENTRYTYPE: article
+  ID: kierczak2009rough
+  author: Kierczak, Marcin and Ginalski, Krzysztof and Dramiñski, Michał and Koronacki,
+    Jacek and Rudnicki, Witold and Komorowski, Jan
+  journal: Bioinformatics and biology insights
+  pages: BBI–S3382
+  publisher: 'SAGE Publications Sage UK: London, England'
+  title: A rough set-based model of HIV-1 reverse transcriptase resistome
+  volume: '3'
+  year: '2009'
+- ENTRYTYPE: article
+  ID: owczarek2012two
+  author: Owczarek-Lipska, Marta and Lauber, Béatrice and Molitor, Vivianne and Meury,
+    Sabrina and Kierczak, Marcin and Tengvall, Katarina and Webster, Matthew T and
+    Jagannathan, Vidhya and Schlotter, Yvette and Willemse, Ton and others
+  journal: PloS one
+  number: '6'
+  pages: e39176
+  publisher: Public Library of Science
+  title: Two loci on chromosome 5 are associated with serum IgE levels in Labrador
+    retrievers
+  volume: '7'
+  year: '2012'
+- ENTRYTYPE: article
+  ID: tengvall2013genome
+  author: Tengvall, Katarina and Kierczak, Marcin and Bergvall, Kerstin and Olsson,
+    Mia and Frankowiack, Marcel and Farias, Fabiana HG and Pielberg, Gerli and Carlborg,
+    Örjan and Leeb, Tosso and Andersson, Göran and others
+  journal: PLoS genetics
+  number: '5'
+  pages: e1003475
+  publisher: Public Library of Science San Francisco, USA
+  title: Genome-wide analysis in German shepherd dogs reveals association of a locus
+    on CFA 27 with atopic dermatitis
+  volume: '9'
+  year: '2013'
+- ENTRYTYPE: inproceedings
+  ID: rudnicki2006statistical
+  author: Rudnicki, Witold R and Kierczak, Marcin and Koronacki, Jacek and Komorowski,
+    Jan
+  booktitle: 'Rough Sets and Current Trends in Computing: 5th International Conference,
+    RSCTC 2006 Kobe, Japan, November 6-8, 2006 Proceedings 5'
+  organization: Springer Berlin Heidelberg
+  pages: 557–566
+  title: A statistical method for determining importance of variables in an information
+    system
+  year: '2006'
+- ENTRYTYPE: article
+  ID: richter2013fine
+  author: Richter-Boix, Alex and Quintela, Maria and Kierczak, Marcin and Franch,
+    Marc and Laurila, Anssi
+  journal: Molecular ecology
+  number: '5'
+  pages: 1322–1340
+  title: 'Fine-grained adaptive divergence in an amphibian: genetic basis of phenotypic
+    divergence and the role of nonrandom gene flow in restricting effective migration
+    among wetlands'
+  volume: '22'
+  year: '2013'
+- ENTRYTYPE: article
+  ID: saha2014ensemble
+  author: Saha, Indrajit and Zubek, Julian and Klingström, Tomas and Forsberg, Simon
+    and Wikander, Johan and Kierczak, Marcin and Maulik, Ujjwal and Plewczynski, Dariusz
+  journal: Molecular BioSystems
+  number: '4'
+  pages: 820–830
+  publisher: Royal Society of Chemistry
+  title: Ensemble learning prediction of protein–protein interactions using proteins
+    functional annotations
+  volume: '10'
+  year: '2014'
+- ENTRYTYPE: article
+  ID: draminski2010monte
+  author: Dramiński, Michał and Kierczak, Marcin and Koronacki, Jacek and Komorowski,
+    Jan
+  journal: 'Advances in Machine Learning II: Dedicated to the Memory of Professor
+    Ryszard S. Michalski'
+  pages: 371–385
+  publisher: Springer Berlin Heidelberg
+  title: Monte Carlo feature selection and interdependency discovery in supervised
+    classification
+  year: '2010'
+- ENTRYTYPE: article
+  ID: kierczak2010computational
+  author: Kierczak, Marcin and Dramiński, Michał and Koronacki, Jacek and Komorowski,
+    Jan
+  journal: Bioinformatics and biology insights
+  pages: BBI–S6247
+  publisher: 'SAGE Publications Sage UK: London, England'
+  title: Computational analysis of molecular interaction networks underlying change
+    of HIV-1 resistance to selected reverse transcriptase inhibitors
+  volume: '4'
+  year: '2010'
+- ENTRYTYPE: article
+  ID: kierczak2008construction
+  author: Kierczak, Marcin and Rudnicki, Witold R and Komorowski, Jan
+  journal: 'Granular Computing: At the Junction of Rough Sets and Fuzzy Sets'
+  pages: 249–258
+  publisher: Springer Berlin Heidelberg
+  title: Construction of Rough Set-Based Classifiers for Predicting HIV Resistance
+    to Nucleoside Reverse Transcriptase Inhibitors
+  year: '2008'
+- ENTRYTYPE: article
+  ID: ahsan2013identification
+  author: Ahsan, Muhammad and Li, Xidan and Lundberg, Andreas E and Kierczak, Marcin
+    and Siegel, Paul B and Carlborg, Örjan and Marklund, Stefan
+  journal: Frontiers in genetics
+  pages: '226'
+  publisher: Frontiers Media SA
+  title: Identification of candidate genes and mutations in QTL regions for chicken
+    growth using bioinformatic analysis of NGS and SNP-chip data
+  volume: '4'
+  year: '2013'
+- ENTRYTYPE: article
+  ID: sjostrand2014breed
+  author: Sjöstrand, Karin and Wess, Gerard and Ljungvall, Ingrid and Häggström, Jens
+    and Merveille, A-C and Wiberg, Maria and Gouni, Vassiliki and Lundgren Willesen,
+    Jacob and Hanås, S and Lequarré, A-S and others
+  journal: Journal of Veterinary Internal Medicine
+  number: '2'
+  pages: 451–457
+  title: Breed differences in natriuretic peptides in healthy dogs
+  volume: '28'
+  year: '2014'
+- ENTRYTYPE: article
+  ID: li2013pase
+  author: Li, Xidan and Kierczak, Marcin and Shen, Xia and Ahsan, Muhammad and Carlborg,
+    Örjan and Marklund, Stefan
+  journal: Frontiers in genetics
+  pages: '21'
+  publisher: Frontiers Media SA
+  title: 'PASE: a novel method for functional prediction of amino acid substitutions
+    based on physicochemical properties'
+  volume: '4'
+  year: '2013'
+- ENTRYTYPE: article
+  ID: nelson2013mapfastr
+  author: Nelson, Ronald M and Nettelblad, Carl and Pettersson, Mats E and Shen, Xia
+    and Crooks, Lucy and Besnier, Francois and Álvarez-Castro, José M and Rönnegård,
+    Lars and Ek, Weronica and Sheng, Zheya and others
+  journal: 'G3: Genes, Genomes, Genetics'
+  number: '12'
+  pages: 2147–2149
+  publisher: Oxford University Press
+  title: 'MAPfastR: quantitative trait loci mapping in outbred line crosses'
+  volume: '3'
+  year: '2013'
+- ENTRYTYPE: article
+  ID: draminski2011monte
+  author: Dramiński, Michał and Kierczak, Marcin and Nowak-Brzezińska, Agnieszka and
+    Koronecki, J and Komorowski, Jan
+  journal: Control and Cybernetics
+  number: '2'
+  pages: 199–211
+  publisher: Polska Akademia Nauk. Instytut Badań Systemowych PAN
+  title: The Monte Carlo feature selection and interdependency discovery is unbiased
+  volume: '40'
+  year: '2011'
+- ENTRYTYPE: article
+  ID: nelson2013higher
+  author: Nelson, Ronald M and Kierczak, Marcin and Carlborg, Örjan
+  journal: Genome-Wide Association Studies and Genomic Prediction
+  pages: 499–518
+  publisher: Humana Press
+  title: 'Higher order interactions: detection of epistasis using machine learning
+    and evolutionary computation'
+  year: '2013'
+- ENTRYTYPE: article
+  ID: olsson2013thorough
+  author: Olsson, Mia and Tintle, Linda and Kierczak, Marcin and Perloski, Michele
+    and Tonomura, Noriko and Lundquist, Andrew and Muren, Eva and Fels, Max and Tengvall,
+    Katarina and Pielberg, Gerli and others
+  journal: PLoS One
+  number: '10'
+  pages: e75242
+  publisher: Public Library of Science San Francisco, USA
+  title: Thorough investigation of a canine autoinflammatory disease (AID) confirms
+    one main risk locus and suggests a modifier locus for amyloidosis
+  volume: '8'
+  year: '2013'
+- ENTRYTYPE: article
+  ID: forsberg2015shepherds
+  author: Forsberg, Simon KG and Kierczak, Marcin and Ljungvall, Ingrid and Merveille,
+    Anne-Christine and Gouni, Vassiliki and Wiberg, Maria and Lundgren Willesen, Jakob
+    and Hanås, Sofia and Lequarre, Anne-Sophie and Mejer Sørensen, Louise and others
+  journal: PloS one
+  number: '5'
+  pages: e0123173
+  publisher: Public Library of Science San Francisco, CA USA
+  title: 'The shepherds’ tale: A genome-wide study across 9 dog breeds implicates
+    two loci in the regulation of fructosamine serum concentration in Belgian shepherds'
+  volume: '10'
+  year: '2015'
+- ENTRYTYPE: inproceedings
+  ID: saha2014evaluation
+  author: Saha, Indrajit and Klingström, Tomas and Forsberg, Simon and Wikander, Johan
+    and Zubek, Julian and Kierczak, Marcin and Plewczynski, Dariusz
+  booktitle: Man-Machine Interactions 3
+  organization: Springer International Publishing
+  pages: 211–218
+  title: Evaluation of machine learning algorithms on protein-protein interactions
+  year: '2014'
+- ENTRYTYPE: article
+  ID: olsson2015genome
+  author: Olsson, Mia and Tengvall, Katarina and Frankowiack, Marcel and Kierczak,
+    Marcin and Bergvall, Kerstin and Axelsson, Erik and Tintle, Linda and Marti, Eliane
+    and Roosje, Petra and Leeb, Tosso and others
+  journal: PLoS One
+  number: '7'
+  pages: e0133844
+  publisher: Public Library of Science San Francisco, CA USA
+  title: Genome-wide analyses suggest mechanisms involving early B-cell development
+    in canine IgA deficiency
+  volume: '10'
+  year: '2015'
+- ENTRYTYPE: article
+  ID: kierczak2015cgmisc
+  author: Kierczak, Marcin and Jabłońska, Jagoda and Forsberg, Simon KG and Bianchi,
+    Matteo and Tengvall, Katarina and Pettersson, Mats and Scholz, Veronika and Meadows,
+    Jennifer RS and Jern, Patric and Carlborg, Örjan and others
+  journal: Bioinformatics
+  number: '23'
+  pages: 3830–3831
+  publisher: Oxford University Press
+  title: 'Cgmisc: Enhanced genome-wide association analyses and visualization'
+  volume: '31'
+  year: '2015'
+- ENTRYTYPE: article
+  ID: bianchi2015multi
+  author: Bianchi, Matteo and Dahlgren, Stina and Massey, Jonathan and Dietschi, Elisabeth
+    and Kierczak, Marcin and Lund-Ziener, Martine and Sundberg, Katarina and Thoresen,
+    Stein Istre and Kämpe, Olle and Andersson, Göran and others
+  journal: PLoS One
+  number: '8'
+  pages: e0134720
+  publisher: Public Library of Science San Francisco, CA USA
+  title: A multi-breed genome-wide association analysis for canine hypothyroidism
+    identifies a shared major risk locus on CFA12
+  volume: '10'
+  year: '2015'
+- ENTRYTYPE: article
+  ID: tengvall2015risk
+  author: Tengvall, Katarina and Kozyrev, Sergey and Kierczak, Marcin and Bergvall,
+    Kerstin and Farias, Fabiana and Ardesjö-Lundgren, Brita and Murén, Eva and Hagman,
+    Ragnvi and Leeb, Tosso and Pielberg, Gerli and others
+  title: A risk haplotype within the PKP2 locus shows association to Canine Atopic
+    Dermatitis and contains cell-type specific enhancers
+  year: '2015'
+- ENTRYTYPE: article
+  ID: olsson2015correction
+  author: Olsson, Mia and Tengvall, Katarina and Frankowiack, Marcel and Kierczak,
+    Marcin and Bergvall, Kerstin and Axelsson, Erik and Tintle, Linda and Marti, Eliane
+    and Roosje, Petra and Leeb, Tosso and others
+  journal: Plos one
+  number: '9'
+  pages: e0138405
+  publisher: Public Library of Science San Francisco, CA USA
+  title: 'Correction: Genome-Wide Analyses Suggest Mechanisms Involving Early B-Cell
+    Development in Canine IgA Deficiency'
+  volume: '10'
+  year: '2015'
+- ENTRYTYPE: article
+  ID: andersson2015exploring
+  author: Andersson, Linda and Kierczak, Marcin and Scholz, Veronika and Johansson,
+    Janet and Hedhammar, Åke
+  journal: Acta Veterinaria Scandinavica
+  number: '1'
+  pages: 1–1
+  publisher: BioMed Central
+  title: Exploring weight data on over 100,000 Swedish dogs of various breeds
+  volume: '57'
+  year: '2015'
+- ENTRYTYPE: article
+  ID: tengvall2015correction
+  author: Tengvall, Katarina and Kierczak, Marcin and Bergvall, Kerstin and Olsson,
+    Mia and Frankowiack, Marcel and Farias, Fabiana HG and Pielberg, Gerli and Carlborg,
+    Örjan and Leeb, Tosso and Andersson, Göran and others
+  journal: Plos Genetics
+  number: '12'
+  pages: e1005740
+  publisher: Public Library of Science San Francisco, CA USA
+  title: 'Correction: Genome-Wide Analysis in German Shepherd Dogs Reveals Association
+    of a Locus on CFA 27 with Atopic Dermatitis'
+  volume: '11'
+  year: '2015'
+- ENTRYTYPE: article
+  ID: hoglund2016effect
+  author: Höglund, Katja and Lequarré, A-S and Ljungvall, Ingrid and Mc Entee, Kathleen
+    and Merveille, A-C and Wiberg, Maria and Gouni, Vassiliki and Lundgren Willesen,
+    Jacob and Hanås, S and Wess, Gerhard and others
+  journal: Journal of veterinary internal medicine
+  number: '2'
+  pages: 566–573
+  title: Effect of breed on plasma endothelin-1 concentration, plasma renin activity,
+    and serum cortisol concentration in healthy dogs
+  volume: '30'
+  year: '2016'
+- ENTRYTYPE: article
+  ID: olsson2016absolute
+  author: Olsson, M and Kierczak, Marcin and Karlsson, Åsa and Jabłońska, J and Leegwater,
+    P and Koltookian, M and Abadie, J and Citres, De and Dufaure, C and Thomas, A
+    and others
+  journal: BMC genomics
+  number: '1'
+  pages: 1–9
+  publisher: BioMed Central
+  title: Absolute quantification reveals the stable transmission of a high copy number
+    variant linked to autoinflammatory disease
+  volume: '17'
+  year: '2016'
+- ENTRYTYPE: article
+  ID: tengvall2016multiple
+  author: Tengvall, Katarina and Kozyrev, Sergey and Kierczak, Marcin and Bergvall,
+    Kerstin and Farias, Fabiana H.G. and Ardesjö-Lundgren, Brita and Olsson, Mia and
+    Murén, Eva and Hagman, Ragnvi and Leeb, Tosso and others
+  journal: BMC Genetics
+  number: '97'
+  title: Multiple regulatory variants located in cell type-specific enhancers within
+    the PKP2 locus form major risk and protective haplotypes for canine atopic dermatitis
+    in German shepherd dog
+  volume: '17'
+  year: '2016'
+- ENTRYTYPE: article
+  ID: tatjewski2017predicting
+  author: Tatjewski, Marcin and Kierczak, Marcin and Plewczynski, Dariusz
+  journal: Prediction of Protein Secondary Structure
+  pages: 275–300
+  publisher: Springer New York
+  title: 'Predicting post-translational modifications from local sequence fragments
+    using machine learning algorithms: Overview and best practices'
+  year: '2017'
+- ENTRYTYPE: article
+  ID: hoglund2014breed
+  author: Höglund, Katja and Lequarré, Anne-Sophie and Ljungvall, Ingrid and Mc Entee,
+    Kathleen and Merveille, Anne-Christine and Wiberg, Maria and Gouni, Vassiliki
+    and Lundgren Wilessen, Jacob and Hanas, S and Wess, Gerard and others
+  journal: Journal of Veterinary Internal Medicine
+  publisher: Wiley-Blackwell, United States
+  title: Breed Differences in Concentrations of Neuroendocrines and Cortisol in Healthy
+    Dogs
+  year: '2014'
+- ENTRYTYPE: article
+  ID: pettersson2017model
+  author: Pettersson, Mats E and Kierczak, Marcin and Almén, Markus Sällman and Lamichhaney,
+    Sangeet and Andersson, Leif
+  journal: bioRxiv
+  pages: '144394'
+  publisher: Cold Spring Harbor Laboratory
+  title: A Model-Free Approach for Detecting Genomic Regions of Deep Divergence Using
+    the Distribution of Haplotype Distances
+  year: '2017'
+- ENTRYTYPE: article
+  ID: sakthikumar2018setd2
+  author: Sakthikumar, Sharadha and Elvers, Ingegerd and Kim, Jaegil and Arendt, Maja
+    L and Thomas, Rachael and Turner-Maier, Jason and Swofford, Ross and Johnson,
+    Jeremy and Schumacher, Steven E and Alföldi, Jessica and others
+  journal: Cancer research
+  number: '13'
+  pages: 3421–3431
+  publisher: American Association for Cancer Research
+  title: SETD2 Is Recurrently Mutated in Whole-Exome Sequenced Canine OsteosarcomaMutational
+    Landscape in Canine Osteosarcoma
+  volume: '78'
+  year: '2018'
+- ENTRYTYPE: article
+  ID: franch10effect
+  author: Franch, Marc and Richter-Boix, Alex and Quintela, María and Kierczak, Marcin
+    and Laurila, Anssi
+  journal: Forest
+  number: '9'
+  pages: '8'
+  title: 'Effect of landscape in Rana arvalis genetic distance: application of circuit
+    theory.'
+  volume: '10'
+  year: '2012'
+- ENTRYTYPE: article
+  ID: hoglund2014breed
+  author: Höglund, Katja and Lequarré, Anne Sophie and Ljungvall, Ingrid and McEntee,
+    Kathleen and Merveille, Anne-Christine and Wiberg, Maria and Gouni, Vassiliki
+    and Lundgren Willesen, J and Hanas, Sofia and Wess, Gerhard and others
+  journal: Journal of veterinary internal medicine
+  pages: 451–457
+  title: Breed differences in concentrations of circulating vasoactive peptides and
+    cortisol in healthy dogs
+  volume: '28'
+  year: '2014'
+- ENTRYTYPE: inproceedings
+  ID: rafati2019analysing
+  author: Rafati, N and Hoglund, J and Kierczak, M and Rask-Andersen, M and Ek, W
+    and Ekman, D and Karlsson, T and Johansson, A
+  booktitle: EUROPEAN JOURNAL OF HUMAN GENETICS
+  organization: NATURE PUBLISHING GROUP MACMILLAN BUILDING, 4 CRINAN ST, LONDON N1
+    9XW, ENGLAND
+  pages: 1779–1779
+  title: Analysing the joint effect of rare and common variants on human traits, using
+    whole-genome sequencing data and a gene-based approach, increases the power to
+    identify genetic effects
+  volume: '27'
+  year: '2019'
+- ENTRYTYPE: article
+  ID: montoliu2020building
+  author: Montoliu-Nerin, Merce and Sánchez-García, Marisol and Bergin, Claudia and
+    Grabherr, Manfred and Ellis, Barbara and Kutschera, Verena Esther and Kierczak,
+    Marcin and Johannesson, Hanna and Rosling, Anna
+  journal: Scientific Reports
+  number: '1'
+  pages: '1303'
+  publisher: Nature Publishing Group UK London
+  title: Building de novo reference genome assemblies of complex eukaryotic microorganisms
+    from single nuclei
+  volume: '10'
+  year: '2020'
+- ENTRYTYPE: article
+  ID: tengvall2020transcriptomes
+  author: Tengvall, Katarina and Bergvall, K and Olsson, M and Ardesjö-Lundgren, Brita
+    and Farias, FHG and Kierczak, Marcin and Hedhammar, Å and Lindblad-Toh, Kerstin
+    and Andersson, G
+  journal: Immunogenetics
+  number: '5'
+  pages: 315–323
+  publisher: Springer Berlin Heidelberg
+  title: Transcriptomes from German shepherd dogs reveal differences in immune activity
+    between atopic dermatitis affected and control skin
+  volume: '72'
+  year: '2020'
+- ENTRYTYPE: article
+  ID: lord2020pre
+  author: Lord, Edana and Dussex, Nicolas and Kierczak, Marcin and Díez-del-Molino,
+    David and Ryder, Oliver A and Stanton, David WG and Gilbert, M Thomas P and Sanchez-Barreiro,
+    Fatima and Zhang, Guojie and Sinding, Mikkel-Holger S and others
+  journal: Current Biology
+  number: '19'
+  pages: 3871–3879
+  publisher: Cell Press
+  title: Pre-extinction demographic stability and genomic signatures of adaptation
+    in the woolly rhinoceros
+  volume: '30'
+  year: '2020'
+- ENTRYTYPE: article
+  ID: luu2022foxo1
+  author: Luu, Thuy T and Søndergaard, Jonas Nørskov and Peña-Pérez, Lucía and Kharazi,
+    Shabnam and Krstic, Aleksandra and Meinke, Stephan and Schmied, Laurent and Frengen,
+    Nicolai and Heshmati, Yaser and Kierczak, Marcin and others
+  journal: Frontiers in immunology
+  pages: '854312'
+  publisher: Frontiers Media SA
+  title: FOXO1 and FOXO3 cooperatively regulate innate lymphoid cell development
+  volume: '13'
+  year: '2022'
+- ENTRYTYPE: article
+  ID: christmas2021genetic
+  author: Christmas, Matthew J and Jones, Julia C and Olsson, Anna and Wallerman,
+    Ola and Bunikis, Ignas and Kierczak, Marcin and Peona, Valentina and Whitley,
+    Kaitlyn M and Larva, Tuuli and Suh, Alexander and others
+  journal: Molecular biology and evolution
+  number: '8'
+  pages: 3126–3143
+  publisher: Oxford University Press
+  title: Genetic barriers to historical gene flow between cryptic species of alpine
+    bumblebees revealed by comparative population genomics
+  volume: '38'
+  year: '2021'
+- ENTRYTYPE: article
+  ID: von2021genomic
+  author: Von Seth, Johanna and Dussex, Nicolas and Díez-del-Molino, David and Van
+    Der Valk, Tom and Kutschera, Verena E and Kierczak, Marcin and Steiner, Cynthia
+    C and Liu, Shanlin and Gilbert, M Thomas P and Sinding, Mikkel-Holger S and others
+  journal: Nature communications
+  number: '1'
+  pages: '2393'
+  publisher: Nature Publishing Group UK London
+  title: Genomic insights into the conservation status of the world’s last remaining
+    Sumatran rhinoceros populations
+  volume: '12'
+  year: '2021'
+- ENTRYTYPE: article
+  ID: raclariu2021dna
+  author: Raclariu-Manolică, Ancuţa Cristina and Anmarkrud, Jarl Andreas and Kierczak,
+    Marcin and Rafati, Nima and Thorbek, Birgitte Lisbeth Graae and Schrøder-Nielsen,
+    Audun and de Boer, Hugo J
+  journal: Frontiers in plant science
+  pages: '665618'
+  publisher: Frontiers Media SA
+  title: DNA metabarcoding for quality control of basil, Oregano, and Paprika
+  volume: '12'
+  year: '2021'
+- ENTRYTYPE: misc
+  ID: draminski2010advances
+  author: Draminski, M and Kierczak, M and Koronacki, J and Komorowski, J
+  publisher: 'Springer Berlin, Germany:'
+  title: Advances in Machine Learning
+  year: '2010'
+- ENTRYTYPE: article
+  ID: kierczak2022contribution
+  author: Kierczak, Marcin and Rafati, Nima and Höglund, Julia and Gourlé, Hadrien
+    and Lo Faro, Valeria and Schmitz, Daniel and Ek, Weronica E and Gyllensten, Ulf
+    and Enroth, Stefan and Ekman, Diana and others
+  journal: Nature Communications
+  number: '1'
+  pages: '2532'
+  publisher: Nature Publishing Group UK London
+  title: Contribution of rare whole-genome sequencing variants to plasma protein levels
+    and the missing heritability
+  volume: '13'
+  year: '2022'
+- ENTRYTYPE: article
+  ID: arendt2021abcc4
+  author: Arendt, Maja and Ambrosen, Aime and Fall, Tove and Kierczak, Marcin and
+    Tengvall, Katarina and Meadows, Jennifer RS and Karlsson, Åsa and Lagerstedt,
+    Anne-Sofie and Bergström, Tomas and Andersson, Göran and others
+  journal: Scientific Reports
+  number: '1'
+  pages: '16647'
+  publisher: Nature Publishing Group UK London
+  title: The ABCC4 gene is associated with pyometra in golden retriever dogs
+  volume: '11'
+  year: '2021'
+- ENTRYTYPE: article
+  ID: christmas2022genomic
+  author: Christmas, Matthew J and Jones, Julia C and Olsson, Anna and Wallerman,
+    Ola and Bunikis, Ignas and Kierczak, Marcin and Whitley, Kaitlyn M and Sullivan,
+    Isabel and Geib, Jennifer C and Miller-Struttmann, Nicole E and others
+  journal: Molecular Ecology
+  number: '4'
+  pages: 1111–1127
+  title: 'A genomic and morphometric analysis of alpine bumblebees: Ongoing reductions
+    in tongue length but no clear genetic component'
+  volume: '31'
+  year: '2022'
+- ENTRYTYPE: article
+  ID: pena2022linked
+  author: Peña-Pérez, Lucía and Frengen, Nicolai and Hauenstein, Julia and Gran, Charlotte
+    and Gustafsson, Charlotte and Eisfeldt, Jesper and Kierczak, Marcin and Taborsak-Lines,
+    Fanny and Olsen, Remi-André and Wallblom, Ann and others
+  journal: Blood Advances
+  number: '17'
+  pages: 5009–5023
+  publisher: American Society of Hematology Washington, DC
+  title: Linked-read whole-genome sequencing resolves common and private structural
+    variants in multiple myeloma
+  volume: '6'
+  year: '2022'
+- ENTRYTYPE: article
+  ID: pena2022foxo
+  author: Peña-Pérez, Lucía and Kharazi, Shabnam and Frengen, Nicolai and Krstic,
+    Aleksandra and Bouderlique, Thibault and Hauenstein, Julia and He, Minghui and
+    Somuncular, Ece and Li Wang, Xiaoze and Dahlberg, Carin and others
+  journal: Frontiers in Immunology
+  pages: '1723'
+  publisher: Frontiers
+  title: FOXO Dictates Initiation of B Cell Development and Myeloid Restriction in
+    Common Lymphoid Progenitors
+  volume: '13'
+  year: '2022'
+- ENTRYTYPE: article
+  ID: kutschera2022generode
+  author: Kutschera, Verena E and Kierczak, Marcin and van der Valk, Tom and von Seth,
+    Johanna and Dussex, Nicolas and Lord, Edana and Dehasque, Marianne and Stanton,
+    David WG and Khoonsari, Payam Emami and Nystedt, Björn and others
+  journal: BMC bioinformatics
+  number: '1'
+  pages: 1–17
+  publisher: BioMed Central
+  title: 'GenErode: a bioinformatics pipeline to investigate genome erosion in endangered
+    and extinct species'
+  volume: '23'
+  year: '2022'
+- ENTRYTYPE: article
+  ID: lingaas2023bayesian
+  author: Lingaas, Frode and Tengvall, Katarina and Jansen, Johan Høgset and Pelander,
+    Lena and Hurst, Maria H and Meuwissen, Theo and Karlsson, Åsa and Meadows, Jennifer
+    RS and Sundström, Elisabeth and Thoresen, Stein Istre and others
+  journal: PLoS Genetics
+  number: '1'
+  pages: e1010599
+  publisher: Public Library of Science San Francisco, CA USA
+  title: Bayesian mixed model analysis uncovered 21 risk loci for chronic kidney disease
+    in boxer dogs
+  volume: '19'
+  year: '2023'
