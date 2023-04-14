@@ -3,13 +3,14 @@ title: "About me"
 ---
 
 ## Academic Degrees
-* **Associate Professor** in Bioinformatics, Uppsala University, Uppsala, Sweden, 2019.
 
-* **Doctor of Philosophy** in Bioinformatics, Uppsala University, Uppsala, Sweden, 2010. Linnaeus Centre for Bioinformatics, advisor prof. Jan Komorowski. Thesis: *From Physicochemical Features to Interdependency Networks: A Monte Carlo Approach to Modeling HIV-1 Resistome and Post-translational Modifications*. 
+* **Associate Professor 𓀍** in Bioinformatics, Uppsala University, Uppsala, Sweden, 2019.
 
-* **MSc**, Uppsala University, Uppsala, Sweden, 2005. Major: molecular biology, minor: chemistry.
+* **Doctor of Philosophy 𓀊** in Bioinformatics, Uppsala University, Uppsala, Sweden, 2010. Linnaeus Centre for Bioinformatics, advisor prof. Jan Komorowski. Thesis: *From Physicochemical Features to Interdependency Networks: A Monte Carlo Approach to Modeling HIV-1 Resistome and Post-translational Modifications*. 
 
-* **BSc**, Warsaw University, Warsaw, Poland, 2003.  Area: molecular biology.
+* **MSc 𓀤**, Uppsala University, Uppsala, Sweden, 2005. Major: molecular biology, minor: chemistry.
+
+* **BSc 𓀧**, Warsaw University, Warsaw, Poland, 2003.  Area: molecular biology.
 
 ## Experience
 * Bioinformatics Data Scientist, Science for Life Laboratory, National Bioinformatics Structure, Sweden. Uppsala, Sweden, 2017 – now.  
