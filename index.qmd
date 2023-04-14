@@ -1,5 +1,5 @@
 ---
-title: "Marcin Kierczak 𓅓𓄿𓂋𓏏𓈖𓁎"
+title: "Marcin Kierczak 𓅓𓄿𓂋𓏏𓈖𓁎 𓎡𓇋𓂋𓍿𓄿𓎡𓏟𓀂"
 image: assets/images/kiero.jpg
 about: 
   template: trestles
