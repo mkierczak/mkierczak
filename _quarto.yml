@@ -28,7 +28,7 @@ website:
       - "Copyright &copy; 2023, Marcin Kierczak"
     right: 
       - icon: github
-        href: https://github.com/mkierczal
+        href: https://github.com/mkierczak
       - icon: twitter
         href: https://twitter.com/quiestrho
   twitter-card: true
@@ -36,7 +36,7 @@ format:
   html:
     theme: 
       - assets/scss/marcin.scss
-    mainfont: Lato
+    mainfont: "'Gill Sans W01 Light', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Lato', sans-serif"
     css: styles.css
     toc: true
 
