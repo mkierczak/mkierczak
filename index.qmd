@@ -1,5 +1,5 @@
 ---
-title: "Marcin Kierczak"
+title: "Marcin Kierczak 𓅓𓄿𓂋𓏏𓈖𓁎"
 image: assets/images/kiero.jpg
 about: 
   template: trestles
@@ -20,23 +20,23 @@ about:
       icon: google
 ---
 
-Hello and welcome to my personal website. If you are here, let me introduce myself as a:   
-{{< fa hat-wizard >}} *bioinformatics data scientist* at [National Bioinformatics Infrastructure](https://nbis.se), Sweden and       
+Hello and welcome to my personal website. If you are here, let me introduce myself as a:\
+{{< fa hat-wizard >}} *bioinformatics data scientist* at [National Bioinformatics Infrastructure](https://nbis.se), Sweden and\
 {{< fa graduation-cap >}} *associate professor in bioinformatics* at [Uppsala University](https://www.uu.se), Sweden.
 
-I support research projects within genomics and computational biology. My **professional interests** span across:
+I support research projects within genomics and computational biology. My **professional interests** span across: 
 
-{{< fa robot >}} machine-learning and AI (neural nets),  
-{{< fa chart-column >}} statistical genomics,  
-{{< fa bone >}} aDNA (ancient/historical DNA),  
-{{< fa bacteria >}} metagenomics and {{< fa barcode >}} metabarcoding,  
-{{< fa computer >}} programming languages: {{< fa brands r-project >}} and {{< fa brands python >}}.  
+{{< fa robot >}} machine-learning and AI (neural nets),\
+{{< fa chart-column >}} statistical genomics,\
+{{< fa bone >}} aDNA (ancient/historical DNA),\
+{{< fa bacteria >}} metagenomics and {{< fa barcode >}} metabarcoding,\
+{{< fa computer >}} programming languages: {{< fa brands r-project >}} and {{< fa brands python >}}.
 
-My **other interests** include:  
-{{< fa microchip >}} microcontroller programming and electronics,  
-{{< fa cubes >}} additive manufacturing (3d printing),  
-{{< fa radio >}} software-defined radio and digital modes,  
-{{< fa music >}} jazz, jazz/classical fusion,  
-{{< fa person-hiking >}} hiking,  
-{{< fa ship >}} boating/sailing,  
+My **other interests** include:\
+{{< fa microchip >}} microcontroller programming and electronics,\
+{{< fa cubes >}} additive manufacturing (3d printing),\
+{{< fa radio >}} software-defined radio and digital modes,\
+{{< fa music >}} jazz, jazz/classical fusion,\
+{{< fa person-hiking >}} hiking,\
+{{< fa ship >}} boating/sailing,\
 {{< fa map >}} GPS, astro- and terrestrial navigation.
