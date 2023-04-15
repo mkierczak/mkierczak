@@ -13,12 +13,13 @@ $light-gray: #949799;
 $purple: #AE8BD1;
 $logofg: rgb(79, 100, 167);
 $logobg: rgb(242, 238, 227);
+$logobg-light: rgb(255, 255, 252);
 
 // Base document colors
 $navbar-bg: $logofg; // navbar
 $navbar-fg: $dark-sage-green; // navbar foreground elements
 $navbar-hl: $purple; // highlight color when hovering over navbar links
-$body-bg: $logobg; // page background 
+$body-bg: $logobg-light; // page background 
 $body-color: $gray; // page text 
 $footer-bg: $logofg; // footer 
 $link-color: $logofg; // hyperlinks 
