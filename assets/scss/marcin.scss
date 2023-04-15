@@ -17,7 +17,7 @@ $logobg-light: rgb(255, 255, 252);
 
 // Base document colors
 $navbar-bg: $logofg; // navbar
-$navbar-fg: $dark-sage-green; // navbar foreground elements
+$navbar-fg: $logobg-light; // navbar foreground elements
 $navbar-hl: $purple; // highlight color when hovering over navbar links
 $body-bg: $logobg-light; // page background 
 $body-color: $gray; // page text 
