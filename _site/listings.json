@@ -1,0 +1,12 @@
+[
+  {
+    "listing": "/writings.html",
+    "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/R6_disease_sim.html"
+    ]
+  }
+]

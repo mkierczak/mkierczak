@@ -1,0 +1,10 @@
+---
+title: "Saga"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: grid
+  categories: true
+  fields: [image, date, title, reading-time, description]
+---
+

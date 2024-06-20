@@ -1,11 +1,15 @@
 ---
-title: "Teaching Portfolio"
-editor: visual
+title: "Teachings"
 ---
+<table style="margin-left: auto; margin-right: auto;"><tr><td>
+![](assets/rabbit_teaching_rabbits.png){ width=300px fig-alt="Rabbit tutoring a class of rabbits." fig-align="left"} 
+</td><td>
+![](assets/RaukR_1.webp){ width=300px fig-alt="RaukR." fig-align="right" } 
+</tr></tr></table>
+<p style="text-align: center; font-family: cursive; font-size: 1.2rem; color: steelblue;">Non scholae sed vitae discimus.</p>
 
 ## Authored Courses
-
-* [**RaukR. Advanced R for Bioinformatics Summer School**](https://nbisweden.github.io/workshop-RaukR-2306/), Visby, Sweden. 2018, 2019, 2021, 2022
+* [**RaukR. Advanced R for Bioinformatics Summer School**](https://nbisweden.github.io/raukr-2024/), Visby, Sweden. 2018, 2019, 2021, 2022, 2023, 2024
 
 * R programming for Life Scientists. A SciLife Lab course. 2015 (1x), 2016 (2x), 2017 (2x), 2018, 2020.
 
@@ -15,7 +19,7 @@ editor: visual
 
 * The Next-Generation Sequencing - Bioinformatics and Data Analysis (a PhD-level courses).
 
-## Courses as teacher/TA
+## Courses as teacher / TA
 
 * Bioinformatics 3MR103 (undergraduate level). Module on machine learning. 2023.
 
@@ -33,30 +37,38 @@ editor: visual
 
 ## Thesis Advisor
 
-* PhD thesis: **Sharadha Sakthikumar** [*Characterizing the spectrum of somatic alterations in canine and human cancers.*](http://uu.diva-portal.org/smash/get/diva2:1379692/FULLTEXT01.pdf) (co-advisor, thesis defended 2020).
+* Masters thesis: **Moa Qvarnlöv**. [*The accuracy, reliability and practicality of AI systems in analyzing and interpreting medical images for improved patient diagnosis and treatment.*]()(subject reader, thesis defended 2024)
 
-* PhD thesis: **Simon Forsberg**. [*Complex Trait Genetics: Beyond Additivity.*](http://Complex Trait Genetics: Beyond Additivity) (co-advisor, thesis defended 2016).
+* Masters thesis: **Yasemin Utkueri**. [*Enhancing cDNA Basecalls for Non-Model Organisms Using Custom Nanopore Models: A Case Study on Krill.*]()(subject reader, thesis defended 2024)
 
-* PhD thesis: **Muhammad Ahsan**. *Identification and evaluation of functional sequences, selective sweeps and candidate mutations within QTL regions regulating growth in chicken.* (co-advisor, thesis defended in 2014).
+* PhD thesis: **Sharadha Sakthikumar** [*Characterizing the spectrum of somatic alterations in canine and human cancers.*](http://uu.diva-portal.org/smash/get/diva2:1379692/FULLTEXT01.pdf) (co-advisor, thesis defended 2020)
 
-* Masters thesis: **Małgorzata Kauczynska**. *Random Forest-based classifiers for prediction of SLE risk from SNP microarray data.* (co-advisor, defended 2006).
+* PhD thesis: **Simon Forsberg**. [*Complex Trait Genetics: Beyond Additivity.*](http://Complex Trait Genetics: Beyond Additivity) (co-advisor, thesis defended 2016)
 
-* Research project: **Oskar Gauffin**, analysis of time-spatial data on microbehavior in the domestic dog. 2015 (advisor).
+* PhD thesis: **Muhammad Ahsan**. *Identification and evaluation of functional sequences, selective sweeps and candidate mutations within QTL regions regulating growth in chicken.* (co-advisor, thesis defended in 2014)
 
-* Research project (within the ERASMUS European project): **Jagoda Jabłońska**. Development and application of novel tools for enhanced genome-wide association studies. Published in Bioinformatics, 2015, 2016.
+* Masters thesis: **Małgorzata Kauczynska**. *Random Forest-based classifiers for prediction of SLE risk from SNP microarray data.* (co-advisor, defended 2006)
 
-* Research project: **Andreas E. Lundberg**. A tool for assembly and SNP detection using data coming from different SOLiD sequencing setups (advisor).
+* Research project: **Oskar Gauffin**, analysis of time-spatial data on microbehavior in the domestic dog. 2015 (advisor)
 
-* Research project: **Simon Forsberg**. An R package for assessment of mutation impact on protein function (advisor).
+* Research project (within the ERASMUS European project): **Jagoda Jabłońska**. Development and application of novel tools for enhanced genome-wide association studies. Published in Bioinformatics, 2015, 2016
 
-* Research project: **Samuel Lampa**. PTMatcher, a web-based tool for predicting post-translational modifications in proteins.
+* Research project: **Andreas E. Lundberg**. A tool for assembly and SNP detection using data coming from different SOLiD sequencing setups (advisor)
+
+* Research project: **Simon Forsberg**. An R package for assessment of mutation impact on protein function (advisor)
+
+* Research project: **Samuel Lampa**. PTMatcher, a web-based tool for predicting post-translational modifications in proteins
 
 ## Thesis Committee 
-* PhD Committee membert: **Rickard Hamarén**. [*From the migrations of herders and farmers to the colonial era and the modern-day: Genetic inferences on African demographic history*](http://uu.diva-portal.org/smash/get/diva2:1696630/FULLTEXT01.pdf) (thesis defended 2022)
+* PhD Committee member: **Rickard Hamarén**. [*From the migrations of herders and farmers to the colonial era and the modern-day: Genetic inferences on African demographic history*](http://uu.diva-portal.org/smash/get/diva2:1696630/FULLTEXT01.pdf) (thesis defended 2022)
 
-* PhD Committee member: **Martin Dahlö**. [*Approaches for Distributing Large Scale Bioinformatic Analyses*](http://uu.diva-portal.org/smash/get/diva2:1597155/FULLTEXT01.pdf) (thesis defended in 2021).
+* PhD Committee member: **Martin Dahlö**. [*Approaches for Distributing Large Scale Bioinformatic Analyses*](http://uu.diva-portal.org/smash/get/diva2:1597155/FULLTEXT01.pdf) (thesis defended in 2021)
 
-* PhD Committee member: **Andrea Garcia Montaner**. [*Genome evolution of a bee-associated bacterium*](http://uu.diva-portal.org/smash/get/diva2:1456589/FULLTEXT01.pdf) (thesis defended in 2020).
+* PhD Committee member: **Andrea Garcia Montaner**. [*Genome evolution of a bee-associated bacterium*](http://uu.diva-portal.org/smash/get/diva2:1456589/FULLTEXT01.pdf) (thesis defended in 2020)
 
-* Licenciate opponent: **Kristina Ausmees**. [*Efficient computational methods for applications in genomics*](http://uu.diva-portal.org/smash/get/diva2:1367712/FULLTEXT02.pdf) (thesis opponent, defended 2019).
-2019
+* Licenciate opponent: **Kristina Ausmees**. [*Efficient computational methods for applications in genomics*](http://uu.diva-portal.org/smash/get/diva2:1367712/FULLTEXT02.pdf) (thesis opponent, defended 2019)
+
+![](assets/rabbit_teaching_rabbit2.webp){ width=300px fig-alt="Rabbit tutoring another rabbit." fig-align="center" } 
+
+<hr style="position: relative; border-width:3px;margin: 0px;top:-1em">
+<hr style="position: relative; border-width:7px;margin: 0px;top:-0.8em">

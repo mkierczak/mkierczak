@@ -1,0 +1,30 @@
+---
+title: "Writings"
+listing:
+  id: publications-listing
+  contents: 
+    - assets/bib/mkierczak.yml
+  sort: "year desc"
+  type: table
+  table-striped: true
+  field-display-names:
+    title: "Title"
+    journal: "Journal"
+    year: "Year"
+  fields: [title, journal, year]
+  page-size: 100
+---
+
+![](assets/sitting_dog.png){ width=300px fig-alt="A dog sitting on a book." style="float: right; margin-left: 10px;"} This page summarises my various writings, mainly scientific publications, main conference presentations and some educational materials. For the most current list of scientific publications, go to my Google Scholar [profile page](https://scholar.google.com/citations?user=ebOBIL4AAAAJ&hl=en). Below, you can find a list of publications that is updated from time to time.
+
+Apart from scientific publications, you can find some of my teaching materials here.
+
+## Lore papers
+
+::: {#publications-listing}
+:::
+
+![](assets/reading_squirrel.png){ width=300px fig-alt="Squirrel reading a codex." fig-align="center" } 
+
+<hr style="position: relative; border-width:3px;margin: 0px;top:-1em">
+<hr style="position: relative; border-width:7px;margin: 0px;top:-0.8em">

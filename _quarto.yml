@@ -1,44 +1,25 @@
 project:
   type: website
-  output-dir: docs
 
 website:
   title: "Marcin Kierczak"
-  favicon: assets/images/logos/Marcin Kierczak-logos.jpeg
   navbar:
-    title: false
-    logo: assets/images/logos/Marcin Kierczak-logos.jpeg
-    logo-alt: "Marcin Kierczak personal logo"
     left:
       - href: index.qmd
-        text: Home
-        icon: house-door
-      - href: about.qmd
-        text: CV
-        icon: file-earmark-person
-      - href: publications.qmd
-        text: Publications
-        icon: newspaper
+        text: Hus
       - href: teaching.qmd
-        text: Teaching
-        icon: mortarboard
-  page-footer: 
-    background: light
-    left:
-      - "Copyright &copy; 2023, Marcin Kierczak"
-    right: 
-      - icon: github
-        href: https://github.com/mkierczak
-      - icon: twitter
-        href: https://twitter.com/quiestrho
-  twitter-card: true
+        text: Teachings
+      - href: writings.qmd
+        text: Writings
+      - href: blog.qmd
+        text: Saga
+
 format:
   html:
     theme: 
-      - assets/scss/marcin.scss
-    mainfont: "'Gill Sans W01 Light', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Lato', sans-serif"
-    css: styles.css
+      - mono
+      - assets/custom.scss
     toc: true
 
-
+editor: source
 

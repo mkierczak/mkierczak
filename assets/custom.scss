@@ -1,0 +1,53 @@
+/*-- scss:defaults --*/
+// Base document colors
+$body-bg: #FFFFED;
+$body-color: brown;
+$link-color: steelblue;
+$navbar-bg: brown;
+
+// Fonts
+// $font-family-sans-serif: Neucha, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-sans-serif: "Josefin Slab";
+$headings-font-family: cursive !default;
+$font-size-root: 1.3em;
+
+body {
+    text-align: justify !important;
+}
+
+.menu-text {
+    font-family: cursive;
+}
+
+.navbar-title {
+    font-family: cursive;
+}
+
+.title {
+    color: brown;
+}
+.anchored {
+    color: brown;
+    border-bottom: 1px solid brown;
+    padding-bottom: 0rem;
+}
+
+.fig-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.fig-center-bottom {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0em;
+    padding-bottom: 0em;
+  }
+
+/*-- scss:rules --*/
+$web-font-path: "https://fonts.googleapis.com/css?family=Neucha|Josefin+Slab|Cabin+Sketch&display=swap" !default;
+@if $web-font-path {
+  @import url($web-font-path);
+}

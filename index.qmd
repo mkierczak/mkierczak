@@ -1,42 +1,58 @@
 ---
-title: "Marcin Kierczak 𓅓𓄿𓂋𓏏𓈖𓁎 𓎡𓇋𓂋𓍿𓄿𓎡𓏟𓀂"
-image: assets/images/kiero.jpg
-about: 
-  template: trestles
-  image-shape: rounded
-  image-width: 10rem
-  links:
-    - text: LinkedIn
-      href: https://www.linkedin.com/in/marcinkierczak/
-      icon: linkedin
-    - text: Twitter
-      href: https://twitter.com/quiestrho
-      icon: twitter
-    - text: GitHub
-      href: https://github.com/mkierczak
-      icon: github
-    - text: GoogleScholar
-      href: https://scholar.google.com/citations?user=ebOBIL4AAAAJ&hl=en
-      icon: google
+title: "Marcin Kierczak"
 ---
 
-Hello and welcome to my personal website. If you are here, let me introduce myself as a:\
-{{< fa hat-wizard >}} *bioinformatics data scientist* at [National Bioinformatics Infrastructure](https://nbis.se), Sweden and\
-{{< fa graduation-cap >}} *associate professor in bioinformatics* at [Uppsala University](https://www.uu.se), Sweden.
+![Marcin Kierczak](assets/marcin1.png){width="200" style="float: left; margin-right: 1em;"} I am a *bioinformatics data scientist* {{< fa hat-wizard >}}, currently working at the [National Bioinformatics Infrastructure](https://nbis.se), Sweden at the Health & Clinical Support Team. I am also an associate professor in bioinformatics {{< fa graduation-cap >}}  at the Department of Cell and Molecular Biology, Uppsala University and at the Science For Life Laboratory, Uppsala, Sweden.
 
-I support research projects within genomics and computational biology. My **professional interests** span across: 
+As a data scientist at NBIS, I am supporting research projects across Sweden with focus on: 
+{{< fa robot >}} machine-learning and AI (neural nets), {{< fa chart-column >}} statistical genomics, {{< fa bone >}} aDNA (ancient/historical DNA), {{< fa bacteria >}} metagenomics and {{< fa barcode >}} DNA metabarcoding, {{< fa computer >}} programming languages: {{< fa brands r-project >}} and {{< fa brands python >}}.
 
-{{< fa robot >}} machine-learning and AI (neural nets),\
-{{< fa chart-column >}} statistical genomics,\
-{{< fa bone >}} aDNA (ancient/historical DNA),\
-{{< fa bacteria >}} metagenomics and {{< fa barcode >}} metabarcoding,\
-{{< fa computer >}} programming languages: {{< fa brands r-project >}} and {{< fa brands python >}}.
+Since 2018, together with my colleagues, I am organizing [RaukR. Advanced R Programming for Bioinformatics](https://nbisweden.github.io/raukr-2024/) Summer School in Visby, Sweden.
 
-My **other interests** include:\
-{{< fa microchip >}} microcontroller programming and electronics,\
-{{< fa cubes >}} additive manufacturing (3d printing),\
-{{< fa radio >}} software-defined radio and digital modes,\
-{{< fa music >}} jazz, jazz/classical fusion,\
-{{< fa person-hiking >}} hiking,\
-{{< fa ship >}} boating/sailing,\
-{{< fa map >}} GPS, astro- and terrestrial navigation.
+My **other interests** include: {{< fa microchip >}} microcontroller programming and electronics, {{< fa cubes >}} additive manufacturing (3d printing), {{< fa radio >}} software-defined radio and digital modes, {{< fa music >}} jazz, jazz/classical fusion, {{< fa person-hiking >}} hiking, {{< fa ship >}} boating/sailing, {{< fa map >}} GPS, astro- and terrestrial navigation.
+
+![](assets/dog1.png){ width=200px fig-alt="Fire-spitting dog." class="fig-center" }
+
+
+## CV
+
+**Marcin Kierczak, PhD**
+
+<div style = "font-size: 0.8rem;">
+Marcin dot Kierczak at scilifelab dot uu dot se \| Uppsala, Sweden
+</div>
+
+::: {.callout-note}
+<div style = "font-size: 0.8rem;">
+phonetic IPA transcription of my name is /Marćn Kierčak/, but I do not mind being called Martin since this is only a different spelling of the same name. 
+</div>
+:::
+
+### Profile
+
+Data scientist and bioinformatics data analyst with strong expertise in genomics and computational biology and statistics. Focused on data mining and biological sequence analysis.
+
+### Experience
+
+* Bioinformatics Data Scientist, Science for Life Laboratory, National Bioinformatics Structure, Sweden. Uppsala, Sweden, 2017 – now
+
+* Researcher, Kerstin Lindblad-Toh’s Lab, Department of Medical Biochemistry and Microbiology, Uppsala University, & Science for Life Laboratory, Uppsala, Sweden, 2014 – 2017
+
+* Assistant researcher, Örjan Carlborg’s Lab, Computational Genetics Group, Department of Clinical Sciences, Swedish University of Agricultural Sciences, Sweden, 2010 – 2014
+
+* Postdoctoral researcher, Örjan Carlborg’s Lab, Computational Genetics Group, Department of Animal Breeding and Genetics, Swedish University of Agricultural Sciences, Sweden, 2010 – 2014
+
+* PhD student, The Linnaeus Centre for Bioinformatics, Uppsala University, Sweden, 2006 – 2009. Web consultant and database engineer, Global Diversity Foundation, 2006 – 2010
+
+### Education
+
+* Uppsala University, Uppsala, Sweden, 2006 – 2009. PhD student in bioinformatics at the Linnaeus Centre for Bioinformatics. The degree of Doctor of Philosophy in Bioinformatics awarded on the 16th of Dec 2009 by the Faculty of Technical and Natural Sciences.
+
+* Uppsala University, Uppsala, Sweden, 2003 – 2005. Master’s degree, major in molecular biology, masters thesis title: Construction of rough set-based classifiers for predicting HIV-1 resistance to NRTI drugs. 
+
+* Warsaw University, Warsaw, Poland, 2000 – 2003. Bachelor’s degree, in molecular biology, thesis title: Role of CDK-5 kinase in the development and functioning of CNS in mammals.
+
+![](assets/fighting_cats_rev.png){ width=300px fig-alt="Fighting cats." class="fig-center-bottom" }
+
+<hr style="position: relative; border-width:3px;margin: 0px;top:-1em">
+<hr style="position: relative; border-width:7px;margin: 0px;top:-0.8em">
