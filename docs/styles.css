@@ -201,3 +201,12 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .spotlight h2::before { display: none !important; }
 .spotlight p:first-of-type { padding-right: 5.5rem; }
 @media (max-width: 640px) { .spotlight p:first-of-type { padding-right: 0; } }
+
+/* Hover/focus explanations on the metric tiles */
+.stats .has-tip { position: relative; cursor: help; }
+.stats .has-tip::after { content: "i"; position: absolute; top: .45rem; right: .6rem; width: 1.15rem; height: 1.15rem; line-height: 1.05rem; text-align: center; font: italic .72rem Georgia, serif; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); }
+.stats .tip-body { position: absolute; z-index: 20; left: 50%; bottom: calc(100% + .7rem); transform: translate(-50%, 4px); width: min(20rem, 80vw); padding: .85rem 1rem; text-align: left; font-family: "Newsreader", serif; font-size: .92rem; line-height: 1.5; letter-spacing: 0; text-transform: none; color: inherit; background: var(--card); border: 1px solid var(--rule); border-top: 3px solid var(--gold); border-radius: 6px; box-shadow: 0 10px 28px rgba(20,25,40,.18); opacity: 0; visibility: hidden; transition: opacity .18s, transform .18s, visibility .18s; pointer-events: none; }
+.stats .tip-body p { margin: 0; font: inherit; letter-spacing: 0; text-transform: none; color: inherit; }
+.stats .has-tip:hover .tip-body, .stats .has-tip:focus .tip-body, .stats .has-tip:focus-within .tip-body { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.stats .has-tip:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .stats .tip-body { transition: none; } }

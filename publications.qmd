@@ -14,15 +14,23 @@ Peer-reviewed articles and preprints, with links to the papers. Citation counts 
 
 citations
 :::
-::: {}
+::: {.has-tip tabindex="0"}
 **22**
 
 h-index
+
+::: tip-body
+A researcher has an h-index of *h* if *h* of their papers have each been cited at least *h* times. It rewards a sustained body of well-cited work rather than a single hit, so it is harder to inflate than the total citation count.
 :::
-::: {}
+:::
+::: {.has-tip tabindex="0"}
 **36**
 
 i10-index
+
+::: tip-body
+The number of publications with at least 10 citations each. It is a simple, Google Scholar-specific measure of how many papers have had a lasting audience, and it ignores how far above 10 each one goes.
+:::
 :::
 :::
 
