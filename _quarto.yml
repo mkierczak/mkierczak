@@ -53,7 +53,7 @@ website:
         aria-label: RSS feed
   page-footer:
     left: "© 2026 Marcin Kierczak"
-    right: "Uppsala, Sweden · Built with [Quarto](https://quarto.org)"
+    right: "Uppsala, Sweden · Built with human brain, [Quarto](https://quarto.org) & [Claude](https://claude.com)"
 
 format:
   html:
