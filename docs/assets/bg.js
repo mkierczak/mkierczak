@@ -92,26 +92,11 @@
   var cols = [];
   function initDNA() {
     cols = [];
-    var n = Math.round(W / 70);
+    var n = Math.round(W / 55);
     for (var i = 0; i < n; i++) {
       var len = Math.round(rnd(12, 26)), str = "";
       for (var k = 0; k < len; k++) str += "ACGT"[Math.floor(Math.random() * 4)];
       cols.push({ x: (i + 0.5) * (W / n), y: rnd(0, H), s: str, v: rnd(5, 11), a: rnd(0.05, 0.1) });
-    }
-  }
-  function helix(cx, amp, a) {
-    var step = 16, k = 0.045;
-    for (var y = -10; y < H + 10; y += step) {
-      var p = y * k + t * 0.35;
-      var x1 = cx + Math.sin(p) * amp, x2 = cx - Math.sin(p) * amp;
-      var z = Math.cos(p);
-      ctx.strokeStyle = rgba(gold, 0.07 + 0.05 * Math.abs(z));
-      ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke();
-      ctx.fillStyle = rgba(color, 0.12 + 0.08 * z);
-      ctx.beginPath(); ctx.arc(x1, y, 2.6 + z, 0, 6.28); ctx.fill();
-      ctx.fillStyle = rgba(gold, 0.16 - 0.08 * z);
-      ctx.beginPath(); ctx.arc(x2, y, 2.6 - z, 0, 6.28); ctx.fill();
     }
   }
   function drawDNA(dt) {
@@ -124,8 +109,6 @@
         ctx.fillText(c.s[i], c.x, c.y - i * 20);
       }
     });
-    helix(W - 60, 26, 1);
-    helix(60, 20, 1);
   }
 
   /* ---------- network ---------- */
