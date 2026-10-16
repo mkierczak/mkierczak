@@ -1,5 +1,9 @@
 ---
 title: "Publications"
+include-in-header:
+  - text: |
+      <meta name="bg-motif" content="formulas">
+      <script src="/assets/bg.js" defer></script>
 ---
 
 Peer-reviewed articles and preprints, with links to the papers. Citation counts come from [OpenAlex](https://openalex.org) and are a rough indicator of impact; for a complete, current picture see [ORCID](https://orcid.org/0000-0003-2629-5655) or [Google Scholar](https://scholar.google.com/citations?user=ebOBIL4AAAAJ).

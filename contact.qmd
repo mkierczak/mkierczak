@@ -1,5 +1,9 @@
 ---
 title: "Contact"
+include-in-header:
+  - text: |
+      <meta name="bg-motif" content="manhattan">
+      <script src="/assets/bg.js" defer></script>
 ---
 
 I'm happy to hear about training, industry collaboration, teaching and research projects.

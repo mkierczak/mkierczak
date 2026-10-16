@@ -1,5 +1,9 @@
 ---
 title: "Research"
+include-in-header:
+  - text: |
+      <meta name="bg-motif" content="dna">
+      <script src="/assets/bg.js" defer></script>
 ---
 
 My work sits between biology, statistics and computer science. Most of it is collaborative: as a data scientist in a national infrastructure, I work with groups across Sweden, from veterinary medicine to evolutionary biology to clinical research.

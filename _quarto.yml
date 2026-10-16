@@ -6,6 +6,7 @@ project:
     - paper-notes.json
     - publication-counts.json
     - assets/icons/*.svg
+    - assets/bg.js
     - CNAME
   render:
     - "*.qmd"

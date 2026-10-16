@@ -1,5 +1,9 @@
 ---
 title: "Training & Outreach"
+include-in-header:
+  - text: |
+      <meta name="bg-motif" content="network">
+      <script src="/assets/bg.js" defer></script>
 ---
 
 As training and industry outreach coordinator at NBIS, I help shape how Swedish life scientists and industry partners learn bioinformatics, and I still teach myself.

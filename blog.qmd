@@ -10,6 +10,10 @@ listing:
   fields: [image, date, title, description, categories, reading-time]
 page-layout: full
 title-block-banner: false
+include-in-header:
+  - text: |
+      <meta name="bg-motif" content="code">
+      <script src="/assets/bg.js" defer></script>
 ---
 
 ::: {.links style="margin: .4rem 0 2rem"}
