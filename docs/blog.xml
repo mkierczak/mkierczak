@@ -10,7 +10,715 @@
 <atom:link href="https://kierczak.net/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Marcin Kierczak, PhD — Training and Industry Outreach Coordinator and Data Scientist at NBIS and Associate Professor of Bioinformatics / SciLifeLab, Uppsala, Sweden.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Wed, 19 Jun 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 15 Oct 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Statistics from the beginning: location and spread</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/stats-1-location-spread/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>About this series
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This series is adapted from lecture notes I wrote in 2017, <em>Introduction to Statistical Tests</em> (<a href="../../assets/docs/statests.pdf">original PDF</a>). I am turning them into short posts with fresh code and figures, starting from the very beginning. This first part covers <strong>location and spread</strong>. Later parts cover covariance and correlation, and then the tests themselves.</p>
+</div>
+</div>
+<section id="statistics-and-a-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="statistics-and-a-statistic">Statistics, and <em>a</em> statistic</h2>
+<p>Statistics is a branch of mathematics concerned with the collection, analysis, interpretation and presentation of data. A very similar word, <em>a statistic</em>, means something narrower: a single number that summarises some feature of a data sample, produced by a statistical procedure. The sample mean and the sample standard deviation are statistics.</p>
+<p>One distinction runs through everything that follows:</p>
+<ul>
+<li><strong>distributions</strong> (populations) are described by <strong>parameters</strong>,</li>
+<li><strong>samples</strong> are described by <strong>statistics</strong>.</li>
+</ul>
+<p>We almost never see the whole population, so we use statistics computed from a sample to estimate the parameters of the distribution it came from. Every distribution can be described by two kinds of parameters: <strong>location</strong> parameters (where are the data?) and <strong>spread</strong> (dispersion) parameters (how widely is it scattered?).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A shared look for the figures in this series</span></span>
+<span id="cb1-4">accent <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#8c2f39"</span>; gold <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#b08d4a"</span>; ink <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#5d6070"</span></span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_set</span>(</span>
+<span id="cb1-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FFFDF8"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>),</span>
+<span id="cb1-8">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb1-9">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.major =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_line</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#EEEAE0"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>),</span>
+<span id="cb1-10">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plot"</span>)</span>
+<span id="cb1-11">)</span></code></pre></div></div>
+</div>
+</section>
+<section id="location-where-are-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="location-where-are-the-data">Location: where are the data?</h2>
+<section id="mean" class="level3">
+<h3 class="anchored" data-anchor-id="mean">Mean</h3>
+<p>The mean measures the central tendency of the data: the sum of all values divided by the number of observations,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmu%20=%20%5Cfrac%7B%5Csum%20x%7D%7BN%7D.%0A"></p>
+<p>The population mean is written <img src="https://latex.codecogs.com/png.latex?%5Cmu"> and the sample mean <img src="https://latex.codecogs.com/png.latex?%5Cbar%7Bx%7D">; <img src="https://latex.codecogs.com/png.latex?N"> is the number of observations.</p>
+<p>The mean has a weakness: it uses <em>every</em> value, so it is pulled around by outliers and by skewed distributions. Five sheep weighing between 52 and 57 kg have a mean of 54.8 kg. Add one animal recorded as 120 kg (perhaps a typo) and see what happens:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">sheep <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">52</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">54</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">56</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">57</span>)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(sheep), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">median =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">median</span>(sheep))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean median 
+  54.8   55.0 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">sheep_typo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(sheep, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">120</span>)</span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(sheep_typo), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">median =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">median</span>(sheep_typo))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    mean   median 
+65.66667 55.50000 </code></pre>
+</div>
+</div>
+<p>The mean jumps by more than ten kilos; the median barely moves. People handle this problem with variants of the mean, such as the <em>weighted mean</em> or the <em>Winsorised mean</em>, which tames extreme observations, but we will not go into those here.</p>
+</section>
+<section id="median" class="level3">
+<h3 class="anchored" data-anchor-id="median">Median</h3>
+<p>The median is another location parameter. Unlike the mean it does not use all the observations: it is simply the middle value of the ordered data. With an odd number of data points it is easy to find. With an even number, it is the mean of the two middle values.</p>
+<p>Comparing the mean with the median tells us something about <strong>skewness</strong>:</p>
+<ul>
+<li>for a perfectly symmetric distribution, mean and median are equal,</li>
+<li>for a <strong>right-skewed</strong> distribution (a long tail to the right), the mean is <em>greater</em> than the median, because the tail drags the mean along,</li>
+<li>for a <strong>left-skewed</strong> distribution (a long tail to the left), the mean is <em>less</em> than the median.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>)</span>
+<span id="cb6-2">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">value =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rgamma</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2000</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">shape =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rate =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>))</span>
+<span id="cb6-3"></span>
+<span id="cb6-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(x, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(value)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_histogram</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bins =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">45</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#d8cfba"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FFFDF8"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">median</span>(x<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>value), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> gold, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>value), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> accent, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">median</span>(x<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>value) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">vjust =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb6-9">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"median"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> gold) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>value) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">vjust =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb6-11">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mean"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> accent) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A right-skewed sample: mean &gt; median"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://kierczak.net/posts/stats-1-location-spread/index_files/figure-html/skew-1.png" class="img-fluid figure-img" alt="Histogram of a right-skewed sample with the median line to the left of the mean line." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="spread-how-scattered-are-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="spread-how-scattered-are-the-data">Spread: how scattered are the data?</h2>
+<section id="variance" class="level3">
+<h3 class="anchored" data-anchor-id="variance">Variance</h3>
+<p>Variance measures dispersion around the mean: the more spread out the observations, the larger the variance. The population variance is <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2"> and the sample variance is <img src="https://latex.codecogs.com/png.latex?s%5E2">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csigma%5E2%20=%20%5Cfrac%7B%5Csum%20(x%20-%20%5Cmu)%5E2%7D%7BN%7D%0A%5Cqquad%5Cqquad%0As%5E2%20=%20%5Cfrac%7B%5Csum%20(x%20-%20%5Cbar%7Bx%7D)%5E2%7D%7Bn%20-%201%7D.%0A"></p>
+<p>Why divide by <img src="https://latex.codecogs.com/png.latex?n%20-%201"> rather than <img src="https://latex.codecogs.com/png.latex?n">? We want <img src="https://latex.codecogs.com/png.latex?s%5E2"> to be as good an estimate of <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2"> as possible. Think of estimating the variance of weights in a herd of 2,000 sheep from a sample of 200. It is quite likely that our sample misses the few very light and very heavy animals, which would otherwise have contributed large <img src="https://latex.codecogs.com/png.latex?(x%20-%20%5Cbar%7Bx%7D)%5E2"> terms. There is a second, more precise way to see it: we measure the deviations from <img src="https://latex.codecogs.com/png.latex?%5Cbar%7Bx%7D">, a number computed <em>from the same sample</em>, and the sample is always closer to its own mean than to the true mean <img src="https://latex.codecogs.com/png.latex?%5Cmu">. Dividing by <img src="https://latex.codecogs.com/png.latex?n"> would therefore underestimate the variance systematically; dividing by <img src="https://latex.codecogs.com/png.latex?n%20-%201"> corrects it exactly.</p>
+<p>Let’s check this with a simulation. We create a herd of 2,000 sheep, draw many samples of each size, and compare the two estimators with the true population variance.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2017</span>)</span>
+<span id="cb7-2">herd <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2000</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb7-3"></span>
+<span id="cb7-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># population variance: divide by N</span></span>
+<span id="cb7-5">pop_var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>((x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x))<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(x)</span>
+<span id="cb7-6">true_var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pop_var</span>(herd)</span>
+<span id="cb7-7"></span>
+<span id="cb7-8">compare_var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(pop, n_draws, sample_size) {</span>
+<span id="cb7-9">  draws <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replicate</span>(n_draws, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample</span>(pop, sample_size))   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># one sample per column</span></span>
+<span id="cb7-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">corrected   =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">apply</span>(draws, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, var)),             <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># divides by n - 1</span></span>
+<span id="cb7-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">uncorrected =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">apply</span>(draws, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, pop_var)))         <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># divides by n</span></span>
+<span id="cb7-12">}</span>
+<span id="cb7-13"></span>
+<span id="cb7-14">sizes <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb7-15">sim <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(sizes, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(n) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">compare_var</span>(herd, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, n)))</span>
+<span id="cb7-16">sim <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(sizes, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),</span>
+<span id="cb7-17">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">estimate =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(sim[, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"uncorrected"</span>], sim[, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"corrected"</span>]),</span>
+<span id="cb7-18">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">version =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"divide by n"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"divide by n − 1"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(sizes)))</span></code></pre></div></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(sim, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(n, estimate, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> version)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_hline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yintercept =</span> true_var, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> ink, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dotted"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.4</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_colour_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"divide by n"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#2b2117"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"divide by n − 1"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> accent)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sample size"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Average estimated variance"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>,</span>
+<span id="cb8-6">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The effect of using n − 1 in the denominator"</span>,</span>
+<span id="cb8-7">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dotted line: true population variance, averaged over 1,000 samples per size"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"top"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://kierczak.net/posts/stats-1-location-spread/index_files/figure-html/variance-plot-1.png" class="img-fluid figure-img" alt="Average variance estimates against sample size. Dividing by n falls below the true variance for small samples, dividing by n minus 1 stays on it." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For small samples, dividing by <img src="https://latex.codecogs.com/png.latex?n"> clearly underestimates the variance; for large samples the choice hardly matters, because <img src="https://latex.codecogs.com/png.latex?n"> and <img src="https://latex.codecogs.com/png.latex?n%20-%201"> are nearly the same number.</p>
+<p>Variance can never be negative, since we square the deviations. A side effect of that squaring is that variance is expressed in <em>squared</em> units (kilograms squared for weights). That is why we usually report its square root instead.</p>
+</section>
+<section id="standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h3>
+<p>The standard deviation (sd, SD, std. dev.) is the square root of the variance, written <img src="https://latex.codecogs.com/png.latex?%5Csigma"> for a population and <img src="https://latex.codecogs.com/png.latex?s"> for a sample. It is in the same units as the data, which makes it far easier to interpret: for our sheep, an sd of about 4 means that a typical animal is within a few kilograms of the herd’s mean weight.</p>
+</section>
+<section id="putting-different-scales-on-the-same-footing" class="level3">
+<h3 class="anchored" data-anchor-id="putting-different-scales-on-the-same-footing">Putting different scales on the same footing</h3>
+<p>If two traits are measured on different scales (say, body weight in kilograms and fleece length in centimetres), their variances cannot be compared directly: the numbers depend on the units. The usual remedy is <strong>standardisation</strong>: we transform each variable so that it has mean 0 and standard deviation 1, i.e.&nbsp;it follows the <em>standard normal</em> scale <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D(0,%201)">. The standardised values are called <strong>z-scores</strong>; each one tells us how many standard deviations an observation lies from the mean:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Az%20=%20%5Cfrac%7Bx%20-%20%5Cbar%7Bx%7D%7D%7Bs%7D.%0A"></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb9-2">herd2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">weight_kg =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>),</span>
+<span id="cb9-3">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fleece_cm =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>))</span>
+<span id="cb9-4"></span>
+<span id="cb9-5">ewe <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">weight_kg =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">58</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fleece_cm =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13.4</span>)</span>
+<span id="cb9-6">z <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> (ewe <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colMeans</span>(herd2)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(herd2, sd)</span>
+<span id="cb9-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(z, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>weight_kg fleece_cm 
+     0.65      1.56 </code></pre>
+</div>
+</div>
+<p>On the raw scale, 58 kg and 13.4 cm cannot be compared. As z-scores they can: this hypothetical ewe is about two-thirds of a standard deviation heavier than average, but more than one and a half standard deviations above average in fleece length. Relative to the rest of the herd, her fleece is the more unusual feature.</p>
+</section>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next</h2>
+<p>We now have the vocabulary to describe a single variable: where it sits and how much it varies. In the next part we look at <strong>two variables at once</strong>, with covariance and correlation. Spoiler: correlation is simply covariance after standardisation.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>statistics</category>
+  <category>R</category>
+  <category>teaching</category>
+  <category>series</category>
+  <guid>https://kierczak.net/posts/stats-1-location-spread/</guid>
+  <pubDate>Thu, 15 Oct 2026 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Pest in R using R6 classes</title>
   <dc:creator>Marcin Kierczak</dc:creator>
