@@ -2,13 +2,17 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/plague-sim/index.html"
+      "/posts/plague-sim/index.html",
+      "/posts/glamorous-ggplot2/index.html",
+      "/posts/karyoploter-23andme/index.html"
     ]
   },
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/plague-sim/index.html"
+      "/posts/plague-sim/index.html",
+      "/posts/glamorous-ggplot2/index.html",
+      "/posts/karyoploter-23andme/index.html"
     ]
   }
 ]

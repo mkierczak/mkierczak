@@ -63,6 +63,41 @@
     "text": "Peer-reviewed articles and preprints, with links to the papers. Citation counts come from OpenAlex and are a rough indicator of impact; for a complete, current picture see ORCID or Google Scholar.\n\n\n1,474\ncitations\n\n\n22\nh-index\n\n\n36\ni10-index\n\n\nMetrics from Google Scholar, October 2026.\n\nSort by  Newest first Oldest first Most cited    \n\n\n\nLoading publications…"
   },
   {
+    "objectID": "posts/karyoploter-23andme/index.html",
+    "href": "posts/karyoploter-23andme/index.html",
+    "title": "Plotting 23andMe marker density with karyoploteR",
+    "section": "",
+    "text": "NoteUpdated in 2026\n\n\n\nThis is a lightly edited version of a 2018 post. The prose and figures are the originals. The code is updated for current Bioconductor, but it is shown, not re-run: the SNPedia files the post relied on are no longer downloadable, so the figures below are the ones produced in 2018."
+  },
+  {
+    "objectID": "posts/karyoploter-23andme/index.html#background",
+    "href": "posts/karyoploter-23andme/index.html#background",
+    "title": "Plotting 23andMe marker density with karyoploteR",
+    "section": "Background",
+    "text": "Background\n23andMe is a personal genomics company that offers saliva-based, direct-to-consumer genetic testing. It is probably one of the most popular ways for people to learn more about their own genetic makeup, including ancestry.\nFor genotyping, the company uses a SNP array (SNP-chip). In short, such a chip lets us “read” polymorphic sites in human DNA: sites known to vary between individuals. Different versions of these sites are associated with traits such as eye colour, blood group or the risk of developing a disease. A given version does not always cause the phenotype. Often a SNP is a good proxy: it tags the phenotype. This works because DNA is inherited in rather long chunks (haplotypes), so a variant tends to travel together with its neighbours, including the actual causative variant. Thanks to this, genotyping a limited number of SNPs can tell you a lot about many traits.\n23andMe has used three versions of its chip, introduced in 2008, 2012 and 2014. I was curious how they differ, so I wanted to visualise the density of genotyped SNPs per fixed-length window along the genome."
+  },
+  {
+    "objectID": "posts/karyoploter-23andme/index.html#the-data",
+    "href": "posts/karyoploter-23andme/index.html#the-data",
+    "title": "Plotting 23andMe marker density with karyoploteR",
+    "section": "The data",
+    "text": "The data\n23andMe uses the Mendel family as its showcase. We look at the data for one family member, Lily Mendel (a real person: Linda Avey, a co-founder of the company). Data from all three chips were available at SNPedia (2008 v1, 2012 v3 and 2014 v4). The format is simple: one row per marker, with four columns:\n\nrsid – unique rs identifier of the marker,\nchr – chromosome,\npos – coordinate of the marker,\ngtype – the genotype, e.g. GG."
+  },
+  {
+    "objectID": "posts/karyoploter-23andme/index.html#analysis",
+    "href": "posts/karyoploter-23andme/index.html#analysis",
+    "title": "Plotting 23andMe marker density with karyoploteR",
+    "section": "Analysis",
+    "text": "Analysis\n\nPreparations\n\n# install once:\n# if (!requireNamespace(\"BiocManager\")) install.packages(\"BiocManager\")\n# BiocManager::install(c(\"karyoploteR\", \"biomaRt\"))\n\nlibrary(karyoploteR)\n\n\n\nLoading the data\nWe load the data, fix the column names and convert it into a GRanges object, which is what the density plot needs.\n\ngdata &lt;- read.table(file = \"genome_Lilly_Mendel_v4.txt\", comment.char = \"#\")\nnames(gdata) &lt;- c(\"rsid\", \"chr\", \"pos\", \"gtype\")\n\nregions &lt;- GRanges(seqnames = paste0(\"chr\", gdata$chr),\n                   ranges = IRanges(start = gdata$pos, width = 2))\n\n\n\nPlotting marker density\nA karyogram is an ideogram of ordered chromosomes: a map of the genome. We plot marker density over each chromosome with kpPlotDensity(). A nice feature of karyoploteR is that it also draws the G-bands, the pattern produced by Giemsa staining, which cytogeneticists use to visualise chromosome structure. The one important parameter here is the window size, which I set empirically to 1 Mbp.\n\nkp &lt;- plotKaryotype(cex = .7) |&gt;\n  kpAddBaseNumbers(cex = .5) |&gt;\n  kpPlotDensity(data = regions,\n                window.size = 1e6,\n                col = \"slateblue\",\n                border = \"slateblue\")\n\n\n\n\nDensity of genotyped markers (1 Mbp windows) along the human karyotype.\n\n\n\n\nSo what?\nI think the visualisation is neat, although the y-axis is missing (we fix that next). We can see low marker density around centromeres (the central, red-stained parts of the chromosomes) and a long stretch with no markers on the Y chromosome, probably its non-pseudoautosomal region. The density is also very low at the start of chromosomes 13, 14, 15, 21 and 22, and exceptionally high on the short arm of chromosome 6. I had no idea why, and not much time to research it…\n\n\nPlotting the actual counts\nWhat if we want the counts per window rather than the density? Easy enough:\n\ncounts &lt;- kp$latest.plot$computed.values$density\ndata_counts &lt;- GRanges(kp$latest.plot$computed.values$windows, y = counts)\nmax_count &lt;- floor(max(counts) + .1 * max(counts))\n\n# Plotting parameters established by trial and error\npp &lt;- getDefaultPlotParams(plot.type = 1)\npp$leftmargin &lt;- 0.15  # keep chromosome names clear of the plot\npp$topmargin &lt;- 150    # avoid overlap between chromosomes\npp$bottommargin &lt;- 150\n\nkp &lt;- plotKaryotype(cex = .7, plot.params = pp) |&gt;\n  kpAddBaseNumbers(cex = .5) |&gt;\n  kpLines(data = data_counts, ymin = 0, ymax = max_count) |&gt;\n  kpAxis(cex = .5, ymin = 0, ymax = max_count)\n\n\n\n\nMarker counts per 1 Mbp window.\n\n\nI did not manage to avoid all overlap between chromosomes and their data panels. It can probably be refined by playing with the graphical parameters, but you get the idea.\n\n\nZooming in\nWe spotted a region of high marker density on the short arm of chromosome 6. Let’s take a closer look.\n\npp &lt;- getDefaultPlotParams(plot.type = 1)\npp$leftmargin &lt;- 0.15\npp$topmargin &lt;- 120\nto_zoom &lt;- GRanges(\"chr6\", IRanges(start = 20e6, end = 60e6))\n\nkp &lt;- plotKaryotype(cex = .7, plot.params = pp, zoom = to_zoom) |&gt;\n  kpAddBaseNumbers(cex = .5) |&gt;\n  kpAxis(cex = .5, ymin = 0) |&gt;\n  kpBars(data = data_counts, y1 = data_counts$y, ymax = max_count)\n\n\n\n\nChromosome 6, 20-60 Mbp.\n\n\nAlmost perfect; only the y-axis has vanished in a mysterious way (my fault or a feature of the package, I never found out). The highest counts occur roughly between 30 and 35 Mbp. It would be interesting to see which genes sit there.\n\n\n\n\n\n\nWarningWhat a real study would need\n\n\n\n\nCheck the exact coordinates of the dense region rather than eyeballing 30-35 Mbp.\n23andMe uses hg19 coordinates, while current Ensembl uses hg38. The code below asks Ensembl for GRCh37 (= hg19) so the two agree. Otherwise you would lift the coordinates over, for instance with liftOver. I did that back then, and the regions were close enough not to matter for this post.\n\n\n\nTo find the attributes and filters available in BioMart, see the BioMart web interface; once you have set them, click XML.\n\nlibrary(biomaRt)\n\nensembl &lt;- useEnsembl(biomart = \"genes\",\n                      dataset = \"hsapiens_gene_ensembl\",\n                      GRCh = 37)\n\ngenes &lt;- getBM(attributes = c(\"ensembl_gene_id\", \"external_gene_name\", \"description\"),\n               filters = c(\"chromosome_name\", \"start\", \"end\"),\n               values = list(\"6\", 30000000, 35000000),\n               mart = ensembl)\n\nknitr::kable(genes)"
+  },
+  {
+    "objectID": "posts/karyoploter-23andme/index.html#conclusion",
+    "href": "posts/karyoploter-23andme/index.html#conclusion",
+    "title": "Plotting 23andMe marker density with karyoploteR",
+    "section": "Conclusion",
+    "text": "Conclusion\nNow we know what sits in the region. Any guesses why 23andMe put so many markers there?"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Marcin Kierczak",
@@ -88,7 +123,7 @@
     "href": "index.html#latest-from-the-blog",
     "title": "Marcin Kierczak",
     "section": "Latest from the blog",
-    "text": "Latest from the blog\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n\n\n\n\nNo matching items\n\nAll posts →"
+    "text": "Latest from the blog\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n\n\n\n\n\n\n\n\n\n\n\nPlotting 23andMe marker density with karyoploteR\n\n\nHow to draw the density of genotyped SNPs along a karyogram, and then zoom in on a region of interest.\n\n\n\n\n\nJan 31, 2018\n\n\n\n\n\nNo matching items\n\nAll posts →"
   },
   {
     "objectID": "index.html#affiliations",
@@ -123,7 +158,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Pest in R using R6 classes\n\n\n\nR\n\nsimulation\n\nteaching\n\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n12 min\n\n\n\n\nNo matching items"
+    "text": "Pest in R using R6 classes\n\n\n\nR\n\nsimulation\n\nteaching\n\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\n\nR\n\nggplot2\n\nvisualisation\n\nteaching\n\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nPlotting 23andMe marker density with karyoploteR\n\n\n\nR\n\ngenetics\n\nvisualisation\n\n\n\nHow to draw the density of genotyped SNPs along a karyogram, and then zoom in on a region of interest.\n\n\n\n\n\nJan 31, 2018\n\n6 min\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "cv.html",
@@ -208,6 +243,41 @@
     "title": "Curriculum Vitae",
     "section": "Languages",
     "text": "Languages\n\nPolish native English fluent Swedish fluent French basic Latin basic Spanish basic\n\nLast updated October 2026."
+  },
+  {
+    "objectID": "posts/glamorous-ggplot2/index.html",
+    "href": "posts/glamorous-ggplot2/index.html",
+    "title": "Making more glamorous graphs in ggplot2",
+    "section": "",
+    "text": "NoteUpdated in 2026\n\n\n\nLightly edited from a 2020 post. The plot is re-rendered with current packages (size became linewidth in ggplot2). The data stop in February 2020, and the scraper is shown but not run, since the repository pages it parsed have changed.\nInspired by William R. Chase’s rstudio::conf 2020 talk “The Glamour of Graphics”, I decided to spruce up an old plot. It is the one I show my students every year to motivate them to learn R: the number of R packages available in various repositories over the years.\nFrom William’s talk I took these lessons:\nThere is much more in the talk that I do not implement here, for example using professional fonts."
+  },
+  {
+    "objectID": "posts/glamorous-ggplot2/index.html#libraries",
+    "href": "posts/glamorous-ggplot2/index.html#libraries",
+    "title": "Making more glamorous graphs in ggplot2",
+    "section": "Libraries",
+    "text": "Libraries\n\nlibrary(tidyverse)\nlibrary(curl)\nlibrary(ggrepel)\nlibrary(scales)\nlibrary(ggtext)\nlibrary(glue)"
+  },
+  {
+    "objectID": "posts/glamorous-ggplot2/index.html#data",
+    "href": "posts/glamorous-ggplot2/index.html#data",
+    "title": "Making more glamorous graphs in ggplot2",
+    "section": "Data",
+    "text": "Data\nI have an ugly function that scrapes CRAN, R-Forge, Bioconductor and, later, also GitHub to count R packages (GitHub is a bit problematic, but hopefully a good proxy). The function repeats code that I should have encapsulated and parametrised. No one is perfect.\n\ninterrogate_repos &lt;- function() {\n  # CRAN\n  cran_con &lt;- curl::curl(url = 'https://cran.r-project.org/web/packages/index.html')\n  cran &lt;- paste0(readLines(con = cran_con, n = 20), collapse = '')\n  cran_pkgs &lt;- stringr::str_match(cran, 'repository features ([0-9]{1,}) available packages')[2]\n\n  # R-Forge\n  rforge_con &lt;- curl::curl(url = 'https://r-forge.r-project.org')\n  rforge &lt;- paste0(readLines(con = rforge_con, n = 200), collapse = '')\n  rforge_pkgs &lt;- stringr::str_replace(stringr::str_match(rforge, 'Projects: &lt;strong&gt;([0-9]{1,},[0-9]{1,})&lt;/strong&gt;')[2], ',', '')\n\n  # Bioconductor\n  bioconductor_con &lt;- curl::curl(url = 'https://bioconductor.org')\n  bioconductor &lt;- paste0(readLines(con = bioconductor_con, n = 200), collapse = '')\n  bioconductor_pkgs &lt;- stringr::str_match(bioconductor, 'Software\\\"&gt;([0-9]{1,}).*software packages.')[2]\n\n  # GitHub\n  github_con &lt;- curl::curl(url = 'https://github.com/search?l=R&q=R+package&type=Repositories')\n  github &lt;- paste0(readLines(con = github_con, n = 1200), collapse = '')\n  github_pkgs &lt;- stringr::str_replace(stringr::str_match(github, '([0-9]{1,},[0-9]{1,}) repository results')[2], ',', '')\n\n  day &lt;- format(Sys.time(), \"%Y-%m-%d\")\n  result &lt;- c(day, cran_pkgs, rforge_pkgs, bioconductor_pkgs, github_pkgs)\n  names(result) &lt;- c('date', 'CRAN', 'R-Forge', 'Bioconductor', 'GitHub')\n  return(result)\n}\n\nFrom time to time I ran the following code to update my dataset:\n\nprev_data &lt;- read_csv('num_pkgs_data.csv')\ntoday &lt;- interrogate_repos()\nif (last(prev_data$date) &lt; today[1]) {\n  prev_data &lt;- rbind(prev_data, today)\n  write_csv(x = prev_data, 'num_pkgs_data.csv')\n}\n\nThe dataset looks like this:\n\nprev_data &lt;- read_csv('num_pkgs_data.csv')\nprev_data\n\n# A tibble: 10 × 5\n   date        cran rforge bioconductor github\n   &lt;date&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;\n 1 2011-05-17  2984    998          460     NA\n 2 2011-11-22  3429   1182          516     NA\n 3 2012-04-25  3745   1274          554     NA\n 4 2013-07-11  4689   1584          671     NA\n 5 2013-09-24  4846   1631          671     NA\n 6 2016-08-31  9066   2024         1211     NA\n 7 2017-03-22 10312   2048         1296     NA\n 8 2017-10-20 11646   2063         1383     NA\n 9 2018-11-11 13342   2086         1649     NA\n10 2020-02-03 15330   2121         1823  28667"
+  },
+  {
+    "objectID": "posts/glamorous-ggplot2/index.html#data-transformation",
+    "href": "posts/glamorous-ggplot2/index.html#data-transformation",
+    "title": "Making more glamorous graphs in ggplot2",
+    "section": "Data transformation",
+    "text": "Data transformation\nTo plot this sensibly, I convert it from wide to long format:\n\ndata &lt;- prev_data |&gt;\n  pivot_longer(cols = c(cran, rforge, bioconductor, github), names_to = 'repo') |&gt;\n  mutate(value = as.integer(value))"
+  },
+  {
+    "objectID": "posts/glamorous-ggplot2/index.html#plotting",
+    "href": "posts/glamorous-ggplot2/index.html#plotting",
+    "title": "Making more glamorous graphs in ggplot2",
+    "section": "Plotting",
+    "text": "Plotting\nI needed some cool colours. On my way home from rstudio::conf 2020 I watched Taika Waititi’s “Jojo Rabbit”, which I found visually appealing. I grabbed a screenshot and, with the Colormind tool, created two palettes from it.\n\njojo1 &lt;- c('#c0b3aa', '#2b2117', '#9a8268', '#d3a677', '#e1d0ba')\njojo2 &lt;- c('#221c17', '#947e66', '#da9869', '#e0c6a4', '#c1b3ab')\n\nAnd now the most glamorous version of the plot, with the legend living in the title:\n\ncols &lt;- c('bioconductor' = jojo2[2], 'cran' = jojo2[3], 'github' = jojo2[1], 'rforge' = jojo2[5])\n\ntitle &lt;- glue('Log # of R packages available at',\n              ' &lt;span style=\"color:{cols[2]}\"&gt;**CRAN**&lt;/span&gt;,',\n              ' &lt;span style=\"color:{cols[4]}\"&gt;**R-Forge**&lt;/span&gt;,',\n              ' &lt;span style=\"color:{cols[1]}\"&gt;**Bioconductor**&lt;/span&gt;',\n              ' and',\n              ' &lt;span style=\"color:{cols[3]}\"&gt;**GitHub**&lt;/span&gt;',\n              ' over time.')\n\nggplot(data, mapping = aes(x = date, y = log(value), col = repo)) +\n  geom_point(show.legend = FALSE) +\n  geom_line(show.legend = FALSE) +\n  geom_text_repel(aes(label = comma(value)), direction = 'y', vjust = 0.5, show.legend = FALSE) +\n  scale_colour_manual(values = cols) +\n  labs(title = title, x = '', y = '') +\n  theme_minimal() +\n  theme(panel.grid.major = element_line(colour = '#EEEEEE', linewidth = 0.25),\n        plot.background = element_rect(fill = '#FFFDF8', colour = '#FFFDF8'),\n        axis.title = element_text(colour = jojo2[5]),\n        axis.text = element_text(colour = jojo2[5], size = 10),\n        axis.title.y = element_blank(),\n        plot.title = element_markdown(lineheight = 1.5, size = 12),\n        plot.title.position = 'plot')"
   },
   {
     "objectID": "posts/plague-sim/index.html",
