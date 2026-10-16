@@ -11,3 +11,7 @@ listing:
 page-layout: full
 title-block-banner: false
 ---
+
+::: {.links style="margin: .4rem 0 2rem"}
+[[]{.bi .bi-rss} Subscribe via RSS](blog.xml){.btn-pill}
+:::
