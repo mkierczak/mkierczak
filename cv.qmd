@@ -141,7 +141,18 @@ Associate professor (docent) in bioinformatics, Department of Cell and Molecular
 
 ## Certifications
 
-- **FitSM® Foundation**, issued by APMG International, May 2026. [Verify credential](https://www.credly.com/badges/2be1b9ca-e588-441e-ad42-72184e8c0735)
+::: entry
+::: when
+[![](assets/badges/fitsm-foundation.png){width=72px fig-alt="FitSM Foundation badge"}](https://www.credly.com/badges/2be1b9ca-e588-441e-ad42-72184e8c0735)
+:::
+::: what
+**FitSM® Foundation**
+
+::: where
+Issued by APMG International, May 2026. [Verify credential](https://www.credly.com/badges/2be1b9ca-e588-441e-ad42-72184e8c0735)
+:::
+:::
+:::
 
 ## Teaching and course organisation
 
