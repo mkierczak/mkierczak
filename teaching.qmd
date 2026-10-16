@@ -8,6 +8,20 @@ include-in-header:
 
 As training and industry outreach coordinator at NBIS, I help shape how Swedish life scientists and industry partners learn bioinformatics, and I still teach myself.
 
+::: {.spotlight #industry}
+```{=html}
+<svg class="card-ic" viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="22" width="22" height="32"/><rect x="38" y="34" width="18" height="20"/><path d="M14 30H24M14 38H24M14 46H24M44 42H50M44 49H50" class="ic-rungs"/><path d="M19 16C26 4 44 4 47 26" class="ic-dash"/><path d="M43 22L47 27L51 21" class="ic-arrow"/></svg>
+```
+## Industry outreach
+I work to make NBIS expertise and training accessible to companies and industry partners, and to build collaborations that connect academia, national infrastructure and industry.
+
+- Opening NBIS training to industry partners
+- Bringing NBIS data-analysis expertise to company questions
+- Building lasting bridges between academia, infrastructure and industry
+
+[Discuss a collaboration](contact.qmd){.btn-pill}
+:::
+
 ## Timeline
 
 ::: {.timeline}
@@ -28,11 +42,6 @@ As training and industry outreach coordinator at NBIS, I help shape how Swedish 
 - Planning and coordinating NBIS training: courses, workshops and summer schools
 - Keeping the training portfolio aligned with what researchers need in practice
 - Helping researchers become confident, independent data analysts
-
-## Industry outreach
-
-- Making NBIS expertise and training accessible to companies and industry partners
-- Building collaborations between academia, infrastructure and industry
 
 ## RaukR {#raukr}
 
