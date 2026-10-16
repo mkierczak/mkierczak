@@ -240,42 +240,42 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Marcin Kierczak",
+    "title": "Marcin Kierczak, PhD",
     "section": "",
     "text": "Training & Industry Outreach Coordinator · Data Scientist · NBIS\n\nI coordinate training and industry outreach at the National Bioinformatics Infrastructure Sweden (NBIS), part of SciLifeLab, connecting Swedish life science with the bioinformatics skills and expertise it needs. As a data scientist at NBIS, I also work with research groups on their data analysis. In addition, I am an associate professor of bioinformatics at Uppsala University, with a research background in machine learning, statistical genomics and ancient DNA.\n\nTraining & Outreach Research Publications Blog"
   },
   {
     "objectID": "index.html#what-i-do",
     "href": "index.html#what-i-do",
-    "title": "Marcin Kierczak",
+    "title": "Marcin Kierczak, PhD",
     "section": "What I do",
     "text": "What I do\n\n\n\n\nTraining\nCoordinating NBIS courses and workshops that build data-analysis skills across Swedish life science.\n\n\n\n\n\nIndustry outreach\nOpening NBIS expertise and training to companies and industry partners.\n\n\n\n\n\nData science\nSupporting research groups across Sweden with statistics, machine learning and reproducible data analysis, from experimental design to final results."
   },
   {
     "objectID": "index.html#expertise",
     "href": "index.html#expertise",
-    "title": "Marcin Kierczak",
+    "title": "Marcin Kierczak, PhD",
     "section": "Expertise",
     "text": "Expertise\n\n\n\n\nMachine learning & AI\nNeural networks and ensemble methods applied to genomic and clinical data.\n\n\n\n\n\nStatistical genomics\nAssociation studies, mixed models and rare-variant analysis in humans and animals.\n\n\n\n\n\nAncient & conservation genomics\nGenome erosion, demographic history and adaptation in endangered and extinct species.\n\n\n\n\n\nMetagenomics\nMetabarcoding and community profiling, from food quality control to ecology."
   },
   {
     "objectID": "index.html#latest-from-the-blog",
     "href": "index.html#latest-from-the-blog",
-    "title": "Marcin Kierczak",
+    "title": "Marcin Kierczak, PhD",
     "section": "Latest from the blog",
     "text": "Latest from the blog\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n\n\n\n\nNo matching items\n\nAll posts →"
   },
   {
     "objectID": "index.html#affiliations",
     "href": "index.html#affiliations",
-    "title": "Marcin Kierczak",
+    "title": "Marcin Kierczak, PhD",
     "section": "Affiliations",
     "text": "Affiliations\nTraining and industry outreach coordinator and data scientist at NBIS, SciLifeLab, and associate professor in bioinformatics at the Department of Cell and Molecular Biology, Uppsala University. Since 2018, co-organiser of RaukR, an advanced R summer school in Visby (more)."
   },
   {
     "objectID": "index.html#beyond-the-lab",
     "href": "index.html#beyond-the-lab",
-    "title": "Marcin Kierczak",
+    "title": "Marcin Kierczak, PhD",
     "section": "Beyond the lab",
     "text": "Beyond the lab\nMicrocontrollers and electronics, 3D printing, software-defined radio, jazz, sailing and celestial navigation."
   },
@@ -319,7 +319,7 @@
     "href": "posts/stats-1-location-spread/index.html",
     "title": "Statistics from the beginning: location and spread",
     "section": "",
-    "text": "NoteAbout this series\n\n\n\nThis series is adapted from lecture notes I wrote in 2017, Introduction to Statistical Tests (original PDF). I am turning them into short posts with fresh code and figures, starting from the very beginning. This first part covers location and spread. Later parts cover covariance and correlation, and then the tests themselves."
+    "text": "Series · Statistics from the beginning · Part 1"
   },
   {
     "objectID": "posts/stats-1-location-spread/index.html#statistics-and-a-statistic",
@@ -347,7 +347,7 @@
     "href": "posts/stats-1-location-spread/index.html#whats-next",
     "title": "Statistics from the beginning: location and spread",
     "section": "What’s next",
-    "text": "What’s next\nWe now have the vocabulary to describe a single variable: where it sits and how much it varies. In the next part we look at two variables at once, with covariance and correlation. Spoiler: correlation is simply covariance after standardisation."
+    "text": "What’s next\nWe now have the vocabulary to describe a single variable: where it sits and how much it varies. In the next part we look at two variables at once, with covariance and correlation. Spoiler: correlation is simply covariance after standardisation.\n\nAll parts in this series\nNext in the series: covariance and correlation."
   },
   {
     "objectID": "research.html",

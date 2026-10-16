@@ -1,4 +1,9 @@
 ---
+description-meta: "Training and industry outreach at NBIS: collaboration with industry, courses and workshops such as RaukR, public talks and supervision."
+open-graph:
+  description: "Training and industry outreach at NBIS: collaboration with industry, courses and workshops such as RaukR, public talks and supervision."
+twitter-card:
+  description: "Training and industry outreach at NBIS: collaboration with industry, courses and workshops such as RaukR, public talks and supervision."
 title: "Training & Outreach"
 include-in-header:
   - text: |

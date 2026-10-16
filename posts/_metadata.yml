@@ -1,3 +1,5 @@
 freeze: true
 toc: true
 author: Marcin Kierczak
+twitter-card:
+  card-style: summary_large_image

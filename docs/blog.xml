@@ -21,6 +21,9 @@
 
 
 
+<div class="series-tag">
+<p>Series · <em>Statistics from the beginning</em> · Part 1</p>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -707,6 +710,10 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
 <section id="whats-next" class="level2">
 <h2 class="anchored" data-anchor-id="whats-next">What’s next</h2>
 <p>We now have the vocabulary to describe a single variable: where it sits and how much it varies. In the next part we look at <strong>two variables at once</strong>, with covariance and correlation. Spoiler: correlation is simply covariance after standardisation.</p>
+<div class="series-nav">
+<p><a href="../../blog.html#category=series" class="btn-pill">All parts in this series</a></p>
+<p>Next in the series: covariance and correlation.</p>
+</div>
 
 
 </section>
@@ -718,6 +725,7 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
   <category>series</category>
   <guid>https://kierczak.net/posts/stats-1-location-spread/</guid>
   <pubDate>Thu, 15 Oct 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/stats-1-location-spread/preview.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>Pest in R using R6 classes</title>
@@ -2773,6 +2781,7 @@ font-style: inherit;">'plot'</span>)</span></code></pre></div></div>
   <category>teaching</category>
   <guid>https://kierczak.net/posts/glamorous-ggplot2/</guid>
   <pubDate>Mon, 03 Feb 2020 23:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/glamorous-ggplot2/preview.png" medium="image" type="image/png" height="90" width="144"/>
 </item>
 <item>
   <title>Plotting 23andMe marker density with karyoploteR</title>

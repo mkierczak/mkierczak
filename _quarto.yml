@@ -8,6 +8,7 @@ project:
     - assets/icons/*.svg
     - assets/bg.js
     - assets/docs/*.pdf
+    - robots.txt
     - CNAME
   render:
     - "*.qmd"
@@ -52,7 +53,7 @@ website:
         href: blog.xml
         aria-label: RSS feed
   page-footer:
-    left: "© 2026 Marcin Kierczak"
+    left: "© 1998-2026 Marcin Kierczak"
     right: "Uppsala, Sweden · Built with human brain, [Quarto](https://quarto.org) & [Claude](https://claude.com)"
 
 format:
@@ -61,6 +62,9 @@ format:
       light: [cosmo, theme-light.scss]
       dark: [cosmo, theme-dark.scss]
     css: styles.css
+    include-in-header:
+      - text: |
+          <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Marcin Kierczak", "url": "https://kierczak.net/", "image": "https://kierczak.net/assets/marcin.jpg", "jobTitle": "Training and Industry Outreach Coordinator and Data Scientist; Associate Professor of Bioinformatics", "worksFor": {"@type": "Organization", "name": "National Bioinformatics Infrastructure Sweden (NBIS), SciLifeLab", "url": "https://nbis.se"}, "affiliation": {"@type": "CollegeOrUniversity", "name": "Uppsala University", "url": "https://www.uu.se"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Uppsala University"}, "knowsAbout": ["Bioinformatics", "Statistical genomics", "Machine learning", "Ancient DNA", "Metagenomics", "R programming"], "sameAs": ["https://orcid.org/0000-0003-2629-5655", "https://www.linkedin.com/in/marcinkierczak", "https://scholar.google.com/citations?user=ebOBIL4AAAAJ"]}</script>
     toc: false
     smooth-scroll: true
     code-copy: true

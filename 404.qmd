@@ -1,0 +1,10 @@
+---
+title: "Page not found"
+description-meta: "This page does not exist."
+---
+
+The page you were looking for is not here. It may have moved when this site was rebuilt, or the address may have a typo.
+
+::: links
+[Home](index.qmd){.btn-pill} [Research](research.qmd){.btn-pill} [Training & Outreach](teaching.qmd){.btn-pill} [Publications](publications.qmd){.btn-pill} [Blog](blog.qmd){.btn-pill} [Contact](contact.qmd){.btn-pill}
+:::

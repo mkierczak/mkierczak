@@ -3,6 +3,7 @@ title: "Making more glamorous graphs in ggplot2"
 description: "Redrawing my old 'growth of R packages' plot with ideas from William R. Chase's 'The Glamour of Graphics'."
 author: "Marcin Kierczak"
 date: 2020-02-04
+image: preview.png
 categories: [R, ggplot2, visualisation, teaching]
 execute:
   warning: false

@@ -1,4 +1,9 @@
 ---
+description-meta: "Curriculum vitae of Marcin Kierczak: experience, education, teaching, talks, supervision and selected publications."
+open-graph:
+  description: "Curriculum vitae of Marcin Kierczak: experience, education, teaching, talks, supervision and selected publications."
+twitter-card:
+  description: "Curriculum vitae of Marcin Kierczak: experience, education, teaching, talks, supervision and selected publications."
 title: "Curriculum Vitae"
 format:
   html: default
@@ -178,7 +183,7 @@ Issued by APMG International, May 2026. [Verify credential](https://www.credly.c
 
 ## Selected publications
 
-36 peer-reviewed articles and preprints; 1,474 citations, h-index 22, i10-index 36 (Google Scholar, October 2026). The full list is on the [publications page](https://kierczak.net/publications.html).
+36 peer-reviewed articles and preprints; {{< var scholar.citations >}} citations, h-index {{< var scholar.h_index >}}, i10-index {{< var scholar.i10_index >}} (Google Scholar, {{< var scholar.asof >}}). The full list is on the [publications page](https://kierczak.net/publications.html).
 
 - [Bayesian mixed model analysis uncovered 21 risk loci for chronic kidney disease in boxer dogs](https://doi.org/10.1371/journal.pgen.1010599). *PLOS Genetics*, 2023.
 - [Contribution of rare whole-genome sequencing variants to plasma protein levels and the missing heritability](https://doi.org/10.1038/s41467-022-30208-8). *Nature Communications*, 2022.

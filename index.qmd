@@ -22,7 +22,7 @@ include-in-header:
 ![](assets/marcin.jpg){fig-alt="Portrait of Marcin Kierczak"}
 
 ::: {}
-# Marcin Kierczak
+# Marcin Kierczak, PhD
 ::: role
 Training & Industry Outreach Coordinator · Data Scientist · NBIS
 :::

@@ -1,4 +1,9 @@
 ---
+description-meta: "Research themes of Marcin Kierczak: statistical and complex-trait genomics, conservation and ancient genomics, cancer genomics and metagenomics, and the tools behind them."
+open-graph:
+  description: "Research themes of Marcin Kierczak: statistical and complex-trait genomics, conservation and ancient genomics, cancer genomics and metagenomics, and the tools behind them."
+twitter-card:
+  description: "Research themes of Marcin Kierczak: statistical and complex-trait genomics, conservation and ancient genomics, cancer genomics and metagenomics, and the tools behind them."
 title: "Research"
 include-in-header:
   - text: |

@@ -1,4 +1,9 @@
 ---
+description-meta: "Notes on data, genomics and teaching by Marcin Kierczak: R, statistics and bioinformatics."
+open-graph:
+  description: "Notes on data, genomics and teaching by Marcin Kierczak: R, statistics and bioinformatics."
+twitter-card:
+  description: "Notes on data, genomics and teaching by Marcin Kierczak: R, statistics and bioinformatics."
 title: "Blog"
 subtitle: "Notes on data, genomics and teaching"
 listing:

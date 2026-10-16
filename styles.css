@@ -210,3 +210,12 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .stats .has-tip:hover .tip-body, .stats .has-tip:focus .tip-body, .stats .has-tip:focus-within .tip-body { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 .stats .has-tip:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .stats .tip-body { transition: none; } }
+
+/* Plot images keep their cream paper; soften them on the dark theme */
+.quarto-dark .cell-output-display img, .quarto-dark .quarto-figure img { filter: brightness(.86) contrast(.96); border-radius: 6px; }
+
+/* Blog series */
+.series-tag { font-family: "Inter", sans-serif; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 1rem; }
+.series-tag p { margin: 0; }
+.series-nav { margin: 2.2rem 0 1rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; }
+.series-nav p { margin: 0; color: var(--muted); }

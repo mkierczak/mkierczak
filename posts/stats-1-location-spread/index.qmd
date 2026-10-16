@@ -3,11 +3,16 @@ title: "Statistics from the beginning: location and spread"
 description: "First in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1."
 author: "Marcin Kierczak"
 date: 2026-10-16
+image: preview.png
 categories: [statistics, R, teaching, series]
 execute:
   warning: false
   message: false
 ---
+
+::: {.series-tag}
+Series · *Statistics from the beginning* · Part 1
+:::
 
 ::: {.callout-note}
 ## About this series
@@ -169,3 +174,9 @@ On the raw scale, 58 kg and 13.4 cm cannot be compared. As z-scores they can: th
 ## What's next
 
 We now have the vocabulary to describe a single variable: where it sits and how much it varies. In the next part we look at **two variables at once**, with covariance and correlation. Spoiler: correlation is simply covariance after standardisation.
+
+::: {.series-nav}
+[All parts in this series](../../blog.qmd#category=series){.btn-pill}
+
+Next in the series: covariance and correlation.
+:::

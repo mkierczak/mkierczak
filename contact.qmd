@@ -1,4 +1,9 @@
 ---
+description-meta: "How to get in touch with Marcin Kierczak about training, industry collaboration, teaching and research projects."
+open-graph:
+  description: "How to get in touch with Marcin Kierczak about training, industry collaboration, teaching and research projects."
+twitter-card:
+  description: "How to get in touch with Marcin Kierczak about training, industry collaboration, teaching and research projects."
 title: "Contact"
 include-in-header:
   - text: |
