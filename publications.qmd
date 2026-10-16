@@ -1,0 +1,159 @@
+---
+title: "Publications"
+---
+
+Peer-reviewed articles and preprints, with links to the papers. Citation counts come from [OpenAlex](https://openalex.org) and are a rough indicator of impact; for a complete, current picture see [ORCID](https://orcid.org/0000-0003-2629-5655) or [Google Scholar](https://scholar.google.com/citations?user=ebOBIL4AAAAJ).
+
+::: stats
+::: {}
+**1,474**
+
+citations
+:::
+::: {}
+**22**
+
+h-index
+:::
+::: {}
+**36**
+
+i10-index
+:::
+:::
+
+*Metrics from Google Scholar, October 2026.*
+
+<div class="pub-controls">
+  <label>Sort by
+    <select id="pub-sort">
+      <option value="new">Newest first</option>
+      <option value="old">Oldest first</option>
+      <option value="cites">Most cited</option>
+    </select>
+  </label>
+  <input id="pub-search" type="search" placeholder="Search title, journal, author…" aria-label="Search publications">
+  <span id="pub-count" aria-live="polite"></span>
+</div>
+
+<ol id="pub-list" class="pub-list"><li class="pub-loading">Loading publications…</li></ol>
+
+<script>
+(function () {
+  var PARTICLES = ["van", "der", "den", "de", "del", "della", "von", "la", "le", "ter", "di", "da", "af"];
+  var pubs = [], me = "Marcin Kierczak";
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
+
+  function initials(given) {
+    return given.split(/\s+/).filter(Boolean).map(function (g) {
+      return g.split("-").map(function (p) { return p.charAt(0).toUpperCase() + "."; }).join("-");
+    }).join(" ");
+  }
+
+  // "Tom van der Valk" -> "van der Valk, T."
+  function apa(name) {
+    var t = name.trim().split(/\s+/);
+    if (t.length < 2) return name;
+    var i = t.length - 1;
+    while (i > 1 && PARTICLES.indexOf(t[i - 1].toLowerCase()) > -1) i--;
+    return t.slice(i).join(" ") + ", " + initials(t.slice(0, i).join(" "));
+  }
+
+  function fmtAuthor(a) {
+    var s = esc(apa(a));
+    return a === me ? '<strong class="me">' + s + "</strong>" : s;
+  }
+
+  function authors(p) {
+    var list = p.authors, all = list.map(fmtAuthor);
+    function join(a) { return a.length > 1 ? a.slice(0, -1).join(", ") + ", &amp; " + a[a.length - 1] : a[0]; }
+    if (list.length <= 8) return join(all);
+    var idx = list.indexOf(me), short = all.slice(0, 3);
+    if (idx > 2) short.push(all[idx]);
+    var full = join(all);
+    return '<span class="au-short">' + short.join(", ") + ', <em>et al.</em></span>' +
+           '<span class="au-full" hidden>' + full + "</span> " +
+           '<button type="button" class="au-toggle" aria-expanded="false" data-label="all ' + list.length + ' authors">all ' + list.length + " authors</button>";
+  }
+
+  function venue(p) {
+    var v = "<em>" + esc(p.journal) + "</em>";
+    if (p.volume) v += ", <em>" + esc(p.volume) + "</em>";
+    if (p.volume && p.issue && p.pages && /[–-]/.test(p.pages)) v += "(" + esc(p.issue) + ")";
+    if (p.pages) v += ", " + esc(p.pages);
+    return v;
+  }
+
+  var THEMES = {gwas: "Statistical genomics", conservation: "Conservation & evolution", cancer: "Cancer genomics", func: "Functional genomics",
+                ml: "Machine learning", meta: "Metagenomics", tools: "Methods & software"};
+  var notes = {}, counts = {};
+
+  function spark(doi) {
+    var c = counts[doi.toLowerCase()] || counts[doi];
+    if (!c) return "";
+    var y0 = 2017, y1 = 2026, vals = [], max = 0;
+    for (var y = y0; y <= y1; y++) { var v = c[y] || 0; vals.push(v); if (v > max) max = v; }
+    if (!max) return "";
+    var W = 150, H = 40, bw = W / vals.length, bars = vals.map(function (v, i) {
+      var h = Math.max(v ? 2 : 0, v / max * (H - 12));
+      return '<rect x="' + (i * bw + 1.5).toFixed(1) + '" y="' + (H - 10 - h).toFixed(1) + '" width="' + (bw - 3).toFixed(1) + '" height="' + h.toFixed(1) + '" rx="1.5"><title>' + (y0 + i) + ": " + v + (v === 1 ? " citation" : " citations") + "</title></rect>";
+    }).join("");
+    return '<figure class="pub-spark"><svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Citations per year, ' + y0 + " to " + y1 + '">' + bars +
+      '<line x1="0" x2="' + W + '" y1="' + (H - 10) + '" y2="' + (H - 10) + '"/><text x="0" y="' + (H - 1) + '">' + y0 + '</text><text x="' + W + '" y="' + (H - 1) + '" text-anchor="end">' + y1 + "</text></svg>" +
+      "<figcaption>Citations per year</figcaption></figure>";
+  }
+
+  function overview(p) {
+    var n = notes[p.doi];
+    if (!n) return "";
+    return '<details class="pub-more"><summary>Overview</summary><div class="pub-more-body">' +
+      '<div class="pub-theme"><span class="pub-ic pi-' + esc(n.theme) + '" aria-hidden="true"></span>' + esc(THEMES[n.theme] || "") + "</div>" +
+      "<p>" + esc(n.summary) + '</p><p class="pub-find"><b>Key finding.</b> ' + esc(n.finding) + "</p>" + spark(p.doi) + "</div></details>";
+  }
+
+  function item(p) {
+    var url = "https://doi.org/" + p.doi;
+    return '<li class="pub"><div class="pub-main">' +
+      '<span class="pub-au">' + authors(p) + "</span> (" + p.year + "). " +
+      '<a class="pub-title" href="' + url + '">' + esc(p.title) + "</a>. " + venue(p) + ". " +
+      '<a class="pub-doi" href="' + url + '">' + esc(url) + "</a>" +
+      (p.type === "preprint" ? ' <span class="tag">preprint</span>' : "") + overview(p) + "</div>" +
+      '<div class="pub-cites" title="Citations (OpenAlex)"><b>' + p.citations + "</b><span>cites</span></div></li>";
+  }
+
+  function render() {
+    var q = document.getElementById("pub-search").value.toLowerCase().trim();
+    var mode = document.getElementById("pub-sort").value;
+    var rows = pubs.filter(function (p) {
+      var n = notes[p.doi] || {};
+      return !q || (p.title + " " + p.journal + " " + p.authors.join(" ") + " " + p.year + " " + (n.summary || "") + " " + (n.finding || "")).toLowerCase().indexOf(q) > -1;
+    });
+    rows.sort(function (a, b) {
+      if (mode === "cites") return b.citations - a.citations || b.date.localeCompare(a.date);
+      return mode === "old" ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
+    });
+    document.getElementById("pub-list").innerHTML = rows.map(item).join("") || '<li class="pub-loading">No matches.</li>';
+    document.getElementById("pub-count").textContent = rows.length + " of " + pubs.length;
+  }
+
+  document.getElementById("pub-sort").addEventListener("change", render);
+  document.getElementById("pub-search").addEventListener("input", render);
+  document.getElementById("pub-list").addEventListener("click", function (e) {
+    var b = e.target.closest(".au-toggle");
+    if (!b) return;
+    var li = b.parentNode, open = b.getAttribute("aria-expanded") === "true";
+    li.querySelector(".au-short").hidden = !open;
+    li.querySelector(".au-full").hidden = open;
+    b.setAttribute("aria-expanded", String(!open));
+    b.textContent = open ? b.dataset.label : "fewer";
+  });
+
+  function optional(url) { return fetch(url).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }); }
+  Promise.all([fetch("publications.json").then(function (r) { return r.json(); }), optional("paper-notes.json"), optional("publication-counts.json")]).then(function (res) {
+    pubs = res[0]; notes = res[1]; counts = res[2]; render();
+  }).catch(function () {
+    document.getElementById("pub-list").innerHTML = '<li class="pub-loading">Could not load the list. See <a href="https://scholar.google.com/citations?user=ebOBIL4AAAAJ">Google Scholar</a>.</li>';
+  });
+})();
+</script>

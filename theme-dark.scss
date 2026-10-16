@@ -1,0 +1,21 @@
+/*-- scss:defaults --*/
+$body-bg: #11161f;
+$body-color: #e6e1d3;
+$primary: #d9b779;
+$link-color: #e0a3a8;
+$link-hover-color: #d9b779;
+$navbar-bg: #0b0f16;
+$navbar-fg: #e6e1d3;
+$navbar-hl: #d9b779;
+$font-family-sans-serif: "Newsreader", Georgia, serif;
+$headings-font-family: "Newsreader", Georgia, serif;
+$code-bg: #1b2230;
+$code-color: #c9b8a8;
+$pre-color: #e6e1d3;
+$border-color: #2a3345;
+/*-- scss:rules --*/
+:root { --accent: #e0a3a8; --gold: #d9b779; --muted: #9aa0b0; --card: #171e2b; --rule: #2a3345; }
+
+div.sourceCode, pre.sourceCode, pre { background-color: #161c28; border: 1px solid #232c3d; }
+pre code, pre code span { font-size: 0.88rem; }
+.callout pre, .callout div.sourceCode { background-color: #161c28; }

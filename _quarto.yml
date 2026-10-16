@@ -1,26 +1,70 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - publications.json
+    - paper-notes.json
+    - publication-counts.json
+    - assets/icons/*.svg
+  render:
+    - "*.qmd"
+    - "posts/**/*.qmd"
 
 website:
   title: "Marcin Kierczak"
+  description: "Marcin Kierczak, PhD — Training and Industry Outreach Coordinator and Data Scientist at NBIS and Associate Professor of Bioinformatics / SciLifeLab, Uppsala, Sweden."
+  site-url: https://kierczak.net
+  favicon: assets/marcin.jpg
+  open-graph: true
+  twitter-card:
+    card-style: summary
+  search: false
   navbar:
+    background: primary
+    pinned: true
+    title: "Marcin Kierczak"
     left:
       - href: index.qmd
-        text: Hus
+        text: Home
+      - href: research.qmd
+        text: Research
       - href: teaching.qmd
-        text: Teachings
-      - href: writings.qmd
-        text: Writings
+        text: Training & Outreach
+      - href: publications.qmd
+        text: Publications
       - href: blog.qmd
-        text: Saga
+        text: Blog
+      - href: cv.qmd
+        text: CV
+      - href: contact.qmd
+        text: Contact
+    tools:
+      - icon: google
+        href: https://scholar.google.com/citations?user=ebOBIL4AAAAJ
+        aria-label: Google Scholar
+      - icon: linkedin
+        href: https://www.linkedin.com/in/marcinkierczak
+        aria-label: LinkedIn
+      - icon: rss
+        href: blog.xml
+        aria-label: RSS feed
+  page-footer:
+    left: "© 2026 Marcin Kierczak"
+    right: "Uppsala, Sweden · Built with [Quarto](https://quarto.org)"
 
 format:
   html:
-    theme: 
-      - mono
-      - assets/custom.scss
-    toc: true
-
-editor: source
-
+    theme:
+      light: [cosmo, theme-light.scss]
+      dark: [cosmo, theme-dark.scss]
+    css: styles.css
+    toc: false
+    smooth-scroll: true
+    code-copy: true
+    highlight-style:
+      light: github
+      dark: github
+    link-external-newwindow: true
+    mainfont: "Newsreader"
+    fontsize: 1.12rem
+    linestretch: 1.7

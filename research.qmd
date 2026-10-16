@@ -1,0 +1,62 @@
+---
+title: "Research"
+---
+
+My work sits between biology, statistics and computer science. Most of it is collaborative: as a data scientist in a national infrastructure, I work with groups across Sweden, from veterinary medicine to evolutionary biology to clinical research.
+
+## Themes
+
+### Statistical and complex-trait genomics
+Mixed-model and gene-based approaches for finding the variants behind disease and quantitative traits, including rare variants and missing heritability. Examples include chronic kidney disease in boxers, atopic dermatitis in German shepherds, pyometra in golden retrievers and plasma protein levels in humans.
+
+::: selected
+**Selected papers**
+
+- [Contribution of rare whole-genome sequencing variants to plasma protein levels and the missing heritability](https://doi.org/10.1038/s41467-022-30208-8). *Nature Communications*, 2022.
+- [Bayesian mixed model analysis uncovered 21 risk loci for chronic kidney disease in boxer dogs](https://doi.org/10.1371/journal.pgen.1010599). *PLOS Genetics*, 2023.
+- [The ABCC4 gene is associated with pyometra in golden retriever dogs](https://doi.org/10.1038/s41598-021-95936-1). *Scientific Reports*, 2021.
+:::
+
+### Conservation and ancient genomics
+Population genomics of endangered and extinct mammals, such as the Sumatran and woolly rhinoceros, and the pipeline [GenErode](https://doi.org/10.1186/s12859-022-04757-0) for quantifying genome erosion.
+
+::: selected
+**Selected papers**
+
+- [Genomic insights into the conservation status of the world’s last remaining Sumatran rhinoceros populations](https://doi.org/10.1038/s41467-021-22386-8). *Nature Communications*, 2021.
+- [Pre-extinction Demographic Stability and Genomic Signatures of Adaptation in the Woolly Rhinoceros](https://doi.org/10.1016/j.cub.2020.07.046). *Current Biology*, 2020.
+- [GenErode: a bioinformatics pipeline to investigate genome erosion in endangered and extinct species](https://doi.org/10.1186/s12859-022-04757-0). *BMC Bioinformatics*, 2022.
+:::
+
+### Cancer genomics
+Somatic variation in canine osteosarcoma (*SETD2*) and structural variants in multiple myeloma resolved with linked-read sequencing.
+
+::: selected
+**Selected papers**
+
+- [SETD2 Is Recurrently Mutated in Whole-Exome Sequenced Canine Osteosarcoma](https://doi.org/10.1158/0008-5472.can-17-3558). *Cancer Research*, 2018.
+- [Linked-read whole-genome sequencing resolves common and private structural variants in multiple myeloma](https://doi.org/10.1182/bloodadvances.2021006720). *Blood Advances*, 2022.
+:::
+
+### Machine learning for biology
+Ensemble learning for protein–protein interaction prediction, rough-set classifiers for HIV-1 drug resistance, and modern neural-network methods for omics data.
+
+::: selected
+**Selected papers**
+
+- [Ensemble learning prediction of protein–protein interactions using proteins functional annotations](https://doi.org/10.1039/c3mb70486f). *Molecular BioSystems*, 2014.
+- [A Rough Set-Based Model of HIV-1 Reverse Transcriptase Resistome](https://doi.org/10.4137/bbi.s3382). *Bioinformatics and Biology Insights*, 2009.
+:::
+
+### Metagenomics and metabarcoding
+DNA metabarcoding for authenticating food products, and genome assembly from single nuclei of complex microorganisms.
+
+::: selected
+**Selected papers**
+
+- [DNA Metabarcoding for Quality Control of Basil, Oregano, and Paprika](https://doi.org/10.3389/fpls.2021.665618). *Frontiers in Plant Science*, 2021.
+- [Building de novo reference genome assemblies of complex eukaryotic microorganisms from single nuclei](https://doi.org/10.1038/s41598-020-58025-3). *Scientific Reports*, 2020.
+:::
+
+## Tools & languages
+R, Python, Nextflow and Snakemake workflows, HPC environments, and reproducible research practices.

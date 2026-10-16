@@ -1,0 +1,177 @@
+{
+ "10.64898/2026.10.08.26365088": {
+  "theme": "gwas",
+  "summary": "A single polygenic risk score for coronary artery disease says how much risk someone carries, not why. The authors split 526 risk variants into eight biological processes, using their links to 78 related traits, and built a separate risk score for each.",
+  "finding": "Eight processes, such as cholesterol, triglycerides, coagulation and cardiac remodelling, give process-specific scores that were consistently linked to disease across three large biobanks."
+ },
+ "10.1371/journal.pgen.1010599": {
+  "theme": "gwas",
+  "summary": "Chronic kidney disease is common in dogs, but its genetics are poorly understood. A Bayesian mixed-model association study in 117 boxer cases and 137 controls was followed up with sequencing and laboratory tests of regulatory variants.",
+  "finding": "21 risk regions together explain 57% of disease variation in the cohort, and four regulatory variants (in MAGI2, GALNT18 and an intergenic site) bind differently in kidney cells."
+ },
+ "10.1186/s12859-022-04757-0": {
+  "theme": "tools",
+  "summary": "Comparing museum specimens from before a population decline with modern samples is the most direct way to measure genomic erosion, but it needs tools built for degraded DNA. GenErode is a modular pipeline that processes both kinds of data together and produces comparable erosion estimates.",
+  "finding": "No programming is needed to run it, and every step is documented, so conservation genomics groups can use it without bioinformatics specialists."
+ },
+ "10.3389/fimmu.2022.854312": {
+  "theme": "func",
+  "summary": "Gene expression profiling of natural killer cell progenitors, combined with chromatin profiling, was used to find which factors steer these cells' development. The study focused on the transcription factors FOXO1 and FOXO3.",
+  "finding": "Losing both FOXO1 and FOXO3 stalls natural killer cell development and maturation, and changes the balance of other innate lymphoid cell types."
+ },
+ "10.1182/bloodadvances.2021006720": {
+  "theme": "cancer",
+  "summary": "Multiple myeloma genomes are full of structural rearrangements that are hard to see with standard sequencing. Linked-read sequencing of sorted cells from 37 patients recovered them using only small numbers of cells.",
+  "finding": "It agreed well with the clinical standard (FISH), found more than 150 additional structural and copy-number variants, and resolved complex rearrangements at the MYC and t(11;14) loci."
+ },
+ "10.1038/s41467-022-30208-8": {
+  "theme": "gwas",
+  "summary": "Much of the heritability of complex traits is still unexplained. Whole-genome sequencing data were used to test how much rare variants contribute to the levels of 414 proteins in blood plasma.",
+  "finding": "Rare variants are expected to explain under 4.3% of narrow-sense heritability, yet a gene-based approach found cis-associations for 237 proteins, some driven by rare variants with larger effects."
+ },
+ "10.3389/fimmu.2022.880668": {
+  "theme": "func",
+  "summary": "B cell development depends on a network of transcription factors. This study removed FOXO1 and FOXO3 at the common lymphoid progenitor stage and followed what happened to the cells.",
+  "finding": "FOXO1 and FOXO3 together restrict progenitors to the lymphoid fate: without both, progenitors regain myeloid potential and the B cell lineage is lost."
+ },
+ "10.1111/mec.16291": {
+  "theme": "conservation",
+  "summary": "Alpine bumblebees in Colorado have been evolving shorter tongues, possibly in response to climate-driven changes in flowers. Genome sequences and measurements from 580 bees tested whether this continues and whether it has a genetic basis.",
+  "finding": "Tongue length kept shrinking between 2012–2014 and 2017, but no genetic association was found. The data also revealed a new cryptic species."
+ },
+ "10.1038/s41598-021-95936-1": {
+  "theme": "gwas",
+  "summary": "Pyometra, a uterine infection, affects about one in five unspayed female dogs, with large differences between breeds. A genome-wide association study in 98 golden retriever cases and 96 controls looked for genetic risk factors.",
+  "finding": "A locus on chromosome 22 pointed to the ABCC4 gene, a prostaglandin transporter, and sequencing found missense variants in it."
+ },
+ "10.3389/fpls.2021.665618": {
+  "theme": "meta",
+  "summary": "Herbs and spices are especially prone to fraud and adulteration, and chemical tests only check specific marker compounds. DNA metabarcoding was evaluated on 62 basil, oregano and paprika products from Norwegian retailers and importers.",
+  "finding": "Most products were authentic, but species found by sequencing sometimes differed from the label. Filtering thresholds are needed to avoid false positives."
+ },
+ "10.1038/s41467-021-22386-8": {
+  "theme": "conservation",
+  "summary": "The Sumatran rhinoceros survives only in small, isolated populations. Five historical and 16 modern genomes were analysed to measure inbreeding and harmful mutation load.",
+  "finding": "The Sumatra and Borneo populations show low inbreeding but high mutational load, so inbreeding depression may follow. Little local adaptation suggests assisted gene flow could help."
+ },
+ "10.1093/molbev/msab086": {
+  "theme": "conservation",
+  "summary": "Related species often keep exchanging genes even when barriers exist in their genomes. Genomes of alpine bumblebee species living together and apart were compared to find where those barriers sit.",
+  "finding": "Divergence peaks in regions of low recombination near centromeres, and these islands carry barriers to historical gene flow in species that overlap."
+ },
+ "10.1016/j.cub.2020.07.046": {
+  "theme": "conservation",
+  "summary": "The woolly rhinoceros went extinct about 14,000 years ago. One complete ancient genome and 14 mitochondrial genomes were used to reconstruct its population history before extinction.",
+  "finding": "The population was stable for over 13,000 years after humans arrived, with no sign of inbreeding. Its collapse was probably sudden, driven by rapid warming."
+ },
+ "10.1007/s00251-020-01169-3": {
+  "theme": "gwas",
+  "summary": "Skin biopsies from nine German shepherd dogs were sequenced to compare gene expression in dogs with atopic dermatitis and in controls.",
+  "finding": "Seven genes differed between cases and controls, five of them linked to an activated immune system, which helps explain how skin looks after treatment. A larger study is needed to confirm it."
+ },
+ "10.1038/s41598-020-58025-3": {
+  "theme": "meta",
+  "summary": "Large genomes of complex multicellular organisms are hard to assemble. A method was developed to sort, sequence and assemble genomes of arbuscular mycorrhizal fungi from single nuclei.",
+  "finding": "A comprehensive genome assembly can be built from just six to seven nuclei, and the method should work for many other organisms."
+ },
+ "10.1158/0008-5472.can-17-3558": {
+  "theme": "cancer",
+  "summary": "Osteosarcoma occurs naturally in dogs and closely resembles the human disease. Tumour exomes from golden retrievers, Rottweilers and greyhounds were sequenced to map the mutations behind it.",
+  "finding": "TP53 was altered in 83% of dogs, and SETD2 was the second most mutated gene, pointing to histone modification in osteosarcoma and showing how similar the dog and human cancers are."
+ },
+ "10.1101/144394": {
+  "theme": "tools",
+  "summary": "Regions where the genome carries very divergent haplotypes can reveal balancing selection, but they are hard to find without knowing the sub-populations in advance. HaploDistScan is an R package that detects them from the distribution of pairwise haplotype distances.",
+  "finding": "It recovered known cases in the ruff and Darwin's finches using genotype data alone, and flagged new candidate regions in the finches."
+ },
+ "10.1186/s12863-016-0404-3": {
+  "theme": "gwas",
+  "summary": "Fine-mapping of a known atopic dermatitis locus in German shepherds, near the PKP2 gene, was followed by reporter assays testing which variants regulate transcription.",
+  "finding": "A risk haplotype and a protective haplotype were identified, and most of the tested variants affected gene regulation, with allele-specific differences."
+ },
+ "10.1186/s12864-016-2619-0": {
+  "theme": "gwas",
+  "summary": "Shar-Pei dogs suffer from an autoinflammatory disease linked to copy number variants. Droplet digital PCR was compared with standard quantitative PCR for measuring them in 196 dogs.",
+  "finding": "The variants are stable and inherited in a Mendelian way, not unstable as thought, and one allele raises the odds of disease four-fold."
+ },
+ "10.1111/jvim.13829": {
+  "theme": "gwas",
+  "summary": "Blood measurements in healthy dogs can differ between breeds. Plasma endothelin-1, plasma renin activity and serum cortisol were measured in 531 healthy dogs of nine breeds at five centres.",
+  "finding": "All three measures differed between breeds, and pairwise differences were most common for endothelin-1 (67% of comparisons)."
+ },
+ "10.1371/journal.pone.0134720": {
+  "theme": "gwas",
+  "summary": "Hypothyroidism affects humans and dogs. A multi-breed association analysis in Gordon Setters, Hovawarts and Rhodesian Ridgebacks searched for shared risk factors.",
+  "finding": "A major risk locus on chromosome 12 (p = 2.1×10⁻¹¹) is shared by all three breeds, with a common 167 kb risk haplotype containing three genes not previously linked to the disease."
+ },
+ "10.1093/bioinformatics/btv426": {
+  "theme": "tools",
+  "summary": "cgmisc is an R package that adds utilities and visualisation tools for genome-wide association studies, including functions for dog genomics.",
+  "finding": "It helps produce publication-quality figures and extends existing GWAS software, and is available for all operating systems."
+ },
+ "10.1371/journal.pone.0133844": {
+  "theme": "gwas",
+  "summary": "IgA deficiency is the most common primary immune deficiency in humans and dogs. Genome-wide association was used to find regions linked to low IgA in four dog breeds, with a new percentile-group approach.",
+  "finding": "35 loci were suggestively linked, including genes such as KIRREL3 and SLIT1, which are highly expressed in the nervous system, pointing to early B-cell development."
+ },
+ "10.1371/journal.pone.0123173": {
+  "theme": "gwas",
+  "summary": "Genetic factors behind serum fructosamine, a marker of blood glucose, were investigated in healthy dogs from nine breeds, as a model for diabetes.",
+  "finding": "No association appeared across all breeds together, but Belgian Malinois showed a chromosome 3 signal near genes involved in glucose metabolism, such as LETM1 and GAPDH."
+ },
+ "10.1111/jvim.12310": {
+  "theme": "gwas",
+  "summary": "Heart hormones called natriuretic peptides are used to diagnose cardiac disease in dogs. Their levels were measured in 535 healthy dogs from nine breeds in the EU LUPA project.",
+  "finding": "Both proANP and NT-proBNP differ significantly between breeds, so breed is one factor that can influence how these values are interpreted."
+ },
+ "10.1039/c3mb70486f": {
+  "theme": "ml",
+  "summary": "New datasets of interacting proteins were built from four public databases, with features from Gene Ontology and DOMINE. Four machine learning methods were combined by majority voting to predict interactions.",
+  "finding": "In cross-validation, sensitivity exceeded 80% and accuracy reached 90%, and sensitivity stayed above 70% on a larger, more realistic dataset."
+ },
+ "10.1534/g3.113.008623": {
+  "theme": "tools",
+  "summary": "MAPfastR is an R package for fast quantitative trait locus mapping in inbred and outbred line crosses.",
+  "finding": "It provides modules for fast, accurate analysis of large datasets, and is freely available."
+ },
+ "10.1371/journal.pone.0075242": {
+  "theme": "gwas",
+  "summary": "Chinese Shar-Pei dogs get an autoinflammatory disease with several clinical signs. Genome-wide analysis in 255 dogs looked at five signs separately.",
+  "finding": "A shared risk locus on chromosome 13 was confirmed for all signs, and a possible modifier locus for amyloidosis was suggested."
+ },
+ "10.1371/journal.pgen.1003475": {
+  "theme": "gwas",
+  "summary": "German shepherd dogs were used as a model for human atopic dermatitis. A mixed model corrected for population structure and for IgA levels and age.",
+  "finding": "A genome-wide significant locus on chromosome 27 was found, and cases had significantly lower IgA levels than controls."
+ },
+ "10.1111/mec.12181": {
+  "theme": "conservation",
+  "summary": "How can local adaptation persist when gene flow is high? Moor frogs across 17 breeding ponds were studied with field data, a common garden experiment and genetic markers.",
+  "finding": "Differences in larval traits reflect adaptation to local pond conditions, and non-random gene flow restricts migration between ponds."
+ },
+ "10.3389/fgene.2013.00021": {
+  "theme": "tools",
+  "summary": "PASE predicts how an amino acid substitution affects protein function, using changes in physicochemical properties, to help prioritise candidate mutations.",
+  "finding": "Tested on 3,338 human substitutions scored by SIFT and PolyPhen, it works well, and combining it with evolutionary conservation improves it."
+ },
+ "10.3389/fgene.2013.00226": {
+  "theme": "gwas",
+  "summary": "Chicken lines selected for high and low body weight for over 50 generations were compared at growth QTL regions using SNP chip and sequencing data.",
+  "finding": "The approach narrowed large QTL regions down to a manageable set of candidate genes and mutations affecting growth."
+ },
+ "10.1371/journal.pone.0039176": {
+  "theme": "gwas",
+  "summary": "Genetic control of IgE levels, which are central to allergy, was studied in 161 Labrador Retrievers.",
+  "finding": "Two genome-wide significant loci on chromosome 5 are linked to IgE responses to two storage mite species, with no obvious candidate gene, so a new mechanism may be involved."
+ },
+ "10.4137/bbi.s6247": {
+  "theme": "ml",
+  "summary": "Predicting HIV drug resistance from sequence does not explain the molecular interactions behind it. The Monte Carlo feature selection and interdependency discovery method (MCFS-ID) was used to build interaction networks for six reverse transcriptase inhibitors.",
+  "finding": "The networks link changes in amino acid properties to resistance and were mapped onto the 3D structure of the enzyme to suggest molecular mechanisms."
+ },
+ "10.4137/bbi.s3382": {
+  "theme": "ml",
+  "summary": "A rule-based rough set model of HIV-1 resistance to eight reverse transcriptase inhibitors was built from 15 years of public data, using changes in physicochemical properties and Monte Carlo feature selection.",
+  "finding": "Resistance is more complex than believed: the model confirmed many known sites, found some less relevant than thought, and flagged several neglected sites."
+ }
+}

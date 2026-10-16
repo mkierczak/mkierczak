@@ -1,0 +1,31 @@
+---
+title: "Contact"
+---
+
+I'm happy to hear about training, industry collaboration, teaching and research projects.
+
+::: {.contact}
+<p class="label">Email</p>
+<p><a class="obf" data-u="bWFyY2lu" data-d="a2llcmN6YWsubmV0" href="#">Show email address</a></p>
+<noscript><p>Please enable JavaScript to see the email address.</p></noscript>
+:::
+
+## Elsewhere
+
+- [LinkedIn](https://www.linkedin.com/in/marcinkierczak)
+- [ORCID: 0000-0003-2629-5655](https://orcid.org/0000-0003-2629-5655)
+- [Google Scholar](https://scholar.google.com/citations?user=ebOBIL4AAAAJ)
+- [NBIS](https://nbis.se), Uppsala, Sweden
+
+<script>
+document.querySelectorAll("a.obf").forEach(function (a) {
+  a.addEventListener("click", function (e) {
+    if (a.dataset.done) return;
+    e.preventDefault();
+    var addr = atob(a.dataset.u) + "@" + atob(a.dataset.d);
+    a.textContent = addr;
+    a.href = "mailto:" + addr;
+    a.dataset.done = "1";
+  });
+});
+</script>

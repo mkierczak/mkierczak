@@ -3,3 +3,9 @@
 web_quarto.code-workspace
 web_quarto.Rproj
 old.zip
+/_site/
+publication-abstracts.json
+.DS_Store
+.Rhistory
+
+**/*.quarto_ipynb

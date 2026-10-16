@@ -1,74 +1,97 @@
 ---
-title: "Teachings"
+title: "Training & Outreach"
 ---
-<table style="margin-left: auto; margin-right: auto;"><tr><td>
-![](assets/rabbit_teaching_rabbits.png){ width=300px fig-alt="Rabbit tutoring a class of rabbits." fig-align="left"} 
-</td><td>
-![](assets/RaukR_1.webp){ width=300px fig-alt="RaukR." fig-align="right" } 
-</tr></tr></table>
-<p style="text-align: center; font-family: cursive; font-size: 1.2rem; color: steelblue;">Non scholae sed vitae discimus.</p>
 
-## Authored Courses
-* [**RaukR. Advanced R for Bioinformatics Summer School**](https://nbisweden.github.io/raukr-2024/), Visby, Sweden. 2018, 2019, 2021, 2022, 2023, 2024
+As training and industry outreach coordinator at NBIS, I help shape how Swedish life scientists and industry partners learn bioinformatics, and I still teach myself.
 
-* R programming for Life Scientists. A SciLife Lab course. 2015 (1x), 2016 (2x), 2017 (2x), 2018, 2020.
+## Timeline
 
-* Statistical Methods in Genetic Mapping: An R-based Course. A 4 ETCS graduate-level course. Nov-Dec 2013.
+::: {.timeline}
+<div class="tl-row tl-axis"><div class="tl-label"></div><div class="tl-track"><span class="tl-tick" style="left:2.632%">2008</span><span class="tl-tick" style="left:13.158%">2010</span><span class="tl-tick" style="left:23.684%">2012</span><span class="tl-tick" style="left:34.211%">2014</span><span class="tl-tick" style="left:44.737%">2016</span><span class="tl-tick" style="left:55.263%">2018</span><span class="tl-tick" style="left:65.789%">2020</span><span class="tl-tick" style="left:76.316%">2022</span><span class="tl-tick" style="left:86.842%">2024</span><span class="tl-tick" style="left:97.368%">2026</span></div></div>
+<div class="tl-row"><div class="tl-label">Knowledge-based Systems in Bioinformatics<small>2008 · teaching assistant</small></div><div class="tl-track"><span class="tl-bar" style="left:0.000%;width:5.263%" title="2008"></span></div></div>
+<div class="tl-row"><div class="tl-label">LUPA Workshop: GWAS in Stratified Populations<small>2011 · course responsible</small></div><div class="tl-track"><span class="tl-bar" style="left:15.789%;width:5.263%" title="2011"></span></div></div>
+<div class="tl-row"><div class="tl-label">Statistical Methods in Genetic Mapping<small>2013 · course responsible and teacher</small></div><div class="tl-track"><span class="tl-bar" style="left:26.316%;width:5.263%" title="2013"></span></div></div>
+<div class="tl-row"><div class="tl-label">R Programming for Life Scientists<small>2015–2020 · course responsible</small></div><div class="tl-track"><span class="tl-bar" style="left:36.842%;width:31.579%" title="2015–2020"></span></div></div>
+<div class="tl-row"><div class="tl-label">RaukR, Advanced R Programming<small>2018 onwards · co-organiser, Visby</small></div><div class="tl-track"><span class="tl-bar open" style="left:52.632%;width:47.368%" title="2018 onwards"></span></div></div>
+<div class="tl-row"><div class="tl-label">13x13 public lecture, Uppsala University<small>2025 · invited speaker</small></div><div class="tl-track"><span class="tl-bar" style="left:89.474%;width:5.263%" title="5 November 2025"></span></div></div>
+<div class="tl-row"><div class="tl-label">Co-advisor, PhD theses<small>defences 2014, 2016, 2020</small></div><div class="tl-track"><span class="tl-dot" style="left:34.211%" title="2014: M. Ahsan"></span><span class="tl-dot" style="left:44.737%" title="2016: S. Forsberg"></span><span class="tl-dot" style="left:65.789%" title="2020: S. Sakthikumar"></span></div></div>
+<div class="tl-row"><div class="tl-label">Examiner, opponent and reviewer<small>2019–2024</small></div><div class="tl-track"><span class="tl-dot" style="left:60.526%" title="2019: opponent, licentiate thesis"></span><span class="tl-dot" style="left:65.789%" title="2020: examiner, PhD thesis"></span><span class="tl-dot" style="left:71.053%" title="2021: examiner, PhD thesis"></span><span class="tl-dot" style="left:86.842%" title="2024: subject reviewer, two master's theses"></span></div></div>
+<div class="tl-legend"><span><i class="k-bar"></i>Course, workshop or lecture</span><span><i class="k-dot"></i>Thesis role</span></div>
+:::
 
-* LUPA Workshop: GWAS Analyses in Stratified Populations, Uppsala, May 2011.
+## Training coordination
 
-* The Next-Generation Sequencing - Bioinformatics and Data Analysis (a PhD-level courses).
+- Planning and coordinating NBIS training: courses, workshops and summer schools
+- Keeping the training portfolio aligned with what researchers need in practice
+- Helping researchers become confident, independent data analysts
 
-## Courses as teacher / TA
+## Industry outreach
 
-* Bioinformatics 3MR103 (undergraduate level). Module on machine learning. 2023.
+- Making NBIS expertise and training accessible to companies and industry partners
+- Building collaborations between academia, infrastructure and industry
 
-* Neural Networks and Deep Learning. Module: *From autoencoders to beta-Variational Autoencoders*. 2022, 2023.
+## RaukR {#raukr}
 
-* Application Oriented Deep Learning in Physics. 1FA386. Guest lectures/labs on autoencoders and convolutional neural networks. 2021,
+Since 2018, together with colleagues, I organise [**RaukR**](https://raukr.nbis.se), the *Advanced R Programming for Bioinformatics* summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at [raukr.nbis.se](https://raukr.nbis.se).
 
-* R programming for Life Scientists. A SciLife Lab course. 2015 (1x), 2016 (2x), 2017 (2x).
+## Courses and workshops
 
-* Statistical Methods in Genetic Mapping: An R-based Course. A 4 ETCS graduate-level course. Nov-Dec 2013.
+- **RaukR**, *Advanced R Programming for Bioinformatics*, Visby. Co-organiser, annually since 2018 ([raukr.nbis.se](https://raukr.nbis.se)).
+- **R for non-programmers** and **Advanced R for data scientists**. Course leader.
+- **R Programming for Life Scientists**, SciLifeLab course, 2015–2020. Course responsible; teacher in five editions, 2015–2017 ([materials from the 2017 Uppsala edition](https://nbisweden.github.io/Rcourse/HT17Uppsala/)).
+- **Statistical Methods in Genetic Mapping: An R-based Course**, 4 ECTS graduate course, Nov–Dec 2013. Course responsible and teacher.
+- **LUPA Workshop: GWAS Analyses in Stratified Populations**, Uppsala, May 2011. Course responsible.
+- **Next-Generation Sequencing: Bioinformatics and Data Analysis**, PhD-level course. Course responsible.
+- **Boolean Reasoning**, lectures and labs on random forests. Teacher.
+- **Knowledge-based Systems in Bioinformatics**, 2008. Teaching assistant.
 
-* Boolean Reasoning (lectures and labs on random forests)
+## Talks and popular science
 
-* Knowledge-based Systems in Bioinformatics
+**From mythology to artificial intelligence: a short journey through statistical models** (in Swedish: *Från mytologi till artificiell intelligens. En kort resa genom statistiska modeller*)
+:   Public lecture in the [13x13 series](https://www.uu.se/institution/fysik-och-astronomi/samverkan/13x13/13x13-2025), Uppsala University, 5 November 2025, Humanistiska Teatern. The talk follows how people have tried to understand the world, from myth to modern statistical models and AI: how such models are built, how reliable they are, and what to look out for when a new AI model appears. 13x13 is a series of thirteen free lectures, organised by the Department of Physics and Astronomy, in which Uppsala researchers present their work to a general audience.
 
-## Thesis Advisor
+## Supervision
 
-* Masters thesis: **Moa Qvarnlöv**. [*The accuracy, reliability and practicality of AI systems in analyzing and interpreting medical images for improved patient diagnosis and treatment.*]()(subject reader, thesis defended 2024)
+### Examiner, PhD theses
 
-* Masters thesis: **Yasemin Utkueri**. [*Enhancing cDNA Basecalls for Non-Model Organisms Using Custom Nanopore Models: A Case Study on Krill.*]()(subject reader, thesis defended 2024)
+::: supervision
+- **Martin Dahlö**. [Approaches for Distributing Large Scale Bioinformatic Analyses](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1597155). Examiner, Uppsala University, 2021.
+- **Andrea García-Montaner**. [Genome evolution of a bee-associated bacterium](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1456589). Examiner, Uppsala University, 2020.
+:::
 
-* PhD thesis: **Sharadha Sakthikumar** [*Characterizing the spectrum of somatic alterations in canine and human cancers.*](http://uu.diva-portal.org/smash/get/diva2:1379692/FULLTEXT01.pdf) (co-advisor, thesis defended 2020)
+### Opponent, licentiate theses
 
-* PhD thesis: **Simon Forsberg**. [*Complex Trait Genetics: Beyond Additivity.*](http://Complex Trait Genetics: Beyond Additivity) (co-advisor, thesis defended 2016)
+::: supervision
+- **Kristiina Ausmees**. [Efficient computational methods for applications in genomics](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1367712). Opponent, Uppsala University, 2019.
+:::
 
-* PhD thesis: **Muhammad Ahsan**. *Identification and evaluation of functional sequences, selective sweeps and candidate mutations within QTL regions regulating growth in chicken.* (co-advisor, thesis defended in 2014)
+### Subject reviewer, master's theses
 
-* Masters thesis: **Małgorzata Kauczynska**. *Random Forest-based classifiers for prediction of SLE risk from SNP microarray data.* (co-advisor, defended 2006)
+::: supervision
+- **Yasemin Utkueri**. [Enhancing cDNA Basecalls for Non-Model Organisms Using Custom Nanopore Models: A Case Study on Krill](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1875387). Subject reviewer, Uppsala University, 2024.
+- **Moa Qvarnlöf**. [The accuracy, reliability, and practicality of Convolutional Neural Networks in classifying ultrasound images for improved breast cancer diagnosis](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1871763). Subject reviewer, Uppsala University, 2024.
+:::
 
-* Research project: **Oskar Gauffin**, analysis of time-spatial data on microbehavior in the domestic dog. 2015 (advisor)
+### Advisor, PhD theses
 
-* Research project (within the ERASMUS European project): **Jagoda Jabłońska**. Development and application of novel tools for enhanced genome-wide association studies. Published in Bioinformatics, 2015, 2016
+::: supervision
+- **Sharadha Sakthikumar**. [Characterizing the spectrum of somatic alterations in canine and human cancers](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1379692). Co-advisor, defended 2020.
+- **Simon Forsberg**. [Complex Trait Genetics: Beyond Additivity](http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1048756). Co-advisor, defended 2016.
+- **Muhammad Ahsan**. Identification and evaluation of functional sequences, selective sweeps and candidate mutations within QTL regions regulating growth in chicken. Co-advisor, defended 2014.
+:::
 
-* Research project: **Andreas E. Lundberg**. A tool for assembly and SNP detection using data coming from different SOLiD sequencing setups (advisor)
+### Advisor, master's thesis
 
-* Research project: **Simon Forsberg**. An R package for assessment of mutation impact on protein function (advisor)
+::: supervision
+- **Małgorzata Kauczyńska-Karlsson**. Random Forest-based classifiers for prediction of SLE risk from SNP microarray data. Co-supervisor, defended 2006.
+:::
 
-* Research project: **Samuel Lampa**. PTMatcher, a web-based tool for predicting post-translational modifications in proteins
+### Research projects
 
-## Thesis Committee 
-* PhD Committee member: **Rickard Hamarén**. [*From the migrations of herders and farmers to the colonial era and the modern-day: Genetic inferences on African demographic history*](http://uu.diva-portal.org/smash/get/diva2:1696630/FULLTEXT01.pdf) (thesis defended 2022)
-
-* PhD Committee member: **Martin Dahlö**. [*Approaches for Distributing Large Scale Bioinformatic Analyses*](http://uu.diva-portal.org/smash/get/diva2:1597155/FULLTEXT01.pdf) (thesis defended in 2021)
-
-* PhD Committee member: **Andrea Garcia Montaner**. [*Genome evolution of a bee-associated bacterium*](http://uu.diva-portal.org/smash/get/diva2:1456589/FULLTEXT01.pdf) (thesis defended in 2020)
-
-* Licenciate opponent: **Kristina Ausmees**. [*Efficient computational methods for applications in genomics*](http://uu.diva-portal.org/smash/get/diva2:1367712/FULLTEXT02.pdf) (thesis opponent, defended 2019)
-
-![](assets/rabbit_teaching_rabbit2.webp){ width=300px fig-alt="Rabbit tutoring another rabbit." fig-align="center" } 
-
-<hr style="position: relative; border-width:3px;margin: 0px;top:-1em">
-<hr style="position: relative; border-width:7px;margin: 0px;top:-0.8em">
+::: supervision
+- **Oskar Gauffin**. Analysis of time-spatial data on microbehaviour in the domestic dog, 2015–2016.
+- **Jagoda Jabłońska**. Development and application of novel tools for enhanced genome-wide association studies; published in *Bioinformatics*, 2015.
+- **Andreas E. Lundberg**. A tool for assembly and SNP detection using data from different SOLiD sequencing setups. Supervisor.
+- **Simon Forsberg**. An R package for assessing the impact of mutations on protein function. Supervisor.
+- **Samuel Lampa**. PTMatcher, a web-based tool for predicting post-translational modifications in proteins.
+:::

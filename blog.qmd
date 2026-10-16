@@ -1,10 +1,13 @@
 ---
-title: "Saga"
+title: "Blog"
+subtitle: "Notes on data, genomics and teaching"
 listing:
   contents: posts
+  type: default
   sort: "date desc"
-  type: grid
   categories: true
-  fields: [image, date, title, reading-time, description]
+  feed: true
+  fields: [image, date, title, description, categories, reading-time]
+page-layout: full
+title-block-banner: false
 ---
-
