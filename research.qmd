@@ -63,4 +63,8 @@ DNA metabarcoding for authenticating food products, and genome assembly from sin
 :::
 
 ## Tools & languages
-R, Python, Nextflow and Snakemake workflows, HPC environments, and reproducible research practices.
+Day-to-day, I work with:
+
+::: chips
+[R]{.chip .i-r} [Python]{.chip .i-python} [Nextflow]{.chip .i-nextflow} [Snakemake]{.chip .i-pipeline} [HPC environments]{.chip .i-server} [Reproducible research]{.chip .i-repro}
+:::
