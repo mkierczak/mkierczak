@@ -139,6 +139,10 @@ University of Warsaw. Thesis: *Role of CDK-5 Kinase in the Mammalian Central Ner
 
 Associate professor (docent) in bioinformatics, Department of Cell and Molecular Biology, Uppsala University.
 
+## Certifications
+
+- **FitSM® Foundation**, issued by APMG International, May 2026. [Verify credential](https://www.credly.com/badges/2be1b9ca-e588-441e-ad42-72184e8c0735)
+
 ## Teaching and course organisation
 
 - **RaukR**, *Advanced R Programming for Bioinformatics*, Visby. Co-organiser, annually since 2018.
