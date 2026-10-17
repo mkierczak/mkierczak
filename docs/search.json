@@ -133,60 +133,74 @@
     "text": "Plotting\nI needed some cool colours. On my way home from rstudio::conf 2020 I watched Taika Waititi’s “Jojo Rabbit”, which I found visually appealing. I grabbed a screenshot and, with the Colormind tool, created two palettes from it.\n\njojo1 &lt;- c('#c0b3aa', '#2b2117', '#9a8268', '#d3a677', '#e1d0ba')\njojo2 &lt;- c('#221c17', '#947e66', '#da9869', '#e0c6a4', '#c1b3ab')\n\nAnd now the most glamorous version of the plot, with the legend living in the title:\n\ncols &lt;- c('bioconductor' = jojo2[2], 'cran' = jojo2[3], 'github' = jojo2[1], 'rforge' = jojo2[5])\n\ntitle &lt;- glue('Log # of R packages available at',\n              ' &lt;span style=\"color:{cols[2]}\"&gt;**CRAN**&lt;/span&gt;,',\n              ' &lt;span style=\"color:{cols[4]}\"&gt;**R-Forge**&lt;/span&gt;,',\n              ' &lt;span style=\"color:{cols[1]}\"&gt;**Bioconductor**&lt;/span&gt;',\n              ' and',\n              ' &lt;span style=\"color:{cols[3]}\"&gt;**GitHub**&lt;/span&gt;',\n              ' over time.')\n\nggplot(data, mapping = aes(x = date, y = log(value), col = repo)) +\n  geom_point(show.legend = FALSE) +\n  geom_line(show.legend = FALSE) +\n  geom_text_repel(aes(label = comma(value)), direction = 'y', vjust = 0.5, show.legend = FALSE) +\n  scale_colour_manual(values = cols) +\n  labs(title = title, x = '', y = '') +\n  theme_minimal() +\n  theme(panel.grid.major = element_line(colour = '#EEEEEE', linewidth = 0.25),\n        plot.background = element_rect(fill = '#FFFDF8', colour = '#FFFDF8'),\n        axis.title = element_text(colour = jojo2[5]),\n        axis.text = element_text(colour = jojo2[5], size = 10),\n        axis.title.y = element_blank(),\n        plot.title = element_markdown(lineheight = 1.5, size = 12),\n        plot.title.position = 'plot')"
   },
   {
-    "objectID": "impressum.html",
-    "href": "impressum.html",
-    "title": "Impressum",
+    "objectID": "posts/archive-rtl-acars-osx/index.html",
+    "href": "posts/archive-rtl-acars-osx/index.html",
+    "title": "Receiving ACARS messages with a software-defined radio on a Mac",
     "section": "",
-    "text": "Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the Contact page."
+    "text": "NoteFrom the archive\n\n\n\nFirst published on my old blog in September 2014 as Compiling and installing rtl_acars on OS X 10.9 Mavericks. These steps are for a 2014 system and are very likely out of date: the software, the build tools and macOS itself have all changed since. I keep the post for the fun of it.\n\n\nI struggled for a while, but in the end I managed to install rtl_acars on my Mac, and after some hours of waiting I received my first ACARS messages. ACARS is the short-message system that aircraft use to talk to ground stations. Now it is only a matter of building a better antenna. Here is my path to success.\n# Clone 9nut's version of rtl-sdr from GitHub\ngit clone https://github.com/9nut/rtl-sdr\n\n# Add missing lines in Makefile.am\nrtl_acars_SOURCES = rtl_acars.c\nrtl_acars_LDADD = librtlsdr.la $(LIBM)\n\n# I had previously installed Homebrew to get the necessary libraries\nbrew install libtool\naclocal\nglibtoolize\nautoconf\nautomake --add-missing\n\n# Choose your own destination\n./configure --prefix=/Users/user/rtl/\nmake\nmake install\nAnd my first received ACARS message came from a United Airlines plane:\nRX_IDX: 0\nACARS mode: V, message label: H1\nAircraft reg: .N14121, flight id: UA0069\nBlock id: 55, msg. no: D02A\nMessage content:-\n#DFBCL2N14121ESSAKEWR3008072336 222 -075-215 20028064524168000691CLMBB\n349 031887031259 961 963 899 904 906 903708702 8480 8512168616890310\n85065008080040"
   },
   {
-    "objectID": "impressum.html#responsible-for-this-website",
-    "href": "impressum.html#responsible-for-this-website",
-    "title": "Impressum",
+    "objectID": "posts/archive-genome-assembly-mapping/index.html",
+    "href": "posts/archive-genome-assembly-mapping/index.html",
+    "title": "Mapping between genome assemblies in R",
     "section": "",
-    "text": "Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the Contact page."
+    "text": "NoteFrom the archive\n\n\n\nFirst published on my old blog in March 2014. I have kept the idea and the original plyr solution, and added a version with today’s dplyr.\nGenome arrays are designed against one particular version of a genome assembly. New assemblies are published, but the array stays the same, so you often need to map between the two. In my case, the task was to map between two assemblies of the canine genome, from canFam2 to CanFam3, for a SNP array. I had two .map files with genomic coordinates per marker, which look like this:\nI wanted to join them so that the marker names come from the canFam2 file, while the chromosome and position come from the matching marker in the canFam3 file."
   },
   {
-    "objectID": "impressum.html#privacy",
-    "href": "impressum.html#privacy",
-    "title": "Impressum",
-    "section": "Privacy",
-    "text": "Privacy\nThis site does not use cookies, does not show advertising and does not include social-media widgets or embedded third-party content.\nWeb analytics. To learn roughly how many people visit and which pages they read, I use GoatCounter, a privacy-friendly analytics service, hosted at kiero.goatcounter.com. According to its documentation it sets no cookies and does not track you across sites or store your IP address. It records only aggregate page-view information such as the page visited, the referring site, browser and screen size, and the country. Because it needs no cookies and stores no personal profile, no consent banner is shown. Details are in GoatCounter’s privacy policy.\n\nTotal page views counted so far: …\n\n\nHosting. The site is served by GitHub Pages. As with any web host, GitHub may process technical data such as your IP address when you request a page; see the GitHub privacy statement.\nLocal storage. If you switch between light and dark mode, your choice is remembered in your browser’s local storage. It never leaves your device.\nContact form. There is none. If you email me, I use your message and address only to reply to you.\nYour rights. Under the GDPR you may ask what data about you is held and request its correction or deletion. Since the site stores no personal profiles, there is normally nothing to report, but you are welcome to get in touch."
+    "objectID": "posts/archive-genome-assembly-mapping/index.html#the-pitfall-of-merge",
+    "href": "posts/archive-genome-assembly-mapping/index.html#the-pitfall-of-merge",
+    "title": "Mapping between genome assemblies in R",
+    "section": "The pitfall of merge()",
+    "text": "The pitfall of merge()\nThe first thing that came to mind was merge(). The problem is that a marker that has no match in canFam3 is moved to the end of the result, which breaks the marker order. What we want instead is NA in both the chromosome and the position when the marker cannot be found in canFam3."
   },
   {
-    "objectID": "impressum.html#fonts-and-technologies",
-    "href": "impressum.html#fonts-and-technologies",
-    "title": "Impressum",
-    "section": "Fonts and technologies",
-    "text": "Fonts and technologies\nEverything needed to display the pages, except the analytics script, is served from this site itself, with no calls to Google Fonts or a public CDN.\n\nFonts: Newsreader and Inter, both under the SIL Open Font License, served locally.\nSite generator: Quarto with the Bootswatch Cosmo theme (Bootstrap, MIT licence).\nMathematics: MathJax (Apache 2.0), served locally.\nPublication data: fetched from OpenAlex and Google Scholar when the site is built; your browser does not contact them.\nGitHub statistics: fetched from the public GitHub API when the site is built.\nCode in the Blog background: the faint code lines are real lines sampled from my own public, non-forked repositories at github.com/mkierczak (R, Python, PHP, Lua, JavaScript, CSS and shell). They are picked when the site is built; comments, vendored or generated files, and anything resembling credentials, addresses or personal paths are left out. Your browser reads them from this site, not from GitHub.\nBackground animations: drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion. Depending on the page they show formulas, code, DNA and protein sequences, a network, or a Manhattan plot. In the DNA background, the protein sequences are written in one-letter amino-acid codes, and some sequences contain a small private joke ;-)\n\nBuilt with human brain, Quarto and Claude.\n\nFormulas in the background\nSome pages show faint, slowly drifting formulas behind the text. They are decoration, but each one is real:\n\n\nShow the formulas and what they mean\n\n\n\n\n\n\n\n\nFormula\nWhat it is\n\n\n\n\n\\(\\mathrm{softmax}(z)_i = \\dfrac{e^{z_i}}{\\sum_j e^{z_j}}\\)\nSoftmax. Turns a vector of raw scores into probabilities that sum to 1; the last step of most classifiers.\n\n\n\\(P(\\theta \\mid D) = \\dfrac{P(D \\mid \\theta)\\,P(\\theta)}{P(D)}\\)\nBayes’ theorem. Updates belief about parameters \\(\\theta\\) after seeing data \\(D\\): posterior = likelihood × prior / evidence.\n\n\n\\(\\mathcal{N}(x \\mid \\mu, \\sigma^2) = (2\\pi\\sigma^2)^{-1/2}\\exp\\!\\left(-\\dfrac{(x-\\mu)^2}{2\\sigma^2}\\right)\\)\nNormal distribution. The bell curve with mean \\(\\mu\\) and variance \\(\\sigma^2\\).\n\n\n\\(L = -\\sum_i y_i \\log \\hat{y}_i\\)\nCross-entropy loss. Penalises a model for giving low probability \\(\\hat{y}_i\\) to the true class \\(y_i\\).\n\n\n\\(\\theta \\leftarrow \\theta - \\eta\\,\\nabla L(\\theta)\\)\nGradient descent. Moves parameters a small step \\(\\eta\\) downhill on the loss; how most models are trained.\n\n\n\\(p^2 + 2pq + q^2 = 1\\)\nHardy–Weinberg equilibrium. Genotype frequencies for two alleles with frequencies \\(p\\) and \\(q\\) in a randomly mating population.\n\n\n\\(\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y\\)\nOrdinary least squares. The linear-regression coefficients that minimise squared error.\n\n\n\\(\\mathrm{Attn}(Q,K,V) = \\mathrm{softmax}\\!\\left(\\dfrac{QK^\\top}{\\sqrt{d}}\\right)V\\)\nAttention. The core operation of transformer models: each position takes a weighted mix of values \\(V\\), weighted by how well queries \\(Q\\) match keys \\(K\\).\n\n\n\\(H(X) = -\\sum_x p(x)\\log p(x)\\)\nShannon entropy. The average uncertainty, or information content, of a random variable.\n\n\n\\(y = X\\beta + g + \\varepsilon\\)\nMixed model for genetics. A trait \\(y\\) explained by fixed effects \\(X\\beta\\), a random genetic effect \\(g\\), and residual noise \\(\\varepsilon\\).\n\n\n\\(\\mathrm{KL}(p \\,\\Vert\\, q) = \\sum_x p(x)\\log\\dfrac{p(x)}{q(x)}\\)\nKullback–Leibler divergence. How much a distribution \\(q\\) differs from a reference distribution \\(p\\).\n\n\n\\(e^{i\\pi} + 1 = 0\\)\nEuler’s identity. Ties together five fundamental constants (\\(e\\), \\(i\\), \\(\\pi\\), 1 and 0) through complex exponentials; a special case of \\(e^{i\\theta} = \\cos\\theta + i\\sin\\theta\\).\n\n\n\\(\\sigma(x) = \\dfrac{1}{1 + e^{-x}}\\)\nSigmoid. Squashes any number into the range 0 to 1; used for probabilities and neuron activations."
+    "objectID": "posts/archive-genome-assembly-mapping/index.html#the-solution-a-left-join",
+    "href": "posts/archive-genome-assembly-mapping/index.html#the-solution-a-left-join",
+    "title": "Mapping between genome assemblies in R",
+    "section": "The solution: a left join",
+    "text": "The solution: a left join\nThe R package plyr has exactly that, in its join() function:\nnew.map &lt;- join(map, canFam3, by = \"marker\", type = \"left\")\nToday the same thing is usually written with dplyr. Here it is with a tiny made-up example, so you can see that the order is preserved and the missing marker gets NA:\n\nlibrary(dplyr)\n\ncanFam2 &lt;- data.frame(\n  marker = c(\"BICF2G630707759\", \"BICF2S2358127\", \"BICF2P1173580\", \"BICF2X0000001\"),\n  chr2 = 1, pos2 = c(14548, 68723, 80040, 90111)\n)\ncanFam3 &lt;- data.frame(\n  marker = c(\"BICF2P1173580\", \"BICF2G630707759\", \"BICF2S2358127\"),\n  chr3 = 1, pos3 = c(81233, 15021, 69300)\n)\n\nleft_join(canFam2, canFam3, by = \"marker\")\n\n           marker chr2  pos2 chr3  pos3\n1 BICF2G630707759    1 14548    1 15021\n2   BICF2S2358127    1 68723    1 69300\n3   BICF2P1173580    1 80040    1 81233\n4   BICF2X0000001    1 90111   NA    NA\n\n\nThe unmatched marker BICF2X0000001 stays in its place and gets NA for the new coordinates, which is what we wanted. In base R, match() does the same job: canFam3$pos3[match(canFam2$marker, canFam3$marker)].\n\n\n\n\n\n\nTipWhen marker names are not shared\n\n\n\nThis trick works because the same array markers appear in both assemblies. To convert coordinates that have no shared identifiers, use a chain-file based lift-over instead, for example liftOver() in the Bioconductor package rtracklayer."
   },
   {
-    "objectID": "impressum.html#content-and-liability",
-    "href": "impressum.html#content-and-liability",
-    "title": "Impressum",
-    "section": "Content and liability",
-    "text": "Content and liability\nI take care with the content of these pages but cannot guarantee that it is complete or current. Links to external sites lead to content I do not control. Unless stated otherwise, text and images on this site are © Marcin Kierczak; please ask before reusing them."
-  },
-  {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Contact",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Marcin Kierczak, PhD",
     "section": "",
-    "text": "I’m happy to hear about training, industry collaboration, teaching and research projects."
+    "text": "Training & Industry Outreach Coordinator · Data Scientist · NBIS\n\nI coordinate training and industry outreach at the National Bioinformatics Infrastructure Sweden (NBIS), part of SciLifeLab, connecting Swedish life science with the bioinformatics skills and expertise it needs. As a data scientist at NBIS, I also work with research groups on their data analysis. In addition, I am an associate professor of bioinformatics at Uppsala University, with a research background in machine learning, statistical genomics and ancient DNA.\n\nTraining & Outreach Research Publications Blog"
   },
   {
-    "objectID": "contact.html#elsewhere",
-    "href": "contact.html#elsewhere",
-    "title": "Contact",
-    "section": "Elsewhere",
-    "text": "Elsewhere\n\nLinkedIn\nORCID: 0000-0003-2629-5655\nGoogle Scholar\nNBIS, Uppsala, Sweden"
+    "objectID": "index.html#what-i-do",
+    "href": "index.html#what-i-do",
+    "title": "Marcin Kierczak, PhD",
+    "section": "What I do",
+    "text": "What I do\n\n\n\n\nTraining\nCoordinating NBIS courses and workshops that build data-analysis skills across Swedish life science.\n\n\n\n\n\nIndustry outreach\nOpening NBIS expertise and training to companies and industry partners.\n\n\n\n\n\nData science\nSupporting research groups across Sweden with statistics, machine learning and reproducible data analysis, from experimental design to final results."
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Subscribe via RSS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\n\nstatistics\n\nR\n\nteaching\n\nseries\n\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n8 min\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\n\nR\n\nsimulation\n\nteaching\n\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\n\nR\n\nggplot2\n\nvisualisation\n\nteaching\n\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nPlotting 23andMe marker density with karyoploteR\n\n\n\nR\n\ngenetics\n\nvisualisation\n\n\n\nHow to draw the density of genotyped SNPs along a karyogram, and then zoom in on a region of interest.\n\n\n\n\n\nJan 31, 2018\n\n6 min\n\n\n\n\nNo matching items"
+    "objectID": "index.html#expertise",
+    "href": "index.html#expertise",
+    "title": "Marcin Kierczak, PhD",
+    "section": "Expertise",
+    "text": "Expertise\n\n\n\n\nMachine learning & AI\nNeural networks and ensemble methods applied to genomic and clinical data.\n\n\n\n\n\nStatistical genomics\nAssociation studies, mixed models and rare-variant analysis in humans and animals.\n\n\n\n\n\nAncient & conservation genomics\nGenome erosion, demographic history and adaptation in endangered and extinct species.\n\n\n\n\n\nMetagenomics\nMetabarcoding and community profiling, from food quality control to ecology."
+  },
+  {
+    "objectID": "index.html#latest-from-the-blog",
+    "href": "index.html#latest-from-the-blog",
+    "title": "Marcin Kierczak, PhD",
+    "section": "Latest from the blog",
+    "text": "Latest from the blog\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n\n\n\n\nNo matching items\n\nAll posts →"
+  },
+  {
+    "objectID": "index.html#affiliations",
+    "href": "index.html#affiliations",
+    "title": "Marcin Kierczak, PhD",
+    "section": "Affiliations",
+    "text": "Affiliations\nTraining and industry outreach coordinator and data scientist at NBIS, SciLifeLab, and associate professor in bioinformatics at the Department of Cell and Molecular Biology, Uppsala University. Since 2018, co-organiser of RaukR, an advanced R summer school in Visby (more)."
+  },
+  {
+    "objectID": "index.html#beyond-the-lab",
+    "href": "index.html#beyond-the-lab",
+    "title": "Marcin Kierczak, PhD",
+    "section": "Beyond the lab",
+    "text": "Beyond the lab\nMicrocontrollers and electronics, 3D printing, software-defined radio, jazz, sailing and celestial navigation."
   },
   {
     "objectID": "cv.html",
@@ -224,11 +238,11 @@
     "text": "Academic title\nAssociate professor (docent) in bioinformatics, Department of Cell and Molecular Biology, Uppsala University."
   },
   {
-    "objectID": "cv.html#certifications",
-    "href": "cv.html#certifications",
+    "objectID": "cv.html#certifications-and-training",
+    "href": "cv.html#certifications-and-training",
     "title": "Curriculum Vitae",
-    "section": "Certifications",
-    "text": "Certifications\n\n\n\n\n\nFitSM® Foundation\n\nIssued by APMG International, May 2026. Verify credential"
+    "section": "Certifications and training",
+    "text": "Certifications and training\n\n\n\n\n\nFitSM® Foundation\n\nIssued by APMG International, May 2026. Verify credential\n\n\n\n\n\n\n\n\nFrom Research to Business\n\nCourse by ESBRI, on commercialising research, 2015. Participant."
   },
   {
     "objectID": "cv.html#teaching-and-course-organisation",
@@ -273,46 +287,109 @@
     "text": "Languages\n\nPolish native English fluent Swedish fluent French basic Latin basic Spanish basic\n\nLast updated October 2026."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Marcin Kierczak, PhD",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
     "section": "",
-    "text": "Training & Industry Outreach Coordinator · Data Scientist · NBIS\n\nI coordinate training and industry outreach at the National Bioinformatics Infrastructure Sweden (NBIS), part of SciLifeLab, connecting Swedish life science with the bioinformatics skills and expertise it needs. As a data scientist at NBIS, I also work with research groups on their data analysis. In addition, I am an associate professor of bioinformatics at Uppsala University, with a research background in machine learning, statistical genomics and ancient DNA.\n\nTraining & Outreach Research Publications Blog"
+    "text": "Subscribe via RSS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\n\nstatistics\n\nR\n\nteaching\n\nseries\n\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n8 min\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\n\nR\n\nsimulation\n\nteaching\n\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\n\nR\n\nggplot2\n\nvisualisation\n\nteaching\n\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nPlotting 23andMe marker density with karyoploteR\n\n\n\nR\n\ngenetics\n\nvisualisation\n\n\n\nHow to draw the density of genotyped SNPs along a karyogram, and then zoom in on a region of interest.\n\n\n\n\n\nJan 31, 2018\n\n6 min\n\n\n\n\n\n\n\n\n\n\n\nReceiving ACARS messages with a software-defined radio on a Mac\n\n\n\narchive\n\nSDR\n\nradio\n\naviation\n\n\n\nFrom the archive: how I compiled rtl_acars on OS X 10.9 Mavericks and received my first aircraft messages with an RTL-SDR dongle.\n\n\n\n\n\nSep 3, 2014\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\nMapping between genome assemblies in R\n\n\n\narchive\n\nR\n\ngenetics\n\ndog\n\n\n\nFrom the archive: joining marker coordinates from two assemblies of the dog genome (canFam2 and CanFam3) without losing marker order.\n\n\n\n\n\nMar 7, 2014\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\nVariance-controlling genes\n\n\n\narchive\n\ngenetics\n\nGWAS\n\n\n\nFrom the archive: a short note on vGWAS, the idea that genetic variants can change not only the mean of a trait but also its variance.\n\n\n\n\n\nAug 23, 2012\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\nCommand-line basics: one-liners, aliases and SSH keys\n\n\n\narchive\n\nbash\n\nLinux\n\nbioinformatics\n\n\n\nFrom the archive: three small February 2011 posts on bash text one-liners, shell start-up files and aliases, and password-less SSH login, merged and corrected.\n\n\n\n\n\nFeb 1, 2011\n\n5 min\n\n\n\n\n\n\n\n\n\n\n\nAll that modernism…\n\n\n\narchive\n\narchitecture\n\nPoland\n\n\n\nFrom the archive: a small gallery of favourite Polish modernist buildings, before 1939 and after 1945.\n\n\n\n\n\nOct 29, 2010\n\n2 min\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html#what-i-do",
-    "href": "index.html#what-i-do",
-    "title": "Marcin Kierczak, PhD",
-    "section": "What I do",
-    "text": "What I do\n\n\n\n\nTraining\nCoordinating NBIS courses and workshops that build data-analysis skills across Swedish life science.\n\n\n\n\n\nIndustry outreach\nOpening NBIS expertise and training to companies and industry partners.\n\n\n\n\n\nData science\nSupporting research groups across Sweden with statistics, machine learning and reproducible data analysis, from experimental design to final results."
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "I’m happy to hear about training, industry collaboration, teaching and research projects."
   },
   {
-    "objectID": "index.html#expertise",
-    "href": "index.html#expertise",
-    "title": "Marcin Kierczak, PhD",
-    "section": "Expertise",
-    "text": "Expertise\n\n\n\n\nMachine learning & AI\nNeural networks and ensemble methods applied to genomic and clinical data.\n\n\n\n\n\nStatistical genomics\nAssociation studies, mixed models and rare-variant analysis in humans and animals.\n\n\n\n\n\nAncient & conservation genomics\nGenome erosion, demographic history and adaptation in endangered and extinct species.\n\n\n\n\n\nMetagenomics\nMetabarcoding and community profiling, from food quality control to ecology."
+    "objectID": "contact.html#elsewhere",
+    "href": "contact.html#elsewhere",
+    "title": "Contact",
+    "section": "Elsewhere",
+    "text": "Elsewhere\n\nLinkedIn\nORCID: 0000-0003-2629-5655\nGoogle Scholar\nNBIS, Uppsala, Sweden"
   },
   {
-    "objectID": "index.html#latest-from-the-blog",
-    "href": "index.html#latest-from-the-blog",
-    "title": "Marcin Kierczak, PhD",
-    "section": "Latest from the blog",
-    "text": "Latest from the blog\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n\n\n\n\nNo matching items\n\nAll posts →"
+    "objectID": "impressum.html",
+    "href": "impressum.html",
+    "title": "Impressum",
+    "section": "",
+    "text": "Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the Contact page."
   },
   {
-    "objectID": "index.html#affiliations",
-    "href": "index.html#affiliations",
-    "title": "Marcin Kierczak, PhD",
-    "section": "Affiliations",
-    "text": "Affiliations\nTraining and industry outreach coordinator and data scientist at NBIS, SciLifeLab, and associate professor in bioinformatics at the Department of Cell and Molecular Biology, Uppsala University. Since 2018, co-organiser of RaukR, an advanced R summer school in Visby (more)."
+    "objectID": "impressum.html#responsible-for-this-website",
+    "href": "impressum.html#responsible-for-this-website",
+    "title": "Impressum",
+    "section": "",
+    "text": "Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the Contact page."
   },
   {
-    "objectID": "index.html#beyond-the-lab",
-    "href": "index.html#beyond-the-lab",
-    "title": "Marcin Kierczak, PhD",
-    "section": "Beyond the lab",
-    "text": "Beyond the lab\nMicrocontrollers and electronics, 3D printing, software-defined radio, jazz, sailing and celestial navigation."
+    "objectID": "impressum.html#privacy",
+    "href": "impressum.html#privacy",
+    "title": "Impressum",
+    "section": "Privacy",
+    "text": "Privacy\nThis site does not use cookies, does not show advertising and does not include social-media widgets or embedded third-party content.\nWeb analytics. To learn roughly how many people visit and which pages they read, I use GoatCounter, a privacy-friendly analytics service, hosted at kiero.goatcounter.com. According to its documentation it sets no cookies and does not track you across sites or store your IP address. It records only aggregate page-view information such as the page visited, the referring site, browser and screen size, and the country. Because it needs no cookies and stores no personal profile, no consent banner is shown. Details are in GoatCounter’s privacy policy.\n\nTotal page views counted so far: …\n\n\nHosting. The site is served by GitHub Pages. As with any web host, GitHub may process technical data such as your IP address when you request a page; see the GitHub privacy statement.\nLocal storage. If you switch between light and dark mode, your choice is remembered in your browser’s local storage. It never leaves your device.\nContact form. There is none. If you email me, I use your message and address only to reply to you.\nYour rights. Under the GDPR you may ask what data about you is held and request its correction or deletion. Since the site stores no personal profiles, there is normally nothing to report, but you are welcome to get in touch."
+  },
+  {
+    "objectID": "impressum.html#fonts-and-technologies",
+    "href": "impressum.html#fonts-and-technologies",
+    "title": "Impressum",
+    "section": "Fonts and technologies",
+    "text": "Fonts and technologies\nEverything needed to display the pages, except the analytics script, is served from this site itself, with no calls to Google Fonts or a public CDN.\n\nFonts: Newsreader and Inter, both under the SIL Open Font License, served locally.\nSite generator: Quarto with the Bootswatch Cosmo theme (Bootstrap, MIT licence).\nMathematics: MathJax (Apache 2.0), served locally.\nPublication data: fetched from OpenAlex and Google Scholar when the site is built; your browser does not contact them.\nGitHub statistics: fetched from the public GitHub API when the site is built.\nCode in the Blog background: the faint code lines are real lines sampled from my own public, non-forked repositories at github.com/mkierczak (R, Python, PHP, Lua, JavaScript, CSS and shell). They are picked when the site is built; comments, vendored or generated files, and anything resembling credentials, addresses or personal paths are left out. Your browser reads them from this site, not from GitHub.\nBackground animations: drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion. Depending on the page they show formulas, code, DNA and protein sequences, a network, or a Manhattan plot. In the DNA background, the protein sequences are written in one-letter amino-acid codes, and some sequences contain a small private joke ;-)\n\nBuilt with human brain, Quarto and Claude.\n\nFormulas in the background\nSome pages show faint, slowly drifting formulas behind the text. They are decoration, but each one is real:\n\n\nShow the formulas and what they mean\n\n\n\n\n\n\n\n\nFormula\nWhat it is\n\n\n\n\n\\(\\mathrm{softmax}(z)_i = \\dfrac{e^{z_i}}{\\sum_j e^{z_j}}\\)\nSoftmax. Turns a vector of raw scores into probabilities that sum to 1; the last step of most classifiers.\n\n\n\\(P(\\theta \\mid D) = \\dfrac{P(D \\mid \\theta)\\,P(\\theta)}{P(D)}\\)\nBayes’ theorem. Updates belief about parameters \\(\\theta\\) after seeing data \\(D\\): posterior = likelihood × prior / evidence.\n\n\n\\(\\mathcal{N}(x \\mid \\mu, \\sigma^2) = (2\\pi\\sigma^2)^{-1/2}\\exp\\!\\left(-\\dfrac{(x-\\mu)^2}{2\\sigma^2}\\right)\\)\nNormal distribution. The bell curve with mean \\(\\mu\\) and variance \\(\\sigma^2\\).\n\n\n\\(L = -\\sum_i y_i \\log \\hat{y}_i\\)\nCross-entropy loss. Penalises a model for giving low probability \\(\\hat{y}_i\\) to the true class \\(y_i\\).\n\n\n\\(\\theta \\leftarrow \\theta - \\eta\\,\\nabla L(\\theta)\\)\nGradient descent. Moves parameters a small step \\(\\eta\\) downhill on the loss; how most models are trained.\n\n\n\\(p^2 + 2pq + q^2 = 1\\)\nHardy–Weinberg equilibrium. Genotype frequencies for two alleles with frequencies \\(p\\) and \\(q\\) in a randomly mating population.\n\n\n\\(\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y\\)\nOrdinary least squares. The linear-regression coefficients that minimise squared error.\n\n\n\\(\\mathrm{Attn}(Q,K,V) = \\mathrm{softmax}\\!\\left(\\dfrac{QK^\\top}{\\sqrt{d}}\\right)V\\)\nAttention. The core operation of transformer models: each position takes a weighted mix of values \\(V\\), weighted by how well queries \\(Q\\) match keys \\(K\\).\n\n\n\\(H(X) = -\\sum_x p(x)\\log p(x)\\)\nShannon entropy. The average uncertainty, or information content, of a random variable.\n\n\n\\(y = X\\beta + g + \\varepsilon\\)\nMixed model for genetics. A trait \\(y\\) explained by fixed effects \\(X\\beta\\), a random genetic effect \\(g\\), and residual noise \\(\\varepsilon\\).\n\n\n\\(\\mathrm{KL}(p \\,\\Vert\\, q) = \\sum_x p(x)\\log\\dfrac{p(x)}{q(x)}\\)\nKullback–Leibler divergence. How much a distribution \\(q\\) differs from a reference distribution \\(p\\).\n\n\n\\(e^{i\\pi} + 1 = 0\\)\nEuler’s identity. Ties together five fundamental constants (\\(e\\), \\(i\\), \\(\\pi\\), 1 and 0) through complex exponentials; a special case of \\(e^{i\\theta} = \\cos\\theta + i\\sin\\theta\\).\n\n\n\\(\\sigma(x) = \\dfrac{1}{1 + e^{-x}}\\)\nSigmoid. Squashes any number into the range 0 to 1; used for probabilities and neuron activations."
+  },
+  {
+    "objectID": "impressum.html#content-and-liability",
+    "href": "impressum.html#content-and-liability",
+    "title": "Impressum",
+    "section": "Content and liability",
+    "text": "Content and liability\nI take care with the content of these pages but cannot guarantee that it is complete or current. Links to external sites lead to content I do not control. Unless stated otherwise, text and images on this site are © Marcin Kierczak; please ask before reusing them."
+  },
+  {
+    "objectID": "posts/archive-bash-ssh-basics/index.html",
+    "href": "posts/archive-bash-ssh-basics/index.html",
+    "title": "Command-line basics: one-liners, aliases and SSH keys",
+    "section": "",
+    "text": "NoteFrom the archive\n\n\n\nThis merges three short posts from my old blog (Bash one-liners, text manipulation, Bash shells and aliases and Automatic SSH login, all February 2011). I have corrected a few mistakes in the originals and updated a few commands that have since changed. The corrections are listed at the end."
+  },
+  {
+    "objectID": "posts/archive-bash-ssh-basics/index.html#text-one-liners",
+    "href": "posts/archive-bash-ssh-basics/index.html#text-one-liners",
+    "title": "Command-line basics: one-liners, aliases and SSH keys",
+    "section": "Text one-liners",
+    "text": "Text one-liners\nBash is very powerful for text manipulation, and you can save a lot of time by learning a few short commands, the so-called one-liners.\nTo convert a string to upper case (or lower case), use tr:\necho \"lowercase\" | tr \"[:lower:]\" \"[:upper:]\"\n# LOWERCASE\nTwo commands that are indispensable for any bioinformatician when checking large files are head and tail, which show the first or last N lines of a file:\nhead myfile.txt            # the first 10 lines\nhead -n 5 myfile.txt       # only the first 5 lines\ntail -n 5 myfile.csv       # the last 5 lines\ntail -n +2 myfile.csv      # everything from line 2 on (skips the header)\nNow the really useful part: you can chain these commands with a pipe.\nhead -n 10 myfile.txt | tail -n 5   # lines 6 to 10\nQuite often you need only a part of a line. Say you have the line Accuracy.mean=0.98 and you want just 0.98:\nacc_mean=$(grep \"Accuracy.mean\" myfile.txt | awk -F= '{print $NF}')\nAnd when a line contains unwanted spaces, here is the remedy:\necho \"   I   a m    full of s p a ces  \" | tr -d \" \"\n# Iamfullofspaces"
+  },
+  {
+    "objectID": "posts/archive-bash-ssh-basics/index.html#start-up-files-and-aliases",
+    "href": "posts/archive-bash-ssh-basics/index.html#start-up-files-and-aliases",
+    "title": "Command-line basics: one-liners, aliases and SSH keys",
+    "section": "Start-up files and aliases",
+    "text": "Start-up files and aliases\nSome commands are long and cumbersome to type, yet you need them several times a day. Aliases are a good remedy.\nEach user has two important files in the home directory: .bash_profile and .bashrc. They are read by a login shell and a non-login shell, respectively. A login shell is the one you get when you log in; every shell you open after that is a non-login shell. Typically, commands you want to run only at login, such as displaying system or network information, go into .bash_profile, and everything else, including aliases, goes into .bashrc. To avoid repetition, end your .bash_profile by including .bashrc:\nif [ -f ~/.bashrc ]; then\n   source ~/.bashrc\nfi\nmacOS users: Terminal opens a login shell every time, so it reads .bash_profile (or .zprofile/.zshrc if you use zsh, which is the default today).\nBeginners’ note: file names that start with a dot, such as .bashrc, are hidden. You can see them with:\nls -al\nSay you often use ls -alh, which lists all files, including hidden ones, with their sizes in human-readable form. To have something shorter, add this line to the end of your .bashrc:\nalias ll='ls -alh'\nFrom now on, typing ll gives you all the information about your files. After editing the profile files, re-open the shell (or run source ~/.bashrc) to use the aliases.\nA useful maintenance alias on Debian or Ubuntu updates the whole system with one word:\nalias admin='sudo apt update && sudo apt -y full-upgrade && sudo apt -y autoclean'"
+  },
+  {
+    "objectID": "posts/archive-bash-ssh-basics/index.html#logging-in-over-ssh-without-a-password",
+    "href": "posts/archive-bash-ssh-basics/index.html#logging-in-over-ssh-without-a-password",
+    "title": "Command-line basics: one-liners, aliases and SSH keys",
+    "section": "Logging in over SSH without a password",
+    "text": "Logging in over SSH without a password\nIf you log into a server over SSH several times a day, typing the password every time gets annoying. It is easy to set up key-based login. Suppose you want to allow your workstation to connect to the server. First, generate a key pair on the workstation:\nssh-keygen -t ed25519\nand answer the questions: where to save the key, and an optional passphrase (a passphrase is a good idea). The command prints a fingerprint and a small picture, the key’s randomart:\n\n\n\nThe randomart image of an SSH key\n\n\nThe image is a visual representation of the key’s fingerprint. It is meant to be easier for humans to compare and verify than a string of hexadecimal characters, such as ef:f2:5b:9c:…. They are fun, anyway.\nNow the public key has to be added to the list of trusted keys on the server. The simplest way is:\nssh-copy-id user@server\nThis creates ~/.ssh on the server if needed and appends your public key to ~/.ssh/authorized_keys. If ssh-copy-id is not available, the same can be done by hand:\nssh user@server mkdir -p .ssh\ncat ~/.ssh/id_ed25519.pub | ssh user@server 'cat &gt;&gt; .ssh/authorized_keys'\nYou should now be able to log in without typing the password. If it still asks, check the permissions on the server: ~/.ssh should be 700 and ~/.ssh/authorized_keys should be 600 (or at least not writable by others)."
+  },
+  {
+    "objectID": "posts/archive-bash-ssh-basics/index.html#corrections-to-the-original-posts",
+    "href": "posts/archive-bash-ssh-basics/index.html#corrections-to-the-original-posts",
+    "title": "Command-line basics: one-liners, aliases and SSH keys",
+    "section": "Corrections to the original posts",
+    "text": "Corrections to the original posts\n\ntail -n myfile.csv was missing the number; tail +2 is the obsolete form of tail -n +2.\nhead -n 10 … | tail -n 5 shows lines 6 to 10, not “5 to 10”.\nawk '{FS=\"=\"}…' sets the separator too late for the first line; -F= is the right way.\nThe ll alias was announced as ls -alh but defined as ls -al; it is now ls -alh.\nThe admin alias used aptitude; it now uses apt.\nThe SSH key type was RSA (ssh-keygen -t rsa); ed25519 is the usual choice today, and ssh-copy-id replaces the manual steps."
+  },
+  {
+    "objectID": "posts/archive-modernism-poland/index.html",
+    "href": "posts/archive-modernism-poland/index.html",
+    "title": "All that modernism…",
+    "section": "",
+    "text": "NoteFrom the archive\n\n\n\nFirst published on my old blog in October 2010; lightly edited for this site.\n\n\nI really like Modernism. When I was a student, I used to live in a house built in the 1930s, designed according to the principles of Modernism and Functionalism, and I loved it. Then, walking the streets of Barcelona, I suddenly realised why I like it so much: it felt like being a student again, walking home from a nice party!\nIn Poland, Modernism has two phases: before 1939 and after 1945. The Second World War and Socrealism right after 1945 sit between the two layers of this modernist waffle. Below is a selection of the most famous buildings, and some of my favourites. Click a picture to enlarge it.\nAll pictures come from Wikimedia Commons; the file names are those used there, where the author and licence of each image are listed.\n\n\n\n\n\n\nBielsko Biała - Żywiecka 23 St.\n\n\n\n\n\n\n\nBydgoszcz - Gdańska 27 St.\n\n\n\n\n\n\n\nCracow - The National Museum\n\n\n\n\n\n\n\n\n\nGdynia - EMPiK bookstore\n\n\n\n\n\n\n\nGdynia - former Polish Oceanic Lines building\n\n\n\n\n\n\n\nKatowice - Fine Arts Academy\n\n\n\n\n\n\n\n\n\nKatowice - Garrison Church\n\n\n\n\n\n\n\nKatowice - Mickiewicza 21 St.\n\n\n\n\n\n\n\nKatowice - Silesian Higher School of Management\n\n\n\n\n\n\n\n\n\nKatowice - Silesian Parliament\n\n\n\n\n\n\n\nKatowice - Silesian Parliament building\n\n\n\n\n\n\n\nKatowice - Silesian Parliament, Marble Room\n\n\n\n\n\n\n\n\n\nKatowice - Silesian Polytechnic University\n\n\n\n\n\n\n\nKatowice - The Corns\n\n\n\n\n\n\n\nKatowice - The Dish (or The UFO)\n\n\n\n\n\n\n\n\n\nKatowice - The Stars\n\n\n\n\n\n\n\nKatowice - The Stars\n\n\n\n\n\n\n\nKatowice - Warszawska 28 St.\n\n\n\n\n\n\n\n\n\nKatowice - a skyscraper\n\n\n\n\n\n\n\nKatowice - an example of upgraded modernism\n\n\n\n\n\n\n\nKatowice - building by the Market Square\n\n\n\n\n\n\n\n\n\nKielce - Cultural Centre\n\n\n\n\n\n\n\nMt Śnieżka - astronomical observatory\n\n\n\n\n\n\n\nPoznań - The “Okrąglak” (The Round Building)\n\n\n\n\n\n\n\n\n\nSosnowiec - City Hall\n\n\n\n\n\n\n\nSosnowiec - The Social Insurances Company building\n\n\n\n\n\n\n\nSosnowiec - Zwycięstwa St.\n\n\n\n\n\n\n\n\n\nToruń - University Library\n\n\n\n\n\n\n\nWarszawa - Parliament, interior detail - snake\n\n\n\n\n\n\n\nWarszawa - Służewiec horse-racing stadium\n\n\n\n\n\n\n\n\n\nWarszawa - The Brukalski’s Villa\n\n\n\n\n\n\n\nWarszawa - The National Museum\n\n\n\n\n\n\n\nWarszawa - The Parliament (Sejm)\n\n\n\n\n\n\n\n\n\nWarszawa - Victoria Hotel\n\n\n\n\n\n\n\nWarszawa - Wedel’s House\n\n\n\n\n\n\n\nZabrze - St Joseph Church\n\n\n\n\n\n\n\n\n\nZabrze - St. Joseph church, interior"
+  },
+  {
+    "objectID": "posts/archive-variance-controlling-genes/index.html",
+    "href": "posts/archive-variance-controlling-genes/index.html",
+    "title": "Variance-controlling genes",
+    "section": "",
+    "text": "NoteFrom the archive\n\n\n\nFirst published on my old blog in August 2012; lightly edited for this site.\n\n\nThe August 2012 issue of PLoS Genetics brought an interesting article by Xia Shen and colleagues from the Computational Genetics Section at the Swedish University of Agricultural Sciences. They show that polymorphisms and mutations can affect not only the mean of a trait but also its variance.\nAfter developing the necessary theory, the authors use an Arabidopsis thaliana dataset from Magnus Nordborg’s lab to pinpoint examples of such variance-controlling genes. It is clearly shown that the classical GWAS approach can completely miss genetic effects that influence trait variance. They propose an extended approach, called vGWAS, that helps discover variance-controlling genes.\nRead it: Shen X, Pettersson M, Rönnegård L, Carlborg Ö (2012). Inheritance beyond plain heritability: variance-controlling genes in Arabidopsis thaliana. PLoS Genetics 8(8): e1002839. doi:10.1371/journal.pgen.1002839"
   },
   {
     "objectID": "posts/karyoploter-23andme/index.html",
@@ -418,12 +495,5 @@
     "title": "Research",
     "section": "Open source on GitHub",
     "text": "Open source on GitHub"
-  },
-  {
-    "objectID": "cv.html#certifications-and-training",
-    "href": "cv.html#certifications-and-training",
-    "title": "Curriculum Vitae",
-    "section": "Certifications and training",
-    "text": "Certifications and training\n\n\n\n\n\nFitSM® Foundation\n\nIssued by APMG International, May 2026. Verify credential\n\n\n\n\n\n\n\n\nFrom Research to Business\n\nCourse by ESBRI, on commercialising research, 2015. Participant."
   }
 ]

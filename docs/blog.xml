@@ -3303,5 +3303,913 @@ font-style: inherit;">kable</span>(genes)</span></code></pre></div></div>
   <pubDate>Tue, 30 Jan 2018 23:00:00 GMT</pubDate>
   <media:content url="https://kierczak.net/posts/karyoploter-23andme/marker_density-1.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
+<item>
+  <title>Receiving ACARS messages with a software-defined radio on a Mac</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/archive-rtl-acars-osx/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>From the archive
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>First published on my old blog in September 2014 as <em>Compiling and installing rtl_acars on OS X 10.9 Mavericks</em>. These steps are for a 2014 system and are <strong>very likely out of date</strong>: the software, the build tools and macOS itself have all changed since. I keep the post for the fun of it.</p>
+</div>
+</div>
+<p>I struggled for a while, but in the end I managed to install <code>rtl_acars</code> on my Mac, and after some hours of waiting I received my first ACARS messages. ACARS is the short-message system that aircraft use to talk to ground stations. Now it is only a matter of building a better antenna. Here is my path to success.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Clone 9nut's version of rtl-sdr from GitHub</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> clone https://github.com/9nut/rtl-sdr</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add missing lines in Makefile.am</span></span>
+<span id="cb1-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rtl_acars_SOURCES</span> = rtl_acars.c</span>
+<span id="cb1-6"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rtl_acars_LDADD</span> = librtlsdr.la <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">LIBM</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># I had previously installed Homebrew to get the necessary libraries</span></span>
+<span id="cb1-9"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">brew</span> install libtool</span>
+<span id="cb1-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aclocal</span></span>
+<span id="cb1-11"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">glibtoolize</span></span>
+<span id="cb1-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">autoconf</span></span>
+<span id="cb1-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">automake</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--add-missing</span></span>
+<span id="cb1-14"></span>
+<span id="cb1-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Choose your own destination</span></span>
+<span id="cb1-16"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./configure</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--prefix</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>/Users/user/rtl/</span>
+<span id="cb1-17"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make</span></span>
+<span id="cb1-18"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make</span> install</span></code></pre></div></div>
+<p>And my first received ACARS message came from a United Airlines plane:</p>
+<pre><code>RX_IDX: 0
+ACARS mode: V, message label: H1
+Aircraft reg: .N14121, flight id: UA0069
+Block id: 55, msg. no: D02A
+Message content:-
+#DFBCL2N14121ESSAKEWR3008072336 222 -075-215 20028064524168000691CLMBB
+349 031887031259 961 963 899 904 906 903708702 8480 8512168616890310
+85065008080040</code></pre>
+
+
+
+ ]]></description>
+  <category>archive</category>
+  <category>SDR</category>
+  <category>radio</category>
+  <category>aviation</category>
+  <guid>https://kierczak.net/posts/archive-rtl-acars-osx/</guid>
+  <pubDate>Tue, 02 Sep 2014 22:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/archive-rtl-acars-osx/preview.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>Mapping between genome assemblies in R</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/archive-genome-assembly-mapping/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>From the archive
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>First published on my old blog in March 2014. I have kept the idea and the original <code>plyr</code> solution, and added a version with today’s <code>dplyr</code>.</p>
+</div>
+</div>
+<p>Genome arrays are designed against one particular version of a genome assembly. New assemblies are published, but the array stays the same, so you often need to map between the two. In my case, the task was to map between two assemblies of the canine genome, from canFam2 to CanFam3, for a SNP array. I had two <code>.map</code> files with genomic coordinates per marker, which look like this:</p>
+<pre><code>chrom name position
+1 BICF2G630707759 14548
+1 BICF2S2358127 68723
+1 BICF2P1173580 80040</code></pre>
+<p>I wanted to join them so that the marker names come from the canFam2 file, while the chromosome and position come from the matching marker in the canFam3 file.</p>
+<section id="the-pitfall-of-merge" class="level2">
+<h2 class="anchored" data-anchor-id="the-pitfall-of-merge">The pitfall of <code>merge()</code></h2>
+<p>The first thing that came to mind was <code>merge()</code>. The problem is that a marker that has no match in canFam3 is moved to the end of the result, which breaks the marker order. What we want instead is <code>NA</code> in both the chromosome and the position when the marker cannot be found in canFam3.</p>
+</section>
+<section id="the-solution-a-left-join" class="level2">
+<h2 class="anchored" data-anchor-id="the-solution-a-left-join">The solution: a left join</h2>
+<p>The R package <code>plyr</code> has exactly that, in its <code>join()</code> function:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">new.map <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join</span>(map, canFam3, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"marker"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"left"</span>)</span></code></pre></div></div>
+<p>Today the same thing is usually written with <code>dplyr</code>. Here it is with a tiny made-up example, so you can see that the order is preserved and the missing marker gets <code>NA</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3">canFam2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">marker =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2G630707759"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2S2358127"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2P1173580"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2X0000001"</span>),</span>
+<span id="cb3-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">chr2 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos2 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">14548</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">68723</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80040</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">90111</span>)</span>
+<span id="cb3-6">)</span>
+<span id="cb3-7">canFam3 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb3-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">marker =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2P1173580"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2G630707759"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BICF2S2358127"</span>),</span>
+<span id="cb3-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">chr3 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos3 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">81233</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15021</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">69300</span>)</span>
+<span id="cb3-10">)</span>
+<span id="cb3-11"></span>
+<span id="cb3-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(canFam2, canFam3, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"marker"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           marker chr2  pos2 chr3  pos3
+1 BICF2G630707759    1 14548    1 15021
+2   BICF2S2358127    1 68723    1 69300
+3   BICF2P1173580    1 80040    1 81233
+4   BICF2X0000001    1 90111   NA    NA</code></pre>
+</div>
+</div>
+<p>The unmatched marker <code>BICF2X0000001</code> stays in its place and gets <code>NA</code> for the new coordinates, which is what we wanted. In base R, <code>match()</code> does the same job: <code>canFam3$pos3[match(canFam2$marker, canFam3$marker)]</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>When marker names are not shared
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This trick works because the <em>same array markers</em> appear in both assemblies. To convert coordinates that have no shared identifiers, use a chain-file based lift-over instead, for example <code>liftOver()</code> in the Bioconductor package <code>rtracklayer</code>.</p>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>archive</category>
+  <category>R</category>
+  <category>genetics</category>
+  <category>dog</category>
+  <guid>https://kierczak.net/posts/archive-genome-assembly-mapping/</guid>
+  <pubDate>Thu, 06 Mar 2014 23:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/archive-genome-assembly-mapping/preview.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>Variance-controlling genes</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/archive-variance-controlling-genes/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>From the archive
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>First published on my old blog in August 2012; lightly edited for this site.</p>
+</div>
+</div>
+<p>The August 2012 issue of <em>PLoS Genetics</em> brought an interesting article by Xia Shen and colleagues from the Computational Genetics Section at the Swedish University of Agricultural Sciences. They show that polymorphisms and mutations can affect not only the <strong>mean</strong> of a trait but also its <strong>variance</strong>.</p>
+<p>After developing the necessary theory, the authors use an <em>Arabidopsis thaliana</em> dataset from Magnus Nordborg’s lab to pinpoint examples of such variance-controlling genes. It is clearly shown that the classical GWAS approach can completely miss genetic effects that influence trait variance. They propose an extended approach, called <strong>vGWAS</strong>, that helps discover variance-controlling genes.</p>
+<p>Read it: Shen X, Pettersson M, Rönnegård L, Carlborg Ö (2012). <em>Inheritance beyond plain heritability: variance-controlling genes in</em> Arabidopsis thaliana. PLoS Genetics 8(8): e1002839. <a href="https://doi.org/10.1371/journal.pgen.1002839">doi:10.1371/journal.pgen.1002839</a></p>
+
+
+
+ ]]></description>
+  <category>archive</category>
+  <category>genetics</category>
+  <category>GWAS</category>
+  <guid>https://kierczak.net/posts/archive-variance-controlling-genes/</guid>
+  <pubDate>Wed, 22 Aug 2012 22:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/archive-variance-controlling-genes/preview.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>Command-line basics: one-liners, aliases and SSH keys</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/archive-bash-ssh-basics/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>From the archive
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This merges three short posts from my old blog (<em>Bash one-liners, text manipulation</em>, <em>Bash shells and aliases</em> and <em>Automatic SSH login</em>, all February 2011). I have corrected a few mistakes in the originals and updated a few commands that have since changed. The corrections are listed at the end.</p>
+</div>
+</div>
+<section id="text-one-liners" class="level2">
+<h2 class="anchored" data-anchor-id="text-one-liners">Text one-liners</h2>
+<p>Bash is very powerful for text manipulation, and you can save a lot of time by learning a few short commands, the so-called one-liners.</p>
+<p>To convert a string to upper case (or lower case), use <code>tr</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lowercase"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tr</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"[:lower:]"</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"[:upper:]"</span></span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># LOWERCASE</span></span></code></pre></div></div>
+<p>Two commands that are indispensable for any bioinformatician when checking large files are <code>head</code> and <code>tail</code>, which show the first or last N lines of a file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span> myfile.txt            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the first 10 lines</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> 5 myfile.txt       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># only the first 5 lines</span></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tail</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> 5 myfile.csv       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the last 5 lines</span></span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tail</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> +2 myfile.csv      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># everything from line 2 on (skips the header)</span></span></code></pre></div></div>
+<p>Now the really useful part: you can chain these commands with a pipe.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> 10 myfile.txt <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tail</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> 5   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># lines 6 to 10</span></span></code></pre></div></div>
+<p>Quite often you need only a part of a line. Say you have the line <code>Accuracy.mean=0.98</code> and you want just <code>0.98</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">acc_mean</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">grep</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Accuracy.mean"</span> myfile.txt <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">awk</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-F</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'{print $NF}'</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div></div>
+<p>And when a line contains unwanted spaces, here is the remedy:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"   I   a m    full of s p a ces  "</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tr</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-d</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span></span>
+<span id="cb5-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Iamfullofspaces</span></span></code></pre></div></div>
+</section>
+<section id="start-up-files-and-aliases" class="level2">
+<h2 class="anchored" data-anchor-id="start-up-files-and-aliases">Start-up files and aliases</h2>
+<p>Some commands are long and cumbersome to type, yet you need them several times a day. <strong>Aliases</strong> are a good remedy.</p>
+<p>Each user has two important files in the home directory: <code>.bash_profile</code> and <code>.bashrc</code>. They are read by a <em>login shell</em> and a <em>non-login shell</em>, respectively. A login shell is the one you get when you log in; every shell you open after that is a non-login shell. Typically, commands you want to run only at login, such as displaying system or network information, go into <code>.bash_profile</code>, and everything else, including aliases, goes into <code>.bashrc</code>. To avoid repetition, end your <code>.bash_profile</code> by including <code>.bashrc</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">[</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-f</span> ~/.bashrc <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">]</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">then</span></span>
+<span id="cb6-2">   <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">source</span> ~/.bashrc</span>
+<span id="cb6-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">fi</span></span></code></pre></div></div>
+<p><strong>macOS users:</strong> Terminal opens a login shell every time, so it reads <code>.bash_profile</code> (or <code>.zprofile</code>/<code>.zshrc</code> if you use zsh, which is the default today).</p>
+<p><strong>Beginners’ note:</strong> file names that start with a dot, such as <code>.bashrc</code>, are hidden. You can see them with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ls</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-al</span></span></code></pre></div></div>
+<p>Say you often use <code>ls -alh</code>, which lists all files, including hidden ones, with their sizes in human-readable form. To have something shorter, add this line to the end of your <code>.bashrc</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">alias</span> ll=<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'ls -alh'</span></span></code></pre></div></div>
+<p>From now on, typing <code>ll</code> gives you all the information about your files. After editing the profile files, re-open the shell (or run <code>source ~/.bashrc</code>) to use the aliases.</p>
+<p>A useful maintenance alias on Debian or Ubuntu updates the whole system with one word:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">alias</span> admin=<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y autoclean'</span></span></code></pre></div></div>
+</section>
+<section id="logging-in-over-ssh-without-a-password" class="level2">
+<h2 class="anchored" data-anchor-id="logging-in-over-ssh-without-a-password">Logging in over SSH without a password</h2>
+<p>If you log into a server over SSH several times a day, typing the password every time gets annoying. It is easy to set up key-based login. Suppose you want to allow your <code>workstation</code> to connect to the <code>server</code>. First, generate a key pair on the workstation:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ssh-keygen</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-t</span> ed25519</span></code></pre></div></div>
+<p>and answer the questions: where to save the key, and an optional passphrase (a passphrase is a good idea). The command prints a fingerprint and a small picture, the key’s <em>randomart</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://kierczak.net/posts/archive-bash-ssh-basics/images/ssh-randomart.png" class="img-fluid figure-img" width="125"></p>
+<figcaption>The randomart image of an SSH key</figcaption>
+</figure>
+</div>
+<p>The image is a visual representation of the key’s fingerprint. It is meant to be easier for humans to compare and verify than a string of hexadecimal characters, such as <code>ef:f2:5b:9c:…</code>. They are fun, anyway.</p>
+<p>Now the public key has to be added to the list of trusted keys on the server. The simplest way is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">ssh-copy-id</span> user@server</span></code></pre></div></div>
+<p>This creates <code>~/.ssh</code> on the server if needed and appends your public key to <code>~/.ssh/authorized_keys</code>. If <code>ssh-copy-id</code> is not available, the same can be done by hand:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ssh</span> user@server mkdir <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> .ssh</span>
+<span id="cb12-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span> ~/.ssh/id_ed25519.pub <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ssh</span> user@server <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'cat &gt;&gt; .ssh/authorized_keys'</span></span></code></pre></div></div>
+<p>You should now be able to log in without typing the password. If it still asks, check the permissions on the server: <code>~/.ssh</code> should be <code>700</code> and <code>~/.ssh/authorized_keys</code> should be <code>600</code> (or at least not writable by others).</p>
+</section>
+<section id="corrections-to-the-original-posts" class="level2">
+<h2 class="anchored" data-anchor-id="corrections-to-the-original-posts">Corrections to the original posts</h2>
+<ul>
+<li><code>tail -n myfile.csv</code> was missing the number; <code>tail +2</code> is the obsolete form of <code>tail -n +2</code>.</li>
+<li><code>head -n 10 … | tail -n 5</code> shows lines <strong>6 to 10</strong>, not “5 to 10”.</li>
+<li><code>awk '{FS="="}…'</code> sets the separator too late for the first line; <code>-F=</code> is the right way.</li>
+<li>The <code>ll</code> alias was announced as <code>ls -alh</code> but defined as <code>ls -al</code>; it is now <code>ls -alh</code>.</li>
+<li>The <code>admin</code> alias used <code>aptitude</code>; it now uses <code>apt</code>.</li>
+<li>The SSH key type was RSA (<code>ssh-keygen -t rsa</code>); <code>ed25519</code> is the usual choice today, and <code>ssh-copy-id</code> replaces the manual steps.</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>archive</category>
+  <category>bash</category>
+  <category>Linux</category>
+  <category>bioinformatics</category>
+  <guid>https://kierczak.net/posts/archive-bash-ssh-basics/</guid>
+  <pubDate>Mon, 31 Jan 2011 23:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/archive-bash-ssh-basics/preview.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>All that modernism…</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/archive-modernism-poland/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>From the archive
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>First published on my old blog in October 2010; lightly edited for this site.</p>
+</div>
+</div>
+<p>I really like Modernism. When I was a student, I used to live in a house built in the 1930s, designed according to the principles of Modernism and Functionalism, and I loved it. Then, walking the streets of Barcelona, I suddenly realised why I like it so much: it felt like being a student again, walking home from a nice party!</p>
+<p>In Poland, Modernism has two phases: before 1939 and after 1945. The Second World War and Socrealism right after 1945 sit between the two layers of this modernist waffle. Below is a selection of the most famous buildings, and some of my favourites. Click a picture to enlarge it.</p>
+<p>All pictures come from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>; the file names are those used there, where the author and licence of each image are listed.</p>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Bielsko-Biala_Zywiecka_23.jpg" class="lightbox" data-gallery="poland-modernism" title="Bielsko Biała - Żywiecka 23 St."><img src="https://kierczak.net/posts/archive-modernism-poland/images/Bielsko-Biala_Zywiecka_23.jpg" class="img-fluid figure-img" alt="Bielsko Biała - Żywiecka 23 St."></a></p>
+<figcaption>Bielsko Biała - Żywiecka 23 St.</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Bydgoszcz_Gdanska_27.jpg" class="lightbox" data-gallery="poland-modernism" title="Bydgoszcz - Gdańska 27 St."><img src="https://kierczak.net/posts/archive-modernism-poland/images/Bydgoszcz_Gdanska_27.jpg" class="img-fluid figure-img" alt="Bydgoszcz - Gdańska 27 St."></a></p>
+<figcaption>Bydgoszcz - Gdańska 27 St.</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Krakow_Muzeum_Narodowe_Krakow.jpg" class="lightbox" data-gallery="poland-modernism" title="Cracow - The National Museum"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Krakow_Muzeum_Narodowe_Krakow.jpg" class="img-fluid figure-img" alt="Cracow - The National Museum"></a></p>
+<figcaption>Cracow - The National Museum</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Gdynia_Empik.jpg" class="lightbox" data-gallery="poland-modernism" title="Gdynia - EMPiK bookstore"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Gdynia_Empik.jpg" class="img-fluid figure-img" alt="Gdynia - EMPiK bookstore"></a></p>
+<figcaption>Gdynia - EMPiK bookstore</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Gdynia_Office_building.jpg" class="lightbox" data-gallery="poland-modernism" title="Gdynia - former Polish Oceanic Lines building"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Gdynia_Office_building.jpg" class="img-fluid figure-img" alt="Gdynia - former Polish Oceanic Lines building"></a></p>
+<figcaption>Gdynia - former Polish Oceanic Lines building</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_ASP.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Fine Arts Academy"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_ASP.jpg" class="img-fluid figure-img" alt="Katowice - Fine Arts Academy"></a></p>
+<figcaption>Katowice - Fine Arts Academy</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Kosciol_garnizonowy.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Garrison Church"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Kosciol_garnizonowy.jpg" class="img-fluid figure-img" alt="Katowice - Garrison Church"></a></p>
+<figcaption>Katowice - Garrison Church</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Mickiewicza_21.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Mickiewicza 21 St."><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Mickiewicza_21.jpg" class="img-fluid figure-img" alt="Katowice - Mickiewicza 21 St."></a></p>
+<figcaption>Katowice - Mickiewicza 21 St.</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Slaska_Wyzsza_Szkola_Zarzadzania.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Silesian Higher School of Management"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Slaska_Wyzsza_Szkola_Zarzadzania.jpg" class="img-fluid figure-img" alt="Katowice - Silesian Higher School of Management"></a></p>
+<figcaption>Katowice - Silesian Higher School of Management</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Sejm_Slaski.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Silesian Parliament"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Sejm_Slaski.jpg" class="img-fluid figure-img" alt="Katowice - Silesian Parliament"></a></p>
+<figcaption>Katowice - Silesian Parliament</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice__Gmach_Sejmu_Slaskiego.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Silesian Parliament building"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice__Gmach_Sejmu_Slaskiego.jpg" class="img-fluid figure-img" alt="Katowice - Silesian Parliament building"></a></p>
+<figcaption>Katowice - Silesian Parliament building</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Sejm_Slaski_Sala_Marmurowa.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Silesian Parliament, Marble Room"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Sejm_Slaski_Sala_Marmurowa.jpg" class="img-fluid figure-img" alt="Katowice - Silesian Parliament, Marble Room"></a></p>
+<figcaption>Katowice - Silesian Parliament, Marble Room</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Gmach_Politechniki_Slaskiej.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Silesian Polytechnic University"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Gmach_Politechniki_Slaskiej.jpg" class="img-fluid figure-img" alt="Katowice - Silesian Polytechnic University"></a></p>
+<figcaption>Katowice - Silesian Polytechnic University</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Kukurydze.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - The Corns"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Kukurydze.jpg" class="img-fluid figure-img" alt="Katowice - The Corns"></a></p>
+<figcaption>Katowice - The Corns</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Spodek.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - The Dish (or The UFO)"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Spodek.jpg" class="img-fluid figure-img" alt="Katowice - The Dish (or The UFO)"></a></p>
+<figcaption>Katowice - The Dish (or The UFO)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Gwiazdy.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - The Stars"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Gwiazdy.jpg" class="img-fluid figure-img" alt="Katowice - The Stars"></a></p>
+<figcaption>Katowice - The Stars</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Osiedle_Gwiazdy.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - The Stars"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Osiedle_Gwiazdy.jpg" class="img-fluid figure-img" alt="Katowice - The Stars"></a></p>
+<figcaption>Katowice - The Stars</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_ul_Warszawska_28.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - Warszawska 28 St."><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_ul_Warszawska_28.jpg" class="img-fluid figure-img" alt="Katowice - Warszawska 28 St."></a></p>
+<figcaption>Katowice - Warszawska 28 St.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Drapacz_Chmur.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - a skyscraper"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Drapacz_Chmur.jpg" class="img-fluid figure-img" alt="Katowice - a skyscraper"></a></p>
+<figcaption>Katowice - a skyscraper</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_Modernizm.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - an example of upgraded modernism"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Modernizm.jpg" class="img-fluid figure-img" alt="Katowice - an example of upgraded modernism"></a></p>
+<figcaption>Katowice - an example of upgraded modernism</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Katowice_BSK-ING_przy_Rynku.jpg" class="lightbox" data-gallery="poland-modernism" title="Katowice - building by the Market Square"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_BSK-ING_przy_Rynku.jpg" class="img-fluid figure-img" alt="Katowice - building by the Market Square"></a></p>
+<figcaption>Katowice - building by the Market Square</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Kielce_Centrum_Kultury.jpg" class="lightbox" data-gallery="poland-modernism" title="Kielce - Cultural Centre"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Kielce_Centrum_Kultury.jpg" class="img-fluid figure-img" alt="Kielce - Cultural Centre"></a></p>
+<figcaption>Kielce - Cultural Centre</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Schronisko_Sniezka.jpg" class="lightbox" data-gallery="poland-modernism" title="Mt Śnieżka - astronomical observatory"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Schronisko_Sniezka.jpg" class="img-fluid figure-img" alt="Mt Śnieżka - astronomical observatory"></a></p>
+<figcaption>Mt Śnieżka - astronomical observatory</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Poznan_Okraglak.jpg" class="lightbox" data-gallery="poland-modernism" title="Poznań - The “Okrąglak” (The Round Building)"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Poznan_Okraglak.jpg" class="img-fluid figure-img" alt="Poznań - The “Okrąglak” (The Round Building)"></a></p>
+<figcaption>Poznań - The “Okrąglak” (The Round Building)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Sosnowiec_Prezydium1.jpg" class="lightbox" data-gallery="poland-modernism" title="Sosnowiec - City Hall"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Sosnowiec_Prezydium1.jpg" class="img-fluid figure-img" alt="Sosnowiec - City Hall"></a></p>
+<figcaption>Sosnowiec - City Hall</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Sosnowiec_ZUS.jpg" class="lightbox" data-gallery="poland-modernism" title="Sosnowiec - The Social Insurances Company building"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Sosnowiec_ZUS.jpg" class="img-fluid figure-img" alt="Sosnowiec - The Social Insurances Company building"></a></p>
+<figcaption>Sosnowiec - The Social Insurances Company building</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Sosnowiec_Zwyciestwa.jpg" class="lightbox" data-gallery="poland-modernism" title="Sosnowiec - Zwycięstwa St."><img src="https://kierczak.net/posts/archive-modernism-poland/images/Sosnowiec_Zwyciestwa.jpg" class="img-fluid figure-img" alt="Sosnowiec - Zwycięstwa St."></a></p>
+<figcaption>Sosnowiec - Zwycięstwa St.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Torun_UMK_biblioteka.jpg" class="lightbox" data-gallery="poland-modernism" title="Toruń - University Library"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Torun_UMK_biblioteka.jpg" class="img-fluid figure-img" alt="Toruń - University Library"></a></p>
+<figcaption>Toruń - University Library</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Sejm_detale_glowa_weza.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - Parliament, interior detail - snake"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Sejm_detale_glowa_weza.jpg" class="img-fluid figure-img" alt="Warszawa - Parliament, interior detail - snake"></a></p>
+<figcaption>Warszawa - Parliament, interior detail - snake</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Sluzewiec.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - Służewiec horse-racing stadium"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Sluzewiec.jpg" class="img-fluid figure-img" alt="Warszawa - Służewiec horse-racing stadium"></a></p>
+<figcaption>Warszawa - Służewiec horse-racing stadium</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Dom_Brukalskich_1927.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - The Brukalski’s Villa"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Dom_Brukalskich_1927.jpg" class="img-fluid figure-img" alt="Warszawa - The Brukalski’s Villa"></a></p>
+<figcaption>Warszawa - The Brukalski’s Villa</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Muzeum_Narodowe.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - The National Museum"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Muzeum_Narodowe.jpg" class="img-fluid figure-img" alt="Warszawa - The National Museum"></a></p>
+<figcaption>Warszawa - The National Museum</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Sejm_RP_front.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - The Parliament (Sejm)"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Sejm_RP_front.jpg" class="img-fluid figure-img" alt="Warszawa - The Parliament (Sejm)"></a></p>
+<figcaption>Warszawa - The Parliament (Sejm)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Hotel_Victoria.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - Victoria Hotel"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Hotel_Victoria.jpg" class="img-fluid figure-img" alt="Warszawa - Victoria Hotel"></a></p>
+<figcaption>Warszawa - Victoria Hotel</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Warszawa_Dom_Wedla.jpg" class="lightbox" data-gallery="poland-modernism" title="Warszawa - Wedel’s House"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Warszawa_Dom_Wedla.jpg" class="img-fluid figure-img" alt="Warszawa - Wedel’s House"></a></p>
+<figcaption>Warszawa - Wedel’s House</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Zabrze_St._Josephs_Church_facade.jpg" class="lightbox" data-gallery="poland-modernism" title="Zabrze - St Joseph Church"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Zabrze_St._Josephs_Church_facade.jpg" class="img-fluid figure-img" alt="Zabrze - St Joseph Church"></a></p>
+<figcaption>Zabrze - St Joseph Church</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Zabrze_St_Josephs_Church_interior.jpg" class="lightbox" data-gallery="poland-modernism" title="Zabrze - St.&nbsp;Joseph church, interior"><img src="https://kierczak.net/posts/archive-modernism-poland/images/Zabrze_St_Josephs_Church_interior.jpg" class="img-fluid figure-img" alt="Zabrze - St.&nbsp;Joseph church, interior"></a></p>
+<figcaption>Zabrze - St.&nbsp;Joseph church, interior</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>archive</category>
+  <category>architecture</category>
+  <category>Poland</category>
+  <guid>https://kierczak.net/posts/archive-modernism-poland/</guid>
+  <pubDate>Thu, 28 Oct 2010 22:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/archive-modernism-poland/images/Katowice_Spodek.jpg" medium="image" type="image/jpeg"/>
+</item>
 </channel>
 </rss>

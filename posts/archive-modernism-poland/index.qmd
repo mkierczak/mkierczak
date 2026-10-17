@@ -1,0 +1,97 @@
+---
+title: "All that modernism…"
+description: "From the archive: a small gallery of favourite Polish modernist buildings, before 1939 and after 1945."
+author: "Marcin Kierczak"
+date: 2010-10-29
+image: images/Katowice_Spodek.jpg
+categories: [archive, architecture, Poland]
+lightbox: true
+---
+
+::: {.callout-note}
+## From the archive
+First published on my old blog in October 2010; lightly edited for this site.
+:::
+
+I really like Modernism. When I was a student, I used to live in a house built in the 1930s, designed according to the principles of Modernism and Functionalism, and I loved it. Then, walking the streets of Barcelona, I suddenly realised why I like it so much: it felt like being a student again, walking home from a nice party!
+
+In Poland, Modernism has two phases: before 1939 and after 1945. The Second World War and Socrealism right after 1945 sit between the two layers of this modernist waffle. Below is a selection of the most famous buildings, and some of my favourites. Click a picture to enlarge it.
+
+All pictures come from [Wikimedia Commons](https://commons.wikimedia.org/); the file names are those used there, where the author and licence of each image are listed.
+
+::: {layout-ncol=3}
+![Bielsko Biała - Żywiecka 23 St.](images/Bielsko-Biala_Zywiecka_23.jpg){group="poland-modernism"}
+
+![Bydgoszcz - Gdańska 27 St.](images/Bydgoszcz_Gdanska_27.jpg){group="poland-modernism"}
+
+![Cracow - The National Museum](images/Krakow_Muzeum_Narodowe_Krakow.jpg){group="poland-modernism"}
+
+![Gdynia - EMPiK bookstore](images/Gdynia_Empik.jpg){group="poland-modernism"}
+
+![Gdynia - former Polish Oceanic Lines building](images/Gdynia_Office_building.jpg){group="poland-modernism"}
+
+![Katowice - Fine Arts Academy](images/Katowice_ASP.jpg){group="poland-modernism"}
+
+![Katowice - Garrison Church](images/Katowice_Kosciol_garnizonowy.jpg){group="poland-modernism"}
+
+![Katowice - Mickiewicza 21 St.](images/Katowice_Mickiewicza_21.jpg){group="poland-modernism"}
+
+![Katowice - Silesian Higher School of Management](images/Katowice_Slaska_Wyzsza_Szkola_Zarzadzania.jpg){group="poland-modernism"}
+
+![Katowice - Silesian Parliament](images/Katowice_Sejm_Slaski.jpg){group="poland-modernism"}
+
+![Katowice - Silesian Parliament building](images/Katowice__Gmach_Sejmu_Slaskiego.jpg){group="poland-modernism"}
+
+![Katowice - Silesian Parliament, Marble Room](images/Katowice_Sejm_Slaski_Sala_Marmurowa.jpg){group="poland-modernism"}
+
+![Katowice - Silesian Polytechnic University](images/Katowice_Gmach_Politechniki_Slaskiej.jpg){group="poland-modernism"}
+
+![Katowice - The Corns](images/Katowice_Kukurydze.jpg){group="poland-modernism"}
+
+![Katowice - The Dish (or The UFO)](images/Katowice_Spodek.jpg){group="poland-modernism"}
+
+![Katowice - The Stars](images/Katowice_Gwiazdy.jpg){group="poland-modernism"}
+
+![Katowice - The Stars](images/Katowice_Osiedle_Gwiazdy.jpg){group="poland-modernism"}
+
+![Katowice - Warszawska 28 St.](images/Katowice_ul_Warszawska_28.jpg){group="poland-modernism"}
+
+![Katowice - a skyscraper](images/Katowice_Drapacz_Chmur.jpg){group="poland-modernism"}
+
+![Katowice - an example of upgraded modernism](images/Katowice_Modernizm.jpg){group="poland-modernism"}
+
+![Katowice - building by the Market Square](images/Katowice_BSK-ING_przy_Rynku.jpg){group="poland-modernism"}
+
+![Kielce - Cultural Centre](images/Kielce_Centrum_Kultury.jpg){group="poland-modernism"}
+
+![Mt Śnieżka - astronomical observatory](images/Schronisko_Sniezka.jpg){group="poland-modernism"}
+
+![Poznań - The "Okrąglak" (The Round Building)](images/Poznan_Okraglak.jpg){group="poland-modernism"}
+
+![Sosnowiec - City Hall](images/Sosnowiec_Prezydium1.jpg){group="poland-modernism"}
+
+![Sosnowiec - The Social Insurances Company building](images/Sosnowiec_ZUS.jpg){group="poland-modernism"}
+
+![Sosnowiec - Zwycięstwa St.](images/Sosnowiec_Zwyciestwa.jpg){group="poland-modernism"}
+
+![Toruń - University Library](images/Torun_UMK_biblioteka.jpg){group="poland-modernism"}
+
+![Warszawa - Parliament, interior detail - snake](images/Warszawa_Sejm_detale_glowa_weza.jpg){group="poland-modernism"}
+
+![Warszawa - Służewiec horse-racing stadium](images/Warszawa_Sluzewiec.jpg){group="poland-modernism"}
+
+![Warszawa - The Brukalski's Villa](images/Warszawa_Dom_Brukalskich_1927.jpg){group="poland-modernism"}
+
+![Warszawa - The National Museum](images/Warszawa_Muzeum_Narodowe.jpg){group="poland-modernism"}
+
+![Warszawa - The Parliament (Sejm)](images/Warszawa_Sejm_RP_front.jpg){group="poland-modernism"}
+
+![Warszawa - Victoria Hotel](images/Warszawa_Hotel_Victoria.jpg){group="poland-modernism"}
+
+![Warszawa - Wedel's House](images/Warszawa_Dom_Wedla.jpg){group="poland-modernism"}
+
+![Zabrze - St Joseph Church](images/Zabrze_St._Josephs_Church_facade.jpg){group="poland-modernism"}
+
+![Zabrze - St. Joseph church, interior](images/Zabrze_St_Josephs_Church_interior.jpg){group="poland-modernism"}
+
+:::

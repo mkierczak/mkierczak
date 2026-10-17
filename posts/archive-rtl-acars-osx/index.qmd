@@ -1,0 +1,49 @@
+---
+title: "Receiving ACARS messages with a software-defined radio on a Mac"
+description: "From the archive: how I compiled rtl_acars on OS X 10.9 Mavericks and received my first aircraft messages with an RTL-SDR dongle."
+author: "Marcin Kierczak"
+date: 2014-09-03
+image: preview.png
+categories: [archive, SDR, radio, aviation]
+---
+
+::: {.callout-note}
+## From the archive
+First published on my old blog in September 2014 as *Compiling and installing rtl_acars on OS X 10.9 Mavericks*. These steps are for a 2014 system and are **very likely out of date**: the software, the build tools and macOS itself have all changed since. I keep the post for the fun of it.
+:::
+
+I struggled for a while, but in the end I managed to install `rtl_acars` on my Mac, and after some hours of waiting I received my first ACARS messages. ACARS is the short-message system that aircraft use to talk to ground stations. Now it is only a matter of building a better antenna. Here is my path to success.
+
+```bash
+# Clone 9nut's version of rtl-sdr from GitHub
+git clone https://github.com/9nut/rtl-sdr
+
+# Add missing lines in Makefile.am
+rtl_acars_SOURCES = rtl_acars.c
+rtl_acars_LDADD = librtlsdr.la $(LIBM)
+
+# I had previously installed Homebrew to get the necessary libraries
+brew install libtool
+aclocal
+glibtoolize
+autoconf
+automake --add-missing
+
+# Choose your own destination
+./configure --prefix=/Users/user/rtl/
+make
+make install
+```
+
+And my first received ACARS message came from a United Airlines plane:
+
+```
+RX_IDX: 0
+ACARS mode: V, message label: H1
+Aircraft reg: .N14121, flight id: UA0069
+Block id: 55, msg. no: D02A
+Message content:-
+#DFBCL2N14121ESSAKEWR3008072336 222 -075-215 20028064524168000691CLMBB
+349 031887031259 961 963 899 904 906 903708702 8480 8512168616890310
+85065008080040
+```

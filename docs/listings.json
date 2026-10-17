@@ -1,20 +1,30 @@
 [
   {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/stats-1-location-spread/index.html",
-      "/posts/plague-sim/index.html",
-      "/posts/glamorous-ggplot2/index.html",
-      "/posts/karyoploter-23andme/index.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/posts/stats-1-location-spread/index.html",
       "/posts/plague-sim/index.html",
       "/posts/glamorous-ggplot2/index.html",
-      "/posts/karyoploter-23andme/index.html"
+      "/posts/karyoploter-23andme/index.html",
+      "/posts/archive-rtl-acars-osx/index.html",
+      "/posts/archive-genome-assembly-mapping/index.html",
+      "/posts/archive-variance-controlling-genes/index.html",
+      "/posts/archive-bash-ssh-basics/index.html",
+      "/posts/archive-modernism-poland/index.html"
+    ]
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/stats-1-location-spread/index.html",
+      "/posts/plague-sim/index.html",
+      "/posts/glamorous-ggplot2/index.html",
+      "/posts/karyoploter-23andme/index.html",
+      "/posts/archive-rtl-acars-osx/index.html",
+      "/posts/archive-genome-assembly-mapping/index.html",
+      "/posts/archive-variance-controlling-genes/index.html",
+      "/posts/archive-bash-ssh-basics/index.html",
+      "/posts/archive-modernism-poland/index.html"
     ]
   }
 ]
