@@ -46,6 +46,31 @@ Everything needed to display the pages, except the analytics script, is served f
 
 Built with human brain, Quarto and Claude.
 
+### Formulas in the background
+
+Some pages show faint, slowly drifting formulas behind the text. They are decoration, but each one is real:
+
+<details>
+<summary>Show the formulas and what they mean</summary>
+
+| Formula | What it is |
+|:--|:--|
+| $\mathrm{softmax}(z)_i = \dfrac{e^{z_i}}{\sum_j e^{z_j}}$ | **Softmax.** Turns a vector of raw scores into probabilities that sum to 1; the last step of most classifiers. |
+| $P(\theta \mid D) = \dfrac{P(D \mid \theta)\,P(\theta)}{P(D)}$ | **Bayes' theorem.** Updates belief about parameters $\theta$ after seeing data $D$: posterior = likelihood × prior / evidence. |
+| $\mathcal{N}(x \mid \mu, \sigma^2) = (2\pi\sigma^2)^{-1/2}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)$ | **Normal distribution.** The bell curve with mean $\mu$ and variance $\sigma^2$. |
+| $L = -\sum_i y_i \log \hat{y}_i$ | **Cross-entropy loss.** Penalises a model for giving low probability $\hat{y}_i$ to the true class $y_i$. |
+| $\theta \leftarrow \theta - \eta\,\nabla L(\theta)$ | **Gradient descent.** Moves parameters a small step $\eta$ downhill on the loss; how most models are trained. |
+| $p^2 + 2pq + q^2 = 1$ | **Hardy–Weinberg equilibrium.** Genotype frequencies for two alleles with frequencies $p$ and $q$ in a randomly mating population. |
+| $\hat{\beta} = (X^\top X)^{-1} X^\top y$ | **Ordinary least squares.** The linear-regression coefficients that minimise squared error. |
+| $\mathrm{Attn}(Q,K,V) = \mathrm{softmax}\!\left(\dfrac{QK^\top}{\sqrt{d}}\right)V$ | **Attention.** The core operation of transformer models: each position takes a weighted mix of values $V$, weighted by how well queries $Q$ match keys $K$. |
+| $H(X) = -\sum_x p(x)\log p(x)$ | **Shannon entropy.** The average uncertainty, or information content, of a random variable. |
+| $y = X\beta + g + \varepsilon$ | **Mixed model for genetics.** A trait $y$ explained by fixed effects $X\beta$, a random genetic effect $g$, and residual noise $\varepsilon$. |
+| $\mathrm{KL}(p \,\Vert\, q) = \sum_x p(x)\log\dfrac{p(x)}{q(x)}$ | **Kullback–Leibler divergence.** How much a distribution $q$ differs from a reference distribution $p$. |
+| $e^{i\pi} + 1 = 0$ | **Euler's identity.** Ties together five fundamental constants ($e$, $i$, $\pi$, 1 and 0) through complex exponentials; a special case of $e^{i\theta} = \cos\theta + i\sin\theta$. |
+| $\sigma(x) = \dfrac{1}{1 + e^{-x}}$ | **Sigmoid.** Squashes any number into the range 0 to 1; used for probabilities and neuron activations. |
+
+</details>
+
 ## Content and liability
 
 I take care with the content of these pages but cannot guarantee that it is complete or current. Links to external sites lead to content I do not control. Unless stated otherwise, text and images on this site are © Marcin Kierczak; please ask before reusing them.

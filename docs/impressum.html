@@ -63,6 +63,34 @@ ul.task-list li input[type="checkbox"] {
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Marcin Kierczak", "url": "https://kierczak.net/", "image": "https://kierczak.net/assets/marcin.jpg", "jobTitle": "Training and Industry Outreach Coordinator and Data Scientist; Associate Professor of Bioinformatics", "worksFor": {"@type": "Organization", "name": "National Bioinformatics Infrastructure Sweden (NBIS), SciLifeLab", "url": "https://nbis.se"}, "affiliation": {"@type": "CollegeOrUniversity", "name": "Uppsala University", "url": "https://www.uu.se"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Uppsala University"}, "knowsAbout": ["Bioinformatics", "Statistical genomics", "Machine learning", "Ancient DNA", "Metagenomics", "R programming"], "sameAs": ["https://orcid.org/0000-0003-2629-5655", "https://www.linkedin.com/in/marcinkierczak", "https://scholar.google.com/citations?user=ebOBIL4AAAAJ"]}</script>
 <script data-goatcounter="https://kiero.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
 
+  <script defer="" src="./assets/mathjax/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Impressum – Marcin Kierczak">
@@ -355,6 +383,81 @@ Total page views counted so far: <strong id="visit-count-n">…</strong>
 <li><strong>Background animations:</strong> drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion.</li>
 </ul>
 <p>Built with human brain, Quarto and Claude.</p>
+<section id="formulas-in-the-background" class="level3">
+<h3 class="anchored" data-anchor-id="formulas-in-the-background">Formulas in the background</h3>
+<p>Some pages show faint, slowly drifting formulas behind the text. They are decoration, but each one is real:</p>
+<details>
+<summary>
+Show the formulas and what they mean
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Formula</th>
+<th style="text-align: left;">What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathrm{softmax}(z)_i = \dfrac{e^{z_i}}{\sum_j e^{z_j}}\)</span></td>
+<td style="text-align: left;"><strong>Softmax.</strong> Turns a vector of raw scores into probabilities that sum to 1; the last step of most classifiers.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P(\theta \mid D) = \dfrac{P(D \mid \theta)\,P(\theta)}{P(D)}\)</span></td>
+<td style="text-align: left;"><strong>Bayes’ theorem.</strong> Updates belief about parameters <span class="math inline">\(\theta\)</span> after seeing data <span class="math inline">\(D\)</span>: posterior = likelihood × prior / evidence.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathcal{N}(x \mid \mu, \sigma^2) = (2\pi\sigma^2)^{-1/2}\exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right)\)</span></td>
+<td style="text-align: left;"><strong>Normal distribution.</strong> The bell curve with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(L = -\sum_i y_i \log \hat{y}_i\)</span></td>
+<td style="text-align: left;"><strong>Cross-entropy loss.</strong> Penalises a model for giving low probability <span class="math inline">\(\hat{y}_i\)</span> to the true class <span class="math inline">\(y_i\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\theta \leftarrow \theta - \eta\,\nabla L(\theta)\)</span></td>
+<td style="text-align: left;"><strong>Gradient descent.</strong> Moves parameters a small step <span class="math inline">\(\eta\)</span> downhill on the loss; how most models are trained.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(p^2 + 2pq + q^2 = 1\)</span></td>
+<td style="text-align: left;"><strong>Hardy–Weinberg equilibrium.</strong> Genotype frequencies for two alleles with frequencies <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> in a randomly mating population.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\hat{\beta} = (X^\top X)^{-1} X^\top y\)</span></td>
+<td style="text-align: left;"><strong>Ordinary least squares.</strong> The linear-regression coefficients that minimise squared error.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\mathrm{Attn}(Q,K,V) = \mathrm{softmax}\!\left(\dfrac{QK^\top}{\sqrt{d}}\right)V\)</span></td>
+<td style="text-align: left;"><strong>Attention.</strong> The core operation of transformer models: each position takes a weighted mix of values <span class="math inline">\(V\)</span>, weighted by how well queries <span class="math inline">\(Q\)</span> match keys <span class="math inline">\(K\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H(X) = -\sum_x p(x)\log p(x)\)</span></td>
+<td style="text-align: left;"><strong>Shannon entropy.</strong> The average uncertainty, or information content, of a random variable.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = X\beta + g + \varepsilon\)</span></td>
+<td style="text-align: left;"><strong>Mixed model for genetics.</strong> A trait <span class="math inline">\(y\)</span> explained by fixed effects <span class="math inline">\(X\beta\)</span>, a random genetic effect <span class="math inline">\(g\)</span>, and residual noise <span class="math inline">\(\varepsilon\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathrm{KL}(p \,\Vert\, q) = \sum_x p(x)\log\dfrac{p(x)}{q(x)}\)</span></td>
+<td style="text-align: left;"><strong>Kullback–Leibler divergence.</strong> How much a distribution <span class="math inline">\(q\)</span> differs from a reference distribution <span class="math inline">\(p\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(e^{i\pi} + 1 = 0\)</span></td>
+<td style="text-align: left;"><strong>Euler’s identity.</strong> Ties together five fundamental constants (<span class="math inline">\(e\)</span>, <span class="math inline">\(i\)</span>, <span class="math inline">\(\pi\)</span>, 1 and 0) through complex exponentials; a special case of <span class="math inline">\(e^{i\theta} = \cos\theta + i\sin\theta\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\sigma(x) = \dfrac{1}{1 + e^{-x}}\)</span></td>
+<td style="text-align: left;"><strong>Sigmoid.</strong> Squashes any number into the range 0 to 1; used for probabilities and neuron activations.</td>
+</tr>
+</tbody>
+</table>
+</details>
+</section>
 </section>
 <section id="content-and-liability" class="level2">
 <h2 class="anchored" data-anchor-id="content-and-liability">Content and liability</h2>

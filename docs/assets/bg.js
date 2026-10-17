@@ -51,7 +51,8 @@
     "H(X) = −Σ p(x) log p(x)",
     "y = Xβ + g + ε",
     "KL(p ‖ q) = Σ p log(p / q)",
-    "σ(x) = 1 / (1 + e⁻ˣ)"
+    "σ(x) = 1 / (1 + e⁻ˣ)",
+    "e^{iπ} + 1 = 0"
   ];
   var SNIPPETS = [
     "library(tidyverse)", "hits <- df |> filter(p < 5e-8)", "fit <- lm(y ~ x, data = d)",
