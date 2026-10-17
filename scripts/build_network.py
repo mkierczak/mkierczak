@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Build network.json (co-author, institution, theme and teaching graph) for the Research page.
 
-Inputs: publications.json, publication-affiliations.json (scripts/fetch_publications.py),
+Inputs: publication-network.json (scripts/fetch_publications.py),
 research.qmd (DOIs under each theme) and network-extra.json (hand-edited).
 """
 import collections, itertools, json, re
 
 ME = "Marcin Kierczak"
 extra = json.load(open("network-extra.json"))
-pubs = json.load(open("publications.json"))
-affil = json.load(open("publication-affiliations.json"))
+pubs = json.load(open("publication-network.json"))
+for p in pubs:
+    p["names"] = [a["name"] for a in p["authors"]]
 aliases = extra["aliases"]
 inst_alias = extra["institution_aliases"]
 
@@ -32,23 +33,23 @@ papers = collections.Counter()
 last = {}
 pair = collections.Counter()
 for p in pubs:
-    names = {norm(a) for a in p["authors"]} - {ME}
+    names = {norm(a) for a in p["names"]} - {ME}
     for a in names:
         papers[a] += 1
         last[a] = max(last.get(a, 0), p["year"])
 people = {a for a, n in papers.items() if n >= extra["min_papers"]}
 for p in pubs:
-    names = sorted({norm(a) for a in p["authors"]} & people)
+    names = sorted({norm(a) for a in p["names"]} & people)
     for a, b in itertools.combinations(names, 2):
         pair[(a, b)] += 1
 
 # Primary institution per person: most frequent among their papers (after aliasing).
 inst_votes = collections.defaultdict(collections.Counter)
-for doi, d in affil.items():
-    for a, insts in d.items():
-        a = norm(a)
+for p in pubs:
+    for au in p["authors"]:
+        a = norm(au["name"])
         if a in people:
-            for i in insts:
+            for i in au["institutions"]:
                 inst_votes[a][inst_alias.get(i, i)] += 1
 skip = {"Science for Life Laboratory", "National Bioinformatics Infrastructure Sweden"}
 primary = {a: next((i for i, _ in v.most_common() if i not in skip), None) for a, v in inst_votes.items()}
@@ -70,10 +71,10 @@ for a in sorted(people):
     if primary.get(a) in insts:
         links.append({"source": a, "target": "inst:" + primary[a], "kind": "affiliation", "w": 1})
 for t, dois in themes.items():
-    tp = [p for p in pubs if p["doi"].lower() in dois]
+    tp = [p for p in pubs if p["doi"] and p["doi"].lower() in dois]
     nodes.append({"id": "theme:" + t, "type": "theme", "label": t, "papers": len(tp)})
     links.append({"source": ME, "target": "theme:" + t, "kind": "theme", "w": len(tp)})
-    c = collections.Counter(a for p in tp for a in {norm(x) for x in p["authors"]} & people)
+    c = collections.Counter(a for p in tp for a in {norm(x) for x in p["names"]} & people)
     for a, w in c.items():
         links.append({"source": a, "target": "theme:" + t, "kind": "theme", "w": w})
 hub = extra["teaching"]["hub"]

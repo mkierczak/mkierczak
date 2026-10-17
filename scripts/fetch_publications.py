@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fetch Marcin Kierczak's publications from OpenAlex into publications.json."""
-import json, urllib.request, urllib.parse
+import json, re, urllib.request, urllib.parse
 
 AUTHOR = "A5036927183"
 # Works OpenAlex wrongly attributes to this author (matched by DOI); never include them.
@@ -32,7 +32,7 @@ def is_me(a):
     n = (a.get("raw_author_name") or a["author"]["display_name"]).strip()
     return (a["author"]["id"] or "").endswith(AUTHOR) or ("kierczak" in n.lower() and n[:1].upper() == "M")
 
-pubs, seen, affil = [], set(), {}
+pubs, seen = [], set()
 for w in out:
     if not is_marcin(w) or (w["title"] or "").startswith("Additional file"):
         continue
@@ -49,8 +49,6 @@ for w in out:
     pages = b.get("first_page") or ""
     if pages and b.get("last_page") and b["last_page"] != pages:
         pages += "–" + b["last_page"]
-    affil[doi] = {("Marcin Kierczak" if is_me(a) else a["author"]["display_name"]):
-                  [i["display_name"] for i in a.get("institutions") or []] for a in w["authorships"]}
     pubs.append({
         "title": w["title"].rstrip("."),
         "authors": [("Marcin Kierczak" if is_me(a) else a["author"]["display_name"]) for a in w["authorships"]],
@@ -74,5 +72,20 @@ for p in pubs:
 
 pubs.sort(key=lambda p: p["date"], reverse=True)
 json.dump(pubs, open("publications.json", "w"), ensure_ascii=False, indent=1)
-json.dump({p["doi"]: affil[p["doi"]] for p in pubs}, open("publication-affiliations.json", "w"), ensure_ascii=False, indent=1)
+# Broader set for the collaboration network: also book chapters, conference papers and
+# works without a DOI or journal, which the publication list leaves out.
+NET_TYPES = ("article", "review", "preprint", "book-chapter", "conference-paper", "proceedings-article")
+net, nseen = [], set()
+for w in out:
+    key = re.sub(r"[^a-z0-9]", "", (w["title"] or "").lower())
+    if not is_marcin(w) or w["type"] not in NET_TYPES or (w["title"] or "").startswith("Additional file") or key in nseen:
+        continue
+    nseen.add(key)
+    net.append({
+        "title": w["title"].rstrip("."), "year": w["publication_year"],
+        "doi": (w.get("doi") or "").replace("https://doi.org/", ""),
+        "authors": [{"name": "Marcin Kierczak" if is_me(a) else a["author"]["display_name"],
+                     "institutions": [i["display_name"] for i in a.get("institutions") or []]} for a in w["authorships"]],
+    })
+json.dump(net, open("publication-network.json", "w"), ensure_ascii=False, indent=1)
 print(len(pubs), "publications")

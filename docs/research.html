@@ -545,7 +545,7 @@ ul.task-list li input[type="checkbox"] {
     });
     select("people");
     var people = g.nodes.filter(function (n) { return n.type === "person"; }).length;
-    document.querySelector("#net-note em").textContent = people + " co-authors of two or more of my " + g.nodes[0].papers + " papers; edges between co-authors need four or more shared papers. Data from OpenAlex.";
+    document.querySelector("#net-note em").textContent = people + " co-authors of two or more of my " + g.nodes[0].papers + " publications (including book chapters and conference papers); edges between co-authors need four or more shared papers. Data from OpenAlex.";
   }).catch(function () { sec.parentNode.hidden = true; document.getElementById("net-note").hidden = true; });
 })();
 </script>
