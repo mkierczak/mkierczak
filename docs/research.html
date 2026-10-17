@@ -450,7 +450,7 @@ ul.task-list li input[type="checkbox"] {
   var ME = "Marcin Kierczak", W = 960, H = 640;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var VIEWS = [
-    ["people", "Co-authors", "My co-authors and the papers we share. Larger dots mean more shared papers. Lines between co-authors are drawn faintly and light up when you hover or focus a dot: two co-authors are linked if they share at least two papers, and the line is darker from four."],
+    ["people", "Co-authors", "My co-authors and the papers we share. Larger dots mean more shared papers. Lines between co-authors are drawn faintly and light up when you hover or focus a dot: two co-authors are linked if they share at least two papers, and the line is darker from four. Zoom with the buttons, Ctrl or \u2318 plus scroll, or pinch; drag the background to pan."],
     ["inst", "Institutions", "Co-authors grouped by the institution where they mostly work."],
     ["themes", "Themes", "Research themes and the co-authors on their selected papers."],
     ["raukr", "RaukR", "Organisers and guest instructors of the RaukR summer school. Click a name to visit their website."],
@@ -458,6 +458,22 @@ ul.task-list li input[type="checkbox"] {
   ];
   var view = "people", sim = null, g, info = document.getElementById("net-info");
   var svg = d3.select(sec).append("svg").attr("viewBox", [0, 0, W, H]).attr("class", "net-svg");
+  var root = null;
+  var zoom = d3.zoom().scaleExtent([0.6, 6])
+    .filter(function (e) {
+      if (e.type === "wheel") return e.ctrlKey || e.metaKey;
+      if (e.type.indexOf("touch") === 0) return e.touches.length > 1;
+      return !e.button;
+    })
+    .on("zoom", function (e) { if (root) root.attr("transform", e.transform); });
+  svg.call(zoom).on("dblclick.zoom", null);
+  var zbar = d3.select(sec).append("div").attr("class", "net-zoom");
+  [["+", "Zoom in", function () { svg.transition().duration(200).call(zoom.scaleBy, 1.6); }],
+   ["\u2212", "Zoom out", function () { svg.transition().duration(200).call(zoom.scaleBy, 1 / 1.6); }],
+   ["\u21ba", "Reset zoom", function () { svg.transition().duration(200).call(zoom.transform, d3.zoomIdentity); }]
+  ].forEach(function (b) {
+    zbar.append("button").attr("type", "button").attr("aria-label", b[1]).attr("title", b[1]).text(b[0]).on("click", b[2]);
+  });
 
   function label(d) {
     if (d.type === "person") return d.label + ": " + d.papers + " shared papers, last in " + d.last + (d.inst ? ", " + d.inst : "");
@@ -485,6 +501,8 @@ ul.task-list li input[type="checkbox"] {
   function render() {
     if (sim) sim.stop();
     svg.selectAll("*").remove();
+    root = svg.append("g");
+    svg.call(zoom.transform, d3.zoomIdentity);
     info.textContent = "";
     var d = subset(view), nodes = d.nodes, links = d.links;
     var tight = view === "inst", labelPeople = view === "people" ? 6 : view === "all" ? 8 : Infinity;
@@ -496,9 +514,9 @@ ul.task-list li input[type="checkbox"] {
       .force("collide", d3.forceCollide().radius(function (n) { return r(n) + 6; }))
       .force("center", d3.forceCenter(W / 2, H / 2))
       .force("x", d3.forceX(W / 2).strength(0.03)).force("y", d3.forceY(H / 2).strength(0.05));
-    var link = svg.append("g").selectAll("line").data(links).join("line")
+    var link = root.append("g").selectAll("line").data(links).join("line")
       .attr("class", function (l) { return "net-link k-" + l.kind + (l.kind === "coauthor" && l.source.id !== ME && l.target.id !== ME ? (l.w >= 4 ? " pair" : " weak") : ""); }).attr("stroke-width", function (l) { return 0.6 + 0.5 * Math.sqrt(l.w); });
-    var node = svg.append("g").selectAll("g").data(nodes).join("g")
+    var node = root.append("g").selectAll("g").data(nodes).join("g")
       .attr("class", function (n) { return "net-node t-" + n.type; }).attr("tabindex", 0).attr("role", "img")
       .attr("aria-label", label);
     node.each(function (n) {

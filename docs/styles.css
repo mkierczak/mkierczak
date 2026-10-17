@@ -474,7 +474,7 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 /* Collaboration network */
 :root { --net-person: #3f6f94; --net-teach: #3e7d5a; }
 .quarto-dark { --net-person: #7fa9c9; --net-teach: #7dbb98; }
-.net { margin: .8rem 0 .4rem; border: 1px solid var(--rule); border-radius: 12px; background: var(--card); }
+.net { position: relative; margin: .8rem 0 .4rem; border: 1px solid var(--rule); border-radius: 12px; background: var(--card); }
 .net-svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
 .net-link { stroke: var(--muted); stroke-opacity: .35; }
 .net-link.k-theme { stroke-dasharray: 3 3; }
@@ -497,3 +497,7 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .net-info { min-height: 1.4em; font-family: "Inter", sans-serif; font-size: .85rem; color: var(--muted); }
 button.net-toggle { cursor: pointer; color: inherit; }
 button.net-toggle[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--card); }
+.net-zoom { position: absolute; top: .6rem; right: .6rem; display: flex; flex-direction: column; gap: .3rem; }
+.net-zoom button { width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); color: inherit; font: 1.1rem/1 "Inter", sans-serif; cursor: pointer; }
+.net-zoom button:hover, .net-zoom button:focus-visible { border-color: var(--accent); color: var(--accent); }
+.net-svg { cursor: grab; }
