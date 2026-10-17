@@ -457,6 +457,10 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* Plot images keep their cream paper; soften them on the dark theme */
 .quarto-dark .cell-output-display img, .quarto-dark .quarto-figure img { filter: brightness(.86) contrast(.96); border-radius: 6px; }
+/* Blog listing thumbnails on the dark theme: dim photos/illustrations, and give the cream-paper plots (PNGs)
+   a near-negative treatment (hue-rotate keeps the colours recognisable) */
+.quarto-dark .quarto-post .thumbnail-image { filter: brightness(.72) contrast(.95) saturate(.9); }
+.quarto-dark .quarto-post .thumbnail-image[src$=".png"] { filter: invert(.9) hue-rotate(180deg) contrast(.95); }
 
 /* Blog series */
 .series-tag { font-family: "Inter", sans-serif; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 1rem; }
