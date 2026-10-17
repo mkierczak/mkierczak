@@ -12,7 +12,7 @@
     "Université Paris-Est Créteil": "École Nationale Vétérinaire d'Alfort"
   },
   "min_papers": 2,
-  "min_pair_papers": 4,
+  "min_pair_papers": 2,
   "min_institution_people": 3,
   "teaching": {
     "hub": {"id": "RaukR", "label": "RaukR", "url": "https://raukr.nbis.se"},

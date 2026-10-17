@@ -481,6 +481,8 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .net-link.k-affiliation { stroke: var(--gold); stroke-opacity: .5; }
 .net-link.hi { stroke-opacity: .9; }
 .net-link.dim { stroke-opacity: .06; }
+.net-link.weak { stroke-opacity: .07; }
+.net-link.weak.hi { stroke-opacity: .85; }
 .net-node { cursor: grab; outline: none; }
 .net-node circle { stroke: var(--card); stroke-width: 1.5; }
 .net-node.t-me circle { fill: var(--accent); }

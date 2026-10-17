@@ -129,7 +129,7 @@ Day-to-day, I work with:
   var ME = "Marcin Kierczak", W = 960, H = 640;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var VIEWS = [
-    ["people", "Co-authors", "My co-authors and the papers we share. Larger dots mean more shared papers."],
+    ["people", "Co-authors", "My co-authors and the papers we share. Larger dots mean more shared papers. Lines between co-authors are drawn faintly and light up when you hover or focus a dot: two co-authors are linked if they share at least two papers, and the line is darker from four."],
     ["inst", "Institutions", "Co-authors grouped by the institution where they mostly work."],
     ["themes", "Themes", "Research themes and the co-authors on their selected papers."],
     ["raukr", "RaukR", "Organisers and guest instructors of the RaukR summer school. Click a name to visit their website."],
@@ -166,17 +166,17 @@ Day-to-day, I work with:
     svg.selectAll("*").remove();
     info.textContent = "";
     var d = subset(view), nodes = d.nodes, links = d.links;
-    var tight = view === "inst", labelPeople = view === "people" ? 4 : view === "all" ? 6 : Infinity;
+    var tight = view === "inst", labelPeople = view === "people" ? 6 : view === "all" ? 8 : Infinity;
     var dist = { coauthor: view === "people" ? 150 : 140, affiliation: 38, theme: view === "themes" ? 130 : 170, teaching: 90 };
     sim = d3.forceSimulation(nodes)
       .force("link", d3.forceLink(links).id(function (n) { return n.id; }).distance(function (l) { return dist[l.kind]; })
-        .strength(function (l) { return l.kind === "coauthor" && l.source.id !== ME && l.target.id !== ME ? 0.15 : 0.35; }))
+        .strength(function (l) { return l.kind === "coauthor" && l.source.id !== ME && l.target.id !== ME ? (l.w >= 4 ? 0.15 : 0.03) : 0.35; }))
       .force("charge", d3.forceManyBody().strength(tight ? -160 : -340).distanceMax(420))
       .force("collide", d3.forceCollide().radius(function (n) { return r(n) + 6; }))
       .force("center", d3.forceCenter(W / 2, H / 2))
       .force("x", d3.forceX(W / 2).strength(0.03)).force("y", d3.forceY(H / 2).strength(0.05));
     var link = svg.append("g").selectAll("line").data(links).join("line")
-      .attr("class", function (l) { return "net-link k-" + l.kind; }).attr("stroke-width", function (l) { return 0.6 + 0.5 * Math.sqrt(l.w); });
+      .attr("class", function (l) { return "net-link k-" + l.kind + (l.kind === "coauthor" && l.source.id !== ME && l.target.id !== ME ? (l.w >= 4 ? " pair" : " weak") : ""); }).attr("stroke-width", function (l) { return 0.6 + 0.5 * Math.sqrt(l.w); });
     var node = svg.append("g").selectAll("g").data(nodes).join("g")
       .attr("class", function (n) { return "net-node t-" + n.type; }).attr("tabindex", 0).attr("role", "img")
       .attr("aria-label", label);
@@ -187,7 +187,6 @@ Day-to-day, I work with:
     });
     node.filter(function (n) { return n.type !== "person" || n.papers >= labelPeople; })
       .append("text").attr("dy", function (n) { return -r(n) - 4; }).attr("text-anchor", "middle").text(function (n) { return n.label; });
-    node.append("title").text(label);
     var nb = {};
     links.forEach(function (l) { (nb[l.source.id] = nb[l.source.id] || {})[l.target.id] = 1; (nb[l.target.id] = nb[l.target.id] || {})[l.source.id] = 1; });
     node.on("mouseenter focus", function (e, n) {
@@ -224,7 +223,7 @@ Day-to-day, I work with:
     });
     select("people");
     var people = g.nodes.filter(function (n) { return n.type === "person"; }).length;
-    document.querySelector("#net-note em").textContent = people + " co-authors of two or more of my " + g.nodes[0].papers + " publications (including book chapters and conference papers); edges between co-authors need four or more shared papers. Data from OpenAlex.";
+    document.querySelector("#net-note em").textContent = people + " co-authors of two or more of my " + g.nodes[0].papers + " publications (including book chapters and conference papers); lines between co-authors need two or more shared papers. Data from OpenAlex.";
   }).catch(function () { sec.parentNode.hidden = true; document.getElementById("net-note").hidden = true; });
 })();
 </script>
