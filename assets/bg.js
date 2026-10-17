@@ -62,7 +62,8 @@
   ];
   var items = [], textList = FORMULAS, textFont = 'italic {s}px Newsreader, Georgia, serif', textSize = [17, 30];
   function initFormulas() { textList = FORMULAS; textFont = "italic {s}px Newsreader, Georgia, serif"; textSize = [17, 30]; initText(); }
-  function initCode() { textList = SNIPPETS; textFont = "{s}px ui-monospace, Menlo, monospace"; textSize = [13, 19]; initText(); }
+  var codeLines = SNIPPETS;
+  function initCode() { textList = codeLines; textFont = "{s}px ui-monospace, Menlo, monospace"; textSize = [13, 19]; initText(); }
   /* All items drift with one shared velocity, so a non-overlapping layout stays
      non-overlapping; placement and respawn use box tests against existing items. */
   var DRIFT = -3.5, PAD = 16;
@@ -87,10 +88,11 @@
   }
   function initText() {
     items = [];
-    var n = Math.max(8, Math.round(W * H / (textList === SNIPPETS ? 150000 : 90000)));
+    var n = Math.max(8, Math.round(W * H / (textList === codeLines ? 150000 : 90000)));
+    var pool = textList.slice().sort(function () { return Math.random() - 0.5; });
     for (var i = 0; i < n; i++) {
       var it = {
-        s: textList[i % textList.length], size: rnd(textSize[0], textSize[1]),
+        s: pool[i % pool.length], size: rnd(textSize[0], textSize[1]),
         rot: rnd(-0.12, 0.12), a: rnd(0.10, 0.17), ph: rnd(0, 6.28), x: 0, y: 0, w: 0
       };
       if (place(it, 0, H)) items.push(it);
@@ -228,4 +230,10 @@
   });
   var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 150); });
   readColors(); resize(); requestAnimationFrame(loop);
+  /* Blog background: swap in real code lines from my own public repos (see scripts/fetch_github_code.py). */
+  if (motif === "code") {
+    fetch("/github-code.json").then(function (r) { return r.json(); }).then(function (d) {
+      if (d.lines && d.lines.length >= 12) { codeLines = d.lines; init(); }
+    }).catch(function () {});
+  }
 })();
