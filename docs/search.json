@@ -32,7 +32,7 @@
     "href": "teaching.html#raukr",
     "title": "Training & Outreach",
     "section": "RaukR",
-    "text": "RaukR\nSince 2018, together with colleagues, I organise RaukR, the Advanced R Programming for Bioinformatics summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at raukr.nbis.se."
+    "text": "RaukR\n\nSince 2018, together with Sebastian DiLorenzo, Roy Francis and other NBIS colleagues, I organise RaukR, the Advanced R Programming for Bioinformatics summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at raukr.nbis.se.\nOver the years, RaukR has hosted guest instructors from the R community, including Martin Morgan, Paula Moraga, Max Kuhn, Yihui Xie, Richard Iannone, Christophe Dervieux, Jenny Bryan and Henrik Bengtsson."
   },
   {
     "objectID": "teaching.html#courses-and-workshops",
