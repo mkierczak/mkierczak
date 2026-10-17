@@ -27,7 +27,9 @@ while True:
     page += 1
 own = [r for r in repos if not r["fork"]]
 stars = sum(r["stargazers_count"] for r in own)
-langs = collections.Counter(r["language"] for r in own if r["language"])
+# GitHub's linguist labels plain .r files as Rebol; these are R scripts.
+RENAME = {"Rebol": "R"}
+langs = collections.Counter(RENAME.get(r["language"], r["language"]) for r in own if r["language"])
 
 def count(path, q):
     return api(path, q=q, per_page=1)["total_count"]
