@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+  post-render: scripts/strip_polyfill.py
   resources:
     - publications.json
     - paper-notes.json
@@ -56,7 +57,7 @@ website:
         href: blog.xml
         aria-label: RSS feed
   page-footer:
-    left: "© 1998-2026 Marcin Kierczak"
+    left: "[©](/impressum.html){.impressum-link title=\"Impressum\"} 1998-2026 Marcin Kierczak"
     right: "Uppsala, Sweden · Built with human brain, [Quarto](https://quarto.org) & [Claude](https://claude.com)"
 
 format:

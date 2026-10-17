@@ -1,0 +1,39 @@
+---
+title: "Impressum"
+description-meta: "Legal notice, privacy statement and technical credits for kierczak.net."
+---
+
+## Responsible for this website
+
+Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the [Contact](contact.qmd) page.
+
+## Privacy
+
+This site does not use cookies, does not show advertising and does not include social-media widgets or embedded third-party content.
+
+**Web analytics.** To learn roughly how many people visit and which pages they read, I use [GoatCounter](https://www.goatcounter.com), a privacy-friendly analytics service, hosted at `kiero.goatcounter.com`. According to its documentation it sets no cookies and does not track you across sites or store your IP address. It records only aggregate page-view information such as the page visited, the referring site, browser and screen size, and the country. Because it needs no cookies and stores no personal profile, no consent banner is shown. Details are in [GoatCounter's privacy policy](https://www.goatcounter.com/privacy).
+
+**Hosting.** The site is served by [GitHub Pages](https://pages.github.com). As with any web host, GitHub may process technical data such as your IP address when you request a page; see the [GitHub privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
+
+**Local storage.** If you switch between light and dark mode, your choice is remembered in your browser's local storage. It never leaves your device.
+
+**Contact form.** There is none. If you email me, I use your message and address only to reply to you.
+
+**Your rights.** Under the GDPR you may ask what data about you is held and request its correction or deletion. Since the site stores no personal profiles, there is normally nothing to report, but you are welcome to [get in touch](contact.qmd).
+
+## Fonts and technologies
+
+Everything needed to display the pages, except the analytics script, is served from this site itself, with no calls to Google Fonts or a public CDN.
+
+- **Fonts:** [Newsreader](https://github.com/productiontype/Newsreader) and [Inter](https://rsms.me/inter/), both under the SIL Open Font License, served locally.
+- **Site generator:** [Quarto](https://quarto.org) with the [Bootswatch](https://bootswatch.com) *Cosmo* theme (Bootstrap, MIT licence).
+- **Mathematics:** [MathJax](https://www.mathjax.org) (Apache 2.0), served locally.
+- **Publication data:** fetched from [OpenAlex](https://openalex.org) and Google Scholar when the site is built; your browser does not contact them.
+- **GitHub statistics:** fetched from the public GitHub API when the site is built.
+- **Background animations:** drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion.
+
+Built with human brain, Quarto and Claude.
+
+## Content and liability
+
+I take care with the content of these pages but cannot guarantee that it is complete or current. Links to external sites lead to content I do not control. Unless stated otherwise, text and images on this site are © Marcin Kierczak; please ask before reusing them.

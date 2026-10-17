@@ -133,6 +133,62 @@
     "text": "Plotting\nI needed some cool colours. On my way home from rstudio::conf 2020 I watched Taika Waititi’s “Jojo Rabbit”, which I found visually appealing. I grabbed a screenshot and, with the Colormind tool, created two palettes from it.\n\njojo1 &lt;- c('#c0b3aa', '#2b2117', '#9a8268', '#d3a677', '#e1d0ba')\njojo2 &lt;- c('#221c17', '#947e66', '#da9869', '#e0c6a4', '#c1b3ab')\n\nAnd now the most glamorous version of the plot, with the legend living in the title:\n\ncols &lt;- c('bioconductor' = jojo2[2], 'cran' = jojo2[3], 'github' = jojo2[1], 'rforge' = jojo2[5])\n\ntitle &lt;- glue('Log # of R packages available at',\n              ' &lt;span style=\"color:{cols[2]}\"&gt;**CRAN**&lt;/span&gt;,',\n              ' &lt;span style=\"color:{cols[4]}\"&gt;**R-Forge**&lt;/span&gt;,',\n              ' &lt;span style=\"color:{cols[1]}\"&gt;**Bioconductor**&lt;/span&gt;',\n              ' and',\n              ' &lt;span style=\"color:{cols[3]}\"&gt;**GitHub**&lt;/span&gt;',\n              ' over time.')\n\nggplot(data, mapping = aes(x = date, y = log(value), col = repo)) +\n  geom_point(show.legend = FALSE) +\n  geom_line(show.legend = FALSE) +\n  geom_text_repel(aes(label = comma(value)), direction = 'y', vjust = 0.5, show.legend = FALSE) +\n  scale_colour_manual(values = cols) +\n  labs(title = title, x = '', y = '') +\n  theme_minimal() +\n  theme(panel.grid.major = element_line(colour = '#EEEEEE', linewidth = 0.25),\n        plot.background = element_rect(fill = '#FFFDF8', colour = '#FFFDF8'),\n        axis.title = element_text(colour = jojo2[5]),\n        axis.text = element_text(colour = jojo2[5], size = 10),\n        axis.title.y = element_blank(),\n        plot.title = element_markdown(lineheight = 1.5, size = 12),\n        plot.title.position = 'plot')"
   },
   {
+    "objectID": "impressum.html",
+    "href": "impressum.html",
+    "title": "Impressum",
+    "section": "",
+    "text": "Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the Contact page."
+  },
+  {
+    "objectID": "impressum.html#responsible-for-this-website",
+    "href": "impressum.html#responsible-for-this-website",
+    "title": "Impressum",
+    "section": "",
+    "text": "Marcin Kierczak, Uppsala, Sweden. This is a personal website. For contact details, including email, see the Contact page."
+  },
+  {
+    "objectID": "impressum.html#privacy",
+    "href": "impressum.html#privacy",
+    "title": "Impressum",
+    "section": "Privacy",
+    "text": "Privacy\nThis site does not use cookies, does not show advertising and does not include social-media widgets or embedded third-party content.\nWeb analytics. To learn roughly how many people visit and which pages they read, I use GoatCounter, a privacy-friendly analytics service, hosted at kiero.goatcounter.com. According to its documentation it sets no cookies and does not track you across sites or store your IP address. It records only aggregate page-view information such as the page visited, the referring site, browser and screen size, and the country. Because it needs no cookies and stores no personal profile, no consent banner is shown. Details are in GoatCounter’s privacy policy.\nHosting. The site is served by GitHub Pages. As with any web host, GitHub may process technical data such as your IP address when you request a page; see the GitHub privacy statement.\nLocal storage. If you switch between light and dark mode, your choice is remembered in your browser’s local storage. It never leaves your device.\nContact form. There is none. If you email me, I use your message and address only to reply to you.\nYour rights. Under the GDPR you may ask what data about you is held and request its correction or deletion. Since the site stores no personal profiles, there is normally nothing to report, but you are welcome to get in touch."
+  },
+  {
+    "objectID": "impressum.html#fonts-and-technologies",
+    "href": "impressum.html#fonts-and-technologies",
+    "title": "Impressum",
+    "section": "Fonts and technologies",
+    "text": "Fonts and technologies\nEverything needed to display the pages, except the analytics script, is served from this site itself, with no calls to Google Fonts or a public CDN.\n\nFonts: Newsreader and Inter, both under the SIL Open Font License, served locally.\nSite generator: Quarto with the Bootswatch Cosmo theme (Bootstrap, MIT licence).\nMathematics: MathJax (Apache 2.0), served locally.\nPublication data: fetched from OpenAlex and Google Scholar when the site is built; your browser does not contact them.\nGitHub statistics: fetched from the public GitHub API when the site is built.\nBackground animations: drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion.\n\nBuilt with human brain, Quarto and Claude."
+  },
+  {
+    "objectID": "impressum.html#content-and-liability",
+    "href": "impressum.html#content-and-liability",
+    "title": "Impressum",
+    "section": "Content and liability",
+    "text": "Content and liability\nI take care with the content of these pages but cannot guarantee that it is complete or current. Links to external sites lead to content I do not control. Unless stated otherwise, text and images on this site are © Marcin Kierczak; please ask before reusing them."
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "I’m happy to hear about training, industry collaboration, teaching and research projects."
+  },
+  {
+    "objectID": "contact.html#elsewhere",
+    "href": "contact.html#elsewhere",
+    "title": "Contact",
+    "section": "Elsewhere",
+    "text": "Elsewhere\n\nLinkedIn\nORCID: 0000-0003-2629-5655\nGoogle Scholar\nNBIS, Uppsala, Sweden"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Subscribe via RSS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\n\nstatistics\n\nR\n\nteaching\n\nseries\n\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n8 min\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\n\nR\n\nsimulation\n\nteaching\n\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\n\nR\n\nggplot2\n\nvisualisation\n\nteaching\n\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nPlotting 23andMe marker density with karyoploteR\n\n\n\nR\n\ngenetics\n\nvisualisation\n\n\n\nHow to draw the density of genotyped SNPs along a karyogram, and then zoom in on a region of interest.\n\n\n\n\n\nJan 31, 2018\n\n6 min\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "cv.html",
     "href": "cv.html",
     "title": "Curriculum Vitae",
@@ -215,27 +271,6 @@
     "title": "Curriculum Vitae",
     "section": "Languages",
     "text": "Languages\n\nPolish native English fluent Swedish fluent French basic Latin basic Spanish basic\n\nLast updated October 2026."
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Subscribe via RSS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistics from the beginning: location and spread\n\n\n\nstatistics\n\nR\n\nteaching\n\nseries\n\n\n\nFirst in a series on statistical tests: what the mean, median, variance and standard deviation really measure, and why we divide by n − 1.\n\n\n\n\n\nOct 16, 2026\n\n8 min\n\n\n\n\n\n\n\n\n\n\n\nPest in R using R6 classes\n\n\n\nR\n\nsimulation\n\nteaching\n\n\n\nAgent-based simulation of epidemics in R using OOP and R6 classes.\n\n\n\n\n\nJun 20, 2024\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\nMaking more glamorous graphs in ggplot2\n\n\n\nR\n\nggplot2\n\nvisualisation\n\nteaching\n\n\n\nRedrawing my old ‘growth of R packages’ plot with ideas from William R. Chase’s ‘The Glamour of Graphics’.\n\n\n\n\n\nFeb 4, 2020\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nPlotting 23andMe marker density with karyoploteR\n\n\n\nR\n\ngenetics\n\nvisualisation\n\n\n\nHow to draw the density of genotyped SNPs along a karyogram, and then zoom in on a region of interest.\n\n\n\n\n\nJan 31, 2018\n\n6 min\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Contact",
-    "section": "",
-    "text": "I’m happy to hear about training, industry collaboration, teaching and research projects."
-  },
-  {
-    "objectID": "contact.html#elsewhere",
-    "href": "contact.html#elsewhere",
-    "title": "Contact",
-    "section": "Elsewhere",
-    "text": "Elsewhere\n\nLinkedIn\nORCID: 0000-0003-2629-5655\nGoogle Scholar\nNBIS, Uppsala, Sweden"
   },
   {
     "objectID": "index.html",
