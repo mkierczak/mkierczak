@@ -408,13 +408,13 @@ ul.task-list li input[type="checkbox"] {
         (tip ? '<div class="tip-body"><p>' + tip + '</p></div>' : '') + '</div>';
     };
     document.getElementById("gh-stats").innerHTML =
-      tile(g.repos, "own repositories") + tile(fmt(g.stars), "stars") + tile(g.followers, "followers") +
+      tile(g.repos, "public repositories") + (g.stars > 0 ? tile(fmt(g.stars), "stars") : "") + tile(g.followers, "followers") +
       tile(g.rank, "GitHub rank", "A letter grade (S, A+ … C) following the github-readme-stats formula. It blends commits, pull requests, issues, code reviews, stars and followers on public repositories, each compared against a typical-user median. It is a rough, playful indicator, not an official GitHub metric.");
     document.getElementById("gh-langs").innerHTML = g.languages.slice(0, 6).map(function (l) {
       return '<span class="chip">' + l.name + ' <span class="lvl">' + l.repos + '</span></span>';
     }).join(" ");
     document.querySelector("#gh-note em").innerHTML = 'Public activity of <a href="' + g.url + '">@' + g.user + '</a>: ' +
-      fmt(g.commits) + ' commits, ' + fmt(g.prs) + ' pull requests, ' + fmt(g.issues) + ' issues. Languages show the main language of each own repository. Snapshot from ' + g.asof + '.';
+      fmt(g.commits) + ' commits, ' + fmt(g.prs) + ' pull requests, ' + fmt(g.issues) + ' issues. Repositories are public and my own (forks excluded); languages show the main language of each. Snapshot from ' + g.asof + '.';
   }).catch(function () { document.getElementById("gh-note").hidden = true; });
 })();
 </script>
