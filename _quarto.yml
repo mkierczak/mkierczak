@@ -5,6 +5,7 @@ project:
     - publications.json
     - paper-notes.json
     - publication-counts.json
+    - github-stats.json
     - assets/icons/*.svg
     - assets/bg.js
     - assets/fonts/*.woff2
