@@ -32,7 +32,7 @@ def is_me(a):
     n = (a.get("raw_author_name") or a["author"]["display_name"]).strip()
     return (a["author"]["id"] or "").endswith(AUTHOR) or ("kierczak" in n.lower() and n[:1].upper() == "M")
 
-pubs, seen = [], set()
+pubs, seen, affil = [], set(), {}
 for w in out:
     if not is_marcin(w) or (w["title"] or "").startswith("Additional file"):
         continue
@@ -49,6 +49,8 @@ for w in out:
     pages = b.get("first_page") or ""
     if pages and b.get("last_page") and b["last_page"] != pages:
         pages += "–" + b["last_page"]
+    affil[doi] = {("Marcin Kierczak" if is_me(a) else a["author"]["display_name"]):
+                  [i["display_name"] for i in a.get("institutions") or []] for a in w["authorships"]}
     pubs.append({
         "title": w["title"].rstrip("."),
         "authors": [("Marcin Kierczak" if is_me(a) else a["author"]["display_name"]) for a in w["authorships"]],
@@ -72,4 +74,5 @@ for p in pubs:
 
 pubs.sort(key=lambda p: p["date"], reverse=True)
 json.dump(pubs, open("publications.json", "w"), ensure_ascii=False, indent=1)
+json.dump({p["doi"]: affil[p["doi"]] for p in pubs}, open("publication-affiliations.json", "w"), ensure_ascii=False, indent=1)
 print(len(pubs), "publications")

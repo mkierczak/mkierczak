@@ -1,0 +1,32 @@
+{
+  "aliases": {
+    "Goran N. Andersson": "Göran Andersson",
+    "Å. Karlsson": "Åsa Karlsson",
+    "Fabiana Geraldo Farias": "Fabiana Farias"
+  },
+  "institution_aliases": {
+    "Interdisciplinary Centre for Mathematical and Computational Modelling, University of Warsaw": "University of Warsaw",
+    "Institute of Computer Science": "Polish Academy of Sciences",
+    "Karolinska University Hospital": "Karolinska Institutet",
+    "Sahlgrenska University Hospital": "University of Gothenburg",
+    "Université Paris-Est Créteil": "École Nationale Vétérinaire d'Alfort"
+  },
+  "min_papers": 2,
+  "min_pair_papers": 4,
+  "min_institution_people": 3,
+  "teaching": {
+    "hub": {"id": "RaukR", "label": "RaukR", "url": "https://raukr.nbis.se"},
+    "people": [
+      {"name": "Sebastian DiLorenzo", "url": "https://github.com/Sebastian-D", "role": "co-organiser"},
+      {"name": "Roy Francis", "url": "https://royfrancis.com", "role": "co-organiser"},
+      {"name": "Martin Morgan", "url": "https://mtmorgan.github.io/", "role": "guest instructor"},
+      {"name": "Paula Moraga", "url": "https://www.paulamoraga.com", "role": "guest instructor"},
+      {"name": "Max Kuhn", "url": "https://github.com/topepo", "role": "guest instructor"},
+      {"name": "Yihui Xie", "url": "https://yihui.org", "role": "guest instructor"},
+      {"name": "Richard Iannone", "url": "https://github.com/rich-iannone", "role": "guest instructor"},
+      {"name": "Christophe Dervieux", "url": "https://cderv.rbind.io", "role": "guest instructor"},
+      {"name": "Jenny Bryan", "url": "https://jennybryan.org", "role": "guest instructor"},
+      {"name": "Henrik Bengtsson", "url": "https://www.jottr.org", "role": "guest instructor"}
+    ]
+  }
+}

@@ -470,3 +470,28 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .series-nav p { margin: 0; color: var(--muted); }
 /* Logos with dark artwork on transparent backgrounds get a light plate on the dark theme */
 .quarto-dark img.on-light { background: #f4efe4; padding: 6px 8px; border-radius: 8px; }
+
+/* Collaboration network */
+:root { --net-person: #3f6f94; --net-teach: #3e7d5a; }
+.quarto-dark { --net-person: #7fa9c9; --net-teach: #7dbb98; }
+.net { margin: .8rem 0 .4rem; border: 1px solid var(--rule); border-radius: 12px; background: var(--card); }
+.net-svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+.net-link { stroke: var(--muted); stroke-opacity: .35; }
+.net-link.k-theme { stroke-dasharray: 3 3; }
+.net-link.k-affiliation { stroke: var(--gold); stroke-opacity: .5; }
+.net-link.hi { stroke-opacity: .9; }
+.net-link.dim { stroke-opacity: .06; }
+.net-node { cursor: grab; outline: none; }
+.net-node circle { stroke: var(--card); stroke-width: 1.5; }
+.net-node.t-me circle { fill: var(--accent); }
+.net-node.t-person circle { fill: var(--net-person); }
+.net-node.t-institution circle { fill: var(--gold); }
+.net-node.t-theme circle { fill: var(--card); stroke: var(--accent); stroke-width: 2.5; }
+.net-node.t-teaching circle { fill: var(--net-teach); }
+.net-node a { cursor: pointer; }
+.net-node text { font-family: "Inter", sans-serif; font-size: 11px; fill: var(--muted); paint-order: stroke; stroke: var(--card); stroke-width: 3px; pointer-events: none; }
+.net-node:focus circle, .net-node:hover circle { stroke: var(--accent); stroke-width: 3; }
+.net-node.dim { opacity: .15; }
+.net-info { min-height: 1.4em; font-family: "Inter", sans-serif; font-size: .85rem; color: var(--muted); }
+button.net-toggle { cursor: pointer; color: inherit; }
+button.net-toggle[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--card); }
