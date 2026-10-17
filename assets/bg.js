@@ -62,24 +62,47 @@
   var items = [], textList = FORMULAS, textFont = 'italic {s}px Newsreader, Georgia, serif', textSize = [17, 30];
   function initFormulas() { textList = FORMULAS; textFont = "italic {s}px Newsreader, Georgia, serif"; textSize = [17, 30]; initText(); }
   function initCode() { textList = SNIPPETS; textFont = "{s}px ui-monospace, Menlo, monospace"; textSize = [13, 19]; initText(); }
+  /* All items drift with one shared velocity, so a non-overlapping layout stays
+     non-overlapping; placement and respawn use box tests against existing items. */
+  var DRIFT = -3.5, PAD = 16;
+  function box(it) { return [it.x, it.y - it.size, it.x + it.w, it.y + it.size * 0.35]; }
+  function hits(it) {
+    var a = box(it);
+    for (var i = 0; i < items.length; i++) {
+      if (items[i] === it) continue;
+      var b = box(items[i]);
+      if (a[0] < b[2] + PAD && a[2] + PAD > b[0] && a[1] < b[3] + PAD && a[3] + PAD > b[1]) return true;
+    }
+    return false;
+  }
+  function place(it, yMin, yMax) {
+    ctx.font = textFont.replace("{s}", it.size);
+    it.w = ctx.measureText(it.s).width;
+    for (var k = 0; k < 40; k++) {
+      it.x = rnd(0, Math.max(0, W - it.w)); it.y = rnd(yMin, yMax);
+      if (!hits(it)) return true;
+    }
+    return false;
+  }
   function initText() {
     items = [];
     var n = Math.max(8, Math.round(W * H / (textList === SNIPPETS ? 150000 : 90000)));
     for (var i = 0; i < n; i++) {
-      items.push({
-        s: textList[i % textList.length], x: rnd(0, W), y: rnd(0, H),
-        size: rnd(textSize[0], textSize[1]), vy: -rnd(2, 5), vx: rnd(-1.5, 1.5),
-        rot: rnd(-0.12, 0.12), a: rnd(0.10, 0.17), ph: rnd(0, 6.28)
-      });
+      var it = {
+        s: textList[i % textList.length], size: rnd(textSize[0], textSize[1]),
+        rot: rnd(-0.12, 0.12), a: rnd(0.10, 0.17), ph: rnd(0, 6.28), x: 0, y: 0, w: 0
+      };
+      if (place(it, 0, H)) items.push(it);
     }
   }
   function drawFormulas(dt) {
     items.forEach(function (it) {
-      it.x += it.vx * dt; it.y += it.vy * dt;
+      it.y += DRIFT * dt;
+      if (it.y < -40) {
+        /* respawn below the viewport; if no free slot, wait a little further down */
+        if (!place(it, H + 40, H + 120)) { it.y = H + 120; it.x = rnd(0, Math.max(0, W - it.w)); }
+      }
       ctx.font = textFont.replace("{s}", it.size);
-      var w = ctx.measureText(it.s).width;
-      if (it.y < -40) { it.y = H + 40; it.x = rnd(0, W); }
-      if (it.x < -w) it.x = W; if (it.x > W) it.x = -w;
       ctx.save();
       ctx.translate(it.x, it.y); ctx.rotate(it.rot);
       ctx.fillStyle = rgba(color, it.a * (0.75 + 0.25 * Math.sin(t / 3 + it.ph)));
