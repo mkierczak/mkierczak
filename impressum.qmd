@@ -43,7 +43,7 @@ Everything needed to display the pages, except the analytics script, is served f
 - **Publication data:** fetched from [OpenAlex](https://openalex.org) and Google Scholar when the site is built; your browser does not contact them.
 - **GitHub statistics:** fetched from the public GitHub API when the site is built.
 - **Code in the Blog background:** the faint code lines are real lines sampled from my own public, non-forked repositories at [github.com/mkierczak](https://github.com/mkierczak) (R, Python, PHP, Lua, JavaScript, CSS and shell). They are picked when the site is built; comments, vendored or generated files, and anything resembling credentials, addresses or personal paths are left out. Your browser reads them from this site, not from GitHub.
-- **Background animations:** drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion.
+- **Background animations:** drawn in your browser with a small script of my own, and switched off if your system asks for reduced motion. Depending on the page they show formulas, code, DNA and protein sequences, a network, or a Manhattan plot. In the DNA background, the protein sequences are written in one-letter amino-acid codes, and some of them, as a small private joke, spell my first name: MARCIN or MARTIN.
 
 Built with human brain, Quarto and Claude.
 
