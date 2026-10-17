@@ -50,7 +50,7 @@ I work to make NBIS expertise and training accessible to companies and industry 
 
 ## RaukR {#raukr}
 
-Since 2018, together with colleagues, I organise [**RaukR**](https://raukr.nbis.se), the *Advanced R Programming for Bioinformatics* summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at [raukr.nbis.se](https://raukr.nbis.se).
+Since 2018, together with Sebastian DiLorenzo, Roy Francis and other NBIS colleagues, I organise [**RaukR**](https://raukr.nbis.se), the *Advanced R Programming for Bioinformatics* summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at [raukr.nbis.se](https://raukr.nbis.se). 
 
 ## Courses and workshops
 
