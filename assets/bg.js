@@ -114,15 +114,29 @@
     });
   }
 
-  /* ---------- DNA ---------- */
+  /* ---------- DNA + protein ---------- */
   var cols = [];
+  var AMINO = "ACDEFGHIKLMNPQRSTVWY", NAMES = ["MARCIN", "MARTIN"];
   function initDNA() {
     cols = [];
-    var n = Math.round(W / 55);
-    for (var i = 0; i < n; i++) {
+    var n = Math.round(W / 55), step = W / n, i, k;
+    for (i = 0; i < n; i++) {
       var len = Math.round(rnd(12, 26)), str = "";
-      for (var k = 0; k < len; k++) str += "ACGT"[Math.floor(Math.random() * 4)];
-      cols.push({ x: (i + 0.5) * (W / n), y: rnd(0, H), s: str, v: rnd(5, 11), a: rnd(0.05, 0.1) });
+      for (k = 0; k < len; k++) str += "ACGT"[Math.floor(Math.random() * 4)];
+      cols.push({ x: (i + 0.5) * step, y: rnd(0, H), s: str, v: rnd(5, 11), a: rnd(0.05, 0.1) });
+      /* a protein column running alongside, midway between DNA columns; about one in
+         three spells MARCIN or MARTIN (index 0 is the bottom, so the name is reversed
+         to read top to bottom) */
+      if (i % 2 === 0) {
+        var plen = Math.round(rnd(14, 26)), p = "", hl = -1;
+        for (k = 0; k < plen; k++) p += AMINO[Math.floor(Math.random() * 20)];
+        if (Math.random() < 0.35) {
+          var name = NAMES[Math.floor(Math.random() * 2)].split("").reverse().join("");
+          hl = Math.floor(rnd(1, plen - name.length));
+          p = p.slice(0, hl) + name + p.slice(hl + name.length);
+        }
+        cols.push({ x: (i + 1) * step, y: rnd(0, H), s: p, v: rnd(5, 11), a: rnd(0.06, 0.11), hl: hl, hn: 6 });
+      }
     }
   }
   function drawDNA(dt) {
@@ -131,7 +145,9 @@
       c.y += c.v * dt;
       if (c.y > H + c.s.length * 20) c.y = -20;
       for (var i = 0; i < c.s.length; i++) {
-        ctx.fillStyle = rgba(i % 2 ? color : gold, c.a * (1 - i / c.s.length));
+        var inName = c.hl >= 0 && i >= c.hl && i < c.hl + c.hn;
+        ctx.fillStyle = rgba(inName ? gold : (i % 2 ? color : gold),
+                             c.a * (1 - i / c.s.length) * (inName ? 1.8 : 1));
         ctx.fillText(c.s[i], c.x, c.y - i * 20);
       }
     });
