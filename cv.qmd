@@ -161,13 +161,13 @@ Issued by APMG International, May 2026. [Verify credential](https://www.credly.c
 
 ::: entry
 ::: when
-2015
+[![](assets/badges/esbri.png){.on-light width=84px fig-alt="ESBRI logo"}](https://esbri.se/)
 :::
 ::: what
 **From Research to Business**
 
 ::: where
-Course by [ESBRI](https://esbri.se/), on commercialising research. Participant.
+Course by [ESBRI](https://esbri.se/), on commercialising research, 2015. Participant.
 :::
 :::
 :::

@@ -468,3 +468,5 @@ a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .series-tag p { margin: 0; }
 .series-nav { margin: 2.2rem 0 1rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; }
 .series-nav p { margin: 0; color: var(--muted); }
+/* Logos with dark artwork on transparent backgrounds get a light plate on the dark theme */
+.quarto-dark img.on-light { background: #f4efe4; padding: 6px 8px; border-radius: 8px; }
