@@ -13,6 +13,19 @@ This site does not use cookies, does not show advertising and does not include s
 
 **Web analytics.** To learn roughly how many people visit and which pages they read, I use [GoatCounter](https://www.goatcounter.com), a privacy-friendly analytics service, hosted at `kiero.goatcounter.com`. According to its documentation it sets no cookies and does not track you across sites or store your IP address. It records only aggregate page-view information such as the page visited, the referring site, browser and screen size, and the country. Because it needs no cookies and stores no personal profile, no consent banner is shown. Details are in [GoatCounter's privacy policy](https://www.goatcounter.com/privacy).
 
+<p id="visit-count" hidden>Total page views counted so far: <strong id="visit-count-n"></strong>.</p>
+
+<script>
+(function () {
+  fetch("https://kiero.goatcounter.com/counter/TOTAL.json")
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) {
+      document.getElementById("visit-count-n").textContent = d.count;
+      document.getElementById("visit-count").hidden = false;
+    }).catch(function () {});
+})();
+</script>
+
 **Hosting.** The site is served by [GitHub Pages](https://pages.github.com). As with any web host, GitHub may process technical data such as your IP address when you request a page; see the [GitHub privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
 
 **Local storage.** If you switch between light and dark mode, your choice is remembered in your browser's local storage. It never leaves your device.
