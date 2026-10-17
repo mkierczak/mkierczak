@@ -67,6 +67,13 @@ DNA metabarcoding for authenticating food products, and genome assembly from sin
 - [Building de novo reference genome assemblies of complex eukaryotic microorganisms from single nuclei](https://doi.org/10.1038/s41598-020-58025-3). *Scientific Reports*, 2020.
 :::
 
+## Species I have worked with
+From domestic animals and wildlife to humans, microbes and plants:
+
+::: chips
+[Dog]{.chip .i-dog} [Human]{.chip .i-human} [Rhinoceros]{.chip .i-rhino} [Chicken]{.chip .i-chicken} [Bumblebee]{.chip .i-bee} [Bacteria]{.chip .i-bacterium} [Plants]{.chip .i-plant} [HIV-1]{.chip .i-virus}
+:::
+
 ## Tools & languages
 Day-to-day, I work with:
 
