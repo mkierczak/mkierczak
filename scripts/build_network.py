@@ -87,5 +87,6 @@ for t in extra["teaching"]["people"]:
 ids = {n["id"] for n in nodes}
 assert len(ids) == len(nodes), "duplicate node ids"
 assert all(l["source"] in ids and l["target"] in ids for l in links)
-json.dump({"nodes": nodes, "links": links}, open("network.json", "w"), ensure_ascii=False, separators=(",", ":"))
+others = {a: {"n": n, "year": last[a]} for a, n in sorted(papers.items()) if a not in people}
+json.dump({"nodes": nodes, "links": links, "others": others}, open("network.json", "w"), ensure_ascii=False, separators=(",", ":"))
 print(len(nodes), "nodes,", len(links), "links;", len(people), "co-authors,", len(insts), "institutions,", len(themes), "themes")

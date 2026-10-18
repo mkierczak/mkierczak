@@ -255,6 +255,15 @@ Day-to-day, I work with:
       if (!q) { if (found) { found = null; render(); } return; }
       var hits = g.nodes.filter(function (n) { return norm(n.label) === q; });
       if (!hits.length) hits = g.nodes.filter(function (n) { return norm(n.label).indexOf(q) > -1; });
+      if (!hits.length) {
+        var oth = Object.keys(g.others || {}).filter(function (k) { return norm(k).indexOf(q) > -1; });
+        if (oth.length === 1) {
+          var o = g.others[oth[0]];
+          desc.textContent = oth[0] + " is a co-author on " + o.n + " of my publications (" + o.year + "). Only co-authors of two or more are shown in the graph.";
+          return;
+        }
+        if (oth.length > 1) { desc.textContent = oth.length + " co-authors with a single shared paper match; they are not shown in the graph. Keep typing to narrow it down."; return; }
+      }
       if (hits.length !== 1) { desc.textContent = hits.length ? hits.length + " matches; keep typing or pick one from the list." : "No match."; return; }
       var n = hits[0];
       found = n.id;

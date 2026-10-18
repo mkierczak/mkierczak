@@ -506,3 +506,5 @@ button.net-toggle[aria-pressed="true"] { background: var(--accent); border-color
 .net-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .net-node.found circle { stroke: var(--accent); stroke-width: 4; }
 .net-node.found text { fill: var(--accent); font-weight: 600; }
+.net-search input { color-scheme: light; }
+.quarto-dark .net-search input { color-scheme: dark; }
