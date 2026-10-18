@@ -456,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
     ["raukr", "RaukR", "Organisers and guest instructors of the RaukR summer school. Click a name to visit their website."]
     // ["all", "Everything", "All layers together."]  (switched off for now)
   ];
-  var view = "people", sim = null, g, info = document.getElementById("net-info");
+  var view = "people", sim = null, found = null, cur = null, g, info = document.getElementById("net-info");
   var svg = d3.select(sec).append("svg").attr("viewBox", [0, 0, W, H]).attr("class", "net-svg");
   var root = null;
   var zoom = d3.zoom().scaleExtent([0.6, 6])
@@ -524,17 +524,24 @@ ul.task-list li input[type="checkbox"] {
       if (n.url) el = el.append("a").attr("href", n.url).attr("target", "_blank").attr("rel", "noopener");
       el.append("circle").attr("r", r(n));
     });
-    node.filter(function (n) { return n.type !== "person" || n.papers >= labelPeople; })
+    node.filter(function (n) { return n.id === found || n.type !== "person" || n.papers >= labelPeople; })
       .append("text").attr("dy", function (n) { return -r(n) - 4; }).attr("text-anchor", "middle").text(function (n) { return n.label; });
     var nb = {};
     links.forEach(function (l) { (nb[l.source.id] = nb[l.source.id] || {})[l.target.id] = 1; (nb[l.target.id] = nb[l.target.id] || {})[l.source.id] = 1; });
-    node.on("mouseenter focus", function (e, n) {
+    function focusOn(n) {
       node.classed("dim", function (m) { return m !== n && !(nb[n.id] && nb[n.id][m.id]); });
       link.classed("dim", function (l) { return l.source !== n && l.target !== n; }).classed("hi", function (l) { return l.source === n || l.target === n; });
       info.textContent = label(n);
-    }).on("mouseleave blur", function () {
+    }
+    var foundNode = found ? nodes.filter(function (n) { return n.id === found; })[0] : null;
+    function blur() {
       node.classed("dim", false); link.classed("dim", false).classed("hi", false); info.textContent = "";
-    });
+      if (foundNode) focusOn(foundNode);
+    }
+    node.on("mouseenter focus", function (e, n) { focusOn(n); }).on("mouseleave blur", blur);
+    node.classed("found", function (n) { return n === foundNode; });
+    if (foundNode) focusOn(foundNode);
+    cur = { nodes: nodes, node: foundNode };
     node.call(d3.drag().on("start", function (e, n) { if (!e.active) sim.alphaTarget(0.25).restart(); n.fx = n.x; n.fy = n.y; })
       .on("drag", function (e, n) { n.fx = e.x; n.fy = e.y; })
       .on("end", function (e, n) { if (!e.active) sim.alphaTarget(0); n.fx = null; n.fy = null; }));
@@ -548,12 +555,40 @@ ul.task-list li input[type="checkbox"] {
   fetch("network.json").then(function (r) { return r.json(); }).then(function (data) {
     g = data;
     var ctl = document.getElementById("net-controls"), desc = document.getElementById("net-desc");
-    function select(v) {
+    function select(v, keep) {
       view = v;
+      if (!keep) { found = null; if (input) input.value = ""; }
       Array.prototype.forEach.call(ctl.children, function (b) { b.setAttribute("aria-pressed", String(b.dataset.view === v)); });
       desc.textContent = VIEWS.filter(function (x) { return x[0] === v; })[0][2];
       render();
     }
+    function norm(t) { return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+    var box = document.createElement("div");
+    box.className = "net-search";
+    box.innerHTML = '<input id="net-search" type="search" list="net-names" autocomplete="off" placeholder="Find a person, institution or theme\u2026" aria-label="Search the network by name"><datalist id="net-names"></datalist>';
+    ctl.parentNode.insertBefore(box, desc);
+    var input = box.querySelector("input");
+    box.querySelector("datalist").innerHTML = g.nodes.map(function (n) { return n.label; }).sort(function (a, b) { return a.localeCompare(b); })
+      .map(function (l) { return '<option value="' + l.replace(/"/g, "&quot;") + '">'; }).join("");
+    function viewHas(v, n) { var d = subset(v); return d.nodes.some(function (x) { return x.id === n.id; }); }
+    function search() {
+      var q = norm(input.value);
+      if (!q) { if (found) { found = null; render(); } return; }
+      var hits = g.nodes.filter(function (n) { return norm(n.label) === q; });
+      if (!hits.length) hits = g.nodes.filter(function (n) { return norm(n.label).indexOf(q) > -1; });
+      if (hits.length !== 1) { desc.textContent = hits.length ? hits.length + " matches; keep typing or pick one from the list." : "No match."; return; }
+      var n = hits[0];
+      found = n.id;
+      var v = viewHas(view, n) ? view : ["people", "inst", "themes", "raukr"].filter(function (x) { return viewHas(x, n); })[0];
+      select(v, true);
+      setTimeout(function () {
+        var t = cur && cur.nodes.filter(function (m) { return m.id === found; })[0];
+        if (t && found !== ME) svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W / 2, H / 2).scale(2).translate(-t.x, -t.y));
+      }, reduce ? 0 : 2000);
+    }
+    input.addEventListener("change", search);
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); search(); } });
+    input.addEventListener("search", search);
     VIEWS.forEach(function (v) {
       var b = document.createElement("button");
       b.type = "button"; b.className = "chip net-toggle"; b.dataset.view = v[0]; b.textContent = v[1];

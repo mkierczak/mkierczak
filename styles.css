@@ -501,3 +501,8 @@ button.net-toggle[aria-pressed="true"] { background: var(--accent); border-color
 .net-zoom button { width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); color: inherit; font: 1.1rem/1 "Inter", sans-serif; cursor: pointer; }
 .net-zoom button:hover, .net-zoom button:focus-visible { border-color: var(--accent); color: var(--accent); }
 .net-svg { cursor: grab; }
+.net-search { margin: 0 0 .5rem; }
+.net-search input { width: 100%; max-width: 22rem; padding: .35rem .8rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); color: inherit; font: .85rem "Inter", sans-serif; }
+.net-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.net-node.found circle { stroke: var(--accent); stroke-width: 4; }
+.net-node.found text { fill: var(--accent); font-weight: 600; }
