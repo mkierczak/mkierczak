@@ -60,7 +60,7 @@ website:
         href: blog.xml
         aria-label: RSS feed
   page-footer:
-    left: "[©](/impressum.html){.impressum-link title=\"Impressum\"} 1998-2026 Marcin Kierczak"
+    left: "[© 1998-2026](/impressum.html){.impressum-link title=\"Impressum\"} Marcin Kierczak"
     right: "Uppsala, Sweden · Built with human brain, [Quarto](https://quarto.org) & [Claude](https://claude.com)"
 
 format:
