@@ -453,8 +453,8 @@ ul.task-list li input[type="checkbox"] {
     ["people", "Co-authors", "My co-authors and the papers we share. Larger dots mean more shared papers. Lines between co-authors are drawn faintly and light up when you hover or focus a dot: two co-authors are linked if they share at least two papers, and the line is darker from four. Zoom with the buttons, Ctrl or \u2318 plus scroll, or pinch; drag the background to pan."],
     ["inst", "Institutions", "Co-authors grouped by the institution where they mostly work."],
     ["themes", "Themes", "Research themes and the co-authors on their selected papers."],
-    ["raukr", "RaukR", "Organisers and guest instructors of the RaukR summer school. Click a name to visit their website."],
-    ["all", "Everything", "All layers together."]
+    ["raukr", "RaukR", "Organisers and guest instructors of the RaukR summer school. Click a name to visit their website."]
+    // ["all", "Everything", "All layers together."]  (switched off for now)
   ];
   var view = "people", sim = null, g, info = document.getElementById("net-info");
   var svg = d3.select(sec).append("svg").attr("viewBox", [0, 0, W, H]).attr("class", "net-svg");
