@@ -175,11 +175,11 @@ Course by [ESBRI](https://esbri.se/), on commercialising research, 2015. Partici
 ## Teaching and course organisation
 
 - **RaukR**, *Advanced R Programming for Bioinformatics*, Visby. Co-organiser, annually since 2018.
-- **R for non-programmers** and **Advanced R for data scientists**. Course leader.
+<!-- - **R for non-programmers** and **Advanced R for data scientists**. Course leader. -->
 - **R Programming for Life Scientists**, SciLifeLab, 2015–2020. Course responsible; teacher 2015–2017.
 - **Statistical Methods in Genetic Mapping: An R-based Course**, 4 ECTS graduate course, 2013. Course responsible and teacher.
 - **LUPA Workshop: GWAS Analyses in Stratified Populations**, Uppsala, 2011. Course responsible.
-- **Next-Generation Sequencing: Bioinformatics and Data Analysis**, PhD-level course. Course responsible.
+<!-- - **Next-Generation Sequencing: Bioinformatics and Data Analysis**, PhD-level course. Course responsible. -->
 - **Boolean Reasoning** and **Knowledge-based Systems in Bioinformatics**, Uppsala University. Teacher and teaching assistant.
 
 ## Invited and popular-science talks

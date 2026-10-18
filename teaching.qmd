@@ -59,11 +59,11 @@ Over the years, RaukR has hosted guest instructors from the R community, includi
 ## Courses and workshops
 
 - **RaukR**, *Advanced R Programming for Bioinformatics*, Visby. Co-organiser, annually since 2018 ([raukr.nbis.se](https://raukr.nbis.se)).
-- **R for non-programmers** and **Advanced R for data scientists**. Course leader.
+<!-- - **R for non-programmers** and **Advanced R for data scientists**. Course leader. -->
 - **R Programming for Life Scientists**, SciLifeLab course, 2015–2020. Course responsible; teacher in five editions, 2015–2017 ([materials from the 2017 Uppsala edition](https://nbisweden.github.io/Rcourse/HT17Uppsala/)).
 - **Statistical Methods in Genetic Mapping: An R-based Course**, 4 ECTS graduate course, Nov–Dec 2013. Course responsible and teacher.
 - **LUPA Workshop: GWAS Analyses in Stratified Populations**, Uppsala, May 2011. Course responsible.
-- **Next-Generation Sequencing: Bioinformatics and Data Analysis**, PhD-level course. Course responsible.
+<!-- - **Next-Generation Sequencing: Bioinformatics and Data Analysis**, PhD-level course. Course responsible. -->
 - **Boolean Reasoning**, lectures and labs on random forests. Teacher.
 - **Knowledge-based Systems in Bioinformatics**, 2008. Teaching assistant.
 
