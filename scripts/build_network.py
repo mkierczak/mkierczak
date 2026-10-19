@@ -75,7 +75,7 @@ for t, dois in themes.items():
     nodes.append({"id": "theme:" + t, "type": "theme", "label": t, "papers": len(tp)})
     links.append({"source": ME, "target": "theme:" + t, "kind": "theme", "w": len(tp)})
     c = collections.Counter(a for p in tp for a in {norm(x) for x in p["names"]} & people)
-    for a, w in c.items():
+    for a, w in sorted(c.items()):
         links.append({"source": a, "target": "theme:" + t, "kind": "theme", "w": w})
 hub = extra["teaching"]["hub"]
 nodes.append({"id": hub["id"], "type": "teaching", "label": hub["label"], "url": hub["url"], "role": "summer school"})

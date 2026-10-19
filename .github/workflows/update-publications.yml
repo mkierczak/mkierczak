@@ -1,0 +1,48 @@
+name: Update publications and network
+
+on:
+  schedule:
+    - cron: "43 5 1 * *"   # 1st of each month, 05:43 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch publications and rebuild the network
+        run: |
+          python scripts/fetch_publications.py
+          python scripts/build_network.py
+      - name: Copy into the published folder
+        run: cp publications.json network.json docs/
+      - name: Open a pull request if changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: auto/update-publications
+          add-paths: |
+            publications.json
+            publication-network.json
+            network.json
+            docs/publications.json
+            docs/network.json
+          commit-message: "Update publications and collaboration network"
+          title: "Update publications and collaboration network"
+          body: |
+            Automated refresh from OpenAlex and Crossref.
+
+            Before merging, check the Research network for:
+            - new co-author spellings that need an entry in `aliases` in `network-extra.json`
+            - new or oddly named institutions that need `institution_aliases`
+            - works wrongly attributed to you (add the DOI to `EXCLUDE` in `scripts/fetch_publications.py`)
+
+            New papers have no note until you add one to `paper-notes.json`. Citation counts update weekly by themselves.
+          delete-branch: true

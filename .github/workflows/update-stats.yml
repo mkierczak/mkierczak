@@ -1,0 +1,40 @@
+name: Update stats and citation counts
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"   # Mondays, 05:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch GitHub stats and citation counts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/fetch_github.py
+          python scripts/fetch_details.py
+      - name: Copy into the published folder
+        run: cp github-stats.json publication-counts.json docs/
+      - name: Commit if changed
+        run: |
+          git add github-stats.json publication-counts.json docs/github-stats.json docs/publication-counts.json
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update GitHub stats and citation counts"
+          git pull --rebase
+          git push
