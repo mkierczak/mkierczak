@@ -1787,65 +1787,6 @@
   ]
  },
  {
-  "title": "A risk haplotype within the PKP2 locus shows association to Canine Atopic Dermatitis and contains cell-type specific enhancers",
-  "year": 2015,
-  "doi": "",
-  "authors": [
-   {
-    "name": "Katarina Tengvall",
-    "institutions": []
-   },
-   {
-    "name": "Sergey V. Kozyrev",
-    "institutions": []
-   },
-   {
-    "name": "Marcin Kierczak",
-    "institutions": []
-   },
-   {
-    "name": "Kerstin Bergvall",
-    "institutions": []
-   },
-   {
-    "name": "Fabiana Geraldo Farias",
-    "institutions": []
-   },
-   {
-    "name": "Brita Ardesjö-Lundgren",
-    "institutions": []
-   },
-   {
-    "name": "Eva Murén",
-    "institutions": []
-   },
-   {
-    "name": "Ragnvi Hagman",
-    "institutions": []
-   },
-   {
-    "name": "Tosso Leeb",
-    "institutions": []
-   },
-   {
-    "name": "Gerli Pielberg",
-    "institutions": []
-   },
-   {
-    "name": "Göran Andersson",
-    "institutions": []
-   },
-   {
-    "name": "Åke A. Hedhammar",
-    "institutions": []
-   },
-   {
-    "name": "Kerstin Lindblad‐Toh",
-    "institutions": []
-   }
-  ]
- },
- {
   "title": "Linked-read whole-genome sequencing resolves common and private structural variants in multiple myeloma",
   "year": 2022,
   "doi": "10.1182/bloodadvances.2021006720",
@@ -2032,6 +1973,65 @@
     "institutions": [
      "Swedish University of Agricultural Sciences"
     ]
+   }
+  ]
+ },
+ {
+  "title": "A risk haplotype within the PKP2 locus shows association to Canine Atopic Dermatitis and contains cell-type specific enhancers",
+  "year": 2015,
+  "doi": "",
+  "authors": [
+   {
+    "name": "Katarina Tengvall",
+    "institutions": []
+   },
+   {
+    "name": "Sergey V. Kozyrev",
+    "institutions": []
+   },
+   {
+    "name": "Marcin Kierczak",
+    "institutions": []
+   },
+   {
+    "name": "Kerstin Bergvall",
+    "institutions": []
+   },
+   {
+    "name": "Fabiana Geraldo Farias",
+    "institutions": []
+   },
+   {
+    "name": "Brita Ardesjö-Lundgren",
+    "institutions": []
+   },
+   {
+    "name": "Eva Murén",
+    "institutions": []
+   },
+   {
+    "name": "Ragnvi Hagman",
+    "institutions": []
+   },
+   {
+    "name": "Tosso Leeb",
+    "institutions": []
+   },
+   {
+    "name": "Gerli Pielberg",
+    "institutions": []
+   },
+   {
+    "name": "Göran Andersson",
+    "institutions": []
+   },
+   {
+    "name": "Åke A. Hedhammar",
+    "institutions": []
+   },
+   {
+    "name": "Kerstin Lindblad‐Toh",
+    "institutions": []
    }
   ]
  },
