@@ -36,7 +36,7 @@ All pictures come from [Wikimedia Commons](https://commons.wikimedia.org/); the 
 
 ![Katowice - Mickiewicza 21 St.](images/Katowice_Mickiewicza_21.jpg){group="poland-modernism"}
 
-![Katowice - Silesian Higher School of Management](images/Katowice_Slaska_Wyzsza_Szkola_Zarzadzania.jpg){group="poland-modernism"}
+![Katowice - Silesian High School of Management](images/Katowice_Slaska_Wyzsza_Szkola_Zarzadzania.jpg){group="poland-modernism"}
 
 ![Katowice - Silesian Parliament](images/Katowice_Sejm_Slaski.jpg){group="poland-modernism"}
 
@@ -58,11 +58,11 @@ All pictures come from [Wikimedia Commons](https://commons.wikimedia.org/); the 
 
 ![Katowice - a skyscraper](images/Katowice_Drapacz_Chmur.jpg){group="poland-modernism"}
 
-![Katowice - an example of upgraded modernism](images/Katowice_Modernizm.jpg){group="poland-modernism"}
+![Katowice - an example of 'upgraded' Modernism](images/Katowice_Modernizm.jpg){group="poland-modernism"}
 
 ![Katowice - building by the Market Square](images/Katowice_BSK-ING_przy_Rynku.jpg){group="poland-modernism"}
 
-![Kielce - Cultural Centre](images/Kielce_Centrum_Kultury.jpg){group="poland-modernism"}
+![Kielce - Culture Centre](images/Kielce_Centrum_Kultury.jpg){group="poland-modernism"}
 
 ![Mt Śnieżka - astronomical observatory](images/Schronisko_Sniezka.jpg){group="poland-modernism"}
 
