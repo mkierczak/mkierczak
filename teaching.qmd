@@ -52,7 +52,7 @@ I work to make NBIS expertise and training accessible to companies and industry 
 
 [![](assets/badges/raukr-hex.svg){width=110px fig-alt="RaukR hex logo" style="float:right;margin:0 0 0.5rem 1rem"}](https://raukr.nbis.se)
 
-Since 2018, together with [Sebastian DiLorenzo](https://github.com/Sebastian-D), [Roy Francis](https://royfrancis.com) and other NBIS colleagues, I organise [**RaukR**](https://raukr.nbis.se), the *Advanced R Programming for Bioinformatics* summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at [raukr.nbis.se](https://raukr.nbis.se).
+Since 2018, together with [Sebastian DiLorenzo](https://github.com/Sebastian-D), [Roy Francis](https://github.com/royfrancis) and other NBIS colleagues, I organise [**RaukR**](https://raukr.nbis.se), the *Advanced R Programming for Bioinformatics* summer school held on the island of Gotland in Visby, Sweden. The course covers writing robust, efficient and reproducible R for life-science data. Course materials and information about upcoming editions are at [raukr.nbis.se](https://raukr.nbis.se).
 
 Over the years, RaukR has hosted guest instructors from the R community, including [Martin Morgan](https://mtmorgan.github.io/), [Paula Moraga](https://www.paulamoraga.com), [Max Kuhn](https://github.com/topepo), [Yihui Xie](https://yihui.org), [Richard Iannone](https://github.com/rich-iannone), [Christophe Dervieux](https://cderv.rbind.io), [Jenny Bryan](https://jennybryan.org) and [Henrik Bengtsson](https://www.jottr.org).
 

@@ -18,7 +18,7 @@
     "hub": {"id": "RaukR", "label": "RaukR", "url": "https://raukr.nbis.se"},
     "people": [
       {"name": "Sebastian DiLorenzo", "url": "https://github.com/Sebastian-D", "role": "co-organiser"},
-      {"name": "Roy Francis", "url": "https://royfrancis.com", "role": "co-organiser"},
+      {"name": "Roy Francis", "url": "https://github.com/royfrancis", "role": "co-organiser"},
       {"name": "Martin Morgan", "url": "https://mtmorgan.github.io/", "role": "guest instructor"},
       {"name": "Paula Moraga", "url": "https://www.paulamoraga.com", "role": "guest instructor"},
       {"name": "Max Kuhn", "url": "https://github.com/topepo", "role": "guest instructor"},
