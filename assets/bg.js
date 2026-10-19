@@ -40,7 +40,7 @@
 
   /* ---------- formulas ---------- */
   var FORMULAS = [
-    "softmax(z)ᵢ = e^{zᵢ} / Σⱼ e^{zⱼ}",
+    "softmax(z)ᵢ = exp(zᵢ) / Σⱼ exp(zⱼ)",
     "P(θ | D) = P(D | θ) P(θ) / P(D)",
     "𝒩(x | μ, σ²) = (2πσ²)⁻¹ᐟ² exp(−(x−μ)² / 2σ²)",
     "L = −Σ yᵢ log ŷᵢ",
@@ -52,7 +52,7 @@
     "y = Xβ + g + ε",
     "KL(p ‖ q) = Σ p log(p / q)",
     "σ(x) = 1 / (1 + e⁻ˣ)",
-    "e^{iπ} + 1 = 0"
+    "exp(iπ) + 1 = 0"
   ];
   var SNIPPETS = [
     "library(tidyverse)", "hits <- df |> filter(p < 5e-8)", "fit <- lm(y ~ x, data = d)",
