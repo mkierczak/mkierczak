@@ -510,10 +510,10 @@ ul.task-list li input[type="checkbox"] {
     sim = d3.forceSimulation(nodes)
       .force("link", d3.forceLink(links).id(function (n) { return n.id; }).distance(function (l) { return dist[l.kind]; })
         .strength(function (l) { return l.kind === "coauthor" && l.source.id !== ME && l.target.id !== ME ? (l.w >= 4 ? 0.15 : 0.03) : 0.35; }))
-      .force("charge", d3.forceManyBody().strength(tight ? -160 : -340).distanceMax(420))
+      .force("charge", d3.forceManyBody().strength(tight ? -110 : -340).distanceMax(tight ? 240 : 420))
       .force("collide", d3.forceCollide().radius(function (n) { return r(n) + 6; }))
       .force("center", d3.forceCenter(W / 2, H / 2))
-      .force("x", d3.forceX(W / 2).strength(0.03)).force("y", d3.forceY(H / 2).strength(0.05));
+      .force("x", d3.forceX(W / 2).strength(tight ? 0.1 : 0.03)).force("y", d3.forceY(H / 2).strength(tight ? 0.12 : 0.05));
     var link = root.append("g").selectAll("line").data(links).join("line")
       .attr("class", function (l) { return "net-link k-" + l.kind + (l.kind === "coauthor" && l.source.id !== ME && l.target.id !== ME ? (l.w >= 4 ? " pair" : " weak") : ""); }).attr("stroke-width", function (l) { return 0.6 + 0.5 * Math.sqrt(l.w); });
     var node = root.append("g").selectAll("g").data(nodes).join("g")
@@ -547,7 +547,9 @@ ul.task-list li input[type="checkbox"] {
       .on("end", function (e, n) { if (!e.active) sim.alphaTarget(0); n.fx = null; n.fy = null; }));
     function tick() {
       link.attr("x1", function (l) { return l.source.x; }).attr("y1", function (l) { return l.source.y; }).attr("x2", function (l) { return l.target.x; }).attr("y2", function (l) { return l.target.y; });
-      node.attr("transform", function (n) { n.x = Math.max(12, Math.min(W - 12, n.x)); n.y = Math.max(12, Math.min(H - 12, n.y)); return "translate(" + n.x + "," + n.y + ")"; });
+      node.attr("transform", function (n) {
+        var hw = Math.max(12, n.type === "person" && n.id !== found && n.papers < labelPeople ? 0 : n.label.length * 3.4 + 6);
+        n.x = Math.max(hw, Math.min(W - hw, n.x)); n.y = Math.max(r(n) + 18, Math.min(H - r(n) - 6, n.y)); return "translate(" + n.x + "," + n.y + ")"; });
     }
     if (reduce) { sim.stop(); for (var i = 0; i < 300; i++) sim.tick(); tick(); } else { sim.on("tick", tick); }
   }
