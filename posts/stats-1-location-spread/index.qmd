@@ -178,5 +178,5 @@ We now have the vocabulary to describe a single variable: where it sits and how 
 ::: {.series-nav}
 [All parts in this series](../../blog.qmd#category=series){.btn-pill}
 
-Next in the series: covariance and correlation.
+Next in the series: [covariance and correlation](../stats-2-covariance-correlation/index.qmd).
 :::

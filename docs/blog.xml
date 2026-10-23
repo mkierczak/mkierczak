@@ -10,7 +10,728 @@
 <atom:link href="https://kierczak.net/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Marcin Kierczak, PhD — Training and Industry Outreach Coordinator and Data Scientist at NBIS and Associate Professor of Bioinformatics / SciLifeLab, Uppsala, Sweden.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Thu, 15 Oct 2026 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Statistics from the beginning: covariance and correlation</title>
+  <dc:creator>Marcin Kierczak</dc:creator>
+  <link>https://kierczak.net/posts/stats-2-covariance-correlation/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="series-tag">
+<p>Series · <em>Statistics from the beginning</em> · Part 2</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>About this series
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This series is adapted from my 2017 lecture notes, <em>Introduction to Statistical Tests</em> (<a href="../../assets/docs/statests.pdf">original PDF</a>). <a href="../../posts/stats-1-location-spread/index.html">Part 1</a> covered location and spread of a single variable. This part looks at <strong>two variables at once</strong>. Next come the tests themselves.</p>
+</div>
+</div>
+<section id="from-one-variable-to-two" class="level2">
+<h2 class="anchored" data-anchor-id="from-one-variable-to-two">From one variable to two</h2>
+<p>Variance told us how much a single variable scatters around its mean. When we have two variables, say <img src="https://latex.codecogs.com/png.latex?x"> and <img src="https://latex.codecogs.com/png.latex?y">, a more interesting question appears: when <img src="https://latex.codecogs.com/png.latex?x"> is above its mean, is <img src="https://latex.codecogs.com/png.latex?y"> also above <em>its</em> mean? Do the deviations of the two variables tend to point the same way?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A shared look for the figures in this series</span></span>
+<span id="cb1-4">accent <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#8c2f39"</span>; gold <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#b08d4a"</span>; ink <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#5d6070"</span></span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_set</span>(</span>
+<span id="cb1-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FFFDF8"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>),</span>
+<span id="cb1-8">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb1-9">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.major =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_line</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#EEEAE0"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>),</span>
+<span id="cb1-10">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plot"</span>)</span>
+<span id="cb1-11">)</span></code></pre></div></div>
+</div>
+<p>Back to our sheep. Let us simulate 150 ewes, recording body weight and the weight of the fleece shorn from each. Heavier animals tend to carry more wool, so we build in a positive relationship:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">23</span>)</span>
+<span id="cb2-2">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">150</span></span>
+<span id="cb2-3">ewes <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">body_kg =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>))</span>
+<span id="cb2-4">ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.25</span>)</span>
+<span id="cb2-5"></span>
+<span id="cb2-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(ewes, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  body_kg fleece_kg
+1   55.77      4.31
+2   53.26      3.39
+3   58.65      3.93
+4   62.17      4.29</code></pre>
+</div>
+</div>
+</section>
+<section id="covariance" class="level2">
+<h2 class="anchored" data-anchor-id="covariance">Covariance</h2>
+<p>Covariance multiplies, for each animal, the deviation of <img src="https://latex.codecogs.com/png.latex?x"> from its mean by the deviation of <img src="https://latex.codecogs.com/png.latex?y"> from its mean, and averages the products (with the same <img src="https://latex.codecogs.com/png.latex?n%20-%201"> as for variance):</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7BCov%7D_%7Bx,y%7D%20=%20%5Cfrac%7B%5Csum%20(x%20-%20%5Cbar%7Bx%7D)(y%20-%20%5Cbar%7By%7D)%7D%7Bn%20-%201%7D.%0A"></p>
+<p>The sign of each product is what matters. If both deviations are positive (heavy animal, heavy fleece) or both are negative (light animal, light fleece), the product is positive. If one is positive and the other negative, the product is negative. Drawing lines through the two means splits the plot into four quadrants and shows this directly:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>sign <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>((ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span></span>
+<span id="cb4-2">                    (ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb4-3">                    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positive product"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"negative product"</span>)</span>
+<span id="cb4-4"></span>
+<span id="cb4-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(ewes, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(body_kg, fleece_kg, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> sign)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> ink, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dotted"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_hline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> ink, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dotted"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_colour_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positive product"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> accent, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"negative product"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> gold)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Body weight (kg)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fleece weight (kg)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>,</span>
+<span id="cb4-11">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Most points fall in the quadrants that add to the covariance"</span>,</span>
+<span id="cb4-12">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dotted lines: the two means"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"top"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://kierczak.net/posts/stats-2-covariance-correlation/index_files/figure-html/quadrants-1.png" class="img-fluid figure-img" alt="Scatterplot of body weight against fleece weight with lines at the means. Points in the upper right and lower left quadrants, which contribute positive products, are red; the others are gold." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Most of the points lie in the upper right and lower left quadrants, so the sum is positive: <strong>positive covariance</strong> means that <img src="https://latex.codecogs.com/png.latex?y"> tends to increase with <img src="https://latex.codecogs.com/png.latex?x">. If the relationship ran the other way, most points would fall in the other two quadrants and the covariance would be <strong>negative</strong>. If the quadrants were populated about evenly, the positive and negative products would cancel and the covariance would be close to zero.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cov</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6676829</code></pre>
+</div>
+</div>
+<p>There is a neat connection to the previous part. Substitute <img src="https://latex.codecogs.com/png.latex?x"> for <img src="https://latex.codecogs.com/png.latex?y"> in the formula and you get <img src="https://latex.codecogs.com/png.latex?%5Csum%20(x%20-%20%5Cbar%7Bx%7D)%5E2%20/%20(n%20-%201)">, which is exactly the variance. <strong>Variance is the covariance of a variable with itself:</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cov =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cov</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">var =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">var</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     cov      var 
+14.25627 14.25627 </code></pre>
+</div>
+</div>
+</section>
+<section id="covariance-depends-on-the-units" class="level2">
+<h2 class="anchored" data-anchor-id="covariance-depends-on-the-units">Covariance depends on the units</h2>
+<p>Like variance, covariance is <strong>scale dependent</strong>. Suppose a colleague records the same fleece weights in grams rather than kilograms. Nothing about the animals has changed, yet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">fleece_g <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb9-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">kg =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cov</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg),</span>
+<span id="cb9-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">g  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cov</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, fleece_g))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         kg           g 
+  0.6676829 667.6828594 </code></pre>
+</div>
+</div>
+<p>The covariance grows a thousandfold. Its size says nothing about how <em>strong</em> the relationship is, so we cannot compare covariances between different pairs of variables, or judge whether 0.4 is “large”. We need to remove the units.</p>
+</section>
+<section id="correlation" class="level2">
+<h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
+<p>We already know how to remove units: <strong>standardise</strong>. Dividing the covariance by the standard deviations of both variables gives the <em>Pearson correlation coefficient</em>,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7BCor%7D_%7Bx,y%7D%20=%20%5Cfrac%7B%5Cmathrm%7BCov%7D_%7Bx,y%7D%7D%7B%5Csqrt%7Bs_x%5E2%20%5Ccdot%20s_y%5E2%7D%7D%20=%20%5Cfrac%7B%5Cmathrm%7BCov%7D_%7Bx,y%7D%7D%7Bs_x%20%5C,%20s_y%7D.%0A"></p>
+<p>It is bounded between <img src="https://latex.codecogs.com/png.latex?-1"> and <img src="https://latex.codecogs.com/png.latex?1">: <img src="https://latex.codecogs.com/png.latex?1"> means a perfect increasing linear relationship, <img src="https://latex.codecogs.com/png.latex?-1"> a perfect decreasing one, and <img src="https://latex.codecogs.com/png.latex?0"> no <em>linear</em> relationship. And now the choice of units does not matter:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">kg =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cor</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg),</span>
+<span id="cb11-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">g  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cor</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, fleece_g))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       kg         g 
+0.5927476 0.5927476 </code></pre>
+</div>
+</div>
+<p>Here is the fact I promised at the end of Part 1: <strong>correlation is simply the covariance of the z-scores.</strong> Standardise both variables, compute their covariance, and you have the correlation:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">z_body   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> (ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg   <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg))   <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg)</span>
+<span id="cb13-2">z_fleece <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> (ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg)</span>
+<span id="cb13-3"></span>
+<span id="cb13-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cov_of_zscores =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cov</span>(z_body, z_fleece),</span>
+<span id="cb13-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cor            =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cor</span>(ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_kg, ewes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fleece_kg))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cov_of_zscores            cor 
+     0.5927476      0.5927476 </code></pre>
+</div>
+</div>
+</section>
+<section id="what-correlation-does-not-tell-you" class="level2">
+<h2 class="anchored" data-anchor-id="what-correlation-does-not-tell-you">What correlation does not tell you</h2>
+<p>A correlation coefficient is one number, and one number can hide a lot. Four small caveats are worth keeping in mind.</p>
+<p><strong>It only sees linear relationships.</strong> Perfect dependence can give a correlation of zero if the shape is not a line. Below, <img src="https://latex.codecogs.com/png.latex?y"> is completely determined by <img src="https://latex.codecogs.com/png.latex?x">, yet the correlation is about zero, because the left and right halves of the curve cancel:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span>
+<span id="cb15-2">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">length.out =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">60</span>)</span>
+<span id="cb15-3"></span>
+<span id="cb15-4">shapes <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbind</span>(</span>
+<span id="cb15-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"linear"</span>,    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">60</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>)),</span>
+<span id="cb15-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quadratic"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> x<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">60</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)),</span>
+<span id="cb15-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"one outlier"</span>,</span>
+<span id="cb15-8">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">59</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">59</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>))</span>
+<span id="cb15-9">)</span>
+<span id="cb15-10">r <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">split</span>(shapes, shapes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>panel), <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(d) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cor</span>(d<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x, d<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y))</span>
+<span id="cb15-11">shapes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>panel <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(shapes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>panel, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(r),</span>
+<span id="cb15-12">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%s (r = %.2f)"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(r), r))</span>
+<span id="cb15-13"></span>
+<span id="cb15-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(shapes, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(x, y)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb15-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> accent, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb15-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> panel, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb15-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The same coefficient can describe very different data"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://kierczak.net/posts/stats-2-covariance-correlation/index_files/figure-html/shapes-1.png" class="img-fluid figure-img" alt="Three scatterplots: a strong linear relationship, a parabola whose correlation is near zero, and an unrelated cloud with one extreme outlier that creates a sizeable correlation." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>It is sensitive to outliers.</strong> In the right-hand panel, 59 unrelated points plus a single extreme one produce a sizeable correlation, just as one mistyped sheep distorted the mean in Part 1. Always plot your data before trusting the number.</p>
+<p><strong>Independence implies zero covariance, but not the other way round.</strong> If two variables are independent, their covariance is zero. The parabola shows that the converse fails: zero correlation means no <em>linear</em> relationship, not no relationship.</p>
+<p><strong>Correlation is not causation.</strong> Body weight and fleece weight move together, but that alone does not tell us whether one drives the other, whether both depend on age or nutrition, or whether it is coincidence. Correlation is a description of the sample, not an explanation of it.</p>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next</h2>
+<p>We can now describe one variable (location and spread) and the relationship between two (covariance and correlation). That is enough vocabulary to start asking questions of the data. In the next part we begin with <strong>statistical tests</strong>: the difference between parametric and non-parametric tests, and checking normality, which is where most analyses start.</p>
+<div class="series-nav">
+<p><a href="../../blog.html#category=series" class="btn-pill">All parts in this series</a></p>
+<p>Previous: <a href="../../posts/stats-1-location-spread/index.html">location and spread</a>. Next in the series: statistical tests, beginning with normality.</p>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>statistics</category>
+  <category>R</category>
+  <category>teaching</category>
+  <category>series</category>
+  <guid>https://kierczak.net/posts/stats-2-covariance-correlation/</guid>
+  <pubDate>Thu, 22 Oct 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://kierczak.net/posts/stats-2-covariance-correlation/preview.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
 <item>
   <title>Statistics from the beginning: location and spread</title>
   <dc:creator>Marcin Kierczak</dc:creator>
@@ -712,7 +1433,7 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
 <p>We now have the vocabulary to describe a single variable: where it sits and how much it varies. In the next part we look at <strong>two variables at once</strong>, with covariance and correlation. Spoiler: correlation is simply covariance after standardisation.</p>
 <div class="series-nav">
 <p><a href="../../blog.html#category=series" class="btn-pill">All parts in this series</a></p>
-<p>Next in the series: covariance and correlation.</p>
+<p>Next in the series: <a href="../../posts/stats-2-covariance-correlation/index.html">covariance and correlation</a>.</p>
 </div>
 
 

@@ -128,13 +128,13 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 <link rel="alternate" type="application/rss+xml" title="Marcin Kierczak" href="blog.xml" data-external="1"><meta property="og:title" content="Blog – Marcin Kierczak">
 <meta property="og:description" content="Notes on data, genomics and teaching by Marcin Kierczak: R, statistics and bioinformatics.">
-<meta property="og:image" content="https://kierczak.net/posts/stats-1-location-spread/preview.png">
+<meta property="og:image" content="https://kierczak.net/posts/stats-2-covariance-correlation/preview.png">
 <meta property="og:site_name" content="Marcin Kierczak">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
 <meta name="twitter:title" content="Blog – Marcin Kierczak">
 <meta name="twitter:description" content="Notes on data, genomics and teaching by Marcin Kierczak: R, statistics and bioinformatics.">
-<meta name="twitter:image" content="https://kierczak.net/posts/stats-1-location-spread/preview.png">
+<meta name="twitter:image" content="https://kierczak.net/posts/stats-2-covariance-correlation/preview.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
@@ -362,7 +362,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="YXJjaGl0ZWN0dXJl">architecture <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXJjaGl2ZQ==">archive <span class="quarto-category-count">(5)</span></div><div class="category" data-category="YXZpYXRpb24=">aviation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmFzaA==">bash <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmlvaW5mb3JtYXRpY3M=">bioinformatics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZG9n">dog <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2VuZXRpY3M=">genetics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R1dBUw==">GWAS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGludXg=">Linux <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9sYW5k">Poland <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(5)</span></div><div class="category" data-category="cmFkaW8=">radio <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U0RS">SDR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2VyaWVz">series <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2ltdWxhdGlvbg==">simulation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGVhY2hpbmc=">teaching <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dmlzdWFsaXNhdGlvbg==">visualisation <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="YXJjaGl0ZWN0dXJl">architecture <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXJjaGl2ZQ==">archive <span class="quarto-category-count">(5)</span></div><div class="category" data-category="YXZpYXRpb24=">aviation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmFzaA==">bash <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmlvaW5mb3JtYXRpY3M=">bioinformatics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZG9n">dog <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2VuZXRpY3M=">genetics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R1dBUw==">GWAS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGludXg=">Linux <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9sYW5k">Poland <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(6)</span></div><div class="category" data-category="cmFkaW8=">radio <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U0RS">SDR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2VyaWVz">series <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c2ltdWxhdGlvbg==">simulation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dGVhY2hpbmc=">teaching <span class="quarto-category-count">(4)</span></div><div class="category" data-category="dmlzdWFsaXNhdGlvbg==">visualisation <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -396,7 +396,41 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcyUyQ1IlMkN0ZWFjaGluZyUyQ3Nlcmllcw==" data-listing-date-sort="1792101600000" data-listing-file-modified-sort="1792170690618" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1504">
+<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcyUyQ1IlMkN0ZWFjaGluZyUyQ3Nlcmllcw==" data-listing-date-sort="1792706400000" data-listing-file-modified-sort="1792760965531" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1292">
+<div class="thumbnail"><a href="./posts/stats-2-covariance-correlation/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/stats-2-covariance-correlation/preview.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/stats-2-covariance-correlation/index.html" class="no-external">Statistics from the beginning: covariance and correlation</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGVhY2hpbmc='); return false;">teaching</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('c2VyaWVz'); return false;">series</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/stats-2-covariance-correlation/index.html" class="no-external">
+<p>Second in a series on statistical tests: how two variables vary together, why covariance depends on units, and how correlation fixes that.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/stats-2-covariance-correlation/index.html" class="no-external">
+<div class="listing-date">
+Oct 23, 2026
+</div>
+<div class="listing-reading-time">7 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="c3RhdGlzdGljcyUyQ1IlMkN0ZWFjaGluZyUyQ3Nlcmllcw==" data-listing-date-sort="1792101600000" data-listing-file-modified-sort="1792760975465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1504">
 <div class="thumbnail"><a href="./posts/stats-1-location-spread/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/stats-1-location-spread/preview.png" class="thumbnail-image">
@@ -430,7 +464,7 @@ Oct 16, 2026
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="UiUyQ3NpbXVsYXRpb24lMkN0ZWFjaGluZw==" data-listing-date-sort="1718834400000" data-listing-file-modified-sort="1792098855000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2262">
+<div class="quarto-post image-right" data-index="2" data-categories="UiUyQ3NpbXVsYXRpb24lMkN0ZWFjaGluZw==" data-listing-date-sort="1718834400000" data-listing-file-modified-sort="1792098855000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2262">
 <div class="thumbnail"><a href="./posts/plague-sim/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/plague-sim/assets/plague_doctor_crow.webp" class="thumbnail-image">
@@ -462,7 +496,7 @@ Jun 20, 2024
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="UiUyQ2dncGxvdDIlMkN2aXN1YWxpc2F0aW9uJTJDdGVhY2hpbmc=" data-listing-date-sort="1580770800000" data-listing-file-modified-sort="1792170690617" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="748">
+<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ2dncGxvdDIlMkN2aXN1YWxpc2F0aW9uJTJDdGVhY2hpbmc=" data-listing-date-sort="1580770800000" data-listing-file-modified-sort="1792170690617" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="748">
 <div class="thumbnail"><a href="./posts/glamorous-ggplot2/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/glamorous-ggplot2/preview.png" class="thumbnail-image">
@@ -496,7 +530,7 @@ Feb 4, 2020
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ2dlbmV0aWNzJTJDdmlzdWFsaXNhdGlvbg==" data-listing-date-sort="1517353200000" data-listing-file-modified-sort="1792147478982" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1126">
+<div class="quarto-post image-right" data-index="4" data-categories="UiUyQ2dlbmV0aWNzJTJDdmlzdWFsaXNhdGlvbg==" data-listing-date-sort="1517353200000" data-listing-file-modified-sort="1792147478982" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1126">
 <div class="thumbnail"><a href="./posts/karyoploter-23andme/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/karyoploter-23andme/marker_density-1.png" class="thumbnail-image">
@@ -528,7 +562,7 @@ Jan 31, 2018
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="YXJjaGl2ZSUyQ1NEUiUyQ3JhZGlvJTJDYXZpYXRpb24=" data-listing-date-sort="1409695200000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191">
+<div class="quarto-post image-right" data-index="5" data-categories="YXJjaGl2ZSUyQ1NEUiUyQ3JhZGlvJTJDYXZpYXRpb24=" data-listing-date-sort="1409695200000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191">
 <div class="thumbnail"><a href="./posts/archive-rtl-acars-osx/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/archive-rtl-acars-osx/preview.png" class="thumbnail-image">
@@ -562,7 +596,7 @@ Sep 3, 2014
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="YXJjaGl2ZSUyQ1IlMkNnZW5ldGljcyUyQ2RvZw==" data-listing-date-sort="1394146800000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="352">
+<div class="quarto-post image-right" data-index="6" data-categories="YXJjaGl2ZSUyQ1IlMkNnZW5ldGljcyUyQ2RvZw==" data-listing-date-sort="1394146800000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="352">
 <div class="thumbnail"><a href="./posts/archive-genome-assembly-mapping/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/archive-genome-assembly-mapping/preview.png" class="thumbnail-image">
@@ -596,7 +630,7 @@ Mar 7, 2014
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="YXJjaGl2ZSUyQ2dlbmV0aWNzJTJDR1dBUw==" data-listing-date-sort="1345672800000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="137">
+<div class="quarto-post image-right" data-index="7" data-categories="YXJjaGl2ZSUyQ2dlbmV0aWNzJTJDR1dBUw==" data-listing-date-sort="1345672800000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="137">
 <div class="thumbnail"><a href="./posts/archive-variance-controlling-genes/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/archive-variance-controlling-genes/preview.png" class="thumbnail-image">
@@ -628,7 +662,7 @@ Aug 23, 2012
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="YXJjaGl2ZSUyQ2Jhc2glMkNMaW51eCUyQ2Jpb2luZm9ybWF0aWNz" data-listing-date-sort="1296514800000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="837">
+<div class="quarto-post image-right" data-index="8" data-categories="YXJjaGl2ZSUyQ2Jhc2glMkNMaW51eCUyQ2Jpb2luZm9ybWF0aWNz" data-listing-date-sort="1296514800000" data-listing-file-modified-sort="1792265859196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="837">
 <div class="thumbnail"><a href="./posts/archive-bash-ssh-basics/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/archive-bash-ssh-basics/preview.png" class="thumbnail-image">
@@ -662,7 +696,7 @@ Feb 1, 2011
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="YXJjaGl2ZSUyQ2FyY2hpdGVjdHVyZSUyQ1BvbGFuZA==" data-listing-date-sort="1288303200000" data-listing-file-modified-sort="1792396165190" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
+<div class="quarto-post image-right" data-index="9" data-categories="YXJjaGl2ZSUyQ2FyY2hpdGVjdHVyZSUyQ1BvbGFuZA==" data-listing-date-sort="1288303200000" data-listing-file-modified-sort="1792400982543" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
 <div class="thumbnail"><a href="./posts/archive-modernism-poland/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/archive-modernism-poland/images/Katowice_Spodek.jpg" class="thumbnail-image">

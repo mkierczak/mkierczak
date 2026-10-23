@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/stats-2-covariance-correlation/index.html",
       "/posts/stats-1-location-spread/index.html",
       "/posts/plague-sim/index.html",
       "/posts/glamorous-ggplot2/index.html",
@@ -16,6 +17,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/stats-2-covariance-correlation/index.html",
       "/posts/stats-1-location-spread/index.html",
       "/posts/plague-sim/index.html",
       "/posts/glamorous-ggplot2/index.html",
