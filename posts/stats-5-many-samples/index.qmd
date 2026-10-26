@@ -1,0 +1,161 @@
+---
+title: "Statistics from the beginning: more than two samples"
+description: "Fifth in a series on statistical tests: why many pairwise tests are a bad idea, and how ANOVA, Tukey's test and the Kruskal–Wallis test compare several groups."
+author: "Marcin Kierczak"
+date: 2026-11-13
+draft: true
+image: preview.png
+categories: [statistics, R, teaching, series]
+execute:
+  warning: false
+  message: false
+---
+
+::: {.series-tag}
+Series · *Statistics from the beginning* · Part 5
+:::
+
+::: {.callout-note}
+## About this series
+This series is adapted from my 2017 lecture notes, *Introduction to Statistical Tests* ([original PDF](/assets/docs/statests.pdf)). [Part 4](../stats-4-two-samples/index.qmd) compared two samples. Here we compare **three or more**.
+:::
+
+## Why not just run many t-tests?
+
+With three diets there are three pairs to compare, with five diets ten, with ten diets forty-five. It is tempting to run a $t$-test on every pair. The trouble is that each test carries its own 5% risk of a false positive, and these risks add up.
+
+We can measure that. Below we draw three groups from the *same* population, so that every difference is pure chance, run all three pairwise tests, and record how often at least one of them comes out "significant":
+
+```{r setup}
+library(ggplot2)
+
+# A shared look for the figures in this series
+accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
+theme_set(
+  theme_minimal(base_size = 13) +
+    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
+          plot.title.position = "plot")
+)
+```
+
+```{r multiplicity}
+set.seed(5)
+any_hit <- replicate(5000, {
+  g <- matrix(rnorm(3 * 20), ncol = 3)          # three groups, same population
+  p <- c(t.test(g[, 1], g[, 2])$p.value,
+         t.test(g[, 1], g[, 3])$p.value,
+         t.test(g[, 2], g[, 3])$p.value)
+  any(p < 0.05)
+})
+mean(any_hit)
+```
+
+Instead of the nominal 5%, we reject a true null hypothesis in roughly one experiment in eight or nine. This is the **multiple comparisons problem**, and it grows quickly with the number of groups. The cure is to start with **one overall test** of whether the groups differ at all, and only then, if it is significant, look at which pairs differ, with a correction.
+
+## Analysis of variance
+
+Take three diets and 30 ewes on each, recording weight gain. The groups have the same variance but different means:
+
+```{r data}
+set.seed(51)
+diets <- data.frame(
+  diet = factor(rep(c("A", "B", "C"), each = 30)),
+  kg   = c(rnorm(30, 4.0, 1.5), rnorm(30, 4.6, 1.5), rnorm(30, 5.4, 1.5))
+)
+```
+
+```{r diet-plot}
+#| fig-alt: "Box plots with jittered points for the weight gain of three diets; the medians rise from A to C."
+ggplot(diets, aes(diet, kg)) +
+  geom_boxplot(fill = "#d8cfba", colour = ink, outlier.shape = NA, width = 0.5) +
+  geom_jitter(colour = accent, width = 0.12, alpha = 0.7, size = 1.8) +
+  labs(x = "Diet", y = "Winter weight gain (kg)")
+```
+
+**Analysis of variance (ANOVA)** compares the means of several groups by comparing two sources of variation: how far the group means are from each other (*between-group* variance) and how far individuals are from their own group's mean (*within-group* variance). The test statistic is their ratio,
+
+$$
+F = \frac{\text{variance between groups}}{\text{variance within groups}}.
+$$
+
+If all groups share one mean, the ratio is close to 1. If at least one group differs, the between-group part grows and so does $F$. The null hypothesis is that all group means are equal; the alternative is only that *at least one* differs.
+
+```{r anova}
+fit <- aov(kg ~ diet, data = diets)
+summary(fit)
+```
+
+A small p-value tells us the means are not all equal, but not *which* differ. For that we use a **post-hoc** test. **Tukey's honest significant differences** compares all pairs while keeping the overall error rate at 5%:
+
+```{r tukey}
+TukeyHSD(fit)
+```
+
+Each row is one pair, with the estimated difference, a confidence interval that has already been widened to account for the multiple comparisons, and an adjusted p-value. Only diets A and C differ significantly. The overall test could tell us that *something* differs, while the pairwise comparisons, which have to be more conservative, pin it down to the pair with the largest gap.
+
+### Assumptions
+
+ANOVA assumes that residuals are roughly normal and that all groups have **equal variances**. Two classical tests check the second assumption. **Bartlett's test** is more powerful but sensitive to non-normality. **Levene's test** is more robust: it runs an ANOVA on how far each observation is from its group's median.
+
+```{r levene}
+bartlett.test(kg ~ diet, data = diets)
+
+# Levene's (Brown–Forsythe) test: ANOVA on absolute deviations from the group median
+dev <- abs(diets$kg - ave(diets$kg, diets$diet, FUN = median))
+anova(lm(dev ~ diets$diet))
+```
+
+Here neither test finds a difference in variances, so the plain ANOVA is appropriate. If it did, `oneway.test(kg ~ diet, data = diets)` gives a *Welch ANOVA* that does not assume equal variances, much as Welch's $t$-test does for two groups.
+
+## When the assumptions fail: Kruskal–Wallis
+
+Consider now the parasite egg counts of three treatments. Counts are skewed, and in such data the variance tends to grow with the mean:
+
+```{r eggs}
+set.seed(52)
+eggs <- data.frame(
+  treatment = factor(rep(c("control", "drug 1", "drug 2"), each = 30),
+                     levels = c("control", "drug 1", "drug 2")),
+  count     = c(rlnorm(30, 5.0, 0.9), rlnorm(30, 4.6, 0.9), rlnorm(30, 4.0, 0.9))
+)
+
+bartlett.test(count ~ treatment, data = eggs)
+
+dev <- abs(eggs$count - ave(eggs$count, eggs$treatment, FUN = median))
+anova(lm(dev ~ eggs$treatment))
+```
+
+Both tests detect unequal variances. The non-parametric counterpart of one-way ANOVA is the **Kruskal–Wallis test**. It ranks all observations together and asks whether the groups' average ranks differ:
+
+```{r kruskal}
+kruskal.test(count ~ treatment, data = eggs)
+```
+
+A small p-value means that not all samples come from the same population. As with ANOVA, it does not say which differ, so we follow up with pairwise Wilcoxon tests and correct the p-values for multiplicity. Holm's method is uniformly better than the older Bonferroni correction and just as simple:
+
+```{r pairwise}
+pairwise.wilcox.test(eggs$count, eggs$treatment, p.adjust.method = "holm")
+```
+
+Drug 2 differs from both the control and drug 1. Drug 1 is not distinguishable from the control at the 5% level, although its adjusted p-value is not far above it.
+
+```{r eggs-plot}
+#| fig-alt: "Box plots of egg counts on a log scale for control, drug 1 and drug 2; counts fall from control to drug 2."
+ggplot(eggs, aes(treatment, count)) +
+  geom_boxplot(fill = "#d8cfba", colour = ink, outlier.shape = NA, width = 0.5) +
+  geom_jitter(colour = accent, width = 0.12, alpha = 0.7, size = 1.8) +
+  scale_y_log10() +
+  labs(x = NULL, y = "Eggs per gram (log scale)")
+```
+
+## What's next
+
+So far the data were measurements. Next we turn to **counts and proportions**, which need a different family of tests, based on the $\chi^2$ statistic. We begin by building the $\chi^2$ distribution ourselves, by simulation.
+
+::: {.series-nav}
+[All parts in this series](../../blog.qmd#category=series){.btn-pill}
+
+Previous: [comparing two samples](../stats-4-two-samples/index.qmd). Next in the series: tests for proportions.
+:::

@@ -1,0 +1,146 @@
+---
+title: "Statistics from the beginning: goodness of fit and independence"
+description: "Seventh in a series on statistical tests: comparing several proportions, checking whether a die is fair, and testing whether a treatment and an outcome are independent."
+author: "Marcin Kierczak"
+date: 2026-11-27
+draft: true
+image: preview.png
+categories: [statistics, R, teaching, series]
+execute:
+  warning: false
+  message: false
+---
+
+::: {.series-tag}
+Series · *Statistics from the beginning* · Part 7
+:::
+
+::: {.callout-note}
+## About this series
+This series is adapted from my 2017 lecture notes, *Introduction to Statistical Tests* ([original PDF](/assets/docs/statests.pdf)). [Part 6](../stats-6-proportions/index.qmd) introduced the $\chi^2$ statistic and the test for one proportion. This part uses the same machinery for three further questions.
+:::
+
+```{r setup}
+library(ggplot2)
+
+# A shared look for the figures in this series
+accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
+theme_set(
+  theme_minimal(base_size = 13) +
+    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
+          plot.title.position = "plot")
+)
+```
+
+## Do several samples share one proportion?
+
+Imagine exit polls from four polling stations, reporting how many of the people questioned declared support for a candidate:
+
+| | Station 1 | Station 2 | Station 3 | Station 4 |
+|---|---|---|---|---|
+| declared support | 55 | 75 | 455 | 45 |
+| people questioned | 100 | 150 | 1000 | 87 |
+
+Is the structure of support the same everywhere, or do the stations differ? The null hypothesis is that all four share a single underlying proportion. `prop.test()`, which we used for one proportion, accepts vectors:
+
+```{r four-sites}
+support <- c(55, 75, 455, 45)
+total   <- c(100, 150, 1000, 87)
+
+prop.test(support, total)
+```
+
+The p-value is well above 0.05, so we have no reason to think the stations differ. The observed proportions all lie between 45% and 55%, and with samples this small, differences of that size are unremarkable.
+
+## Is the die fair? Goodness of fit
+
+A **goodness-of-fit test** asks whether the counts we observe across several categories fit a *specified* distribution. This is handy when visiting a casino, or when playing dice with a stranger. We throw a die 61 times and get:
+
+```{r dice}
+faces   <- 1:6
+results <- c(7, 14, 9, 11, 15, 5)       # counts of one ... six
+expected <- sum(results) / 6
+
+data.frame(face = faces, observed = results, expected = round(expected, 1))
+chisq.test(x = results, p = rep(1/6, 6))
+```
+
+$H_0$ says the die is fair: each face has probability 1/6. The test has $6 - 1 = 5$ degrees of freedom, and the p-value is large, so we have no evidence of cheating. Alea iacta est.
+
+But beware of reading "no evidence" as "fair". Sixty-one throws is not many. If we saw the *same proportions* in ten times as many throws, would the verdict change?
+
+```{r dice-more}
+chisq.test(x = results * 10, p = rep(1/6, 6))$p.value
+```
+
+Now the p-value is tiny. Same die, same pattern, ten times more data: the test is much more powerful, and the pattern that was compatible with chance is no longer so. A non-significant result means we did not collect enough evidence, not that the null hypothesis is true.
+
+```{r dice-plot}
+#| fig-alt: "Bar chart of observed counts for faces one to six, with a dashed line at the expected count of about 10 per face."
+ggplot(data.frame(face = factor(faces), n = results), aes(face, n)) +
+  geom_col(fill = "#d8cfba", width = 0.7) +
+  geom_hline(yintercept = expected, colour = accent, linetype = "dashed", linewidth = 1) +
+  labs(x = "Face", y = "Count", title = "Observed throws against the expected count for a fair die")
+```
+
+## Are two categorical variables independent?
+
+The third use of the $\chi^2$ statistic is the **test of independence**. Say we want to know whether a new drug has any effect. We give the drug to 100 randomly chosen patients and a placebo to 100 others, and after some time classify each patient as *better*, *unchanged* or *worse*:
+
+```{r drug}
+trial <- matrix(c(21, 39, 40,      # drug
+                   2, 45, 53),     # placebo
+                nrow = 2, byrow = TRUE,
+                dimnames = list(group   = c("drug", "placebo"),
+                                outcome = c("better", "unchanged", "worse")))
+trial
+```
+
+The null hypothesis is that **outcome and group are independent**: treatment makes no difference, so the distribution of outcomes is the same in both groups. Under independence, the expected count in each cell is (row total × column total) / grand total, and the $\chi^2$ statistic compares that with what we see:
+
+```{r drug-test}
+test <- chisq.test(trial)
+test
+round(test$expected, 1)       # counts expected under independence
+```
+
+The p-value is very small, so we **reject** independence. The distribution of outcomes differs between the treated and placebo groups: the treatment had an effect. (My 2017 notes slipped here, phrasing the null as the opposite of what it is. The null is independence, and the test rejects it.)
+
+To see *where* the difference comes from, look at the standardised residuals: the signed distance of each cell from what independence predicts, in standard-error units. Values beyond about ±2 stand out.
+
+```{r residuals}
+round(test$stdres, 1)
+```
+
+More patients than expected got better on the drug, and fewer got worse. Notice too that the four-station test earlier is the same test in disguise: a table with two rows (support / no support) and four columns, tested for independence of station and answer.
+
+```{r same}
+tab <- rbind(support, against = total - support)
+chisq.test(tab, correct = FALSE)$statistic
+prop.test(support, total, correct = FALSE)$statistic
+```
+
+## When counts are small
+
+All of these tests use the $\chi^2$ distribution as an *approximation*, which is good when expected counts are large enough, roughly 5 or more per cell. With small tables, use **Fisher's exact test**, which computes the probability directly:
+
+```{r fisher}
+small <- matrix(c(8, 2, 3, 7), nrow = 2,
+                dimnames = list(group = c("treated", "control"),
+                                outcome = c("recovered", "not recovered")))
+fisher.test(small)
+```
+
+Recovery was 80% in the treated group and 30% in the control group, but with only ten animals each the exact p-value is just above 0.05, and the confidence interval for the odds ratio is huge. A big apparent effect in a small sample is exactly what low power looks like.
+
+## What's next
+
+We now have a toolbox for measurements (Parts 3 to 5) and for counts (Parts 6 and 7). The tests for measurements assumed normality, so what do we do when a variable is stubbornly skewed? In the last part we look at **transformations that restore normality**, and wrap up the series with a map of which test to use when.
+
+::: {.series-nav}
+[All parts in this series](../../blog.qmd#category=series){.btn-pill}
+
+Previous: [counts, proportions and the χ² statistic](../stats-6-proportions/index.qmd). Next in the series: restoring normality, and a summary.
+:::

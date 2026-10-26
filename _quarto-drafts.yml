@@ -1,0 +1,7 @@
+website:
+  draft-mode: visible
+format:
+  html:
+    include-in-header:
+      - text: |
+          <style>#quarto-draft-alert { display: none !important; }</style>

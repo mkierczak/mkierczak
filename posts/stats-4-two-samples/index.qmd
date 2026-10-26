@@ -1,0 +1,163 @@
+---
+title: "Statistics from the beginning: comparing two samples"
+description: "Fourth in a series on statistical tests: the F-test for variances, Student's and Welch's t-tests, paired samples, and the Mann–Whitney test when normality fails."
+author: "Marcin Kierczak"
+date: 2026-11-06
+draft: true
+image: preview.png
+categories: [statistics, R, teaching, series]
+execute:
+  warning: false
+  message: false
+---
+
+::: {.series-tag}
+Series · *Statistics from the beginning* · Part 4
+:::
+
+::: {.callout-note}
+## About this series
+This series is adapted from my 2017 lecture notes, *Introduction to Statistical Tests* ([original PDF](/assets/docs/statests.pdf)). [Part 3](../stats-3-hypothesis-one-sample/index.qmd) introduced the logic of hypothesis testing and the tests for one sample. Here we compare **two samples**.
+:::
+
+## Do two samples come from the same population?
+
+The commonest question in applied statistics is a comparison. Do ewes fed on diet A gain as much weight as ewes fed on diet B? Is the expression of a gene different in two tissues? The null hypothesis is that both samples come from populations with the **same mean**, and we ask whether the observed difference is larger than chance would produce.
+
+Let us simulate two groups of 40 ewes and record their weight gain over the winter, in kilograms. The groups differ in mean *and* in how variable they are:
+
+```{r setup}
+library(ggplot2)
+
+# A shared look for the figures in this series
+accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
+theme_set(
+  theme_minimal(base_size = 13) +
+    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
+          plot.title.position = "plot")
+)
+```
+
+```{r data}
+set.seed(4)
+gain <- data.frame(
+  diet = rep(c("A", "B", "C"), each = 40),
+  kg   = c(rnorm(40, mean = 4.0, sd = 1.0),    # A
+           rnorm(40, mean = 4.8, sd = 2.5),    # B: higher mean, much more variable
+           rnorm(40, mean = 4.1, sd = 1.1))    # C: like A
+)
+a <- gain$kg[gain$diet == "A"]
+b <- gain$kg[gain$diet == "B"]
+c_ <- gain$kg[gain$diet == "C"]
+```
+
+```{r plot}
+#| fig-alt: "Box plots with jittered points of weight gain for diets A, B and C. Diet B is more spread out than A and C."
+ggplot(gain, aes(diet, kg)) +
+  geom_boxplot(fill = "#d8cfba", colour = ink, outlier.shape = NA, width = 0.5) +
+  geom_jitter(colour = accent, width = 0.12, alpha = 0.7, size = 1.8) +
+  labs(x = "Diet", y = "Winter weight gain (kg)",
+       title = "Three groups of 40 ewes: similar centres, different spreads")
+```
+
+## Comparing variances: the F-test
+
+Before comparing means, it is useful to know whether the two groups are equally variable. The **F-test** (named after Snedecor) compares two variances. Its statistic is simply their ratio, and $H_0$ says that the true ratio is 1:
+
+```{r ftest}
+var.test(a, b)   # A vs B
+var.test(a, c_)  # A vs C
+```
+
+A and B clearly differ in variance (the ratio is far from 1 and the p-value tiny), while A and C do not. This matches how we generated the data. One caveat: the F-test is itself quite sensitive to departures from normality, so do not take a non-significant result as a guarantee of equal variances.
+
+## Comparing means: the t-test
+
+The two-sample $t$-test asks whether the means differ. It comes in two flavours, and the difference is exactly the variance question we just asked:
+
+* **Student's t-test** pools the two variances into one estimate and so *assumes* they are equal;
+* **Welch's t-test** keeps them separate and adjusts the degrees of freedom accordingly. It does not assume equal variances.
+
+In R, `t.test()` uses Welch's version by default. Let us compare A with C, whose variances are similar, using both:
+
+```{r ttest-ac}
+t.test(a, c_, var.equal = TRUE)   # Student
+t.test(a, c_)                      # Welch
+```
+
+The two give almost the same answer, as they should when variances and sample sizes are similar. Now A against B, where the variances are not at all alike:
+
+```{r ttest-ab}
+t.test(a, b)
+```
+
+The output reports the estimated means of both groups, a confidence interval for their **difference**, and the p-value. Diet B's sample mean is about 0.4 kg higher than A's, yet the test does not call it significant: B is so variable that a gap of this size is easily produced by chance with 40 animals per group. The confidence interval shows this nicely. Read as B relative to A, it runs from about −0.4 kg to +1.2 kg, so it is compatible with both no effect and a useful one. It tells us not only *whether* the diets differ but *by how much*, within what range, and that the data are simply too noisy to say.
+
+::: {.callout-tip}
+## Do we need the F-test at all?
+My 2017 notes used the F-test as a gatekeeper: if variances differ, avoid the $t$-test. Today the usual advice is simpler. Welch's test loses very little power when variances happen to be equal, and stays valid when they are not, so you can use it by default and skip the pre-test. Testing assumptions first and then choosing the test based on the outcome also distorts the overall error rates a little.
+:::
+
+## Paired samples
+
+Sometimes the two measurements are not independent groups but come in *pairs*: the same animals weighed before and after a treatment, say. Pairing removes the large differences between individuals, and we exploit it with a **paired t-test**, which is just a one-sample test on the within-pair differences:
+
+```{r paired}
+set.seed(8)
+before <- rnorm(25, mean = 55, sd = 5)
+after  <- before + rnorm(25, mean = 1, sd = 1.2)   # modest, consistent gain
+
+t.test(after, before, paired = TRUE)$p.value      # exploits the pairing
+t.test(after, before)$p.value                      # ignores it
+```
+
+Ignoring the pairing hides the effect behind the large animal-to-animal variation. Whenever the design is paired, say so in the test.
+
+## When normality fails: the Mann–Whitney test
+
+If the data are far from normal, and especially if samples are small, the non-parametric alternative is the **Wilcoxon rank-sum test**, also known as the **Mann–Whitney U test**. R implements both as `wilcox.test()`. It pools all observations, ranks them, and asks whether one group's ranks tend to be higher than the other's.
+
+Consider parasite egg counts in two treatment groups, which are typically strongly right-skewed:
+
+```{r wilcox}
+#| fig-alt: "Histograms of egg counts for two treatments; both are strongly right-skewed, the treated group shifted lower."
+set.seed(21)
+eggs <- data.frame(
+  treatment = rep(c("control", "treated"), each = 30),
+  count     = c(rlnorm(30, meanlog = 5.0, sdlog = 0.8),
+                rlnorm(30, meanlog = 4.1, sdlog = 0.8))
+)
+
+ggplot(eggs, aes(count)) +
+  geom_histogram(bins = 15, fill = "#d8cfba", colour = "#FFFDF8") +
+  facet_wrap(~ treatment, ncol = 1) +
+  labs(x = "Eggs per gram", y = NULL, title = "Skewed data: counts are not normal")
+
+shapiro.test(eggs$count[eggs$treatment == "control"])$p.value
+wilcox.test(count ~ treatment, data = eggs)
+```
+
+The rank-based test needs no normality and works with the skewed counts directly. Read its result like the others: a small p-value means that values in one group tend to be larger. Strictly speaking, the test compares the *distributions*. It is a comparison of medians or means only if the two distributions have the same shape.
+
+## A short guide
+
+| Situation | Test |
+|---|---|
+| two independent samples, roughly normal | Welch's t-test (`t.test`) |
+| two independent samples, same variance assumed | Student's t-test (`var.equal = TRUE`) |
+| same units measured twice | paired t-test (`paired = TRUE`) |
+| non-normal data or small samples | Wilcoxon rank-sum (`wilcox.test`) |
+| non-normal, paired | Wilcoxon signed-rank (`wilcox.test(paired = TRUE)`) |
+| compare variances | F-test (`var.test`) |
+
+## What's next
+
+Two groups are easy. With three or more, running all the pairwise tests brings in a problem of its own. In the next part we deal with **more than two samples**: why multiple comparisons inflate errors, and how ANOVA and the Kruskal–Wallis test handle them.
+
+::: {.series-nav}
+[All parts in this series](../../blog.qmd#category=series){.btn-pill}
+
+Previous: [hypotheses, normality and one-sample tests](../stats-3-hypothesis-one-sample/index.qmd). Next in the series: more than two samples.
+:::
