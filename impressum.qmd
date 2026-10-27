@@ -69,6 +69,7 @@ Some pages show faint, slowly drifting formulas behind the text. They are decora
 | $\mathrm{KL}(p \,\Vert\, q) = \sum_x p(x)\log\dfrac{p(x)}{q(x)}$ | **Kullback–Leibler divergence.** How much a distribution $q$ differs from a reference distribution $p$. |
 | $e^{i\pi} + 1 = 0$ | **Euler's identity.** Ties together five fundamental constants ($e$, $i$, $\pi$, 1 and 0) through complex exponentials; a special case of $e^{i\theta} = \cos\theta + i\sin\theta$. |
 | $\sigma(x) = \dfrac{1}{1 + e^{-x}}$ | **Sigmoid.** Squashes any number into the range 0 to 1; used for probabilities and neuron activations. |
+| $E(a,b) = \exp(a) - \log(b)$ | **EML operator** (exp-minus-log). A single binary operation that, combined with the constant 1, is enough to build the familiar elementary functions. For example $E(x,1) = \exp(x)$ because $\log 1 = 0$, $E(1,1) = e$, and $\log x = E\bigl(1, E(E(1,x),1)\bigr)$. Introduced by Andrzej Odrzywołek (written $\mathrm{eml}$ in the original): [*All elementary functions from a single binary operator*](https://arxiv.org/abs/2603.21852), arXiv:2603.21852, March 2026 (preprint). |
 
 </details>
 

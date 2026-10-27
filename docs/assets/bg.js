@@ -52,7 +52,8 @@
     "y = Xβ + g + ε",
     "KL(p ‖ q) = Σ p log(p / q)",
     "σ(x) = 1 / (1 + e⁻ˣ)",
-    "exp(iπ) + 1 = 0"
+    "exp(iπ) + 1 = 0",
+    "E(a, b) = exp(a) − log(b)"
   ];
   var SNIPPETS = [
     "library(tidyverse)", "hits <- df |> filter(p < 5e-8)", "fit <- lm(y ~ x, data = d)",

@@ -392,10 +392,6 @@ Total page views counted so far: <strong id="visit-count-n">…</strong>
 Show the formulas and what they mean
 </summary>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Formula</th>
@@ -454,6 +450,10 @@ Show the formulas and what they mean
 <tr class="odd">
 <td style="text-align: left;"><span class="math inline">\(\sigma(x) = \dfrac{1}{1 + e^{-x}}\)</span></td>
 <td style="text-align: left;"><strong>Sigmoid.</strong> Squashes any number into the range 0 to 1; used for probabilities and neuron activations.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(E(a,b) = \exp(a) - \log(b)\)</span></td>
+<td style="text-align: left;"><strong>EML operator</strong> (exp-minus-log). A single binary operation that, combined with the constant 1, is enough to build the familiar elementary functions. For example <span class="math inline">\(E(x,1) = \exp(x)\)</span> because <span class="math inline">\(\log 1 = 0\)</span>, <span class="math inline">\(E(1,1) = e\)</span>, and <span class="math inline">\(\log x = E\bigl(1, E(E(1,x),1)\bigr)\)</span>. Introduced by Andrzej Odrzywołek (written <span class="math inline">\(\mathrm{eml}\)</span> in the original): <a href="https://arxiv.org/abs/2603.21852"><em>All elementary functions from a single binary operator</em></a>, arXiv:2603.21852, March 2026 (preprint).</td>
 </tr>
 </tbody>
 </table>
