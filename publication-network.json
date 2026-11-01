@@ -1,5 +1,33 @@
 [
  {
+  "title": "Predicting Post-Translational Modifications from Local Sequence Fragments Using Machine Learning Algorithms: Overview and Best Practices",
+  "year": 2016,
+  "doi": "10.1007/978-1-4939-6406-2_19",
+  "authors": [
+   {
+    "name": "Marcin Tatjewski",
+    "institutions": [
+     "Institute of Computer Science",
+     "University of Warsaw",
+     "Polish Academy of Sciences"
+    ]
+   },
+   {
+    "name": "Marcin Kierczak",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Dariusz Plewczyński",
+    "institutions": [
+     "University of Warsaw"
+    ]
+   }
+  ]
+ },
+ {
   "title": "Monte Carlo Feature Selection and Interdependency Discovery in Supervised Classification",
   "year": 2009,
   "doi": "10.1007/978-3-642-05179-1_17",
@@ -31,34 +59,6 @@
      "Uppsala University",
      "Swedish University of Agricultural Sciences",
      "Interdisciplinary Centre for Mathematical and Computational Modelling, University of Warsaw",
-     "University of Warsaw"
-    ]
-   }
-  ]
- },
- {
-  "title": "Predicting Post-Translational Modifications from Local Sequence Fragments Using Machine Learning Algorithms: Overview and Best Practices",
-  "year": 2016,
-  "doi": "10.1007/978-1-4939-6406-2_19",
-  "authors": [
-   {
-    "name": "Marcin Tatjewski",
-    "institutions": [
-     "Institute of Computer Science",
-     "University of Warsaw",
-     "Polish Academy of Sciences"
-    ]
-   },
-   {
-    "name": "Marcin Kierczak",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Dariusz Plewczyński",
-    "institutions": [
      "University of Warsaw"
     ]
    }
@@ -212,6 +212,29 @@
   ]
  },
  {
+  "title": "Analysis of local molecular interaction networks underlying HIV-1 resistance to reverse transcriptase inhibitors",
+  "year": 2009,
+  "doi": "",
+  "authors": [
+   {
+    "name": "Marcin Kierczak",
+    "institutions": []
+   },
+   {
+    "name": "Michał Dramiński",
+    "institutions": []
+   },
+   {
+    "name": "Jacek Koronacki",
+    "institutions": []
+   },
+   {
+    "name": "Jan Komorowski",
+    "institutions": []
+   }
+  ]
+ },
+ {
   "title": "Fine‐grained adaptive divergence in an amphibian: genetic basis of phenotypic divergence and the role of nonrandom gene flow in restricting effective migration among wetlands",
   "year": 2013,
   "doi": "10.1111/mec.12181",
@@ -246,29 +269,6 @@
     "institutions": [
      "Uppsala University"
     ]
-   }
-  ]
- },
- {
-  "title": "Analysis of local molecular interaction networks underlying HIV-1 resistance to reverse transcriptase inhibitors",
-  "year": 2009,
-  "doi": "",
-  "authors": [
-   {
-    "name": "Marcin Kierczak",
-    "institutions": []
-   },
-   {
-    "name": "Michał Dramiński",
-    "institutions": []
-   },
-   {
-    "name": "Jacek Koronacki",
-    "institutions": []
-   },
-   {
-    "name": "Jan Komorowski",
-    "institutions": []
    }
   ]
  },
@@ -521,55 +521,6 @@
   ]
  },
  {
-  "title": "Identification of candidate genes and mutations in QTL regions for chicken growth using bioinformatic analysis of NGS and SNP-chip data",
-  "year": 2013,
-  "doi": "10.3389/fgene.2013.00226",
-  "authors": [
-   {
-    "name": "Muhammad Ahsan",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Xidan Li",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Andreas E. Lundberg",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Marcin Kierczak",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "P.B. Siegel",
-    "institutions": [
-     "Virginia Tech"
-    ]
-   },
-   {
-    "name": "Örjan Carlborg",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Stefan L. Marklund",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   }
-  ]
- },
- {
   "title": "Evaluation of Machine Learning Algorithms on Protein-Protein Interactions",
   "year": 2013,
   "doi": "10.1007/978-3-319-02309-0_22",
@@ -617,6 +568,55 @@
     "institutions": [
      "Interdisciplinary Centre for Mathematical and Computational Modelling, University of Warsaw",
      "University of Warsaw"
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Identification of candidate genes and mutations in QTL regions for chicken growth using bioinformatic analysis of NGS and SNP-chip data",
+  "year": 2013,
+  "doi": "10.3389/fgene.2013.00226",
+  "authors": [
+   {
+    "name": "Muhammad Ahsan",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Xidan Li",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Andreas E. Lundberg",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Marcin Kierczak",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "P.B. Siegel",
+    "institutions": [
+     "Virginia Tech"
+    ]
+   },
+   {
+    "name": "Örjan Carlborg",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Stefan L. Marklund",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
     ]
    }
   ]
@@ -690,49 +690,6 @@
   ]
  },
  {
-  "title": "A Monte Carlo approach to modeling post-translational modification sites using local physicochemical properties",
-  "year": 2009,
-  "doi": "",
-  "authors": [
-   {
-    "name": "Marcin Kierczak",
-    "institutions": []
-   },
-   {
-    "name": "Dariusz Plewczyński",
-    "institutions": []
-   },
-   {
-    "name": "Gunnar K. A. Andersson",
-    "institutions": []
-   },
-   {
-    "name": "Samuel Lampa",
-    "institutions": []
-   },
-   {
-    "name": "Witold Remigiusz Rudnicki",
-    "institutions": []
-   },
-   {
-    "name": "Michał Dramiński",
-    "institutions": []
-   },
-   {
-    "name": "Jacek Koronacki",
-    "institutions": []
-   },
-   {
-    "name": "Krzysztof Ginalski",
-    "institutions": []
-   },
-   {
-    "name": "Jan Komorowski",
-    "institutions": []
-   }
-  ]
- },
- {
   "title": "DNA Metabarcoding for Quality Control of Basil, Oregano, and Paprika",
   "year": 2021,
   "doi": "10.3389/fpls.2021.665618",
@@ -775,6 +732,49 @@
     "institutions": [
      "University of Oslo"
     ]
+   }
+  ]
+ },
+ {
+  "title": "A Monte Carlo approach to modeling post-translational modification sites using local physicochemical properties",
+  "year": 2009,
+  "doi": "",
+  "authors": [
+   {
+    "name": "Marcin Kierczak",
+    "institutions": []
+   },
+   {
+    "name": "Dariusz Plewczyński",
+    "institutions": []
+   },
+   {
+    "name": "Gunnar K. A. Andersson",
+    "institutions": []
+   },
+   {
+    "name": "Samuel Lampa",
+    "institutions": []
+   },
+   {
+    "name": "Witold Remigiusz Rudnicki",
+    "institutions": []
+   },
+   {
+    "name": "Michał Dramiński",
+    "institutions": []
+   },
+   {
+    "name": "Jacek Koronacki",
+    "institutions": []
+   },
+   {
+    "name": "Krzysztof Ginalski",
+    "institutions": []
+   },
+   {
+    "name": "Jan Komorowski",
+    "institutions": []
    }
   ]
  },
@@ -841,6 +841,97 @@
     "name": "Göran Andersson",
     "institutions": [
      "Swedish University of Agricultural Sciences"
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Genome-Wide Analyses Suggest Mechanisms Involving Early B-Cell Development in Canine IgA Deficiency",
+  "year": 2015,
+  "doi": "10.1371/journal.pone.0133844",
+  "authors": [
+   {
+    "name": "Mia Olsson",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Katarina Tengvall",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Marcel Frankowiack",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Marcin Kierczak",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Kerstin Bergvall",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Erik Axelsson",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Linda Tintle",
+    "institutions": []
+   },
+   {
+    "name": "Eliane Marti",
+    "institutions": [
+     "University of Bern"
+    ]
+   },
+   {
+    "name": "Petra J. Roosje",
+    "institutions": [
+     "University of Bern"
+    ]
+   },
+   {
+    "name": "Tosso Leeb",
+    "institutions": [
+     "University of Bern"
+    ]
+   },
+   {
+    "name": "Åke A. Hedhammar",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Lennart L G Hammarström",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Kerstin Lindblad‐Toh",
+    "institutions": [
+     "Broad Institute",
+     "Uppsala University",
+     "Science for Life Laboratory"
     ]
    }
   ]
@@ -934,98 +1025,6 @@
      "Broad Institute",
      "Uppsala University",
      "Science for Life Laboratory"
-    ]
-   }
-  ]
- },
- {
-  "title": "Genome-Wide Analyses Suggest Mechanisms Involving Early B-Cell Development in Canine IgA Deficiency",
-  "year": 2015,
-  "doi": "10.1371/journal.pone.0133844",
-  "authors": [
-   {
-    "name": "Mia Olsson",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Katarina Tengvall",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Marcel Frankowiack",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Marcin Kierczak",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Kerstin Bergvall",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Erik Axelsson",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Linda Tintle",
-    "institutions": []
-   },
-   {
-    "name": "Eliane Marti",
-    "institutions": [
-     "University of Bern"
-    ]
-   },
-   {
-    "name": "Petra J. Roosje",
-    "institutions": [
-     "University of Bern"
-    ]
-   },
-   {
-    "name": "Tosso Leeb",
-    "institutions": [
-     "University of Bern"
-    ]
-   },
-   {
-    "name": "Åke A. Hedhammar",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Lennart L G Hammarström",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Kerstin Lindblad‐Toh",
-    "institutions": [
-     "Broad Institute",
-     "Uppsala University",
-     "Science for Life Laboratory",
-     "Massachusetts Institute of Technology"
     ]
    }
   ]
@@ -1133,92 +1132,6 @@
   ]
  },
  {
-  "title": "cgmisc: enhanced genome-wide association analyses and visualization",
-  "year": 2015,
-  "doi": "10.1093/bioinformatics/btv426",
-  "authors": [
-   {
-    "name": "Marcin Kierczak",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory",
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Jagoda Jabłońska",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Simon K. G. Forsberg",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Matteo Bianchi",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Katarina Tengvall",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Mats E. Pettersson",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory",
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Veronika Scholz",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Jennifer R. S. Meadows",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Patric Jern",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory"
-    ]
-   },
-   {
-    "name": "Örjan Carlborg",
-    "institutions": [
-     "Swedish University of Agricultural Sciences"
-    ]
-   },
-   {
-    "name": "Kerstin Lindblad‐Toh",
-    "institutions": [
-     "Broad Institute",
-     "Uppsala University",
-     "Science for Life Laboratory",
-     "Massachusetts Institute of Technology"
-    ]
-   }
-  ]
- },
- {
   "title": "The ABCC4 gene is associated with pyometra in golden retriever dogs",
   "year": 2021,
   "doi": "10.1038/s41598-021-95936-1",
@@ -1303,6 +1216,91 @@
     "name": "Ragnvi Hagman",
     "institutions": [
      "Swedish University of Agricultural Sciences"
+    ]
+   }
+  ]
+ },
+ {
+  "title": "cgmisc: enhanced genome-wide association analyses and visualization",
+  "year": 2015,
+  "doi": "10.1093/bioinformatics/btv426",
+  "authors": [
+   {
+    "name": "Marcin Kierczak",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory",
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Jagoda Jabłońska",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Simon K. G. Forsberg",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Matteo Bianchi",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Katarina Tengvall",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Mats E. Pettersson",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory",
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Veronika Scholz",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Jennifer R. S. Meadows",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Patric Jern",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory"
+    ]
+   },
+   {
+    "name": "Örjan Carlborg",
+    "institutions": [
+     "Swedish University of Agricultural Sciences"
+    ]
+   },
+   {
+    "name": "Kerstin Lindblad‐Toh",
+    "institutions": [
+     "Broad Institute",
+     "Uppsala University",
+     "Science for Life Laboratory"
     ]
    }
   ]
@@ -1591,6 +1589,65 @@
   ]
  },
  {
+  "title": "A risk haplotype within the PKP2 locus shows association to Canine Atopic Dermatitis and contains cell-type specific enhancers",
+  "year": 2015,
+  "doi": "",
+  "authors": [
+   {
+    "name": "Katarina Tengvall",
+    "institutions": []
+   },
+   {
+    "name": "Sergey V. Kozyrev",
+    "institutions": []
+   },
+   {
+    "name": "Marcin Kierczak",
+    "institutions": []
+   },
+   {
+    "name": "Kerstin Bergvall",
+    "institutions": []
+   },
+   {
+    "name": "Fabiana Geraldo Farias",
+    "institutions": []
+   },
+   {
+    "name": "Brita Ardesjö-Lundgren",
+    "institutions": []
+   },
+   {
+    "name": "Eva Murén",
+    "institutions": []
+   },
+   {
+    "name": "Ragnvi Hagman",
+    "institutions": []
+   },
+   {
+    "name": "Tosso Leeb",
+    "institutions": []
+   },
+   {
+    "name": "Gerli Pielberg",
+    "institutions": []
+   },
+   {
+    "name": "Göran Andersson",
+    "institutions": []
+   },
+   {
+    "name": "Åke A. Hedhammar",
+    "institutions": []
+   },
+   {
+    "name": "Kerstin Lindblad‐Toh",
+    "institutions": []
+   }
+  ]
+ },
+ {
   "title": "Absolute quantification reveals the stable transmission of a high copy number variant linked to autoinflammatory disease",
   "year": 2016,
   "doi": "10.1186/s12864-016-2619-0",
@@ -1699,7 +1756,9 @@
    {
     "name": "Marcin Kierczak",
     "institutions": [
-     "Science for Life Laboratory"
+     "Uppsala University",
+     "Science for Life Laboratory",
+     "National Bioinformatics Infrastructure Sweden"
     ]
    },
    {
@@ -1977,65 +2036,6 @@
   ]
  },
  {
-  "title": "A risk haplotype within the PKP2 locus shows association to Canine Atopic Dermatitis and contains cell-type specific enhancers",
-  "year": 2015,
-  "doi": "",
-  "authors": [
-   {
-    "name": "Katarina Tengvall",
-    "institutions": []
-   },
-   {
-    "name": "Sergey V. Kozyrev",
-    "institutions": []
-   },
-   {
-    "name": "Marcin Kierczak",
-    "institutions": []
-   },
-   {
-    "name": "Kerstin Bergvall",
-    "institutions": []
-   },
-   {
-    "name": "Fabiana Geraldo Farias",
-    "institutions": []
-   },
-   {
-    "name": "Brita Ardesjö-Lundgren",
-    "institutions": []
-   },
-   {
-    "name": "Eva Murén",
-    "institutions": []
-   },
-   {
-    "name": "Ragnvi Hagman",
-    "institutions": []
-   },
-   {
-    "name": "Tosso Leeb",
-    "institutions": []
-   },
-   {
-    "name": "Gerli Pielberg",
-    "institutions": []
-   },
-   {
-    "name": "Göran Andersson",
-    "institutions": []
-   },
-   {
-    "name": "Åke A. Hedhammar",
-    "institutions": []
-   },
-   {
-    "name": "Kerstin Lindblad‐Toh",
-    "institutions": []
-   }
-  ]
- },
- {
   "title": "Multiple regulatory variants located in cell type-specific enhancers within the PKP2 locus form major risk and protective haplotypes for canine atopic dermatitis in German shepherd dogs",
   "year": 2016,
   "doi": "10.1186/s12863-016-0404-3",
@@ -2228,8 +2228,7 @@
     "institutions": [
      "Broad Institute",
      "Uppsala University",
-     "Science for Life Laboratory",
-     "Massachusetts Institute of Technology"
+     "Science for Life Laboratory"
     ]
    },
    {
@@ -2764,138 +2763,6 @@
   ]
  },
  {
-  "title": "FOXO1 and FOXO3 Cooperatively Regulate Innate Lymphoid Cell Development",
-  "year": 2022,
-  "doi": "10.3389/fimmu.2022.854312",
-  "authors": [
-   {
-    "name": "Thuy T. Luu",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Jonas Nørskov Søndergaard",
-    "institutions": [
-     "Science for Life Laboratory",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Lucía Peña‐Pérez",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Shabnam Kharazi",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Aleksandra Krstic",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Stephan Meinke",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Laurent Schmied",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Nicolai Sebastian Frengen",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Yaser Heshmati",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Marcin Kierczak",
-    "institutions": [
-     "Uppsala University",
-     "Science for Life Laboratory",
-     "National Bioinformatics Infrastructure Sweden"
-    ]
-   },
-   {
-    "name": "Thibault Bouderlique",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Arnika Kathleen Wagner",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Charlotte Gustafsson",
-    "institutions": [
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Benedict J. Chambers",
-    "institutions": [
-     "Science for Life Laboratory",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Adnane Achour",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Science for Life Laboratory",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Claudia Kutter",
-    "institutions": [
-     "Science for Life Laboratory",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Petter Höglund",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Robert Månsson",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Karolinska Institutet"
-    ]
-   },
-   {
-    "name": "Nadir Kadri",
-    "institutions": [
-     "Karolinska University Hospital",
-     "Science for Life Laboratory",
-     "Karolinska Institutet"
-    ]
-   }
-  ]
- },
- {
   "title": "Genomic insights into the conservation status of the world’s last remaining Sumatran rhinoceros populations",
   "year": 2021,
   "doi": "10.1038/s41467-021-22386-8",
@@ -3202,6 +3069,138 @@
      "Broad Institute",
      "Uppsala University",
      "Science for Life Laboratory"
+    ]
+   }
+  ]
+ },
+ {
+  "title": "FOXO1 and FOXO3 Cooperatively Regulate Innate Lymphoid Cell Development",
+  "year": 2022,
+  "doi": "10.3389/fimmu.2022.854312",
+  "authors": [
+   {
+    "name": "Thuy T. Luu",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Jonas Nørskov Søndergaard",
+    "institutions": [
+     "Science for Life Laboratory",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Lucía Peña‐Pérez",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Shabnam Kharazi",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Aleksandra Krstic",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Stephan Meinke",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Laurent Schmied",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Nicolai Sebastian Frengen",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Yaser Heshmati",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Marcin Kierczak",
+    "institutions": [
+     "Uppsala University",
+     "Science for Life Laboratory",
+     "National Bioinformatics Infrastructure Sweden"
+    ]
+   },
+   {
+    "name": "Thibault Bouderlique",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Arnika Kathleen Wagner",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Charlotte Gustafsson",
+    "institutions": [
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Benedict J. Chambers",
+    "institutions": [
+     "Science for Life Laboratory",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Adnane Achour",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Science for Life Laboratory",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Claudia Kutter",
+    "institutions": [
+     "Science for Life Laboratory",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Petter Höglund",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Robert Månsson",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Karolinska Institutet"
+    ]
+   },
+   {
+    "name": "Nadir Kadri",
+    "institutions": [
+     "Karolinska University Hospital",
+     "Science for Life Laboratory",
+     "Karolinska Institutet"
     ]
    }
   ]
@@ -3641,9 +3640,7 @@
     "institutions": [
      "Broad Institute",
      "Uppsala University",
-     "Harvard University",
-     "Science for Life Laboratory",
-     "Massachusetts Institute of Technology"
+     "Science for Life Laboratory"
     ]
    },
    {
