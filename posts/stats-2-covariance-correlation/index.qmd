@@ -164,5 +164,5 @@ We can now describe one variable (location and spread) and the relationship betw
 ::: {.series-nav}
 [All parts in this series](../../blog.qmd#category=series){.btn-pill}
 
-Previous: [location and spread](../stats-1-location-spread/index.qmd). Next in the series: statistical tests, beginning with normality.
+Previous: [location and spread](../stats-1-location-spread/index.qmd). Next in the series: [hypotheses, normality and one-sample tests](../stats-3-hypothesis-one-sample/index.qmd).
 :::

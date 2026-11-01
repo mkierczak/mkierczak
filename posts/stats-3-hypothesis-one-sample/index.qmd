@@ -2,8 +2,7 @@
 title: "Statistics from the beginning: hypotheses, normality and one-sample tests"
 description: "Third in a series on statistical tests: the logic of hypothesis testing, what a p-value is, how to check normality, and the t-test and Wilcoxon test for a single sample."
 author: "Marcin Kierczak"
-date: 2026-10-30
-draft: true
+date: 2026-11-01
 image: preview.png
 categories: [statistics, R, teaching, series]
 execute:

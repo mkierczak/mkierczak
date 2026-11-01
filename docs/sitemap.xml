@@ -2,74 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kierczak.net/teaching.html</loc>
-    <lastmod>2026-10-18T16:57:36.921Z</lastmod>
+    <lastmod>2026-10-19T08:53:08.771Z</lastmod>
   </url>
   <url>
     <loc>https://kierczak.net/publications.html</loc>
     <lastmod>2026-10-16T17:12:01.431Z</lastmod>
   </url>
   <url>
-    <loc>https://kierczak.net/posts/plague-sim/index.html</loc>
-    <lastmod>2026-10-15T21:14:15.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/glamorous-ggplot2/index.html</loc>
-    <lastmod>2026-10-16T17:11:30.617Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/archive-rtl-acars-osx/index.html</loc>
-    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/archive-genome-assembly-mapping/index.html</loc>
-    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/index.html</loc>
-    <lastmod>2026-10-16T17:17:30.570Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/cv.html</loc>
-    <lastmod>2026-10-18T16:57:36.921Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/blog.html</loc>
-    <lastmod>2026-10-16T17:12:01.431Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/contact.html</loc>
-    <lastmod>2026-10-16T17:12:01.431Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/impressum.html</loc>
-    <lastmod>2026-10-27T18:04:01.449Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/archive-bash-ssh-basics/index.html</loc>
-    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/archive-modernism-poland/index.html</loc>
-    <lastmod>2026-10-19T07:49:25.190Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/archive-variance-controlling-genes/index.html</loc>
-    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
-  </url>
-  <url>
-    <loc>https://kierczak.net/posts/karyoploter-23andme/index.html</loc>
-    <lastmod>2026-10-16T10:44:38.982Z</lastmod>
+    <loc>https://kierczak.net/posts/stats-3-hypothesis-one-sample/index.html</loc>
+    <lastmod>2026-11-01T15:47:19.922Z</lastmod>
   </url>
   <url>
     <loc>https://kierczak.net/posts/stats-1-location-spread/index.html</loc>
     <lastmod>2026-10-23T13:09:35.465Z</lastmod>
   </url>
   <url>
-    <loc>https://kierczak.net/research.html</loc>
-    <lastmod>2026-10-19T08:03:21.094Z</lastmod>
+    <loc>https://kierczak.net/posts/karyoploter-23andme/index.html</loc>
+    <lastmod>2026-10-16T10:44:38.982Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/archive-variance-controlling-genes/index.html</loc>
+    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/archive-modernism-poland/index.html</loc>
+    <lastmod>2026-10-19T09:09:42.543Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/archive-bash-ssh-basics/index.html</loc>
+    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/impressum.html</loc>
+    <lastmod>2026-10-27T18:04:01.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/contact.html</loc>
+    <lastmod>2026-10-16T17:12:01.431Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/blog.html</loc>
+    <lastmod>2026-10-16T17:12:01.431Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/cv.html</loc>
+    <lastmod>2026-10-18T16:57:36.921Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/index.html</loc>
+    <lastmod>2026-10-16T17:17:30.570Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/archive-genome-assembly-mapping/index.html</loc>
+    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/archive-rtl-acars-osx/index.html</loc>
+    <lastmod>2026-10-17T19:37:39.196Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/glamorous-ggplot2/index.html</loc>
+    <lastmod>2026-10-16T17:11:30.617Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/posts/plague-sim/index.html</loc>
+    <lastmod>2026-10-15T21:14:15.000Z</lastmod>
   </url>
   <url>
     <loc>https://kierczak.net/posts/stats-2-covariance-correlation/index.html</loc>
-    <lastmod>2026-10-23T13:09:25.531Z</lastmod>
+    <lastmod>2026-11-01T15:47:19.922Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kierczak.net/research.html</loc>
+    <lastmod>2026-10-19T08:03:21.094Z</lastmod>
   </url>
 </urlset>
