@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marcin Kierczak">
-<meta name="dcterms.date" content="2026-10-30">
+<meta name="dcterms.date" content="2026-11-01">
 <meta name="description" content="Third in a series on statistical tests: the logic of hypothesis testing, what a p-value is, how to check normality, and the t-test and Wilcoxon test for a single sample.">
 
 <title>Statistics from the beginning: hypotheses, normality and one-sample tests – Marcin Kierczak</title>
@@ -373,6 +373,7 @@ window.Quarto = {
   <li><a href="#a-test-is-a-question-put-to-the-data" id="toc-a-test-is-a-question-put-to-the-data" class="nav-link active" data-scroll-target="#a-test-is-a-question-put-to-the-data">A test is a question put to the data</a>
   <ul class="collapse">
   <li><a href="#two-kinds-of-mistake" id="toc-two-kinds-of-mistake" class="nav-link" data-scroll-target="#two-kinds-of-mistake">Two kinds of mistake</a></li>
+  <li><a href="#many-tests-at-once-p-values-and-q-values" id="toc-many-tests-at-once-p-values-and-q-values" class="nav-link" data-scroll-target="#many-tests-at-once-p-values-and-q-values">Many tests at once: p-values and q-values</a></li>
   </ul></li>
   <li><a href="#parametric-or-non-parametric" id="toc-parametric-or-non-parametric" class="nav-link" data-scroll-target="#parametric-or-non-parametric">Parametric or non-parametric?</a></li>
   <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality">Checking normality</a></li>
@@ -419,7 +420,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 30, 2026</p>
+      <p class="date">November 1, 2026</p>
     </div>
   </div>
   
@@ -497,6 +498,35 @@ window.Quarto = {
 </div>
 <p>About 5% of the tests reject <span class="math inline">\(H_0\)</span> even though it is true, which is what <span class="math inline">\(\alpha = 0.05\)</span> promises. This is also why a single “significant” result should not be over-interpreted: run twenty tests on pure noise and one of them will come out significant on average.</p>
 </section>
+<section id="many-tests-at-once-p-values-and-q-values" class="level3">
+<h3 class="anchored" data-anchor-id="many-tests-at-once-p-values-and-q-values">Many tests at once: p-values and q-values</h3>
+<p>Now suppose we are not weighing one flock but a thousand. Every flock gets its own test against the 55 kg standard. At <span class="math inline">\(\alpha = 0.05\)</span>, about 50 flocks will look “significant” by luck alone, even if none of them differs from the standard.</p>
+<p>The classical fix is the <strong>Bonferroni correction</strong>. It keeps the chance of <em>even one</em> false alarm at 5%. That is safe, but it is also so strict that real differences slip through.</p>
+<p>Often we can live with a few false alarms, as long as we know how many to expect. This is the idea behind the <strong>false discovery rate</strong> (FDR): the share of false alarms among the flocks we flag. The <strong>q-value</strong> is the p-value’s counterpart for this. The q-value of a test is the smallest FDR at which that test would still be flagged. A p-value of 0.01 says that 1% of true nulls look this extreme. A q-value of 0.01 says that about 1% of the flagged flocks are expected to be false alarms.</p>
+<p>In practice you rarely compute q-values by hand. The Benjamini–Hochberg procedure, <code>p.adjust(p, method = "BH")</code>, gives FDR-adjusted p-values. Storey’s <code>qvalue</code> package (Bioconductor) goes a step further and estimates how many of the nulls are true, which makes it a little less conservative. Here is a toy flock survey: 900 flocks truly at 55 kg, and 100 whose true mean is 57 kg.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">55</span>, <span class="dv">900</span>), <span class="fu">rep</span>(<span class="dv">57</span>, <span class="dv">100</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>p  <span class="ot">&lt;-</span> <span class="fu">sapply</span>(mu, <span class="cf">function</span>(m) <span class="fu">t.test</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, m, <span class="dv">4</span>), <span class="at">mu =</span> <span class="dv">55</span>)<span class="sc">$</span>p.value)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># How many flocks does each method flag?</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">raw_p      =</span> <span class="fu">sum</span>(p <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">bonferroni =</span> <span class="fu">sum</span>(<span class="fu">p.adjust</span>(p, <span class="st">"bonferroni"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">BH_q       =</span> <span class="fu">sum</span>(<span class="fu">p.adjust</span>(p, <span class="st">"BH"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     raw_p bonferroni       BH_q 
+       119          8         39 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Of the flocks flagged at FDR 5%, how many are false alarms?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(p, <span class="st">"BH"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">flagged =</span> <span class="fu">sum</span>(hits), <span class="at">false_alarms =</span> <span class="fu">sum</span>(hits <span class="sc">&amp;</span> mu <span class="sc">==</span> <span class="dv">55</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     flagged false_alarms 
+          39            2 </code></pre>
+</div>
+</div>
+<p>The raw threshold flags dozens of flocks that are in fact normal. Bonferroni flags almost no false ones, but it also misses most of the 57 kg flocks. The FDR approach finds many more of the real ones, and its false alarms stay near the 5% we asked for.</p>
+</section>
 </section>
 <section id="parametric-or-non-parametric" class="level2">
 <h2 class="anchored" data-anchor-id="parametric-or-non-parametric">Parametric or non-parametric?</h2>
@@ -512,11 +542,11 @@ window.Quarto = {
 <p>The most common assumption to check is that the sample comes from a normal distribution. There are two complementary ways to do it: a formal test and a picture.</p>
 <p>The <strong>Shapiro–Wilk test</strong> has <span class="math inline">\(H_0\)</span>: <em>the sample comes from a normal distribution</em>. Let us try it on a sample that is normal and on one that is uniform:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>normal_sample  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>uniform_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">4</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(normal_sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>normal_sample  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>uniform_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">4</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(normal_sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -524,7 +554,7 @@ window.Quarto = {
 data:  normal_sample
 W = 0.98751, p-value = 0.473</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(uniform_sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(uniform_sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -535,15 +565,15 @@ W = 0.9583, p-value = 0.003048</code></pre>
 </div>
 <p>For the normal sample the p-value is large, so we have no reason to reject normality. For the uniform sample it is small, and we reject. The <strong>quantile–quantile (Q–Q) plot</strong> shows <em>how</em> a sample departs from normality: it plots the sample’s quantiles against those of a normal distribution, so a normal sample falls along a straight line.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>qq <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="st">"normal sample"</span>,  <span class="at">x =</span> normal_sample),</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="st">"uniform sample"</span>, <span class="at">x =</span> uniform_sample))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(qq, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>(<span class="at">colour =</span> accent, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">colour =</span> ink) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sample, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>, <span class="at">y =</span> <span class="st">"Sample quantiles"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Q-Q plots: a straight line means normality"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>qq <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="st">"normal sample"</span>,  <span class="at">x =</span> normal_sample),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="st">"uniform sample"</span>, <span class="at">x =</span> uniform_sample))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(qq, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>(<span class="at">colour =</span> accent, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">colour =</span> ink) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sample, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>, <span class="at">y =</span> <span class="st">"Sample quantiles"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Q-Q plots: a straight line means normality"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -558,14 +588,14 @@ W = 0.9583, p-value = 0.003048</code></pre>
 <h2 class="anchored" data-anchor-id="one-sample-t-test">One-sample t-test</h2>
 <p>Back to our flock. We weigh 30 ewes and ask whether their population mean differs from the breed standard of 55 kg:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>flock <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">57</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(flock)<span class="sc">$</span>p.value    <span class="co"># normality looks fine</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>flock <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">57</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(flock)<span class="sc">$</span>p.value    <span class="co"># normality looks fine</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3245917</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(flock, <span class="at">mu =</span> <span class="dv">55</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(flock, <span class="at">mu =</span> <span class="dv">55</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -586,12 +616,12 @@ t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}},
 \]</span></p>
 <p>the distance between the sample mean and the hypothesised mean <span class="math inline">\(\mu_0\)</span>, measured in units of the standard error. We can check it by hand:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>t_stat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(flock) <span class="sc">-</span> <span class="dv">55</span>) <span class="sc">/</span> (<span class="fu">sd</span>(flock) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(flock)))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>t_stat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>t_stat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(flock) <span class="sc">-</span> <span class="dv">55</span>) <span class="sc">/</span> (<span class="fu">sd</span>(flock) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(flock)))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>t_stat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.137558</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t_stat), <span class="at">df =</span> <span class="fu">length</span>(flock) <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># two-sided p-value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t_stat), <span class="at">df =</span> <span class="fu">length</span>(flock) <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># two-sided p-value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04111133</code></pre>
 </div>
@@ -614,14 +644,14 @@ t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}},
 <h3 class="anchored" data-anchor-id="when-the-standard-deviation-is-known-the-z-test">When the standard deviation is known: the z-test</h3>
 <p>If the population standard deviation <span class="math inline">\(\sigma\)</span> is <em>known</em> in advance, we can replace <span class="math inline">\(s\)</span> by <span class="math inline">\(\sigma\)</span> and use the normal distribution instead of <span class="math inline">\(t\)</span>. This is the <strong>z-test</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">4</span>                                   <span class="co"># known population sd</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (<span class="fu">mean</span>(flock) <span class="sc">-</span> <span class="dv">55</span>) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(flock)))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">z =</span> z, <span class="at">p =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(z)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">4</span>                                   <span class="co"># known population sd</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (<span class="fu">mean</span>(flock) <span class="sc">-</span> <span class="dv">55</span>) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(flock)))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">z =</span> z, <span class="at">p =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(z)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         z          p 
 2.34190706 0.01918549 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(flock) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(flock))   <span class="co"># 95% CI</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(flock) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(flock))   <span class="co"># 95% CI</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 55.27893 58.14164</code></pre>
 </div>
@@ -633,11 +663,11 @@ t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}},
 <h2 class="anchored" data-anchor-id="one-sample-wilcoxon-test">One-sample Wilcoxon test</h2>
 <p>What if the data are clearly not normal? The non-parametric counterpart of the one-sample <span class="math inline">\(t\)</span>-test is the <strong>Wilcoxon signed-rank test</strong>. It ranks the absolute differences from the hypothesised centre and asks whether positive and negative differences are balanced. It assumes the distribution is <em>symmetric</em> but not that it is normal. Our uniform sample from before qualifies:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(uniform_sample, <span class="at">mu =</span> <span class="dv">3</span>)<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(uniform_sample, <span class="at">mu =</span> <span class="dv">3</span>)<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5275405</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(uniform_sample, <span class="at">mu =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(uniform_sample, <span class="at">mu =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction

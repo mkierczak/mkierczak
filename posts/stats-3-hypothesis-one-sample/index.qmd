@@ -67,6 +67,33 @@ ggplot(data.frame(p = p_null), aes(p)) +
 
 About 5% of the tests reject $H_0$ even though it is true, which is what $\alpha = 0.05$ promises. This is also why a single "significant" result should not be over-interpreted: run twenty tests on pure noise and one of them will come out significant on average.
 
+### Many tests at once: p-values and q-values
+
+Now suppose we are not weighing one flock but a thousand. Every flock gets its own test against the 55 kg standard. At $\alpha = 0.05$, about 50 flocks will look "significant" by luck alone, even if none of them differs from the standard.
+
+The classical fix is the **Bonferroni correction**. It keeps the chance of *even one* false alarm at 5%. That is safe, but it is also so strict that real differences slip through.
+
+Often we can live with a few false alarms, as long as we know how many to expect. This is the idea behind the **false discovery rate** (FDR): the share of false alarms among the flocks we flag. The **q-value** is the p-value's counterpart for this. The q-value of a test is the smallest FDR at which that test would still be flagged. A p-value of 0.01 says that 1% of true nulls look this extreme. A q-value of 0.01 says that about 1% of the flagged flocks are expected to be false alarms.
+
+In practice you rarely compute q-values by hand. The Benjamini–Hochberg procedure, `p.adjust(p, method = "BH")`, gives FDR-adjusted p-values. Storey's `qvalue` package (Bioconductor) goes a step further and estimates how many of the nulls are true, which makes it a little less conservative. Here is a toy flock survey: 900 flocks truly at 55 kg, and 100 whose true mean is 57 kg.
+
+```{r qvalues}
+set.seed(4)
+mu <- c(rep(55, 900), rep(57, 100))
+p  <- sapply(mu, function(m) t.test(rnorm(30, m, 4), mu = 55)$p.value)
+
+# How many flocks does each method flag?
+c(raw_p      = sum(p < 0.05),
+  bonferroni = sum(p.adjust(p, "bonferroni") < 0.05),
+  BH_q       = sum(p.adjust(p, "BH") < 0.05))
+
+# Of the flocks flagged at FDR 5%, how many are false alarms?
+hits <- p.adjust(p, "BH") < 0.05
+c(flagged = sum(hits), false_alarms = sum(hits & mu == 55))
+```
+
+The raw threshold flags dozens of flocks that are in fact normal. Bonferroni flags almost no false ones, but it also misses most of the 57 kg flocks. The FDR approach finds many more of the real ones, and its false alarms stay near the 5% we asked for.
+
 ## Parametric or non-parametric?
 
 Tests fall into two families:

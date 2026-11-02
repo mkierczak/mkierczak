@@ -229,6 +229,140 @@ font-style: inherit;">"When H0 is true, p-values are uniformly distributed"</spa
 </div>
 <p>About 5% of the tests reject <img src="https://latex.codecogs.com/png.latex?H_0"> even though it is true, which is what <img src="https://latex.codecogs.com/png.latex?%5Calpha%20=%200.05"> promises. This is also why a single “significant” result should not be over-interpreted: run twenty tests on pure noise and one of them will come out significant on average.</p>
 </section>
+<section id="many-tests-at-once-p-values-and-q-values" class="level3">
+<h3 class="anchored" data-anchor-id="many-tests-at-once-p-values-and-q-values">Many tests at once: p-values and q-values</h3>
+<p>Now suppose we are not weighing one flock but a thousand. Every flock gets its own test against the 55 kg standard. At <img src="https://latex.codecogs.com/png.latex?%5Calpha%20=%200.05">, about 50 flocks will look “significant” by luck alone, even if none of them differs from the standard.</p>
+<p>The classical fix is the <strong>Bonferroni correction</strong>. It keeps the chance of <em>even one</em> false alarm at 5%. That is safe, but it is also so strict that real differences slip through.</p>
+<p>Often we can live with a few false alarms, as long as we know how many to expect. This is the idea behind the <strong>false discovery rate</strong> (FDR): the share of false alarms among the flocks we flag. The <strong>q-value</strong> is the p-value’s counterpart for this. The q-value of a test is the smallest FDR at which that test would still be flagged. A p-value of 0.01 says that 1% of true nulls look this extreme. A q-value of 0.01 says that about 1% of the flagged flocks are expected to be false alarms.</p>
+<p>In practice you rarely compute q-values by hand. The Benjamini–Hochberg procedure, <code>p.adjust(p, method = "BH")</code>, gives FDR-adjusted p-values. Storey’s <code>qvalue</code> package (Bioconductor) goes a step further and estimates how many of the nulls are true, which makes it a little less conservative. Here is a toy flock survey: 900 flocks truly at 55 kg, and 100 whose true mean is 57 kg.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb5-2">mu <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">900</span>), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">57</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>))</span>
+<span id="cb5-3">p  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(mu, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(m) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t.test</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, m, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mu =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>p.value)</span>
+<span id="cb5-4"></span>
+<span id="cb5-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># How many flocks does each method flag?</span></span>
+<span id="cb5-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">raw_p      =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>),</span>
+<span id="cb5-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bonferroni =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">p.adjust</span>(p, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bonferroni"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>),</span>
+<span id="cb5-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">BH_q       =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">p.adjust</span>(p, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BH"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     raw_p bonferroni       BH_q 
+       119          8         39 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Of the flocks flagged at FDR 5%, how many are false alarms?</span></span>
+<span id="cb7-2">hits <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">p.adjust</span>(p, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BH"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span></span>
+<span id="cb7-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">flagged =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(hits), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">false_alarms =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(hits <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> mu <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">55</span>))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     flagged false_alarms 
+          39            2 </code></pre>
+</div>
+</div>
+<p>The raw threshold flags dozens of flocks that are in fact normal. Bonferroni flags almost no false ones, but it also misses most of the 57 kg flocks. The FDR approach finds many more of the real ones, and its false alarms stay near the 5% we asked for.</p>
+</section>
 </section>
 <section id="parametric-or-non-parametric" class="level2">
 <h2 class="anchored" data-anchor-id="parametric-or-non-parametric">Parametric or non-parametric?</h2>
@@ -244,12 +378,12 @@ font-style: inherit;">"When H0 is true, p-values are uniformly distributed"</spa
 <p>The most common assumption to check is that the sample comes from a normal distribution. There are two complementary ways to do it: a formal test and a picture.</p>
 <p>The <strong>Shapiro–Wilk test</strong> has <img src="https://latex.codecogs.com/png.latex?H_0">: <em>the sample comes from a normal distribution</em>. Let us try it on a sample that is normal and on one that is uniform:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">11</span>)</span>
-<span id="cb5-2">normal_sample  <span class="ot" style="color: #003B4F;
+<span id="cb9-2">normal_sample  <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -264,7 +398,7 @@ background-color: null;
 font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb5-3">uniform_sample <span class="ot" style="color: #003B4F;
+<span id="cb9-3">uniform_sample <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -279,8 +413,8 @@ background-color: null;
 font-style: inherit;">max =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>)</span>
-<span id="cb5-4"></span>
-<span id="cb5-5"><span class="fu" style="color: #4758AB;
+<span id="cb9-4"></span>
+<span id="cb9-5"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">shapiro.test</span>(normal_sample)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
@@ -290,7 +424,7 @@ font-style: inherit;">shapiro.test</span>(normal_sample)</span></code></pre></di
 data:  normal_sample
 W = 0.98751, p-value = 0.473</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">shapiro.test</span>(uniform_sample)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
@@ -303,7 +437,7 @@ W = 0.9583, p-value = 0.003048</code></pre>
 </div>
 <p>For the normal sample the p-value is large, so we have no reason to reject normality. For the uniform sample it is small, and we reject. The <strong>quantile–quantile (Q–Q) plot</strong> shows <em>how</em> a sample departs from normality: it plots the sample’s quantiles against those of a normal distribution, so a normal sample falls along a straight line.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">qq <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">qq <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -316,7 +450,7 @@ background-color: null;
 font-style: inherit;">"normal sample"</span>,  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> normal_sample),</span>
-<span id="cb9-2">            <span class="fu" style="color: #4758AB;
+<span id="cb13-2">            <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -325,8 +459,8 @@ background-color: null;
 font-style: inherit;">"uniform sample"</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> uniform_sample))</span>
-<span id="cb9-3"></span>
-<span id="cb9-4"><span class="fu" style="color: #4758AB;
+<span id="cb13-3"></span>
+<span id="cb13-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ggplot</span>(qq, <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -335,7 +469,7 @@ background-color: null;
 font-style: inherit;">sample =</span> x)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb9-5">  <span class="fu" style="color: #4758AB;
+<span id="cb13-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">stat_qq</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -346,14 +480,14 @@ background-color: null;
 font-style: inherit;">0.8</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb9-6">  <span class="fu" style="color: #4758AB;
+<span id="cb13-6">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">stat_qq_line</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">colour =</span> ink) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb9-7">  <span class="fu" style="color: #4758AB;
+<span id="cb13-7">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -364,7 +498,7 @@ background-color: null;
 font-style: inherit;">"free_y"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb9-8">  <span class="fu" style="color: #4758AB;
+<span id="cb13-8">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -375,7 +509,7 @@ background-color: null;
 font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Sample quantiles"</span>,</span>
-<span id="cb9-9">       <span class="at" style="color: #657422;
+<span id="cb13-9">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -394,12 +528,12 @@ font-style: inherit;">"Q-Q plots: a straight line means normality"</span>)</span
 <h2 class="anchored" data-anchor-id="one-sample-t-test">One-sample t-test</h2>
 <p>Back to our flock. We weigh 30 ewes and ask whether their population mean differs from the breed standard of 55 kg:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2026</span>)</span>
-<span id="cb10-2">flock <span class="ot" style="color: #003B4F;
+<span id="cb14-2">flock <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -414,8 +548,8 @@ background-color: null;
 font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>)</span>
-<span id="cb10-3"></span>
-<span id="cb10-4"><span class="fu" style="color: #4758AB;
+<span id="cb14-3"></span>
+<span id="cb14-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">shapiro.test</span>(flock)<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -425,7 +559,7 @@ font-style: inherit;"># normality looks fine</span></span></code></pre></div></d
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3245917</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">t.test</span>(flock, <span class="at" style="color: #657422;
 background-color: null;
@@ -450,7 +584,7 @@ mean of x
 <p><img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B%5Cbar%7Bx%7D%20-%20%5Cmu_0%7D%7Bs%20/%20%5Csqrt%7Bn%7D%7D,%0A"></p>
 <p>the distance between the sample mean and the hypothesised mean <img src="https://latex.codecogs.com/png.latex?%5Cmu_0">, measured in units of the standard error. We can check it by hand:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">t_stat <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">t_stat <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> (<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -469,11 +603,11 @@ background-color: null;
 font-style: inherit;">sqrt</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">length</span>(flock)))</span>
-<span id="cb14-2">t_stat</span></code></pre></div></div>
+<span id="cb18-2">t_stat</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.137558</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="dv" style="color: #AD0000;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -516,14 +650,14 @@ font-style: inherit;"># two-sided p-value</span></span></code></pre></div></div>
 <h3 class="anchored" data-anchor-id="when-the-standard-deviation-is-known-the-z-test">When the standard deviation is known: the z-test</h3>
 <p>If the population standard deviation <img src="https://latex.codecogs.com/png.latex?%5Csigma"> is <em>known</em> in advance, we can replace <img src="https://latex.codecogs.com/png.latex?s"> by <img src="https://latex.codecogs.com/png.latex?%5Csigma"> and use the normal distribution instead of <img src="https://latex.codecogs.com/png.latex?t">. This is the <strong>z-test</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">sigma <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">sigma <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>                                   <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># known population sd</span></span>
-<span id="cb18-2">z <span class="ot" style="color: #003B4F;
+<span id="cb22-2">z <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> (<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -540,7 +674,7 @@ background-color: null;
 font-style: inherit;">sqrt</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">length</span>(flock)))</span>
-<span id="cb18-3"><span class="fu" style="color: #4758AB;
+<span id="cb22-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -561,7 +695,7 @@ font-style: inherit;">abs</span>(z)))</span></code></pre></div></div>
 <pre><code>         z          p 
 2.34190706 0.01918549 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mean</span>(flock) <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -601,7 +735,7 @@ font-style: inherit;"># 95% CI</span></span></code></pre></div></div>
 <h2 class="anchored" data-anchor-id="one-sample-wilcoxon-test">One-sample Wilcoxon test</h2>
 <p>What if the data are clearly not normal? The non-parametric counterpart of the one-sample <img src="https://latex.codecogs.com/png.latex?t">-test is the <strong>Wilcoxon signed-rank test</strong>. It ranks the absolute differences from the hypothesised centre and asks whether positive and negative differences are balanced. It assumes the distribution is <em>symmetric</em> but not that it is normal. Our uniform sample from before qualifies:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">t.test</span>(uniform_sample, <span class="at" style="color: #657422;
 background-color: null;
@@ -613,7 +747,7 @@ font-style: inherit;">$</span>p.value</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5275405</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">wilcox.test</span>(uniform_sample, <span class="at" style="color: #657422;
 background-color: null;
