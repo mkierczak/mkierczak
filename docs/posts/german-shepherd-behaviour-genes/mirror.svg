@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" font-family="Inter, Helvetica, Arial, sans-serif" role="img" aria-label="Diagram: boldness in dogs is the reverse of neuroticism in people, and both are associated with variation near the TCF4 gene.">
+  <rect width="800" height="330" fill="#FFFDF8"/>
+  <!-- dog panel -->
+  <rect x="30" y="30" width="280" height="200" rx="12" fill="#EFE7D3" stroke="#d8cfba"/>
+  <text x="170" y="62" text-anchor="middle" font-size="12" letter-spacing="1.5" fill="#5d6070">DOG · DMA</text>
+  <text x="170" y="92" text-anchor="middle" font-size="20" font-weight="700" fill="#2a2420">Boldness</text>
+  <g stroke="#5d6070" stroke-width="2"><path d="M60 150 L280 150"/></g>
+  <circle cx="75" cy="150" r="8" fill="#9a9aa6"/><circle cx="265" cy="150" r="8" fill="#8c2f39"/>
+  <text x="75" y="182" text-anchor="middle" font-size="13" fill="#5d6070">shy</text>
+  <text x="265" y="182" text-anchor="middle" font-size="13" fill="#5d6070">bold</text>
+  <text x="170" y="214" text-anchor="middle" font-size="12" fill="#5d6070" font-style="italic">chromosome 1 (CFA1)</text>
+
+  <!-- human panel -->
+  <rect x="490" y="30" width="280" height="200" rx="12" fill="#EFE7D3" stroke="#d8cfba"/>
+  <text x="630" y="62" text-anchor="middle" font-size="12" letter-spacing="1.5" fill="#5d6070">HUMAN · PERSONALITY</text>
+  <text x="630" y="92" text-anchor="middle" font-size="20" font-weight="700" fill="#2a2420">Neuroticism</text>
+  <g stroke="#5d6070" stroke-width="2"><path d="M520 150 L740 150"/></g>
+  <circle cx="535" cy="150" r="8" fill="#8c2f39"/><circle cx="725" cy="150" r="8" fill="#9a9aa6"/>
+  <text x="535" y="182" text-anchor="middle" font-size="13" fill="#5d6070">low</text>
+  <text x="725" y="182" text-anchor="middle" font-size="13" fill="#5d6070">high</text>
+  <text x="630" y="214" text-anchor="middle" font-size="12" fill="#5d6070" font-style="italic">chromosome 18</text>
+
+  <!-- middle: gene -->
+  <rect x="338" y="104" width="124" height="52" rx="26" fill="#8c2f39"/>
+  <text x="400" y="137" text-anchor="middle" font-size="20" font-weight="700" font-style="italic" fill="#FFFDF8">TCF4</text>
+  <g stroke="#b08d4a" stroke-width="2" fill="none"><path d="M310 130 L338 130"/><path d="M462 130 L490 130"/></g>
+
+  <!-- mirror note -->
+  <path d="M265 262 Q400 300 535 262" stroke="#b08d4a" stroke-width="2" fill="none" stroke-dasharray="6 5"/>
+  <text x="400" y="320" text-anchor="middle" font-size="13" fill="#5d6070">Mirror images: a bold dog corresponds to a person low in neuroticism, so the scales run in opposite directions.</text>
+</svg>

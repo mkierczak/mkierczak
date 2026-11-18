@@ -1,0 +1,6 @@
+/* Rounded corners for the figures in this post */
+main figure img,
+main img.figure-img,
+.quarto-dark main figure img {
+  border-radius: 14px !important;
+}

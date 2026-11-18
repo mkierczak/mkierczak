@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" font-family="Inter, Helvetica, Arial, sans-serif" role="img" aria-label="Diagram: 33 behaviours scored 1 to 5 combine into six traits, which combine into one higher-level trait called boldness.">
+  <rect width="800" height="430" fill="#FFFDF8"/>
+  <!-- tier 1 -->
+  <text x="400" y="30" text-anchor="middle" font-size="12" letter-spacing="1.5" fill="#5d6070">WHAT THE RATER SEES</text>
+  <rect x="60" y="42" width="680" height="62" rx="10" fill="#EFE7D3" stroke="#d8cfba"/>
+  <text x="400" y="68" text-anchor="middle" font-size="16" font-weight="600" fill="#2a2420">33 behaviours, each scored 1 to 5, across 10 subtests</text>
+  <text x="400" y="91" text-anchor="middle" font-size="13" fill="#5d6070">tug-of-war · grabbing a moving toy · a ghost-like figure · being handled by a stranger · …</text>
+
+  <!-- arrows 1->2 -->
+  <g stroke="#b08d4a" stroke-width="2" fill="none">
+    <path d="M400 104 L400 124"/><path d="M394 118 L400 126 L406 118"/>
+  </g>
+
+  <!-- tier 2 -->
+  <text x="400" y="150" text-anchor="middle" font-size="12" letter-spacing="1.5" fill="#5d6070">SIX TRAITS (STATISTICAL FACTORS)</text>
+  <g font-size="13" font-weight="600" fill="#2a2420" text-anchor="middle">
+    <rect x="40"  y="162" width="112" height="52" rx="8" fill="#FFFDF8" stroke="#8c2f39" stroke-width="1.5"/><text x="96" y="193">Playfulness</text>
+    <rect x="164" y="162" width="112" height="52" rx="8" fill="#FFFDF8" stroke="#8c2f39" stroke-width="1.5"/>
+    <text x="220" y="184">Distance</text><text x="220" y="202">playfulness</text>
+    <rect x="288" y="162" width="124" height="52" rx="8" fill="#FFFDF8" stroke="#8c2f39" stroke-width="1.5"/>
+    <text x="350" y="184">Curiosity /</text><text x="350" y="202">fearlessness</text>
+    <rect x="424" y="162" width="112" height="52" rx="8" fill="#FFFDF8" stroke="#8c2f39" stroke-width="1.5"/>
+    <text x="480" y="184">Chase-</text><text x="480" y="202">proneness</text>
+    <rect x="548" y="162" width="112" height="52" rx="8" fill="#FFFDF8" stroke="#8c2f39" stroke-width="1.5"/><text x="604" y="193">Sociability</text>
+    <rect x="672" y="162" width="88" height="52" rx="8" fill="#FFFDF8" stroke="#9a9aa6" stroke-width="1.5" stroke-dasharray="5 4"/><text x="716" y="184" fill="#5d6070">Aggres-</text><text x="716" y="202" fill="#5d6070">siveness</text>
+  </g>
+
+  <!-- links to boldness -->
+  <g stroke="#b08d4a" stroke-width="1.6" fill="none">
+    <path d="M96 214 Q96 262 330 300"/><path d="M220 214 Q220 262 360 300"/><path d="M350 214 L385 296"/><path d="M480 214 Q480 262 420 300"/><path d="M604 214 Q604 262 450 300"/>
+  </g>
+  <path d="M716 214 Q716 270 470 304" stroke="#9a9aa6" stroke-width="1.6" fill="none" stroke-dasharray="5 4"/>
+  <text x="716" y="236" text-anchor="middle" font-size="11" fill="#5d6070">not tied to</text>
+  <text x="716" y="250" text-anchor="middle" font-size="11" fill="#5d6070">boldness</text>
+
+  <!-- tier 3 -->
+  <text x="400" y="288" text-anchor="middle" font-size="12" letter-spacing="1.5" fill="#5d6070" opacity="0">.</text>
+  <rect x="290" y="300" width="220" height="50" rx="25" fill="#8c2f39"/>
+  <text x="400" y="331" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFDF8" letter-spacing="1">BOLDNESS</text>
+
+  <!-- shy-bold axis -->
+  <g stroke="#5d6070" stroke-width="2" fill="none"><path d="M170 392 L630 392"/><path d="M178 386 L168 392 L178 398"/><path d="M622 386 L632 392 L622 398"/></g>
+  <text x="165" y="384" text-anchor="end" font-size="13" fill="#5d6070" font-style="italic">shy</text>
+  <text x="635" y="384" font-size="13" fill="#5d6070" font-style="italic">bold</text>
+  <circle cx="300" cy="392" r="7" fill="#b08d4a"/><text x="300" y="418" text-anchor="middle" font-size="12" fill="#5d6070">show type (average)</text>
+  <circle cx="500" cy="392" r="7" fill="#8c2f39"/><text x="500" y="418" text-anchor="middle" font-size="12" fill="#5d6070">working type (average)</text>
+</svg>
