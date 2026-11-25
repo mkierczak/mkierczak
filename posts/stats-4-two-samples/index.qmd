@@ -2,8 +2,7 @@
 title: "Statistics from the beginning: comparing two samples"
 description: "Fourth in a series on statistical tests: the F-test for variances, Student's and Welch's t-tests, paired samples, and the Mann–Whitney test when normality fails."
 author: "Marcin Kierczak"
-date: 2026-11-06
-draft: true
+date: 2026-11-25
 image: preview.png
 categories: [statistics, R, teaching, series]
 execute:

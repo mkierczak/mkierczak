@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/stats-4-two-samples/index.html",
       "/posts/german-shepherd-behaviour-genes/index.html",
       "/posts/stats-3-hypothesis-one-sample/index.html",
       "/posts/stats-2-covariance-correlation/index.html",
@@ -19,6 +20,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/stats-4-two-samples/index.html",
       "/posts/german-shepherd-behaviour-genes/index.html",
       "/posts/stats-3-hypothesis-one-sample/index.html",
       "/posts/stats-2-covariance-correlation/index.html",
