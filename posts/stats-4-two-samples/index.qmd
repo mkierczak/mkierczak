@@ -8,6 +8,10 @@ categories: [statistics, R, teaching, series]
 execute:
   warning: false
   message: false
+fig-format: svg
+knitr:
+  opts_chunk:
+    dev: svglite   # svglite knows plotty's fonts; the default png device does not
 ---
 
 ::: {.series-tag}
@@ -27,16 +31,14 @@ Let us simulate two groups of 40 ewes and record their weight gain over the wint
 
 ```{r setup}
 library(ggplot2)
+library(plotty)   # https://github.com/mkierczak/plotty
 
-# A shared look for the figures in this series
-accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
-theme_set(
-  theme_minimal(base_size = 13) +
-    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
-          panel.grid.minor = element_blank(),
-          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
-          plot.title.position = "plot")
-)
+# A shared look for the figures in this series: blue pencil on dot-journal paper.
+# Blue is the default lead; a second and third pencil for groups. Line types and
+# shapes repeat the colour, so the figures also work in greyscale.
+plotty_set(style = "pencil", paper = "dots", lead = "#3466b0", seed = 7)
+theme_set(theme_plotty())
+pal <- c(blue = "#3466b0", red = "#b5473a", green = "#4f7f4a")
 ```
 
 ```{r data}
@@ -55,8 +57,8 @@ c_ <- gain$kg[gain$diet == "C"]
 ```{r plot}
 #| fig-alt: "Box plots with jittered points of weight gain for diets A, B and C. Diet B is more spread out than A and C."
 ggplot(gain, aes(diet, kg)) +
-  geom_boxplot(fill = "#d8cfba", colour = ink, outlier.shape = NA, width = 0.5) +
-  geom_jitter(colour = accent, width = 0.12, alpha = 0.7, size = 1.8) +
+  geom_boxplot_sketchy(width = 0.5, outliers = FALSE) +
+  geom_jitter_sketchy(width = 0.12, jitter_seed = 1, size = 1.6, colour = pal[["red"]]) +
   labs(x = "Diet", y = "Winter weight gain (kg)",
        title = "Three groups of 40 ewes: similar centres, different spreads")
 ```
@@ -130,7 +132,7 @@ eggs <- data.frame(
 )
 
 ggplot(eggs, aes(count)) +
-  geom_histogram(bins = 15, fill = "#d8cfba", colour = "#FFFDF8") +
+  geom_histogram_sketchy(bins = 15) +
   facet_wrap(~ treatment, ncol = 1) +
   labs(x = "Eggs per gram", y = NULL, title = "Skewed data: counts are not normal")
 

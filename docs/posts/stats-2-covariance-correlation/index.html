@@ -446,16 +446,14 @@ window.Quarto = {
 <p>Variance told us how much a single variable scatters around its mean. When we have two variables, say <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, a more interesting question appears: when <span class="math inline">\(x\)</span> is above its mean, is <span class="math inline">\(y\)</span> also above <em>its</em> mean? Do the deviations of the two variables tend to point the same way?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A shared look for the figures in this series</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>accent <span class="ot">&lt;-</span> <span class="st">"#8c2f39"</span>; gold <span class="ot">&lt;-</span> <span class="st">"#b08d4a"</span>; ink <span class="ot">&lt;-</span> <span class="st">"#5d6070"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FFFDF8"</span>, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#EEEAE0"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title.position =</span> <span class="st">"plot"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotty)   <span class="co"># https://github.com/mkierczak/plotty</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A shared look for the figures in this series: blue pencil on dot-journal paper.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Blue is the default lead; a second and third pencil for groups. Line types and</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># shapes repeat the colour, so the figures also work in greyscale.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plotty_set</span>(<span class="at">style =</span> <span class="st">"pencil"</span>, <span class="at">paper =</span> <span class="st">"dots"</span>, <span class="at">lead =</span> <span class="st">"#3466b0"</span>, <span class="at">seed =</span> <span class="dv">7</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_plotty</span>())</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">blue =</span> <span class="st">"#3466b0"</span>, <span class="at">red =</span> <span class="st">"#b5473a"</span>, <span class="at">green =</span> <span class="st">"#4f7f4a"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Back to our sheep. Let us simulate 150 ewes, recording body weight and the weight of the fleece shorn from each. Heavier animals tend to carry more wool, so we build in a positive relationship:</p>
 <div class="cell">
@@ -486,19 +484,22 @@ window.Quarto = {
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                    (ewes<span class="sc">$</span>fleece_kg <span class="sc">-</span> <span class="fu">mean</span>(ewes<span class="sc">$</span>fleece_kg)) <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"positive product"</span>, <span class="st">"negative product"</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ewes, <span class="fu">aes</span>(body_kg, fleece_kg, <span class="at">colour =</span> sign)) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(ewes<span class="sc">$</span>body_kg), <span class="at">colour =</span> ink, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(ewes<span class="sc">$</span>fleece_kg), <span class="at">colour =</span> ink, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"positive product"</span> <span class="ot">=</span> accent, <span class="st">"negative product"</span> <span class="ot">=</span> gold)) <span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body weight (kg)"</span>, <span class="at">y =</span> <span class="st">"Fleece weight (kg)"</span>, <span class="at">colour =</span> <span class="cn">NULL</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Most points fall in the quadrants that add to the covariance"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Dotted lines: the two means"</span>) <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ewes, <span class="fu">aes</span>(body_kg, fleece_kg)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path_sketchy</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">mean</span>(ewes<span class="sc">$</span>body_kg), <span class="at">y =</span> <span class="fu">range</span>(ewes<span class="sc">$</span>fleece_kg)),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(x, y), <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path_sketchy</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">range</span>(ewes<span class="sc">$</span>body_kg), <span class="at">y =</span> <span class="fu">mean</span>(ewes<span class="sc">$</span>fleece_kg)),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(x, y), <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point_sketchy</span>(<span class="fu">aes</span>(<span class="at">shape =</span> sign, <span class="at">colour =</span> sign), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"positive product"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"negative product"</span> <span class="ot">=</span> <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"positive product"</span> <span class="ot">=</span> pal[[<span class="st">"red"</span>]], <span class="st">"negative product"</span> <span class="ot">=</span> pal[[<span class="st">"green"</span>]])) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body weight (kg)"</span>, <span class="at">y =</span> <span class="st">"Fleece weight (kg)"</span>, <span class="at">shape =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Most points fall in the quadrants that add to the covariance"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Dotted lines: the two means"</span>) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/quadrants-1.png" class="img-fluid figure-img" alt="Scatterplot of body weight against fleece weight with lines at the means. Points in the upper right and lower left quadrants, which contribute positive products, are red; the others are gold." width="672"></p>
+<p><img src="index_files/figure-html/quadrants-1.svg" class="img-fluid figure-img" alt="Scatterplot of body weight against fleece weight with lines at the means. Points in the upper right and lower left quadrants, which contribute positive products, are red circles; the others are green crosses."></p>
 </figure>
 </div>
 </div>
@@ -580,13 +581,13 @@ window.Quarto = {
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">sprintf</span>(<span class="st">"%s (r = %.2f)"</span>, <span class="fu">names</span>(r), r))</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(shapes, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> accent, <span class="at">size =</span> <span class="fl">1.8</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point_sketchy</span>(<span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> panel, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"The same coefficient can describe very different data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/shapes-1.png" class="img-fluid figure-img" alt="Three scatterplots: a strong linear relationship, a parabola whose correlation is near zero, and an unrelated cloud with one extreme outlier that creates a sizeable correlation." width="672"></p>
+<p><img src="index_files/figure-html/shapes-1.svg" class="img-fluid figure-img" alt="Three scatterplots: a strong linear relationship, a parabola whose correlation is near zero, and an unrelated cloud with one extreme outlier that creates a sizeable correlation."></p>
 </figure>
 </div>
 </div>

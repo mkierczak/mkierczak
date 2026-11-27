@@ -461,16 +461,14 @@ window.Quarto = {
 <p>Two cautions about wording. First, the p-value is <em>not</em> the probability that <span class="math inline">\(H_0\)</span> is true. It is the probability of data this extreme <em>given</em> that <span class="math inline">\(H_0\)</span> is true. Second, failing to reject <span class="math inline">\(H_0\)</span> is not proof that <span class="math inline">\(H_0\)</span> holds. It means the data did not give us enough reason to doubt it.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A shared look for the figures in this series</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>accent <span class="ot">&lt;-</span> <span class="st">"#8c2f39"</span>; gold <span class="ot">&lt;-</span> <span class="st">"#b08d4a"</span>; ink <span class="ot">&lt;-</span> <span class="st">"#5d6070"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FFFDF8"</span>, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#EEEAE0"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title.position =</span> <span class="st">"plot"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotty)   <span class="co"># https://github.com/mkierczak/plotty</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A shared look for the figures in this series: blue pencil on dot-journal paper.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Blue is the default lead; a second and third pencil for groups. Line types and</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># shapes repeat the colour, so the figures also work in greyscale.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plotty_set</span>(<span class="at">style =</span> <span class="st">"pencil"</span>, <span class="at">paper =</span> <span class="st">"dots"</span>, <span class="at">lead =</span> <span class="st">"#3466b0"</span>, <span class="at">seed =</span> <span class="dv">7</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_plotty</span>())</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">blue =</span> <span class="st">"#3466b0"</span>, <span class="at">red =</span> <span class="st">"#b5473a"</span>, <span class="at">green =</span> <span class="st">"#4f7f4a"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="two-kinds-of-mistake" class="level3">
 <h3 class="anchored" data-anchor-id="two-kinds-of-mistake">Two kinds of mistake</h3>
@@ -485,13 +483,13 @@ window.Quarto = {
 <pre><code>[1] 0.0502</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">p =</span> p_null), <span class="fu">aes</span>(p)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>), <span class="at">fill =</span> <span class="st">"#d8cfba"</span>, <span class="at">colour =</span> <span class="st">"#FFFDF8"</span>) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram_sketchy</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"p-value"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"When H0 is true, p-values are uniformly distributed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/pvalues-1.png" class="img-fluid figure-img" alt="Histogram of 5,000 p-values from tests where the null hypothesis is true. The bars are roughly equal in height, so p-values are uniformly distributed." width="672"></p>
+<p><img src="index_files/figure-html/pvalues-1.svg" class="img-fluid figure-img" alt="Histogram of 5,000 p-values from tests where the null hypothesis is true. The bars are roughly equal in height, so p-values are uniformly distributed."></p>
 </figure>
 </div>
 </div>
@@ -565,19 +563,29 @@ W = 0.9583, p-value = 0.003048</code></pre>
 </div>
 <p>For the normal sample the p-value is large, so we have no reason to reject normality. For the uniform sample it is small, and we reject. The <strong>quantile–quantile (Q–Q) plot</strong> shows <em>how</em> a sample departs from normality: it plots the sample’s quantiles against those of a normal distribution, so a normal sample falls along a straight line.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>qq <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="st">"normal sample"</span>,  <span class="at">x =</span> normal_sample),</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="st">"uniform sample"</span>, <span class="at">x =</span> uniform_sample))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(qq, <span class="fu">aes</span>(<span class="at">sample =</span> x)) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>(<span class="at">colour =</span> accent, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">colour =</span> ink) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sample, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>, <span class="at">y =</span> <span class="st">"Sample quantiles"</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Q-Q plots: a straight line means normality"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Q-Q data by hand: sample vs theoretical quantiles, plus the line through the quartiles</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>qq_parts <span class="ot">&lt;-</span> <span class="cf">function</span>(x, label) {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  q <span class="ot">&lt;-</span> <span class="fu">qqnorm</span>(x, <span class="at">plot.it =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">diff</span>(<span class="fu">quantile</span>(x, <span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>))) <span class="sc">/</span> <span class="fu">diff</span>(<span class="fu">qnorm</span>(<span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>)))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(x, .<span class="dv">25</span>) <span class="sc">-</span> b <span class="sc">*</span> <span class="fu">qnorm</span>(.<span class="dv">25</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">pts  =</span> <span class="fu">data.frame</span>(<span class="at">panel =</span> label, <span class="at">theo =</span> q<span class="sc">$</span>x, <span class="at">obs =</span> q<span class="sc">$</span>y),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">line =</span> <span class="fu">data.frame</span>(<span class="at">panel =</span> label, <span class="at">theo =</span> <span class="fu">range</span>(q<span class="sc">$</span>x), <span class="at">obs =</span> a <span class="sc">+</span> b <span class="sc">*</span> <span class="fu">range</span>(q<span class="sc">$</span>x)))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>parts <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">qq_parts</span>(normal_sample, <span class="st">"normal sample"</span>), <span class="fu">qq_parts</span>(uniform_sample, <span class="st">"uniform sample"</span>))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>pts   <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(parts, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"pts"</span>))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(parts, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"line"</span>))</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pts, <span class="fu">aes</span>(theo, obs)) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line_sketchy</span>(<span class="at">data =</span> lines, <span class="at">colour =</span> pal[[<span class="st">"red"</span>]]) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point_sketchy</span>(<span class="at">size =</span> <span class="fl">1.4</span>) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> panel, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>, <span class="at">y =</span> <span class="st">"Sample quantiles"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Q-Q plots: a straight line means normality"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/qq-1.png" class="img-fluid figure-img" alt="Two Q-Q plots. The normal sample follows the straight line; the uniform sample curves away from it in an S shape." width="672"></p>
+<p><img src="index_files/figure-html/qq-1.svg" class="img-fluid figure-img" alt="Two Q-Q plots. The normal sample follows the straight line; the uniform sample curves away from it in an S shape."></p>
 </figure>
 </div>
 </div>
