@@ -9,10 +9,6 @@ categories: [statistics, R, teaching, series]
 execute:
   warning: false
   message: false
-fig-format: svg
-knitr:
-  opts_chunk:
-    dev: svglite   # svglite knows plotty's fonts; the default png device does not
 ---
 
 ::: {.series-tag}
@@ -26,14 +22,16 @@ This series is adapted from my 2017 lecture notes, *Introduction to Statistical 
 
 ```{r setup}
 library(ggplot2)
-library(plotty)   # https://github.com/mkierczak/plotty
 
-# A shared look for the figures in this series: blue pencil on dot-journal paper.
-# Blue is the default lead; a second and third pencil for groups. Line types and
-# shapes repeat the colour, so the figures also work in greyscale.
-plotty_set(style = "pencil", paper = "dots", lead = "#3466b0", seed = 7)
-theme_set(theme_plotty())
-pal <- c(blue = "#3466b0", red = "#b5473a", green = "#4f7f4a")
+# A shared look for the figures in this series
+accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
+theme_set(
+  theme_minimal(base_size = 13) +
+    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
+          plot.title.position = "plot")
+)
 ```
 
 ## Do several samples share one proportion?
@@ -82,9 +80,8 @@ Now the p-value is tiny. Same die, same pattern, ten times more data: the test i
 ```{r dice-plot}
 #| fig-alt: "Bar chart of observed counts for faces one to six, with a dashed line at the expected count of about 10 per face."
 ggplot(data.frame(face = factor(faces), n = results), aes(face, n)) +
-  geom_col_sketchy(width = 0.7) +
-  geom_path_sketchy(data = data.frame(x = c(0.5, 6.5), y = expected), aes(x, y),
-                    linetype = "dashed", linewidth = 1, colour = pal[["red"]]) +
+  geom_col(fill = "#d8cfba", width = 0.7) +
+  geom_hline(yintercept = expected, colour = accent, linetype = "dashed", linewidth = 1) +
   labs(x = "Face", y = "Count", title = "Observed throws against the expected count for a fair die")
 ```
 

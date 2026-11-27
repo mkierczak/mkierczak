@@ -8,10 +8,6 @@ categories: [statistics, R, teaching, series]
 execute:
   warning: false
   message: false
-fig-format: svg
-knitr:
-  opts_chunk:
-    dev: svglite
 ---
 
 ::: {.series-tag}
@@ -36,14 +32,16 @@ We almost never see the whole population, so we use statistics computed from a s
 
 ```{r setup}
 library(ggplot2)
-library(plotty)   # https://github.com/mkierczak/plotty
 
-# A shared look for the figures in this series: blue pencil on dot-journal paper.
-# Blue is the default lead; a second and third pencil for groups. Line types and
-# shapes repeat the colour, so the figures also work in greyscale.
-plotty_set(style = "pencil", paper = "dots", lead = "#3466b0", seed = 7)
-theme_set(theme_plotty())
-pal <- c(blue = "#3466b0", red = "#b5473a", green = "#4f7f4a")
+# A shared look for the figures in this series
+accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
+theme_set(
+  theme_minimal(base_size = 13) +
+    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
+          plot.title.position = "plot")
+)
 ```
 
 ## Location: where are the data?
@@ -85,20 +83,15 @@ Comparing the mean with the median tells us something about **skewness**:
 set.seed(42)
 x <- data.frame(value = rgamma(2000, shape = 2, rate = 0.5))
 
-hist_x <- ggplot(x, aes(value)) + geom_histogram_sketchy(bins = 45)
-top <- 1.05 * max(layer_data(hist_x)$count)             # height of the two lines
-
-centres <- data.frame(stat = rep(c("median", "mean"), each = 2),
-                      x = rep(c(median(x$value), mean(x$value)), each = 2),
-                      y = rep(c(0, top), 2))
-
-hist_x +
-  geom_path_sketchy(data = centres, aes(x, y, linetype = stat, colour = stat), linewidth = 1) +
-  scale_linetype_manual(values = c(median = "solid", mean = "dashed")) +
-  scale_colour_manual(values = c(median = pal[["green"]], mean = pal[["red"]])) +
-  labs(x = NULL, y = NULL, linetype = NULL, colour = NULL,
-       title = "A right-skewed sample: mean > median") +
-  theme(legend.position = "top", legend.key.width = grid::unit(1.6, "cm"))
+ggplot(x, aes(value)) +
+  geom_histogram(bins = 45, fill = "#d8cfba", colour = "#FFFDF8") +
+  geom_vline(xintercept = median(x$value), colour = gold, linewidth = 1) +
+  geom_vline(xintercept = mean(x$value), colour = accent, linewidth = 1) +
+  annotate("text", x = median(x$value) - 0.2, y = Inf, vjust = 2, hjust = 1,
+           label = "median", colour = gold) +
+  annotate("text", x = mean(x$value) + 0.2, y = Inf, vjust = 2, hjust = 0,
+           label = "mean", colour = accent) +
+  labs(x = NULL, y = NULL, title = "A right-skewed sample: mean > median")
 ```
 
 ## Spread: how scattered are the data?
@@ -140,13 +133,11 @@ sim <- data.frame(n = rep(sizes, 2),
 
 ```{r variance-plot}
 #| fig-alt: "Average variance estimates against sample size. Dividing by n falls below the true variance for small samples, dividing by n minus 1 stays on it."
-ggplot(sim, aes(n, estimate)) +
-  geom_path_sketchy(data = data.frame(n = range(sizes), estimate = true_var),
-                    linetype = "dotted") +
-  geom_point_sketchy(aes(shape = version, colour = version), size = 1.4) +
-  scale_shape_manual(values = c("divide by n" = 1, "divide by n − 1" = 4)) +
-  scale_colour_manual(values = c("divide by n" = pal[["blue"]], "divide by n − 1" = pal[["red"]])) +
-  labs(x = "Sample size", y = "Average estimated variance", shape = NULL, colour = NULL,
+ggplot(sim, aes(n, estimate, colour = version)) +
+  geom_hline(yintercept = true_var, colour = ink, linetype = "dotted") +
+  geom_point(size = 1.4) +
+  scale_colour_manual(values = c("divide by n" = "#2b2117", "divide by n − 1" = accent)) +
+  labs(x = "Sample size", y = "Average estimated variance", colour = NULL,
        title = "The effect of using n − 1 in the denominator",
        subtitle = "Dotted line: true population variance, averaged over 1,000 samples per size") +
   theme(legend.position = "top")

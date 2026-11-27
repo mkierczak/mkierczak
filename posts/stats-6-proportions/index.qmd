@@ -9,10 +9,6 @@ categories: [statistics, R, teaching, series]
 execute:
   warning: false
   message: false
-fig-format: svg
-knitr:
-  opts_chunk:
-    dev: svglite   # svglite knows plotty's fonts; the default png device does not
 ---
 
 ::: {.series-tag}
@@ -42,14 +38,16 @@ Suppose a population of voters is split 50:50 between "yes" and "no". We poll 20
 
 ```{r setup}
 library(ggplot2)
-library(plotty)   # https://github.com/mkierczak/plotty
 
-# A shared look for the figures in this series: blue pencil on dot-journal paper.
-# Blue is the default lead; a second and third pencil for groups. Line types and
-# shapes repeat the colour, so the figures also work in greyscale.
-plotty_set(style = "pencil", paper = "dots", lead = "#3466b0", seed = 7)
-theme_set(theme_plotty())
-pal <- c(blue = "#3466b0", red = "#b5473a", green = "#4f7f4a")
+# A shared look for the figures in this series
+accent <- "#8c2f39"; gold <- "#b08d4a"; ink <- "#5d6070"
+theme_set(
+  theme_minimal(base_size = 13) +
+    theme(plot.background = element_rect(fill = "#FFFDF8", colour = NA),
+          panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(colour = "#EEEAE0", linewidth = 0.3),
+          plot.title.position = "plot")
+)
 ```
 
 ```{r simulate}
@@ -67,17 +65,13 @@ qchisq(0.95, df = 1)      # theory
 
 ```{r chi-plot}
 #| fig-alt: "Histogram of simulated chi-squared values, heavily concentrated near zero with a long right tail, with the theoretical chi-squared density with one degree of freedom drawn over it and a vertical line at the 95th percentile."
-grid <- data.frame(x = seq(0.02, 8, length.out = 150))   # the density is infinite at 0
-grid$y <- dchisq(grid$x, df = 1)
-cut95 <- data.frame(x = qchisq(0.95, 1), y = c(0, 1.5))
-
 ggplot(data.frame(chi2), aes(chi2)) +
-  geom_histogram_sketchy(aes(y = after_stat(density)), bins = 30) +
-  geom_line_sketchy(data = grid, aes(x, y), linewidth = 1, colour = pal[["red"]]) +
-  geom_path_sketchy(data = cut95, aes(x, y), linewidth = 1, linetype = "dashed",
-                    colour = pal[["green"]]) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30,
+                 fill = "#d8cfba", colour = "#FFFDF8") +
+  stat_function(fun = dchisq, args = list(df = 1), colour = accent, linewidth = 1) +
+  geom_vline(xintercept = qchisq(0.95, 1), colour = gold, linewidth = 1, linetype = "dashed") +
   coord_cartesian(xlim = c(0, 8), ylim = c(0, 1.5)) +
-  labs(x = "chi-squared", y = "Density",
+  labs(x = expression(chi^2), y = "Density",
        title = "A simulated chi-squared distribution and the theoretical curve",
        subtitle = "Dashed line: the 95th percentile, 3.84")
 ```
